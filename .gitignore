@@ -1,4 +1,5 @@
+# SO
+.DS_Store
 # Dependencias de Kraken
-
 kraken-e2e/node_modules/*
 kraken-e2e/reports/*
