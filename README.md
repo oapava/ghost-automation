@@ -1,3 +1,9 @@
+# Participantes en la integración
+- Omar Pava | o.pava@uniandes.edu.co
+- Harold Virguez | h.virgueze@uniandes.edu.co
+- Pablo Rivera | p.riverah@uniandes.edu.co
+- Edwin Cruz | e.cruzs@uniandes.edu.co
+
 # Instrucciones generales de instalación:
 
 ## Cypres:
