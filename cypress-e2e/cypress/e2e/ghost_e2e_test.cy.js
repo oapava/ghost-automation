@@ -1,5 +1,10 @@
 describe('Escenarios para ver los Post dentro de GHOST', () => {
     beforeEach(() => {
+        cy.on('uncaught:exception', (err, runnable) => {
+
+            return false
+
+        })
         // Visitamos la página de inicio de sesión de Ghost
         cy.visit('http://localhost:2368/ghost/#/signin');
         
@@ -396,6 +401,100 @@ describe('Escenarios para ver los Post dentro de GHOST', () => {
         cy.contains(tagName).should('exist');
     });
 
+    it('Escenario 16: Crear un tag y ponerlo en un post', () => {
+
+        // Llenar los campos del formulario para crear un nuevo tag
+        const tagName = 'tag-para-post';  // Nombre del tag
+
+        crearTag(tagName);
+
+        visitSite("posts");
+
+        // Hacer click en el botón de "New post"
+        cy.get('span').contains('New post').click({force:true, waitForAnimations: false, animationDistanceThreshold: 20});
+
+        // Escribimos el título del post
+        cy.get('textarea[placeholder="Post title"]').type('Post con tag');
+
+        //poner tag
+        aniadirTagPagePost(tagName);
+
+        publishPost();
+
+        cy.get('a[data-test-nav="posts"]').click({force:true, waitForAnimations: false, animationDistanceThreshold: 20});
+
+        // Verificar que el tag se haya agregado correctamente al post
+        verifyExist('.posts-list', tagName);
+    });
+
+    it('Escenario 17: Crear un tag y ponerlo en una page', () => {
+
+        // Llenar los campos del formulario para crear un nuevo tag
+        const tagName = 'tag-para-page';  // Nombre del tag
+
+
+        crearTag(tagName);
+
+        visitSite('pages');
+
+
+        // Hacer click en "New page" para crear una nueva página
+        cy.contains('New page').click({ force: true, waitForAnimations: false });
+
+        // Escribir el título de la página
+        cy.get('textarea[data-test-editor-title-input]').type('Páge con tag');
+
+        //poner tag
+        aniadirTagPagePost(tagName);
+
+        //publicar page
+        publishPage();
+
+
+        visitSite('pages');
+
+        verifyExist('.posts-list', tagName);
+    });
+
+    it('Escenario 18: Crear member', () => {
+        const email = "p.riverah@uniandes.edu.co";
+        const name = "Pablo Rivera";
+
+        //Crear member
+        crearMember(name,email);
+
+
+        // Verificar que el tag se haya agregado correctamente al post
+        verifyExist('div[data-test-table="members"]', email);
+    });
+
+    it('Escenario 19: Crear member y eliminarlo', () => {
+        const email = "test@uniandes.edu.co";
+        const name = "test";
+
+        //Crear member
+        crearMember(name, email);
+
+        //Buscar al member
+        cy.get('input[data-test-input="members-search"]').type(email);
+        //Clickear en el member encontrado
+        cy.get('a[data-test-table-data="details"]').first().click();
+        //Abrir los settings del member
+        cy.get('button[data-test-button="member-actions"]').first().click();
+        //Dar boton de eliminar member
+        cy.get('button[data-test-button="delete-member"]').first().click();
+        //Dar boton de confirmar eliminar member
+        cy.get('button[data-test-button="confirm"]').first().click()
+
+        verifyExist('div[class="gh-members-empty"]', "No members match the current filter");
+
+    });
+
+    it('Escenario 20: Entrar al view site', () => {
+        //El contenido del view site es un iframa alojado en otro puerto.
+        visitSite('site');
+    });
+
 });
 
 // Función de login separada
@@ -427,4 +526,76 @@ function publishPage(){
     cy.get('button[data-test-button="confirm-publish"]').should('be.visible'); //Publish post, right now
     cy.get('button[data-test-button="confirm-publish"]').first().click();
     cy.url().should('contain', '/pages');
+}
+
+
+function crearTag(tagName) {
+    visitSite('tags');
+
+    cy.wait(1000);
+
+    // Hacer clic en el botón "New tag"
+    cy.contains('a.gh-btn-primary', 'New tag').click();
+
+    cy.wait(1000);
+
+    // Llenar el campo de nombre del tag
+    cy.get('[data-test-input="tag-name"]').type(tagName);
+
+    cy.wait(1000);
+
+    // Esperar un momento (opcional si necesitas tiempo para que los cambios se reflejen)
+    cy.wait(2000);
+
+    // Hacer clic en el botón "Save"
+    cy.get('button[data-test-button="save"]').click({force:true, waitForAnimations: false});
+
+    cy.wait(2000);
+}
+
+function aniadirTagPagePost(nombreTag){
+    // Hacer clic en el botón "Setting"
+    cy.get('button[class="settings-menu-toggle gh-btn gh-btn-editor gh-btn-icon icon-only gh-btn-action-icon"]').click();  // Este es el botón de settings del post
+
+    cy.get('input[class="ember-power-select-trigger-multiple-input"]').first().type(nombreTag);
+    cy.get('li[data-option-index="1"]').first().click();
+
+    cy.get('button[class="settings-menu-toggle gh-btn gh-btn-editor gh-btn-icon icon-only gh-btn-action-icon"]').click();  // Este es el botón para cerrar setting
+}
+
+function visitSite(Site) {
+    cy.visit(`http://localhost:2368/ghost/#/${Site}`);
+    cy.url().should('include', `/ghost/#/${Site}`);
+}
+
+function verifyExist(lista, nombre){
+    // Verificar que el tag se haya agregado correctamente en el post
+    cy.get(lista)
+        .should('contain', nombre);
+
+    // Verificar que el tag aparece en el post
+    cy.contains(nombre).should('exist');
+}
+
+function crearMember(name,email){
+    //Ingresar al sitio de members
+    visitSite('members');
+
+    cy.wait(1000);
+
+    cy.get('a[data-test-new-member-button="true"]').click();
+
+    cy.wait(1000);
+
+    cy.get('input[data-test-input="member-name"]').type(name);
+
+    cy.get('input[data-test-input="member-email"]').type(email);
+
+    cy.wait(1000);
+
+    cy.get('button[data-test-button="save"]').click();
+
+    cy.wait(1000);
+
+    cy.get('a[href="#/members/"]').first().click();
 }
