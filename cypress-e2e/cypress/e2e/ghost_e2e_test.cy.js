@@ -228,6 +228,173 @@ describe('Escenarios para ver los Post dentro de GHOST', () => {
         publishPage();
     });
 
+    it('Escenario 11: Crear y publicar una página con un video de YouTube', () => {
+        // Ir a la sección de páginas
+        cy.visit('http://localhost:2368/ghost/#/pages');
+        cy.url().should('include', '/ghost/#/pages');
+
+        // Click en "New page"
+        cy.get('span').contains('New page').click({force:true, waitForAnimations: false});
+
+        // Ingresar el título de la página
+        cy.get('textarea[data-test-editor-title-input]').type('Página con video de YouTube');
+        cy.get('textarea[data-test-editor-title-input]').type('{enter}');
+
+        cy.get('button[aria-label="Add a card"]').first().click({force:true, waitForAnimations: false});
+
+
+        // Seleccionar la opción de YouTube en el menú de inserción
+        cy.get('button[data-kg-card-menu-item="YouTube"]').scrollIntoView().should('be.visible').click();
+
+        // Esperar a que el campo de URL esté disponible y escribir el enlace de YouTube
+        cy.get('input[data-testid="embed-url"]').should('be.visible').type("https://www.youtube.com/watch?v=x91MPoITQ3I").type('{enter}');
+
+        // Publicar la página
+        publishPage();
+    });
+
+    it('#Escenario 12: Crear y editar una página en Ghost', () => {
+        // Navegar al módulo de Páginas
+        cy.get('a[href="#/pages/"]').click();
+        cy.url().should('include', '/pages');
+
+        // Crear nueva página
+        cy.get('a[href="#/editor/page/"]').click();
+        cy.get('textarea[placeholder="Page title"]').type('My Page to edit{enter}');
+
+        publishPage()
+        //Cerrar modal
+        cy.get('button[data-test-button="close-publish-flow"]').click();
+
+        // Editar la página recién creada
+        cy.contains('My Page to edit').click();
+        cy.get('textarea[placeholder="Page title"]').clear().type('Updated Page Title{enter}');
+
+        // Guardar la página actualizada
+        cy.get('button[data-test-button="publish-save"]').contains('Update').click();
+
+        cy.get('.gh-notification').should('be.visible');
+
+    });
+
+    it('Escenario 13: Crear, publicar y eliminar una página en Ghost', () => {
+        // Ignorar errores específicos
+        Cypress.on('uncaught:exception', (err) => {
+            if (err.message.includes("TaskInstance 'getlatestPublishedPost' was canceled")) {
+                return false; // Ignorar este error específico
+            }
+        });
+
+        // Paso 1: Navegar a la sección de páginas
+        cy.visit('http://localhost:2368/ghost/#/pages');
+        cy.url().should('include', '/ghost/#/pages');
+
+        // Hacer click en "New page" para crear una nueva página
+        cy.contains('New page').click({ force: true, waitForAnimations: false });
+
+        // Escribir el título de la página
+        cy.get('textarea[data-test-editor-title-input]').type('Página de prueba para eliminar{enter}');
+
+        // Agregar contenido HTML a la página
+        cy.get('button[aria-label="Add a card"]').first().click({ force: true, waitForAnimations: false });
+        cy.get('button[data-kg-card-menu-item="HTML"]').first().click({ force: true, waitForAnimations: false });
+        cy.get('div.cm-line').type('<h2>Contenido de la página de prueba</h2>{enter}');
+
+        // Publicar la página
+        publishPage();
+
+        // Paso 2: Confirmar que la página fue publicada
+        cy.url().should('include', '/pages');
+        cy.contains('Página de prueba para eliminar').should('exist');
+        cy.wait(2000);
+        cy.get('body').type('{esc}');
+
+        cy.visit('http://localhost:2368/ghost/#/pages');
+        cy.url().should('include', '/ghost/#/pages');
+
+        // Buscar la página en la lista por el título y hacer clic derecho para abrir el menú contextual
+        cy.contains('h3.gh-content-entry-title', 'Página de prueba para eliminar')
+            .closest('li')
+            .rightclick(); // Realiza el clic derecho en el elemento de lista para abrir el menú de opciones
+
+        // Seleccionar la opción "Delete" del menú contextual
+        cy.get('[data-test-button="delete"]').should('be.visible').click();
+
+        // Confirmar la eliminación
+        cy.get('button[data-test-button="confirm"]').should('be.visible').click();
+
+    });
+
+    it('Escenario 14: Crear una pagina y agregar un link de youtube invalido', () =>{
+        // Ir a la sección de páginas
+        cy.visit('http://localhost:2368/ghost/#/pages');
+        cy.url().should('include', '/ghost/#/pages');
+
+        // Click en "New page"
+        cy.get('span').contains('New page').click({force:true, waitForAnimations: false});
+
+        // Ingresar el título de la página
+        cy.get('textarea[data-test-editor-title-input]').type('Página con error en video de YouTube');
+        cy.get('textarea[data-test-editor-title-input]').type('{enter}');
+
+        cy.get('button[aria-label="Add a card"]').first().click({force:true, waitForAnimations: false});
+
+
+        // Seleccionar la opción de YouTube en el menú de inserción
+        cy.get('button[data-kg-card-menu-item="YouTube"]').scrollIntoView().should('be.visible').click();
+
+        // Esperar a que el campo de URL esté disponible y escribir el enlace de YouTube
+        cy.get('input[data-testid="embed-url"]').should('be.visible').type("https://www.youtu").type('{enter}');
+
+        // Publicar la página
+        publishPage();
+
+        cy.wait(2000);
+        cy.get('body').type('{esc}');
+
+    })
+
+
+    it('Escenario 15: Crear un tag', () => {
+        cy.visit('http://localhost:2368/ghost/#/tags');
+        cy.url().should('include', '/ghost/#/tags');
+
+        // Hacer clic en el botón "New tag"
+        cy.contains('a.gh-btn-primary', 'New tag').click();
+
+        // Llenar los campos del formulario para crear un nuevo tag
+        const tagName = 'Tecnología';  // Nombre del tag
+        const tagColor = 'FF5733';     // Color (en formato hexadecimal)
+        const tagSlug = 'tecnologia';  // Slug (por ejemplo, en minúsculas y sin espacios)
+        const tagDescription = 'Este es un tag de tecnología';  // Descripción del tag
+
+        // Llenar el campo de nombre del tag
+        cy.get('[data-test-input="tag-name"]').type(tagName);
+
+        // Llenar el campo de color del tag
+        cy.get('[data-test-input="accentColor"]').type(tagColor);
+
+        // Llenar el campo de slug del tag
+        cy.get('[data-test-input="tag-slug"]').type(tagSlug);
+
+        // Llenar el campo de descripción del tag
+        cy.get('[data-test-input="tag-description"]').type(tagDescription);
+
+        // Esperar un momento (opcional si necesitas tiempo para que los cambios se reflejen)
+        cy.wait(1000);
+
+        // Hacer clic en el botón "Save"
+        cy.get('button[data-test-button="save"]').click();  // Este es el botón de guardar
+
+        cy.visit('http://localhost:2368/ghost/#/tags');
+
+        // Verificar que el tag se haya agregado correctamente
+        cy.get('.tags-list') // Asegúrate de que este selector sea el adecuado para la lista de tags
+            .should('contain', tagName);
+
+        // Verificar que el tag aparece con la descripción y otros detalles (opcional)
+        cy.contains(tagName).should('exist');
+    });
 
 });
 
