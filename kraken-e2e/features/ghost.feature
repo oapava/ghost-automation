@@ -87,6 +87,59 @@ Scenario: Crear un Post con un título y guardar este nuevo post
   And I wait for 7 seconds
   And I click on view post
 
+  #Escenario 6: Eliminar post creado
+  #Scenario: Escenario 6 - Eliminar post creado
+  Given I navigate to page "http://localhost:2368/ghost/#/dashboard"
+  And I navigate to the posts section
+  And I validate delete post publish available
+  And I wait for 2 seconds
+  Then I should be redirected to the posts page
+
+  #Escenario 7: Eliminar post publicado
+  #Scenario: Escenario 7 - Eliminar post publicado
+  Given I navigate to page "http://localhost:2368/ghost/#/posts?type=published"
+  And I validate one post publish available
+  And I delete post publish available
+  And I wait for 2 seconds
+  Then I should be redirected to the posts page
+
+  #Escenario 8: Crear Post para que solo sea visible para miembros
+  #Scenario: Escenario 8 - Crear Post para que solo sea visible para miembros
+  Given I navigate to page "http://localhost:2368/ghost/#/dashboard"
+  And I click on new story
+  When I enter the post title "Post de prueba miembros Nro 1" 
+  And I open close the post settings panel
+  And I set the post visibility
+  And I open close the post settings panel
+  And I publish the post
+  And I wait for 2 seconds
+  And I close post
+  Then I should be redirected to the posts page
+
+  #Escenario 9: Crear Post con contenido HTML
+  #Scenario: Escenario 9 - Crear Post con contenido HTML
+  Given I navigate to page "http://localhost:2368/ghost/#/dashboard"
+  And I wait for 5 seconds
+  And I click on new story
+  When I enter the post title "Post de prueba Nro 3"
+  And I wait for 2 seconds
+  And I add an HTML card with content "<h2>Prueba texto en post</h2>"
+  And I publish the post
+  And I close post
+  Then I should be redirected to the posts page
+
+  #Escenario 10: Crear página con contenido HTML
+  #Scenario: Escenario 10 - Crear página con contenido HTML
+  Given I navigate to page "http://localhost:2368/ghost/#/pages"
+  And I wait for 2 seconds
+  When I click on new page
+  And I enter the page title
+  And I wait for 2 seconds
+  And I add an HTML card with content "<h2> Prueba texto pagina </h2>"
+  And I publish the page html
+  And I close post
+  Then I should be redirected to the pages page
+
   #Escenario 11: Crear y publicar una página con un video de YouTube
   @user3 @web
   Scenario: Crear y publicar una página con un video de YouTube
