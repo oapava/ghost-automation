@@ -381,3 +381,138 @@ Then('the new tag should be created', async function () {
 
     console.log('El nuevo tag fue creado correctamente.');
 });
+
+//Esenario 6
+Given('I navigate to the posts section', async function () {
+    await this.driver.url('http://localhost:2368/ghost/#/posts');
+    let url = await this.driver.getUrl();
+    if (!url.includes('/posts')) {
+        throw new Error('Navigation to posts section failed');
+    }
+});
+
+Given('I validate delete post publish available', async function () {
+    try{
+        let postList = await this.driver.$('a.gh-post-list-button');
+        if (postList.length === 0) {
+            console.log('No hay posts disponibles, pasando al siguiente escenario.');
+            return 'skipped';
+        }
+        await postList.click();
+        let settingsButton = await this.driver.$('button[data-test-psm-trigger]');
+        await settingsButton.click();
+        let panel = await this.driver.$('.settings-menu-pane-main');
+        await panel.scrollIntoView();
+
+        let deleteButton = await this.driver.$('button[data-test-button="delete-post"]');
+        await deleteButton.click();
+        let confirmDeleteButton = await this.driver.$('button[data-test-button="delete-post-confirm"]');
+        await confirmDeleteButton.click();
+    }catch(error) {
+        console.log('Error al validar la existencia de posts:', error);
+    }
+});
+
+//escenario 7
+Given('I validate one post publish available', async function () {
+    let postAvailable = await this.driver.$('a.gh-post-list-button');
+    if (postAvailable.length === 0) {
+        throw new Error('No posts available to delete');
+    }
+    await postAvailable.click();
+});
+
+Given('I delete post publish available', async function () {
+    let optionButton = await this.driver.$('button[data-test-button="analytics-actions"]');
+    await optionButton.click();
+    let deleteButton = await this.driver.$('button[data-test-button="delete-post"]');
+    await deleteButton.click();
+    let confirmDeleteButton = await this.driver.$('button[data-test-button="delete-post-confirm"]');
+    await confirmDeleteButton.click();
+});
+
+Then('I should be redirected to the posts page', async function () {
+    let url = await this.driver.getUrl();
+    if (!url.includes('/posts')) {
+        throw new Error('Did not redirect to posts page');
+    }
+});
+
+//Escenario 8
+When('I click on new story', async function () {
+    let element = await this.driver.$('a[data-test-nav="new-story"]');
+    await element.click();
+});
+
+When('I close post', async function () {
+    try{
+        let element = await this.driver.$('button[data-test-button="close-publish-flow"]');
+        await element.click();
+    }catch(error) {
+        console.log('Error al validar la existencia de posts:', error);
+    }
+});
+
+When('I enter the post title {string}', async function (title) {
+    let element = await this.driver.$('textarea[data-test-editor-title-input]');
+    await element.setValue(title);
+    await element.addValue('\n');
+});
+
+When('I open close the post settings panel', async function () {
+    let settingsButton = await this.driver.$('button[data-test-psm-trigger]');
+    await settingsButton.click();
+});
+
+When('I set the post visibility', async function () {
+    let selectElement = await this.driver.$('select[data-test-select="post-visibility"]');
+    await selectElement.selectByAttribute('value', 'members');
+});
+
+When('I publish the post', async function () {
+    let publishButton = await this.driver.$('button[data-test-button="publish-flow"]');
+    await publishButton.click();
+    let continueButton = await this.driver.$('button[data-test-button="continue"]');
+    await continueButton.click();
+    let confirmButton = await this.driver.$('button[data-test-button="confirm-publish"]');
+    await confirmButton.click();
+});
+
+//Escenario 9
+When('I add an HTML card with content {string}', async function (htmlContent) {
+    let addCardButton = await this.driver.$('button[aria-label="Add a card"]');
+    await addCardButton.click();
+    let htmlButton = await this.driver.$('button[data-kg-card-menu-item="HTML"]');
+    await htmlButton.click();
+    let htmlInput = await this.driver.$('div[class="cm-line"]');
+    await htmlInput.setValue(htmlContent);
+});
+
+//Escenario 10
+When('I click on new page', async function () {
+    let newPageButton = await this.driver.$('a[data-test-new-page-button]');
+    await newPageButton.click();
+});
+
+When('I enter the page title', async function () {
+    let element = await this.driver.$('textarea[data-test-editor-title-input]');
+    await element.waitForDisplayed();
+    await element.setValue('Pagina de prueba HTML Nro 1');
+    await element.addValue('\n');
+});
+
+When('I publish the page html', async function () {
+    let publishButton = await this.driver.$('button[data-test-button="publish-flow"]');
+    await publishButton.click();
+    let continueButton = await this.driver.$('button[data-test-button="continue"]');
+    await continueButton.click();
+    let confirmButton = await this.driver.$('button[data-test-button="confirm-publish"]');
+    await confirmButton.click();
+});
+
+Then('I should be redirected to the pages page', async function () {
+    let url = await this.driver.getUrl();
+    if (!url.includes('/pages')) {
+        throw new Error('Did not redirect to pages page');
+    }
+});
