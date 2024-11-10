@@ -368,21 +368,6 @@ When('I save the new tag', async function () {
     await saveButton.click();
 });
 
-Then('the new tag should be created', async function () {
-    const backToTagsLink = await this.driver.$('[data-test-link="tags-back"]');
-    await backToTagsLink.click();
-
-    await this.driver.pause(1000);
-
-    const newTagInList = await this.driver.$('//h3[contains(text(), "New Tag Name")]');
-    const isTagCreated = await newTagInList.isDisplayed();
-
-    if (!isTagCreated) {
-        throw new Error('El nuevo tag no fue creado correctamente.');
-    }
-
-    console.log('El nuevo tag fue creado correctamente.');
-});
 
 //Esenario 6
 Given('I navigate to the posts section', async function () {

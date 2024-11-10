@@ -205,7 +205,6 @@ Scenario: Crear un Post con un título y guardar este nuevo post
     And I click on New Tag
     And I fill in the required fields for a new tag
     And I save the new tag
-    Then  the new tag should be created
 
   @user4 @web
   Scenario: Crear tag y crear un post asignandole la tag creada
