@@ -107,7 +107,7 @@ Scenario: Crear un Post con un título y guardar este nuevo post
   #Scenario: Escenario 8 - Crear Post para que solo sea visible para miembros
   Given I navigate to page "http://localhost:2368/ghost/#/dashboard"
   And I click on new story
-  When I enter the post title "Post de prueba miembros Nro 1" 
+  When I enter the post title "Post de prueba miembros Nro 1"
   And I open close the post settings panel
   And I set the post visibility
   And I open close the post settings panel
@@ -206,4 +206,79 @@ Scenario: Crear un Post con un título y guardar este nuevo post
     And I fill in the required fields for a new tag
     And I save the new tag
     Then  the new tag should be created
+
+  @user4 @web
+  Scenario: Crear tag y crear un post asignandole la tag creada
+    Given I navigate to page "http://localhost:2368/ghost/#/signin"
+    And I wait for 5 seconds
+    When I enter email "<USERNAME>"
+    And I wait for 2 seconds
+    And I enter password "<PASSWORD>"
+    And I wait for 2 seconds
+    And I click next
+    And I wait for 7 seconds
+    When I navigate to Tags module
+    And I click on New Tag
+    And I enter tagname "Test-tag1"
+    And I save the new tag
+    And I wait for 5 seconds
+    And I click on posts link
+    And I wait for 2 seconds
+    And I click on new post button
+    And I click on the title input
+    And I enter text "Título-para-crear-tag"
+    And I click on the content input
+    And I enter text "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ut erat at massa sagittis posuere nec ac elit. Maecenas hendrerit ante non sapien sollicitudin, sed aliquam purus semper."
+    And I click on the title input
+    And I click on Settings button
+    And I select tag "Test-tag1"
+    And I wait for 6 seconds
+    And I click on publish button
+    And I click on continue button
+    And I click on confirm button
+    Then I click on posts link
+    And The post with the tag should be created "Test-tag1"
+
+  #Escenario 17: Crear page con tag
+    Given I navigate to page "http://localhost:2368/ghost/#/dashboard"
+    When I navigate to Pages module
+    And I click on New Page
+    And I enter "My-Page-Title-tag" as the title
+    And I click on Settings button
+    And I select tag "Test-tag1"
+    And I wait for 6 seconds
+    And I publish the page
+    And I perform the final review
+    Then I navigate to Pages module
+    And The page with the tag should be created "Test-tag1"
+
+
+  # Escenario 18: Crear Member
+    Given I navigate to page "http://localhost:2368/ghost/#/dashboard"
+    When I navigate to Members Module
+    And I click on New Member
+    And I enter member name "Pablo Rivera"
+    And I enter member email "p.riverah@uniandes.edu.co"
+    And I save the new member
+    And I navigate to Members Module
+    And I wait for 5 seconds
+    Then I navigate to Members Module
+    And The new member should be created "p.riverah@uniandes.edu.co"
+
+  # Escenario 19:  Crear y eliminar Member
+    Given I navigate to page "http://localhost:2368/ghost/#/dashboard"
+    When I navigate to Members Module
+    And I click on New Member
+    And I wait for 5 seconds
+    And I enter member name "Pedro Lorenzo"
+    And I enter member email "test@hotmail.com"
+    And I save the new member
+    And I deleted the new member "test@hotmail.com"
+    Then I navigate to Members Module
+    And The member should be deleted "test@hotmail.com"
+
+
+  # Escenario 20: Verificar que se puede visitar un post en el view de la pagina
+    Given I navigate to page "http://localhost:2368/ghost/#/dashboard"
+    When I navigate to View Site
 

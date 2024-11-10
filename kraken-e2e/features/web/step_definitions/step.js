@@ -1,4 +1,6 @@
+
 const { Given, When, Then } = require('@cucumber/cucumber');
+
 When('I enter email {kraken-string}', async function (email) {
     let element = await this.driver.$('input[type="email"]');
     return await element.setValue(email);
@@ -516,3 +518,137 @@ Then('I should be redirected to the pages page', async function () {
         throw new Error('Did not redirect to pages page');
     }
 });
+
+Then('The page with the tag should be created {string}', async function (text) {
+    const newtagInpost = await this.driver.$(`//span[contains(text(), "${text}" )]`);
+    const istagPostCreated = await newtagInpost.isDisplayed();
+
+    if (!istagPostCreated) {
+        throw new Error('El nuevo post con el tag no fue creado correctamente.');
+    }
+
+    console.log('El nuevo post con el tag fue creado correctamente.');
+})
+
+Then('The post with the tag should be created {string}', async function (text) {
+    const newtagInpage = await this.driver.$(`//span[contains(text(), "${text}" )]`);
+    const istagPageCreated = await newtagInpage.isDisplayed();
+
+    if (!istagPageCreated) {
+        throw new Error('la nueva post con el tag no fue creado correctamente.');
+    }
+
+    console.log('la nueva page con el tag fue creado correctamente.');
+})
+
+When('I click on tags link', async function () {
+    let element = await this.driver.$('a[data-test-nav="tags"]');
+    return await element.click();
+})
+
+When('I Navigate to create a new tag', async function () {
+    let element = await this.driver.$('a[href="#/tags/new/"]');
+    return await element.click();
+})
+
+When('I enter tagname {string}', async function (tagname) {
+    let element = await this.driver.$('#tag-name');
+    return await element.setValue(tagname);
+})
+
+When('I save the tag', async function () {
+    let element = await this.driver.$('button[data-test-button="save"]');
+    return await element.click();
+})
+
+When('I click on Settings button', async function () {
+    let element = await this.driver.$('button[class="settings-menu-toggle gh-btn gh-btn-editor gh-btn-icon icon-only gh-btn-action-icon"]');
+    return await element.click();
+})
+
+
+When('I select tag {string}', async function (tagname) {
+    let element = await this.driver.$('input[class="ember-power-select-trigger-multiple-input"]');
+    await element.setValue(tagname);
+    const element1 = await this.driver.$('li[data-option-index="0"]');
+    return await element1.click();
+})
+
+When('I navigate to Members Module', async function () {
+    const memberModule = await this.driver.$('a[data-test-nav="members"]');
+    return await memberModule.click();
+})
+
+When('I click on New Member', async function () {
+    let element = await this.driver.$('a[href="#/members/new/"]');
+    console.log(element);
+    return await element.click();
+})
+
+When('I click to Members Module', async function () {
+    let element = await this.driver.$('a[data-test-nav="members"]');
+    return await element.click();
+})
+
+When('I enter member name {string}', async function (membername) {
+    let element = await this.driver.$('#member-name');
+    return await element.setValue(membername);
+})
+
+When('I enter member email {string}', async function (memberemail) {
+    let element = await this.driver.$('#member-email');
+    return await element.setValue(memberemail);
+})
+
+When('I save the new member', async function () {
+    let element = await this.driver.$('button[data-test-button="save"]');
+    return await element.click();
+})
+
+Then('The new member should be created {string}', async function (text) {
+    const newMemberInList = await this.driver.$(`//p[contains(text(), "${text}" )]`);
+    const isMemberCreated = await newMemberInList.isDisplayed();
+
+    if (!isMemberCreated) {
+        throw new Error('El nuevo member no fue creado correctamente.');
+    }
+
+    console.log('El nuevo member fue creado correctamente.');
+});
+
+When('I deleted the new member {string}', async function (memberemail) {
+    const backToMembersLink = await this.driver.$('[data-test-link="members-back"]');
+    await backToMembersLink.click();
+
+    let memberSearch = await this.driver.$('input[data-test-input="members-search"]');
+    await memberSearch.setValue(memberemail);
+
+    let clickMemberSearch = await this.driver.$('a[data-test-table-data="details"]');
+    await clickMemberSearch.click();
+
+    let clickMembersAction = await this.driver.$('button[data-test-button="member-actions"]');
+    await clickMembersAction.click();
+
+    let clickDeleteMember = await this.driver.$('button[data-test-button="delete-member"]');
+    await clickDeleteMember.click();
+
+    let clickConfirmDelete = await this.driver.$('button[data-test-button="confirm"]');
+    await clickConfirmDelete.click();
+
+})
+
+Then('The member should be deleted {string}', async function (text) {
+    const newMemberInList = await this.driver.$(`//p[contains(text(), "${text}" )]`);
+    const isMemberCreated = await newMemberInList.isDisplayed();
+
+    if (isMemberCreated) {
+        throw new Error('El nuevo member no fue eliminado correctamente.');
+    }
+
+    console.log('El nuevo member fue eliminado correctamente.');
+})
+
+When('I navigate to View Site', async function () {
+    const viewSiteModule = await this.driver.$('a[data-test-nav="site"]');
+    return await viewSiteModule.click();
+})
