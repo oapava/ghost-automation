@@ -1,5 +1,4 @@
 Feature: Creación de Post
-
 @user1 @web
 Scenario: 1. Crear un Post con un título y guardar este nuevo post
   # Escenario 1: Crear un Post con un título y guardar este nuevo post
