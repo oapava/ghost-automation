@@ -5,9 +5,10 @@ module.exports = {
     },
   },
   env: {
-    baseUrl: "http://localhost:2368/ghost/#/signin",
+    baseUrl: "http://localhost:2368",
     email: "o.pava@uniandes.edu.com",
     password: "andres2124",
-    postPageUrl: "http://localhost:2368/ghost/#/posts"
+    postPageUrl: "http://localhost:2368/ghost/#/posts",
+    pageUrl: "http://localhost:2368/ghost/#/pages"
   }
 };
