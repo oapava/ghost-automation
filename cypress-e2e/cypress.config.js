@@ -10,6 +10,7 @@ module.exports = {
     password: "Pruebas.12345",
     postPageUrl: "http://localhost:2368/ghost/#/posts",
     pageUrl: "http://localhost:2368/ghost/#/pages",
+    postMembersPageUrl: "http://localhost:2368/ghost/#/posts?visibility=members",
     titlePostBasic: "Post basico 1",
     titlePostBold: "Post en negrita 1"
   }
