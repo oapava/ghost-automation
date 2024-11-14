@@ -11,7 +11,7 @@ class Given {
     };
 
     givenNavigateDashboard(){
-        cy.wait(4500);
+        cy.wait(1000);
         cy.url().should('include', '/ghost/#/dashboard');
     }
     

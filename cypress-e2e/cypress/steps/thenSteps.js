@@ -12,6 +12,11 @@ class Then {
         cy.get('button[data-test-button="confirm-publish"]').first().click();
         cy.url().should('contain', '/pages');
     }
+
+    thenSeePostPublished(){
+        cy.visit(Cypress.env('postPageUrl'));
+        cy.contains(Cypress.env('titlePostBasic')).should('be.visible'); 
+    }
 }
 
 

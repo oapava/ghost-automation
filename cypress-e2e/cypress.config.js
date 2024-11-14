@@ -6,9 +6,10 @@ module.exports = {
   },
   env: {
     baseUrl: "http://localhost:2368",
-    email: "o.pava@uniandes.edu.com",
-    password: "andres2124",
+    email: "prueba@gmail.com",
+    password: "Pruebas.12345",
     postPageUrl: "http://localhost:2368/ghost/#/posts",
-    pageUrl: "http://localhost:2368/ghost/#/pages"
+    pageUrl: "http://localhost:2368/ghost/#/pages",
+    titlePostBasic: "Post basico 1 de prueba",
   }
 };
