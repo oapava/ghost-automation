@@ -4,39 +4,26 @@ const { Given, When, Then } = require('@cucumber/cucumber');
 When('I login in ghost {kraken-string} {kraken-string}', async function (email, password){
 
     let element = await this.driver.$('input[type="email"]');
-    await this.driver.pause(2000);
     await element.setValue(email);
 
     let element1 = await this.driver.$('input[type="password"]');
-    await this.driver.pause(2000);
     await element1.setValue(password);
 
 
     let element3 = await this.driver.$('#ember5');
-    await this.driver.pause(7000);
+    await this.driver.pause(5000);
     return await element3.click();
 
 });
-
-When('I enter email {kraken-string}', async function (email) {
-    let element = await this.driver.$('input[type="email"]');
-    return await element.setValue(email);
-});
-
-When('I enter password {kraken-string}', async function (password) {
-    let element = await this.driver.$('input[type="password"]');
-    return await element.setValue(password);
-});
-
-When('I click next', async function() {
-    let element = await this.driver.$('#ember5');
-    return await element.click();
-})
-
 When('I click on posts link', async function() {
     let element = await this.driver.$('a[data-test-nav="posts"]');
     return await element.click();
 })
+
+When('I click on the posts button', async function () {
+    const postsButton = await this.driver.$('a[data-test-link="posts"].gh-editor-back-button');
+    await postsButton.click();
+});
 
 When('I click on pages link', async function() {
     let element = await this.driver.$('a[data-test-nav="pages"]');
@@ -58,6 +45,12 @@ When('I click on the title input', async function() {
     let element = await this.driver.$('textarea[placeholder="Post title"]');
     return await element.click();
 })
+
+When('I delete text', async function () {
+    const titleInput = await this.driver.$('.gh-editor-title');
+    await titleInput.setValue('');
+});
+
 
 When('I click on the content input', async function() {
     let element = await this.driver.$('div[class="kg-prose"]');
@@ -721,17 +714,31 @@ Then('The member should be deleted {string}', async function (text) {
     console.log('El nuevo member fue eliminado correctamente.');
 })
 
-
 When('I navigate to View Site', async function () {
     const viewSiteModule = await this.driver.$('a[data-test-nav="site"]');
     return await viewSiteModule.click();
 })
 
 Then('I should see the post with title {string}', async function (expectedTitle) {
-    const postTitle = await browser.$('h1.post-title');
+    const windows = await this.driver.getWindowHandles();
+    await this.driver.switchToWindow(windows[windows.length - 1]);
+    const postTitle = await this.driver.$('h1.gh-article-title.is-title');
     const titleText = await postTitle.getText();
 
-    assert.strictEqual(titleText, expectedTitle, `Expected title to be "${expectedTitle}", but got "${titleText}"`);
+    if (titleText !== expectedTitle) {
+        throw new Error(`Expected title to be "${expectedTitle}", but got "${titleText}"`);
+    }
+});
+
+Then('I should see the post with text {string}', async function (expectedText) {
+    const windows = await this.driver.getWindowHandles();
+    await this.driver.switchToWindow(windows[windows.length - 1]);
+    const postText = await this.driver.$('section.gh-content p strong');
+    const text = await postText.getText();
+
+    if (text !== expectedText) {
+        throw new Error(`Expected text to be "${expectedText}", but got "${text}"`);
+    }
 });
 
 Then('I shouldn´t see the post with title {string}', async function (text) {
@@ -744,3 +751,44 @@ Then('I shouldn´t see the post with title {string}', async function (text) {
 
     console.log('El draft del post se elimino correctamente');
 })
+
+
+Then('I should see the post with title {string} and an Unsplash image', async function (expectedTitle) {
+    const windows = await this.driver.getWindowHandles();
+    await this.driver.switchToWindow(windows[windows.length - 1]);
+
+    await this.driver.pause(2000);
+
+    const postTitleElement = await this.driver.$('h1.gh-article-title.is-title');
+    const titleText = await postTitleElement.getText();
+
+    if (titleText !== expectedTitle) {
+        throw new Error(`Expected title to be "${expectedTitle}", but got "${titleText}"`);
+    }
+
+    const postImage = await this.driver.$('figure.gh-article-image img[src*="images.unsplash.com"]');
+    const imageExists = await postImage.isExisting();
+
+    if (!imageExists) {
+        throw new Error('Expected an Unsplash image in the post, but none was found.');
+    }
+});
+
+Then('I should see the post with title {string} and content {string}', async function (expectedTitle, expectedContent) {
+    const windows = await this.driver.getWindowHandles();
+    await this.driver.switchToWindow(windows[windows.length - 1]);
+
+    await this.driver.pause(2000);
+
+    const postTitleElement = await this.driver.$('h1.gh-article-title.is-title');
+    const titleText = await postTitleElement.getText();
+    if (titleText !== expectedTitle) {
+        throw new Error(`Expected title to be "${expectedTitle}", but got "${titleText}"`);
+    }
+
+    const postContentElement = await this.driver.$('section.gh-content p');
+    const contentText = await postContentElement.getText();
+    if (contentText !== expectedContent) {
+        throw new Error(`Expected content to be "${expectedContent}", but got "${contentText}"`);
+    }
+});
