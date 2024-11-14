@@ -37,9 +37,9 @@ class Then {
         //pendiente
     }
 
-    confirmDeletedPostPublished(){
-        cy.visit(Cypress.env('postPageUrl'));
-        //pendiente
+    confirmUnpublishPostPublished(){
+        cy.visit(Cypress.env('postDraftPageUrl'));
+        cy.get('span[title="Go to Editor"]').should('exist')
     }
 
     seePostPublishedMembersOnly(){

@@ -73,7 +73,7 @@ class When {
         cy.get('textarea[data-test-editor-title-input').type('{enter}');
         //Agregar imagen
         cy.get('.gh-editor-feature-image-unsplash').first().click({force:true})
-        cy.wait(5000)
+        cy.wait(1000)
         cy.contains('a', 'Insert image').then(($elements) => {
             const randomIndex = Math.floor(Math.random() * $elements.length);
             cy.wrap($elements[randomIndex]).click();
@@ -84,9 +84,9 @@ class When {
     }
 
     createAndPublishPostWhithContent(){
-        //Navegar a la página de posts y esperamos que la URL cargue correctamente
-        cy.visit('http://localhost:2368/ghost/#/posts');
-        cy.url().should('include', '/ghost/#/posts');
+        //ir a seccion de crear post
+        cy.get('a[data-test-nav="new-story"]').click();
+        cy.url().should('contain', '/post');
 
         //Se ingresa titulo del post
         cy.get('textarea[data-test-editor-title-input]').type('Post con contenido 1');
@@ -97,37 +97,33 @@ class When {
         this.validatePublishPostAndCloseModal();
     }
 
-    deletePostCreated(){
+    unpublishPostCreated(){
         //Se valida que existan Posts
-        cy.get('a.gh-post-list-button').should('exist').then(() => {
-            //Boton editar ultimo post
-            cy.get('a.gh-post-list-button').first().click();
+        cy.get('span[title="Go to Analytics"]').should('exist').then(() => {
+            cy.get('span[title="Go to Analytics"]').first().click();
 
-            //Se abre el panel de configuracion
-            cy.get('button[data-test-psm-trigger]').should('be.visible');
-            cy.get('button[data-test-psm-trigger]').first().click();
-            cy.get('button[data-test-psm-trigger]').trigger('mousedown') //se usa el trigger en lugar del click para mantener el panel abierto
+            //Click en opciones
+            cy.get('button[data-test-button="analytics-actions"]').should('be.visible');
+            cy.get('button[data-test-button="analytics-actions"]').first().click();
 
-            //Scroll al final del panel
-            cy.get('.settings-menu-pane-main').should('be.visible')
-            cy.get('.settings-menu-pane-main').scrollTo('bottom')
+            //Click en edit post  
+            cy.get('a.edit-post').contains('Edit post').should('be.visible');
+            cy.get('a.edit-post').contains('Edit post').first().click();
 
-            //Se da click en boton eliminar
-            cy.get('button[data-test-button="delete-post"]').should('be.visible');
-            cy.get('button[data-test-button="delete-post"]').first().click();
+            //Click en Unpublish Post
+            cy.get('button[data-test-button="update-flow"]').should('be.visible');
+            cy.get('button[data-test-button="update-flow"]').first().click();
 
-            //Se confirma eliminar
-            cy.get('button[data-test-button="delete-post-confirm"]').should('be.visible');
-            cy.get('button[data-test-button="delete-post-confirm"]').first().click();
-
-            cy.url().should('contain', '/posts');
+            //Click en confirmar unpublish
+            cy.get('button[data-test-button="revert-to-draft"]').should('be.visible');
+            cy.get('button[data-test-button="revert-to-draft"]').first().click();
         });
     }
 
     deletePostPublished(){
         //Se valida que existan Posts
-        cy.get('a.gh-post-list-button').should('exist').then(() => {
-            cy.get('a.gh-post-list-button').first().click();
+        cy.get('span[title="Go to Analytics"]').should('exist').then(() => {
+            cy.get('span[title="Go to Analytics"]').first().click();
 
             //Click en opciones
             cy.get('button[data-test-button="analytics-actions"]').should('be.visible');

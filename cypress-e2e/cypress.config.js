@@ -11,7 +11,8 @@ module.exports = {
     postPageUrl: "http://localhost:2368/ghost/#/posts",
     pageUrl: "http://localhost:2368/ghost/#/pages",
     postMembersPageUrl: "http://localhost:2368/ghost/#/posts?visibility=members",
+    postDraftPageUrl: "http://localhost:2368/ghost/#/posts?type=draft",
     titlePostBasic: "Post basico 1",
-    titlePostBold: "Post en negrita 1"
+    titlePostBold: "Post en negrita 1",
   }
 };

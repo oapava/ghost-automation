@@ -64,15 +64,15 @@ describe('Crear un post', () => {
         Then.seePostPublishedPostWithContent();
     });
 
-    it('Escenario 6: Eliminar post creado', () => {
+    it('Escenario 6: Unpublish post publicado', () => {
         // THEN: Visitar pagina de posts
         Given.navigateToPostPage();
 
         // WHEN: Crear y publicar post 
-        When.deletePostCreated();
+        When.unpublishPostCreated();
 
         // THEN: Verificar post publicado
-        Then.confirmDeletedPostPublished();
+        Then.confirmUnpublishPostPublished();
     });
 
     it('Escenario 7: Eliminar post publicado', () => {
