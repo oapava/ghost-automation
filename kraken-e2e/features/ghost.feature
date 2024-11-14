@@ -2,7 +2,6 @@ Feature: Creación de Post
 
 @user1 @web
 Scenario: Crear un Post con un título y guardar este nuevo post
-  # Escenario 1: Crear un Post con un título y guardar este nuevo post
   Given I navigate to page "http://localhost:2368/ghost/#/signin"
   And I login in ghost "<USERNAME>" "<PASSWORD>"
   When I click on posts link
@@ -19,71 +18,92 @@ Scenario: Crear un Post con un título y guardar este nuevo post
   And I click on view post
   Then I should see the post with title "Título desde Kraken 1"
 
-#
-#  @user2 @web
-#  Scenario: Crear un Post con un contenido en markdown y guardar este nuevo post
-#  Given I navigate to page "http://localhost:2368/ghost/#/dashboard"
-#  And I wait for 5 seconds
-#  And I click on posts link
-#  And I wait for 2 seconds
-#  And I click on new post button
-#  And I click on the content input
-#  And I enter text "**Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ut erat at massa sagittis posuere nec ac elit. Maecenas hendrerit ante non sapien sollicitudin, sed aliquam purus semper.**"
-#  And I click on the title input
-#  And I click on publish button
-#  And I click on continue button
-#  And I click on confirm button
-#  And I wait for 7 seconds
-#  And I click on view post
-#
-#  # Escenario 3: Tomar un Post en draft y agregar contenido en markdown y guardar este nuevo post
-#  Given I navigate to page "http://localhost:2368/ghost/#/dashboard"
-#  And I wait for 5 seconds
-#  And I click on posts link
-#  And I wait for 2 seconds
-#  And I click on edit button of draft
-#  And I click on the content input
-#  And I enter text "**Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ut erat at massa sagittis posuere nec ac elit. Maecenas hendrerit ante non sapien sollicitudin, sed aliquam purus semper.**"
-#  And I click on the title input
-#  And I enter text "Título desde Kraken 3"
-#  And I wait for 3 seconds
-#  And I click on preview button
-#  And I wait for 7 seconds
-#  And I click on back posts list
-#
-#  # Escenario 4: Crear un Post con una imagen de Unsplash y guardar este nuevo post
-#  Given I navigate to page "http://localhost:2368/ghost/#/dashboard"
-#  And I wait for 5 seconds
-#  And I click on posts link
-#  And I wait for 2 seconds
-#  And I click on new post button
-#  And I click on unsplash button
-#  And I wait for 5 seconds
-#  And I click on a random link with text "Insert image"
-#  And I click on the title input
-#  And I enter text "Título desde Kraken 4"
-#  And I wait for 3 seconds
-#  And I click on preview button
-#  And I wait for 7 seconds
-#  And I click on back posts list
-#
-#  # Escenario 5: Crear un Post con un contenido y título despues guardar este nuevo post
-#  Given I navigate to page "http://localhost:2368/ghost/#/dashboard"
-#  And I wait for 5 seconds
-#  And I click on posts link
-#  And I wait for 2 seconds
-#  And I click on new post button
-#  And I click on the title input
-#  And I enter text "Título desde Kraken 4"
-#  And I click on the content input
-#  And I enter text "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ut erat at massa sagittis posuere nec ac elit. Maecenas hendrerit ante non sapien sollicitudin, sed aliquam purus semper."
-#  And I click on the title input
-#  And I click on publish button
-#  And I click on continue button
-#  And I click on confirm button
-#  And I wait for 7 seconds
-#  And I click on view post
-#
+@user2 @web
+  Scenario: Crear un Post con un contenido en markdown y guardar este nuevo post
+  Given I navigate to page "http://localhost:2368/ghost/#/dashboard"
+  And I wait for 5 seconds
+  And I login in ghost "<USERNAME>" "<PASSWORD>"
+  And I click on posts link
+  And I wait for 2 seconds
+  And I click on new post button
+  And I click on the content input
+  When I enter text "**Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ut erat at massa sagittis posuere nec ac elit. Maecenas hendrerit ante non sapien sollicitudin, sed aliquam purus semper.**"
+  And I click on the title input
+  And I click on publish button
+  And I click on continue button
+  And I click on confirm button
+  And I wait for 7 seconds
+  And I click on view post
+  Then I should see the post with text "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ut erat at massa sagittis posuere nec ac elit. Maecenas hendrerit ante non sapien sollicitudin, sed aliquam purus semper."
+
+  @user3 @web
+  Scenario:  Crear un Post en draft y agregar contenido en markdown y guardar este nuevo post
+  Given I navigate to page "http://localhost:2368/ghost/#/dashboard"
+  And I wait for 5 seconds
+  And I login in ghost "<USERNAME>" "<PASSWORD>"
+  And I click on posts link
+  And I wait for 2 seconds
+  And I click on new post button
+  And I click on the title input
+  And I enter text "Título desde Kraken error"
+  And I click on the posts button
+  And I click on posts link
+  And I click on edit button of draft
+  And I click on the content input
+  And I enter text "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ut erat at massa sagittis posuere nec ac elit. Maecenas hendrerit ante non sapien sollicitudin, sed aliquam purus semper."
+  And I click on the title input
+  And I delete text
+  And I enter text "Título desde Kraken 3"
+  And I wait for 3 seconds
+  And I click on publish button
+  And I click on continue button
+  And I click on confirm button
+  And I wait for 7 seconds
+  And I click on view post
+  Then I should see the post with title "Título desde Kraken 3" and content "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ut erat at massa sagittis posuere nec ac elit. Maecenas hendrerit ante non sapien sollicitudin, sed aliquam purus semper."
+
+
+  @user4 @web
+  Scenario:Crear un Post con una imagen de Unsplash y guardar este nuevo post
+  Given I navigate to page "http://localhost:2368/ghost/#/dashboard"
+  And I wait for 5 seconds
+  And I login in ghost "<USERNAME>" "<PASSWORD>"
+  And I click on posts link
+  And I wait for 2 seconds
+  And I click on new post button
+  And I click on unsplash button
+  And I wait for 5 seconds
+  And I click on a random link with text "Insert image"
+  And I click on the title input
+  And I enter text "Título desde Kraken 4"
+  And I wait for 3 seconds
+  And I click on publish button
+  And I click on continue button
+  And I click on confirm button
+  And I wait for 7 seconds
+  And I click on view post
+  Then I should see the post with title "Título desde Kraken 4" and an Unsplash image
+
+  @user5 @web
+  Scenario:Crear un Post con un contenido y título despues guardar este nuevo post
+  Given I navigate to page "http://localhost:2368/ghost/#/dashboard"
+  And I wait for 5 seconds
+  And I login in ghost "<USERNAME>" "<PASSWORD>"
+  And I click on posts link
+  And I wait for 2 seconds
+  And I click on new post button
+  And I click on the title input
+  And I enter text "Título desde Kraken 5"
+  And I click on the content input
+  And I enter text "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ut erat at massa sagittis posuere nec ac elit. Maecenas hendrerit ante non sapien sollicitudin, sed aliquam purus semper."
+  And I click on the title input
+  And I click on publish button
+  And I click on continue button
+  And I click on confirm button
+  And I wait for 7 seconds
+  And I click on view post
+  Then I should see the post with title "Título desde Kraken 5" and content "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ut erat at massa sagittis posuere nec ac elit. Maecenas hendrerit ante non sapien sollicitudin, sed aliquam purus semper."
+
 #  #Escenario 6: Eliminar post creado
 #  #Scenario: Escenario 6 - Eliminar post creado
 #  Given I navigate to page "http://localhost:2368/ghost/#/dashboard"
