@@ -38,6 +38,16 @@ When('I click on posts link', async function() {
     return await element.click();
 })
 
+When('I click on pages link', async function() {
+    let element = await this.driver.$('a[data-test-nav="pages"]');
+    return await element.click();
+})
+
+When('I return on posts links', async function() {
+    let element = await this.driver.$('a[data-test-link="posts"]');
+    return await element.click();
+})
+
 When('I click on new post button', async function() {
     //let element = await this.driver.$('span');
     let element = await this.driver.$(`//span[contains(text(), 'New post')]`);
@@ -70,6 +80,11 @@ When('I click on confirm button', async function() {
 })
 
 When('I click on view post', async function() {
+    let element = await this.driver.$('a[data-test-complete-bookmark]');
+    return await element.click();
+})
+
+When('I click on view page', async function() {
     let element = await this.driver.$('a[data-test-complete-bookmark]');
     return await element.click();
 })
@@ -298,6 +313,44 @@ Then('I should see the updated page with the new title and content', async funct
     console.log('La página fue actualizada correctamente.');
 });
 
+Then('I should see the title {string} and html {string} description in the post', async function (title, html) {
+
+    const windows = await this.driver.getWindowHandles();
+    await this.driver.switchToWindow(windows[windows.length - 1]);
+
+    const updatedTitle = await this.driver.$('h1');
+    const updatedContent = await this.driver.$('h2');
+
+    if (await updatedTitle.getText() !== title) {
+        throw new Error('El título actualizado no es visible.');
+    }
+
+    if (await updatedContent.getText() !== html) {
+        throw new Error('El contenido actualizado no es visible.');
+    }
+
+    console.log('La página con html fue creada exitosamente.');
+});
+
+Then('I should see the title {string} and html {string} description in the page', async function (title, html) {
+
+    const windows = await this.driver.getWindowHandles();
+    await this.driver.switchToWindow(windows[windows.length - 1]);
+
+    const updatedTitle = await this.driver.$('h1');
+    const updatedContent = await this.driver.$('h2');
+
+    if (await updatedTitle.getText() !== title) {
+        throw new Error('El título actualizado no es visible.');
+    }
+
+    if (await updatedContent.getText() !== html) {
+        throw new Error('El contenido actualizado no es visible.');
+    }
+
+    console.log('La página con html fue creada exitosamente.');
+});
+
 When('I return pages', async function () {
     await this.driver.url('http://localhost:2368/ghost/#/dashboard');
     await this.driver.pause(200)
@@ -308,6 +361,24 @@ When('I return pages', async function () {
 
 When('I delete the page titled {string}', async function (pageTitle) {
     const pageToDelete = await this.driver.$(`//h3[contains(@class, "gh-content-entry-title") and text()="${pageTitle}"]`);
+    await pageToDelete.waitForDisplayed({ timeout: 5000 });
+
+    await pageToDelete.click({ button: 2 });
+
+    const deleteMenuOption = await this.driver.$('[data-test-button="delete"]');
+    await deleteMenuOption.waitForDisplayed({ timeout: 5000 });
+
+    await deleteMenuOption.click();
+
+    const confirmDeleteButton = await this.driver.$('[data-test-button="confirm"]');
+    await confirmDeleteButton.waitForDisplayed({ timeout: 5000 });
+    await confirmDeleteButton.click();
+
+    await this.driver.pause(2000);
+});
+
+When('I delete the post {string}', async function (postTitle) {
+    const pageToDelete = await this.driver.$(`//h3[contains(@class, "gh-content-entry-title") and text()="${postTitle}"]`);
     await pageToDelete.waitForDisplayed({ timeout: 5000 });
 
     await pageToDelete.click({ button: 2 });
@@ -650,6 +721,7 @@ Then('The member should be deleted {string}', async function (text) {
     console.log('El nuevo member fue eliminado correctamente.');
 })
 
+
 When('I navigate to View Site', async function () {
     const viewSiteModule = await this.driver.$('a[data-test-nav="site"]');
     return await viewSiteModule.click();
@@ -661,3 +733,14 @@ Then('I should see the post with title {string}', async function (expectedTitle)
 
     assert.strictEqual(titleText, expectedTitle, `Expected title to be "${expectedTitle}", but got "${titleText}"`);
 });
+
+Then('I shouldn´t see the post with title {string}', async function (text) {
+    const postDeleted = await this.driver.$(`//h3[contains(text(), "${text}" )]`);
+    const isPostDeleted = await postDeleted.isDisplayed();
+
+    if (isPostDeleted) {
+        throw new Error('El draft del post no se elimino correctamente');
+    }
+
+    console.log('El draft del post se elimino correctamente');
+})

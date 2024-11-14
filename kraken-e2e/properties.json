@@ -1,4 +1,5 @@
 {
     "USERNAME": "privera05@hotmail.com",
-    "PASSWORD": "Uniandes213."
+    "PASSWORD": "Uniandes213.",
+    "URLBASE": "http://localhost:2368/ghost/#/signin"
 }
