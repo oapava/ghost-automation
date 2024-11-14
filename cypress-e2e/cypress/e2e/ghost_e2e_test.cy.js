@@ -14,8 +14,7 @@ describe('Crear un post', () => {
         Given.givenNavigateToPostPage();
 
         // WHEN: Crear y publicar post 
-        When.whenCreatePost();
-        When.whenPublishPost();
+        When.whenCreateAndPublishPost();
 
         // THEN: Verificar post publicado
         Then.thenSeePostPublished();
@@ -26,22 +25,32 @@ describe('Crear un post', () => {
         Given.givenNavigateToPostPage();
 
         // WHEN: Crear y publicar post 
-        When.whenCreatePost();
-        When.whenPublishPost();
+        When.whenCreateAndPublishPost();
 
         // THEN: Verificar post publicado
         Then.thenSeePostPublished();
     });
 
-    // it('Escenario 11: Crear y publicar una página con un video de YouTube', () => {
-    //     // THEN: Visitar Pages
-    //     Given.givenNavigateToPagePage();
+    it('Escenario 11: Crear y publicar una página con un video de YouTube', () => {
+        // GIVEN: Visitar Pages
+        Given.givenNavigateToPagePage();
 
-    //     // WHEN: Click en "New page"
-    //     When.createPageAndPublishWithVideo();
+        // WHEN: Click en "New page"
+        When.createPageAndPublishWithVideo();
 
-    //     // THEN: Publicar la página
-    //     Then.publishPage();
-    // });
+        // THEN: Validar la publicación de la página
+        Then.validatePageWithVideoCreated();
+    });
+
+    it('#Escenario 12: Crear y editar una página en Ghost', () => {
+        // GIVEN: Visitar Pages
+        Given.givenNavigateToPagePage();
+
+        // WHEN: Crear publicar, editar y guardar
+        When.reateAndPublishPageEditAndSave();
+
+        // THEN: Publicar la página
+        Then.validatePageWasEditedAndCreated();
+    });
 });
 
