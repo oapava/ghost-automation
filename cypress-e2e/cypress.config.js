@@ -5,8 +5,9 @@ module.exports = {
     },
   },
   env: {
-    baseUrl: "http://localhost:2368", // Define tu URL base
+    baseUrl: "http://localhost:2368/ghost/#/signin", // Define tu URL base
     email: "prueba@gmail.com",
-    password: "prueba123456"
+    password: "prueba123456",
+    postPageUrl: "http://localhost:2368/ghost/#/posts"
   }
 };

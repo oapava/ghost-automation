@@ -1,6 +1,8 @@
 describe('Crear un post', () => {
     beforeEach(() => {
+        givenNavigateToInitialPage();
         givenLogin();
+        givenNavigateToPostPage();
     });
 
     it('Escenario 1', () => {
