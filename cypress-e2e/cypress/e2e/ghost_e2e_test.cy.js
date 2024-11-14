@@ -16,8 +16,19 @@ describe('Crear un post', () => {
         // WHEN: Click en "New page"
         When.createPageAndPublishWithVideo();
 
+        // THEN: Validar la publicación de la página
+        Then.validatePageWithVideoCreated();
+    });
+
+    it('#Escenario 12: Crear y editar una página en Ghost', () => {
+        // THEN: Visitar Pages
+        Given.givenNavigateToPagePage();
+
+        // WHEN: Click en "New page"
+        When.reateAndPublishPageEditAndSave();
+
         // THEN: Publicar la página
-        Then.publishPage();
+        Then.validatePageWasEditedAndCreated();
     });
 });
 
