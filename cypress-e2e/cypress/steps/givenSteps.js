@@ -15,7 +15,7 @@ class Given {
         cy.url().should('include', '/ghost/#/dashboard');
     }
     
-    givenNavigateToPostPage(){
+    navigateToPostPage(){
         cy.visit(Cypress.env('postPageUrl'));
         cy.url().should('include', '/ghost/#/posts');
     };

@@ -7,9 +7,54 @@ class Then {
         cy.get('.gh-notification').should('be.visible');
     }
 
-    thenSeePostPublished(){
+    seePostPublished(){
         cy.visit(Cypress.env('postPageUrl'));
         cy.contains(Cypress.env('titlePostBasic')).should('be.visible'); 
+    }
+
+    seePostPublishedBold(){
+        cy.visit(Cypress.env('postPageUrl'));
+        cy.contains(Cypress.env('titlePostBold')).should('be.visible'); 
+    }
+
+    seePostPublishedPostMarkdown(){
+        cy.visit(Cypress.env('postPageUrl'));
+        cy.contains('(Editado!)').should('be.visible'); 
+    }
+
+    seePostPublishedPostWithImage(){
+        cy.visit(Cypress.env('postPageUrl'));
+        cy.contains('Post con imagen 1').should('be.visible'); 
+    }
+
+    seePostPublishedPostWithContent(){
+        cy.visit(Cypress.env('postPageUrl'));
+        cy.contains('Post con contenido 1').should('be.visible'); 
+    }
+
+    confirmDeletedPost(){
+        cy.visit(Cypress.env('postPageUrl'));
+        //pendiente
+    }
+
+    confirmUnpublishPostPublished(){
+        cy.visit(Cypress.env('postDraftPageUrl'));
+        cy.get('span[title="Go to Editor"]').should('exist')
+    }
+
+    seePostPublishedMembersOnly(){
+        cy.visit(Cypress.env('postMembersPageUrl'));
+        cy.contains('Post para miembros 1').should('be.visible'); 
+    }
+
+    seePostPublishedWithHtml(){
+        cy.visit(Cypress.env('postPageUrl'));
+        cy.contains('Post con HTML 1').should('be.visible'); 
+    }
+
+    seePagePublishedWithHtml(){
+        cy.visit(Cypress.env('pageUrl'));
+        cy.contains('Pagina con HTML 1').should('be.visible'); 
     }
 }
 
