@@ -1,6 +1,23 @@
 
 const { Given, When, Then } = require('@cucumber/cucumber');
 
+When('I login in ghost {kraken-string} {kraken-string}', async function (email, password){
+
+    let element = await this.driver.$('input[type="email"]');
+    await this.driver.pause(2000);
+    await element.setValue(email);
+
+    let element1 = await this.driver.$('input[type="password"]');
+    await this.driver.pause(2000);
+    await element1.setValue(password);
+
+
+    let element3 = await this.driver.$('#ember5');
+    await this.driver.pause(7000);
+    return await element3.click();
+
+});
+
 When('I enter email {kraken-string}', async function (email) {
     let element = await this.driver.$('input[type="email"]');
     return await element.setValue(email);
@@ -637,3 +654,10 @@ When('I navigate to View Site', async function () {
     const viewSiteModule = await this.driver.$('a[data-test-nav="site"]');
     return await viewSiteModule.click();
 })
+
+Then('I should see the post with title {string}', async function (expectedTitle) {
+    const postTitle = await browser.$('h1.post-title');
+    const titleText = await postTitle.getText();
+
+    assert.strictEqual(titleText, expectedTitle, `Expected title to be "${expectedTitle}", but got "${titleText}"`);
+});
