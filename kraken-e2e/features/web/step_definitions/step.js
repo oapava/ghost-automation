@@ -792,3 +792,12 @@ Then('I should see the post with title {string} and content {string}', async fun
         throw new Error(`Expected content to be "${expectedContent}", but got "${contentText}"`);
     }
 });
+
+Then('I expect to see tag {string}', async function (expectedText) {
+    const elementSelector = '.gh-tag-list-name';
+    const element = await this.driver.$(elementSelector);
+    const actualText = await element.getText();
+    if (!actualText.includes(expectedText)) {
+        throw new Error(`Expected to find text "${expectedText}" in element "${elementSelector}", but found "${actualText}"`);
+    }
+});
