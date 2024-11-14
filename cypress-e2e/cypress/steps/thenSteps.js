@@ -11,6 +11,11 @@ class Then {
         cy.visit(Cypress.env('postPageUrl'));
         cy.contains(Cypress.env('titlePostBasic')).should('be.visible'); 
     }
+
+    thenSeePostPublishedBold(){
+        cy.visit(Cypress.env('postPageUrl'));
+        cy.contains(Cypress.env('titlePostBold')).should('be.visible'); 
+    }
 }
 
 

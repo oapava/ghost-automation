@@ -33,10 +33,26 @@ class When {
         // Hacer click en el botón de "New post"
         cy.get('span').contains('New post').click({force:true, waitForAnimations: false, animationDistanceThreshold: 20});
 
-        //Se ingresa titulo del post
+        //Se ingresa titulo y contenido en negrita del post
         cy.get('textarea[data-test-editor-title-input]').type(Cypress.env('titlePostBasic'));
         cy.get('textarea[data-test-editor-title-input').type('{enter}');
+        cy.get('p[data-koenig-dnd-droppable="true"]').first().type('**Contenido en negrita**');
         this.publishPostAndPage();
+        this.validatePublishPostAndCloseModal();
+    }
+
+    whenCreateAndPublishPostBold(){
+        // Hacer click en el botón de "New post"
+        cy.get('span').contains('New post').click({force:true, waitForAnimations: false, animationDistanceThreshold: 20});
+
+        //Se ingresa titulo del post
+        cy.get('textarea[data-test-editor-title-input]').type(Cypress.env('titlePostBold'));
+        cy.get('textarea[data-test-editor-title-input').type('{enter}');
+        this.publishPostAndPage();
+        this.validatePublishPostAndCloseModal();
+    }
+
+    validatePublishPostAndCloseModal(){
         cy.url().should('include', '/ghost/#/posts');
         cy.get('button[data-test-button="close-publish-flow"]').click();
     }

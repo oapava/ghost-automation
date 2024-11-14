@@ -25,10 +25,10 @@ describe('Crear un post', () => {
         Given.givenNavigateToPostPage();
 
         // WHEN: Crear y publicar post 
-        When.whenCreateAndPublishPost();
+        When.whenCreateAndPublishPostBold();
 
         // THEN: Verificar post publicado
-        Then.thenSeePostPublished();
+        Then.thenSeePostPublishedBold();
     });
 
     it('Escenario 11: Crear y publicar una página con un video de YouTube', () => {
