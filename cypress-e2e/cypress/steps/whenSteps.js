@@ -394,6 +394,7 @@ class When {
     
     reateAndPublishPageEditAndSave(){
         // Crear nueva página
+        cy.screenshot('e12/p1-click-nueva-pagina')
         cy.get(this.newPageButton).click();
         cy.get(this.titleInput).type('My Page to edit{enter}');
 
@@ -404,11 +405,13 @@ class When {
 
         // Editar la página recién creada
         cy.get(this.closeModalPublishFlow).click();
+        cy.screenshot('e12/p2-pagina-creada-listada');
         cy.contains('My Page to edit').click();
-        cy.get(this.titleInput).clear().type('Updated Page Title{enter}');
+        cy.get(this.titleInput).clear().type('Updated Page Title{enter}').screenshot('e12/p3-actualizacion-titulo');
 
         // Guardar la página actualizada
         cy.get(this.publishSaveButton).contains('Update').click();
+        cy.screenshot('e12/p4-publicacion-pagina-actualizada');
         
     }
 
@@ -427,6 +430,7 @@ class When {
 
     createPublishAndDeletePage(){
         // Hacer click en "New page" para crear una nueva página
+        cy.screenshot('e13/p1-pagina-creada-listada');
         cy.contains('New page').click({ force: true, waitForAnimations: false });
 
         // Escribir el título de la página

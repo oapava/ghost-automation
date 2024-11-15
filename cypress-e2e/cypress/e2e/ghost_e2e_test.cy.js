@@ -130,29 +130,29 @@ describe('Crear un post', () => {
     //     Then.validatePageWithVideoCreated();
     // });
 
-    it('Escenario 12: Crear y editar una página en Ghost', () => {
-        // GIVEN: Visitar Pages
-        Given.givenNavigateToPagePage();
-
-        // WHEN: Crear publicar, editar y guardar
-        When.reateAndPublishPageEditAndSave();
-
-        // THEN: Publicar la página
-        Then.validatePageWasEditedAndCreated();
-    });
-
-    // it('Escenario 13: Crear, publicar y eliminar una página en Ghost', () => {
-
+    // it('Escenario 12: Crear y editar una página en Ghost', () => {
     //     // GIVEN: Visitar Pages
     //     Given.givenNavigateToPagePage();
 
-    //     // WHEN: Crear publicar, eliminar pagina
-    //     When.createPublishAndDeletePage();
+    //     // WHEN: Crear publicar, editar y guardar
+    //     When.reateAndPublishPageEditAndSave();
 
-    //     // THEN: Validar que se lemino la pagina creada
-    //     Then.validatePageWasCreatedAndDeleted();
-
+    //     // THEN: Publicar la página
+    //     Then.validatePageWasEditedAndCreated();
     // });
+
+    it('Escenario 13: Crear, publicar y eliminar una página en Ghost', () => {
+
+        // GIVEN: Visitar Pages
+        Given.givenNavigateToPagePage();
+
+        // WHEN: Crear publicar, eliminar pagina
+        When.createPublishAndDeletePage();
+
+        // THEN: Validar que se lemino la pagina creada
+        Then.validatePageWasCreatedAndDeleted();
+
+    });
 
     // it('Escenario 14: Crear una pagina y agregar un link de youtube invalido', () =>{
     //     // GIVEN: Visitar Pages
