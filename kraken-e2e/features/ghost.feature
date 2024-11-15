@@ -265,8 +265,8 @@ Scenario: 1. Crear un Post con un título y guardar este nuevo post
   Scenario: Crear tag y crear un post asignandole la tag creada
     Given I navigate to page "<URLBASE>"
     And I login in ghost "<USERNAME>" "<PASSWORD>"
-    When I navigate to Tags module
-    And I click on New Tag
+    And I navigate to Tags module
+    When I click on New Tag
     And I enter tagname "Test-tag1"
     And I save the new tag
     And I wait for 5 seconds
@@ -284,8 +284,9 @@ Scenario: 1. Crear un Post con un título y guardar este nuevo post
     And I click on publish button
     And I click on continue button
     And I click on confirm button
-    Then I click on posts link
-    And The post with the tag should be created "Test-tag1"
+    And I click on view post
+    And I wait for 5 seconds
+    Then I should see the tag "Test-tag1" in the post
 
   @user17 @web
   Scenario: Crear page con tag

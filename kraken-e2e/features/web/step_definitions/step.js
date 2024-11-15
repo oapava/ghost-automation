@@ -1,5 +1,5 @@
-
 const { Given, When, Then } = require('@cucumber/cucumber');
+var assert = require('assert-plus');
 
 When('I login in ghost {kraken-string} {kraken-string}', async function (email, password){
 
@@ -325,6 +325,18 @@ Then('I should see the title {string} and html {string} description in the post'
     console.log('La página con html fue creada exitosamente.');
 });
 
+Then('I should see the tag {string} in the post', async function (tagName) {
+
+    const windows = await this.driver.getWindowHandles();
+    await this.driver.switchToWindow(windows[windows.length - 1]);
+
+    const updatedTag = await this.driver.$('a[class="gh-article-tag"]');
+
+    assert.equal(await updatedTag.getText(),tagName.toUpperCase(),'El tag no coincide');
+
+    console.log('El post fue creada exitosamente.');
+});
+
 Then('I should see the title {string} and html {string} description in the page', async function (title, html) {
 
     const windows = await this.driver.getWindowHandles();
@@ -636,8 +648,8 @@ When('I click on Settings button', async function () {
 When('I select tag {string}', async function (tagname) {
     let element = await this.driver.$('input[class="ember-power-select-trigger-multiple-input"]');
     await element.setValue(tagname);
-    const element1 = await this.driver.$('li[data-option-index="0"]');
-    return await element1.click();
+    const element1 = await this.driver.$$('li[class="ember-power-select-option"]');
+    return await element1[0].click();
 })
 
 When('I navigate to Members Module', async function () {
@@ -829,7 +841,7 @@ Then('I expect to see tag {string}', async function (expectedText) {
     const elementSelector = '.gh-tag-list-name';
     const element = await this.driver.$(elementSelector);
     const actualText = await element.getText();
-    if (!actualText.includes(expectedText)) {
-        throw new Error(`Expected to find text "${expectedText}" in element "${elementSelector}", but found "${actualText}"`);
-    }
+
+    assert.ok(actualText.includes(expectedText),`Expected to find text "${expectedText}" in element "${elementSelector}", but found "${actualText}"`)
+
 });
