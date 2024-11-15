@@ -441,14 +441,17 @@ class When {
         cy.get(this.htmlEditorButton).first().click({ force: true, waitForAnimations: false });
         cy.get(this.cmLineDiv).type('<h2>Contenido de la página de prueba</h2>{enter}');
 
+        cy.screenshot('e13/p2-pagina-creada-con-contenido');
+
         // Publicar la página
         this.publishPostAndPage();
 
         // Paso 2: Confirmar que la página fue publicada
         cy.url().should('include', '/pages');
         cy.contains('Página de prueba para eliminar').should('exist');
-        cy.wait(2000);
+        cy.wait(500);
         cy.get(this.bodyElement).type('{esc}');
+        cy.screenshot('e13/p3-pagina-creada');
 
         cy.visit('http://localhost:2368/ghost/#/pages');
         cy.url().should('include', '/ghost/#/pages');
@@ -459,7 +462,13 @@ class When {
             .rightclick(); // Realiza el clic derecho en el elemento de lista para abrir el menú de opciones
 
         // Seleccionar la opción "Delete" del menú contextual
-        cy.get(this.deletePageButton).should('be.visible').click();
+        cy.get(this.deletePageButton)
+            .should('be.visible')
+            .then(() => {
+                cy.screenshot('e13/p4-eliminar-pagina', { capture: 'fullPage' });
+                cy.get(this.deletePageButton).click();
+            });
+
     }
 
     createPageAndAddInvalidYoutubeLink(){
@@ -472,19 +481,23 @@ class When {
 
         cy.get(this.buttonAddCard).first().click({force:true, waitForAnimations: false});
 
-
         // Seleccionar la opción de YouTube en el menú de inserción
         cy.get(this.buttonYoutube).scrollIntoView().should('be.visible').click();
 
         // Esperar a que el campo de URL esté disponible y escribir el enlace de YouTube
         cy.get(this.inputEmbedUrl).should('be.visible').type("https://www.youtu").type('{enter}');
 
+        cy.screenshot('e14/p1-contenido-ingresado');
+
         // Publicar la página
         this.publishPostAndPage();
         cy.get(this.closeModalPublishFlow).click();
+        cy.screenshot('e14/p2-confirmacion-guardado');
     }
 
     createNewTag(){
+        cy.screenshot('e15/p1-crear-nuevo-tag');
+
         // Hacer clic en el botón "New tag"
         cy.contains('a.gh-btn-primary', 'New tag').click();
 
@@ -504,6 +517,10 @@ class When {
         // Llenar el campo de descripción del tag
         cy.get('[data-test-input="tag-description"]').type(tagDescription);
 
+        //Scroll al inicio de la pagina
+        cy.get('[data-test-input="tag-name"]').scrollIntoView()
+
+        cy.screenshot('e15/p2-formulario-completo');
         // Esperar un momento (opcional si necesitas tiempo para que los cambios se reflejen)
         cy.wait(1000);
 
@@ -513,6 +530,8 @@ class When {
 
     createTagAndAsignIt(){
         this.createNewTag()
+
+        cy.screenshot('e16/p1-tag-creado');
 
         cy.visit(Cypress.env('postPageUrl'));
 
@@ -528,7 +547,10 @@ class When {
         cy.get(this.asignTagInput).first().type(Cypress.env('tagName'));
         cy.get(this.confirmTagAsign).first().click();
 
-        cy.get(this.asignTagButton).click(); 
+        cy.get(this.asignTagButton).then(()=>{
+            cy.screenshot('e16/p2-asignacion-tag');
+            cy.get(this.asignTagButton).click();
+        });
 
         this.publishPostAndPage();
 
@@ -539,6 +561,8 @@ class When {
     createTagAndAsignItToPage(){
 
         this.createNewTag()
+
+        cy.screenshot('e17/p1-creacion-del-tag');
 
         cy.visit(Cypress.env('pageUrl'));
 
@@ -554,6 +578,8 @@ class When {
         cy.get(this.asignTagInput).first().type(Cypress.env('tagName'));
         cy.get(this.confirmTagAsign).first().click();
 
+        cy.screenshot('e17/p1-asignacion-de-tag');
+
         cy.get(this.asignTagButton).click();  // Este es el botón para cerrar setting
 
         //publicar page
@@ -564,12 +590,15 @@ class When {
     }
 
     createNewMember(){
+        
         //Crear member
         cy.get(this.createNewMemberButton).click();
 
         cy.get(this.memberNameInput).type(Cypress.env('newMemberName'));
 
         cy.get(this.memberEmailInput).type(Cypress.env('newMemberEmail')+Date.now()+ Cypress.env('domainEmail'));
+
+        cy.screenshot('e18/p1-creacion-member');
 
         cy.get(this.saveMemberButton).click();
 
@@ -582,15 +611,20 @@ class When {
 
         //Buscar al member
         cy.get(this.searchMembersInput).type(Cypress.env('newMemberEmail')+Date.now()+ Cypress.env('domainEmail'));
+        cy.screenshot('e19/p1-buscar-miembro');
         //Clickear en el member encontrado
         cy.get(this.detailMemberButton).first().click();
         //Abrir los settings del member
         cy.get(this.memberActionsButton).first().click();
+        cy.screenshot('e19/p2-eliminar-miembro', {disableTimersAndAnimations: false,})
         //Dar boton de eliminar member
+        
         cy.get(this.deleteMemberButton).first().click();
+        cy.screenshot('e19/p3-confirmacion-eliminar-miembro', {disableTimersAndAnimations: false,})
+        
         //Dar boton de confirmar eliminar member
         cy.get(this.deleteMemberConfirmButton).first().click()
-
+ 
     }
 
 }

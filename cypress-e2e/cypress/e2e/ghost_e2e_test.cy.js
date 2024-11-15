@@ -141,18 +141,18 @@ describe('Crear un post', () => {
     //     Then.validatePageWasEditedAndCreated();
     // });
 
-    it('Escenario 13: Crear, publicar y eliminar una página en Ghost', () => {
+    // it('Escenario 13: Crear, publicar y eliminar una página en Ghost', () => {
 
-        // GIVEN: Visitar Pages
-        Given.givenNavigateToPagePage();
+    //     // GIVEN: Visitar Pages
+    //     Given.givenNavigateToPagePage();
 
-        // WHEN: Crear publicar, eliminar pagina
-        When.createPublishAndDeletePage();
+    //     // WHEN: Crear publicar, eliminar pagina
+    //     When.createPublishAndDeletePage();
 
-        // THEN: Validar que se lemino la pagina creada
-        Then.validatePageWasCreatedAndDeleted();
+    //     // THEN: Validar que se lemino la pagina creada
+    //     Then.validatePageWasCreatedAndDeleted();
 
-    });
+    // });
 
     // it('Escenario 14: Crear una pagina y agregar un link de youtube invalido', () =>{
     //     // GIVEN: Visitar Pages
@@ -210,13 +210,13 @@ describe('Crear un post', () => {
     //     Then.validateNewMemberExist();
     // });
 
-    // it('Escenario 19: Crear member y eliminarlo', () => {
-    //     // GIVEN: Visitar members
-    //     Given.givenNavigateTomembers();
+    it('Escenario 19: Crear member y eliminarlo', () => {
+        // GIVEN: Visitar members
+        Given.givenNavigateTomembers();
 
-    //     When.createMemberAndDeletIt();
+        When.createMemberAndDeletIt();
 
-    //     Then.validateMemberWasDeleted();
-    // });
+        Then.validateMemberWasDeleted();
+    });
 });
 
