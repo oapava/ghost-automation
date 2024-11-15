@@ -14,5 +14,6 @@ module.exports = {
     postDraftPageUrl: "http://localhost:2368/ghost/#/posts?type=draft",
     titlePostBasic: "Post basico 1",
     titlePostBold: "Post en negrita 1",
-  }
+  },
+  "screenshotsFolder": "cypress/screenshots"
 };
