@@ -193,7 +193,7 @@ Scenario: 1. Crear un Post con un título y guardar este nuevo post
   Scenario: Crear y publicar una página con un video de YouTube
     Given I navigate to page "http://localhost:2368/ghost/#/signin"
     And I wait for 5 seconds
-    When I enter email "<USERNAME>"
+    And I enter email "<USERNAME>"
     And I wait for 2 seconds
     And I enter password "<PASSWORD>"
     And I wait for 2 seconds
@@ -331,9 +331,12 @@ Scenario: 1. Crear un Post con un título y guardar este nuevo post
     Then I navigate to Members Module
     And The member should be deleted "test@hotmail.com"
 
-
   @user20 @web
-  Scenario: Verificar que se puede visitar un post en el view de la pagina
-    Given I navigate to page "http://localhost:2368/ghost/#/dashboard"
-    When I navigate to View Site
-
+  Scenario: Cambiar nombre de sitio web
+    Given I navigate to page "<URLBASE>"
+    And I login in ghost "<USERNAME>" "<PASSWORD>"
+    When I navigate to configuration
+    And I click on edit button
+    And I select new title "Updated title site" to site
+    And I save changes to of site
+    Then The page with the title site should be "Updated title site"

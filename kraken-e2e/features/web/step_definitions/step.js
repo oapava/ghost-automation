@@ -719,6 +719,38 @@ When('I navigate to View Site', async function () {
     return await viewSiteModule.click();
 })
 
+When('I navigate to configuration', async function() {
+    let element = await this.driver.$('.gh-nav-bottom a[href="#/settings/"]');
+    return await element.click();
+});
+
+When('I click on edit button', async function() {
+    let editButton = await this.driver.$('div.flex.items-center button');
+    return await editButton.click();
+});
+When('I select new title {string} to site', async function(newTitle) {
+    let element = await this.driver.$('input[placeholder="Site title"]');
+
+    await element.clearValue();
+    return await element.setValue(newTitle);
+});
+
+When('I save changes to of site', async function() {
+    let saveButton = await this.driver.$('button.bg-green.text-white');
+    await saveButton.click();
+});
+
+Then('The page with the title site should be {string}', async function(expectedTitle) {
+    await this.driver.url('http://localhost:2368/');
+
+    let titleElement = await this.driver.$('a.gh-navigation-logo.is-title');
+    let actualTitle = await titleElement.getText();
+
+    if (actualTitle !== expectedTitle) {
+        throw new Error(`Title mismatch: expected "${expectedTitle}", but got "${actualTitle}"`);
+    }
+});
+
 Then('I should see the post with title {string}', async function (expectedTitle) {
     const windows = await this.driver.getWindowHandles();
     await this.driver.switchToWindow(windows[windows.length - 1]);
