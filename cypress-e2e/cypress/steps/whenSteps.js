@@ -210,12 +210,16 @@ class When {
     createAndPublishPost(){
         // Hacer click en el botón de "New post"
         cy.get(this.spanElement).contains('New post').click({force:true, waitForAnimations: false, animationDistanceThreshold: 20});
+        cy.get(this.titleInput).should('be.visible');
+        cy.screenshot('e1/p1_newPost');
 
         //Se ingresa titulo y contenido en negrita del post
         cy.get(this.titleInput).type(Cypress.env('titlePostBasic'));
+        cy.screenshot('e1/p2_AddTitlePost');
         cy.get(this.titleInput).type('{enter}');
-        this.publishPostAndPage();
-        this.validatePublishPostAndCloseModal();
+
+        this.publishPostAndPage('e1/p3');
+        this.validatePublishPostAndCloseModal('e1/p4');
     }
 
     createAndPublishPostBold(){
@@ -231,15 +235,25 @@ class When {
     }
 
     editAndPublishPostMarkdown(){
+        //Se crea Post para luego editar
+        this.createAndPublishPost();
+        cy.visit(Cypress.env('postPageUrl'));
+        cy.url().should('include', '/ghost/#/posts');
+        cy.screenshot('e3/p1_pagePost');
+
         // Se toma el el botón editar del último post
         cy.get('a.gh-post-list-button').first().click({force:true});
+        cy.get(this.titleInput).should('be.visible');
+        cy.screenshot('e3/p2_editPost');
 
         //Se ingresa titulo del post
         cy.get(this.textAreaContent).first().type(' **Contenido agregado a post existente** ');
         cy.get(this.titleInput).type('(Editado!)');
         cy.get(this.titleInput).type('{enter}');
-        this.publishPostAndPage();
-        this.validatePublishPostAndCloseModal();
+        cy.screenshot('e3/p3_editedPost');
+
+        this.publishPostAndPage('e3');
+        this.validatePublishPostAndCloseModal('e3');
     }
 
     createAndPublishPostWhithImage(){
@@ -382,9 +396,16 @@ class When {
         this.validatePublishPageAndCloseModal();
     }
 
-    validatePublishPostAndCloseModal(){
+    validatePublishPostAndCloseModal(scenery){
         cy.url().should('include', '/ghost/#/posts');
+
+        cy.get(this.closeModalPublishFlow).should('be.visible');
+        cy.wait(1000);
+        cy.screenshot(scenery + '_1_postPublished');
         cy.get(this.closeModalPublishFlow).click();
+
+        cy.get(this.spanElement).contains('New post').should('be.visible');
+        cy.screenshot(scenery + '_2_listPostFinal');
     }
 
     validatePublishPageAndCloseModal(){
@@ -415,16 +436,21 @@ class When {
         
     }
 
-    publishPostAndPage(){
+    publishPostAndPage(scenery){
         cy.get(this.publishFlowButton).should('be.visible'); // Publish
-        cy.get(this.publishFlowButton).first().click();
+        cy.screenshot(scenery + '_0_publishButton', {disableTimersAndAnimations: false});
+        cy.get(this.publishFlowButton).first().click(); 
 
         //Continuar a review final
         cy.get(this.publishContinueButton).should('be.visible'); // Continue, final review
-        cy.get(this.publishContinueButton).first().click();
+        cy.wait(500);
+        cy.screenshot(scenery + '_1_finalReview', {disableTimersAndAnimations: false});
+        cy.get(this.publishContinueButton).first().click(); 
 
         //Publicar post
         cy.get(this.confirmPublishButton).should('be.visible'); //Publish post, right now
+        cy.wait(500);
+        cy.screenshot(scenery + '_2_publishRightNow', {disableTimersAndAnimations: false});
         cy.get(this.confirmPublishButton).first().click(); 
     }
 
