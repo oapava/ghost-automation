@@ -1,7 +1,7 @@
 {
   "scripts": {
-    "backstop:reference": "npx kraken-run backstop reference --config=./backstop-references/backstop.json",
-    "backstop:test": "npx kraken-run backstop test --config=./backstop-tests/backstop.json",
-    "test:all": "npm run backstop:reference && npm run backstop:test"
+    "backstop:reference": "cd.. && cd kraken-e2e-base && npx kraken-node run",
+    "backstop:test": "cd.. && cd kraken-e2e-rc && npx kraken-node run",
+    "test:all": "npm run backstop:reference && echo Paso1 && npm run backstop:test"
   }
 }

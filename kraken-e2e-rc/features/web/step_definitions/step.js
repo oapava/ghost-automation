@@ -51,6 +51,12 @@ When('I delete text', async function () {
     await titleInput.setValue('');
 });
 
+When('I click on text input', async function () {
+    const titleInput = await this.driver.$('div[class="kg-prose"]');
+    await titleInput.setValue('');
+});
+
+
 
 When('I click on the content input', async function() {
     let element = await this.driver.$('div[class="kg-prose"]');
