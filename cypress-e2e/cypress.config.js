@@ -6,8 +6,8 @@ module.exports = {
   },
   env: {
     baseUrl: "http://localhost:2368",
-    email: "o.pava@uniandes.edu.com",
-    password: "andres2124",
+    email: "automatizador@uniandes.edu.co",
+    password: "Uniandes.e13",
     postPageUrl: "http://localhost:2368/ghost/#/posts",
     pageUrl: "http://localhost:2368/ghost/#/pages",
     postMembersPageUrl: "http://localhost:2368/ghost/#/posts?visibility=members",

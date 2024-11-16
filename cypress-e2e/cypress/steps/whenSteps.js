@@ -170,7 +170,7 @@ class When {
 
     get time(){
         const now = new Date();
-        const formattedDate = Math.floor(new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours(), now.getMinutes()).getTime() / 1000);
+        const formattedDate = Math.floor(new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours(), now.getMinutes(), now.getSeconds()).getTime() / 1000);
         return formattedDate;
     }
 
@@ -285,6 +285,7 @@ class When {
         cy.get(this.titleInput).type('(Editado!)');
         cy.get(this.titleInput).type('{enter}');
         cy.screenshot(scenery + '/p4_editedPost');
+        
 
         this.publishPostAndPage(scenery,'p5');
         this.validatePublishPostAndCloseModal(scenery,'p6');
@@ -550,6 +551,7 @@ class When {
 
         // Hacer clic en el botón "Save"
         cy.get('button[data-test-button="save"]').click();  // Este es el botón de guardar
+        cy.wait(1000);
     }
 
     createTagAndAsignIt(){
@@ -627,6 +629,7 @@ class When {
         cy.get(this.saveMemberButton).click();
 
         cy.get(this.anchorMembersButton).first().click();
+        cy.wait(1000)
     }
 
     createMemberAndDeletIt(){
@@ -737,6 +740,7 @@ class When {
         cy.get(this.titleInput).type('Post para prueba Nro 1');
         cy.get(this.titleInput).type('{enter}');
         cy.screenshot(scenery + '/' + step + '_2_addTitlePost');
+        cy.wait(500)
 
         this.publishPostAndPage(scenery, step + '_3');
         this.validatePublishPostAndCloseModal(scenery, step + '_4');

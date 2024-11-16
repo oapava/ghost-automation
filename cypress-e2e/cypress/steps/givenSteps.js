@@ -53,6 +53,7 @@ class Given {
     givenNavigateToPagePage(){
         cy.visit(Cypress.env('pageUrl'));
         cy.url().should('include', '/ghost/#/pages');
+        cy.wait(500);
     };
 
     givenNavigateToTagsPage(){

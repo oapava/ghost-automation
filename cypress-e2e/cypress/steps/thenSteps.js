@@ -73,7 +73,6 @@ class Then {
     }
 
     validateTagWasCreated(){
-        cy.visit('http://localhost:2368/ghost/#/tags');
         cy.visit(Cypress.env('tagsUrl'));
         cy.get('.tags-list').should('contain', Cypress.env('tagName'));
         cy.contains(Cypress.env('tagName')).should('exist');
