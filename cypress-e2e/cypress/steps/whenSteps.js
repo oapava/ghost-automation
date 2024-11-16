@@ -185,6 +185,26 @@ class When {
     get siteTitleInput(){
         return 'input[placeholder="Site title"]';
     }
+    
+    get tagNameInput(){
+        return '[data-test-input="tag-name"]';
+    }
+    
+    get tagColorInput(){
+        return '[data-test-input="accentColor"]';
+    }
+    
+    get tagSlugInput(){
+        return '[data-test-input="tag-slug"]';
+    }
+    
+    get tagDescriptionInput(){
+        return '[data-test-input="tag-description"]';
+    }
+    
+    get tagSaveButton(){
+        return 'button[data-test-button="save"]';
+    }
 
     get spanElement(){
         return 'span';
@@ -530,26 +550,26 @@ class When {
         const tagDescription = 'Este es un tag de tecnología';  // Descripción del tag
 
         // Llenar el campo de nombre del tag
-        cy.get('[data-test-input="tag-name"]').type(Cypress.env('tagName'));
+        cy.get(this.tagNameInput).type(Cypress.env('tagName'));
 
         // Llenar el campo de color del tag
-        cy.get('[data-test-input="accentColor"]').type(tagColor);
+        cy.get(this.tagColorInput).type(tagColor);
 
         // Llenar el campo de slug del tag
-        cy.get('[data-test-input="tag-slug"]').type(Cypress.env('tagName'));
+        cy.get(this.tagSlugInput).type(Cypress.env('tagName'));
 
         // Llenar el campo de descripción del tag
-        cy.get('[data-test-input="tag-description"]').type(tagDescription);
+        cy.get(this.tagDescriptionInput).type(tagDescription);
 
         //Scroll al inicio de la pagina
-        cy.get('[data-test-input="tag-name"]').scrollIntoView()
+        cy.get(this.tagNameInput).scrollIntoView()
 
         cy.screenshot('e15/p2-formulario-completo');
         // Esperar un momento (opcional si necesitas tiempo para que los cambios se reflejen)
         cy.wait(1000);
 
         // Hacer clic en el botón "Save"
-        cy.get('button[data-test-button="save"]').click();  // Este es el botón de guardar
+        cy.get(this.tagSaveButton).click();  // Este es el botón de guardar
     }
 
     createTagAndAsignIt(){

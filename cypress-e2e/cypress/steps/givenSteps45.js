@@ -50,6 +50,11 @@ class Given {
         cy.visit(Cypress.env('pageUrl'));
         cy.url().should('include', '/ghost/#/pages');
     };
+
+    givenNavigateToTagsPage(){
+        cy.visit(Cypress.env('tagsUrl'));
+        cy.url().should('include', '/ghost/#/tags');
+    };
 }
 
 

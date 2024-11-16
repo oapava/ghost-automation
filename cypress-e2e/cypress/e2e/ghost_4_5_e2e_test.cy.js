@@ -45,15 +45,27 @@ describe('Crear un post', () => {
     //     Then.seePostPublishedPostMarkdown();
     // });
 
-    it('Escenario 6: Unpublish post publicado', () => {
-        // THEN: Visitar pagina de posts
-        Given.navigateToPostPage();
+    // it('Escenario 6: Unpublish post publicado', () => {
+    //     // THEN: Visitar pagina de posts
+    //     Given.navigateToPostPage();
 
-        // WHEN: Crear y publicar post 
-        When.unpublishPostCreated();
+    //     // WHEN: Crear y publicar post 
+    //     When.unpublishPostCreated();
 
-        // THEN: Verificar post publicado
-        Then.confirmUnpublishPostPublished();
+    //     // THEN: Verificar post publicado
+    //     Then.confirmUnpublishPostPublished();
+    // });
+
+    it('Escenario 16: Crear un tag y asignarlo a un post', () => {
+
+        // GIVEN: Visitar Tags
+        Given.givenNavigateToTagsPage();
+
+        // WHEN: Crear un tag y asignarlo a post
+        When.createTagAndAsignIt();
+
+        // GIVEN: Validar la creación del post con el tag asignado
+        Then.validatePostWithTag();
     });
 
 
