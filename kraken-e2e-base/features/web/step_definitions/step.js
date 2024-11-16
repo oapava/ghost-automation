@@ -844,3 +844,116 @@ Then('I expect to see tag {string}', async function (expectedText) {
     assert.ok(actualText.includes(expectedText),`Expected to find text "${expectedText}" in element "${elementSelector}", but found "${actualText}"`)
 
 });
+
+When('I click in settings', async function () {
+    const settingsButton = await this.driver.$('button[title="Settings"]');
+
+    await this.driver.waitUntil(async () => {
+        return (await settingsButton.isDisplayed() && await settingsButton.isEnabled());
+    }, {
+        timeout: 5000,
+        timeoutMsg: 'El botón "Settings" no se encontró o no estaba habilitado después de 5 segundos'
+    });
+
+    await settingsButton.click();
+});
+
+When('I delete post', async function () {
+    const deleteButton = await this.driver.$('button.settings-menu-delete-button');
+
+    await deleteButton.scrollIntoView();
+
+    await this.driver.waitUntil(async () => {
+        return (await deleteButton.isDisplayed() && await deleteButton.isEnabled());
+    }, {
+        timeout: 5000,
+        timeoutMsg: 'El botón "Delete post" no se encontró o no estaba habilitado después de 5 segundos'
+    });
+
+    await deleteButton.click();
+});
+
+When('I confirm the deletion', async function () {
+    const confirmDeleteButton = await this.driver.$('button.gh-btn.gh-btn-red');
+
+    await this.driver.waitUntil(async () => {
+        return (await confirmDeleteButton.isDisplayed() && await confirmDeleteButton.isEnabled());
+    }, {
+        timeout: 5000,
+        timeoutMsg: 'El botón "Delete" en el modal de confirmación no se encontró o no estaba habilitado después de 5 segundos'
+    });
+
+    await confirmDeleteButton.click();
+});
+
+When('I click in text input 4.5', async function() {
+    let element = await this.driver.$('div[contenteditable="true"][data-placeholder="Begin writing your post..."]');
+
+    await this.driver.waitUntil(async () => {
+        return (await element.isDisplayed());
+    }, {
+        timeout: 5000,
+        timeoutMsg: 'El editor de texto no se mostró después de 5 segundos'
+    });
+
+    await element.scrollIntoView();
+
+    return await element.click();
+});
+
+When('I publish in version 4.5 the post', async function () {
+    let publishMenuButton = await this.driver.$('div.gh-publishmenu-trigger');
+    await this.driver.waitUntil(async () => {
+        return await publishMenuButton.isDisplayed();
+    }, {
+        timeout: 5000,
+        timeoutMsg: 'El botón para abrir el menú de publicación no se encontró o no se mostró después de 5 segundos'
+    });
+    await publishMenuButton.click();
+
+    let publishMenu = await this.driver.$('div.gh-publishmenu-dropdown');
+    await this.driver.waitUntil(async () => {
+        return await publishMenu.isDisplayed();
+    }, {
+        timeout: 5000,
+        timeoutMsg: 'El menú de publicación no se desplegó después de 5 segundos'
+    });
+
+    let publishConfirmButton = await this.driver.$('button.gh-btn-black.gh-publishmenu-button');
+    await this.driver.waitUntil(async () => {
+        return (await publishConfirmButton.isDisplayed() && await publishConfirmButton.isEnabled());
+    }, {
+        timeout: 5000,
+        timeoutMsg: 'El botón "Publish" no se encontró o no se mostró después de 5 segundos'
+    });
+    await publishConfirmButton.click();
+});
+
+When('I click on posts link using 4.5', async function() {
+    let element = await this.driver.$('a[href="#/posts/"]'); // Asegúrate de usar el selector correcto
+
+    await element.waitForDisplayed();
+
+    const isClickable = await element.isClickable();
+    if (!isClickable) {
+        console.error('El elemento no es clicable');
+        throw new Error('El elemento no es clicable');
+    }
+
+    await element.click();
+});
+
+When('I add an HTML card in 4.5 version {string}', async function (htmlContent) {
+    let addCardButton = await this.driver.$('button[aria-label="Add a card"]');
+    await addCardButton.click();
+    let htmlButton = await this.driver.$('div[title="HTML"]');
+    await htmlButton.click();
+
+    let codeMirrorDiv = await this.driver.$('.CodeMirror');
+    await codeMirrorDiv.waitForExist();
+
+    await codeMirrorDiv.click();
+
+    let htmlInput = await this.driver.$('.gh-cm-editor-textarea');
+    await htmlInput.setValue(htmlContent);
+});
