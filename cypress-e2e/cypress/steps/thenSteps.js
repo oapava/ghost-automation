@@ -34,7 +34,6 @@ class Then {
 
     confirmDeletedPost(){
         cy.visit(Cypress.env('postPageUrl'));
-        //pendiente
     }
 
     confirmUnpublishPostPublished(){
