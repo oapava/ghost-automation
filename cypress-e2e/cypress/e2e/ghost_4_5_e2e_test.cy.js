@@ -12,49 +12,49 @@ describe('Crear un post', () => {
         Given.givenNavigateDashboard();
     });
 
-    // it('Escenario 1: Crear post basico', () => {
-    //     // THEN: Visitar pagina de posts
-    //     Given.navigateToPostPage();
+    it('Escenario 1: Crear post basico', () => {
+        // THEN: Visitar pagina de posts
+        Given.navigateToPostPage();
 
-    //     // WHEN: Crear y publicar post 
-    //     When.createAndPublishPost();
+        // WHEN: Crear y publicar post 
+        When.createAndPublishPost();
 
-    //     // THEN: Verificar post publicado
-    //     Then.seePostPublished();
-    // });
+        // THEN: Verificar post publicado
+        Then.seePostPublished();
+    });
 
-    // it('Escenario 2: Crear post con texto en negrita', () => {
-    //     // THEN: Visitar pagina de posts
-    //     Given.navigateToPostPage();
+    it('Escenario 2: Crear post con texto en negrita', () => {
+        // THEN: Visitar pagina de posts
+        Given.navigateToPostPage();
 
-    //     // WHEN: Crear y publicar post 
-    //     When.createAndPublishPostBold();
+        // WHEN: Crear y publicar post 
+        When.createAndPublishPostBold();
 
-    //     // THEN: Verificar post publicado
-    //     Then.seePostPublishedBold();
-    // });
+        // THEN: Verificar post publicado
+        Then.seePostPublishedBold();
+    });
 
-    // it('Escenario 3: Editar post con contenido en markdown', () => {
-    //     // THEN: Visitar pagina de posts
-    //     Given.navigateToPostPage();
+    it('Escenario 3: Editar post con contenido en markdown', () => {
+        // THEN: Visitar pagina de posts
+        Given.navigateToPostPage();
 
-    //     // WHEN: Crear y publicar post 
-    //     When.editAndPublishPostMarkdown();
+        // WHEN: Crear y publicar post 
+        When.editAndPublishPostMarkdown();
 
-    //     // THEN: Verificar post publicado
-    //     Then.seePostPublishedPostMarkdown();
-    // });
+        // THEN: Verificar post publicado
+        Then.seePostPublishedPostMarkdown();
+    });
 
-    // it('Escenario 6: Unpublish post publicado', () => {
-    //     // THEN: Visitar pagina de posts
-    //     Given.navigateToPostPage();
+    it('Escenario 6: Unpublish post publicado', () => {
+        // THEN: Visitar pagina de posts
+        Given.navigateToPostPage();
 
-    //     // WHEN: Crear y publicar post 
-    //     When.unpublishPostCreated();
+        // WHEN: Crear y publicar post 
+        When.unpublishPostCreated();
 
-    //     // THEN: Verificar post publicado
-    //     Then.confirmUnpublishPostPublished();
-    // });
+        // THEN: Verificar post publicado
+        Then.confirmUnpublishPostPublished();
+    });
 
     it('Escenario 16: Crear un tag y asignarlo a un post', () => {
 
