@@ -3,6 +3,8 @@
 .DS_Store
 # Dependencias de Kraken
 kraken-e2e/node_modules/*
+kraken-e2e/reports/*
 kraken-e2e-base/node_modules/*
 kraken-e2e-base/reports/*
-kraken-e2e/reports/*
+kraken-e2e-rc/node_modules/*
+kraken-e2e-rc/reports/*

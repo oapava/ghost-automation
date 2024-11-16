@@ -10,18 +10,18 @@ When('I login in ghost {kraken-string} {kraken-string}', async function (email, 
     await element1.setValue(password);
 
 
-    let element3 = await this.driver.$('button[type="submit"]');
+    let element3 = await this.driver.$('#ember5');
     await this.driver.pause(5000);
     return await element3.click();
 
 });
-When('I click on posts link 4.5', async function() {
-    let element = await this.driver.$('a[href="#/posts/"]');
+When('I click on posts link', async function() {
+    let element = await this.driver.$('a[data-test-nav="posts"]');
     return await element.click();
 })
 
 When('I click on the posts button', async function () {
-    const postsButton = await this.driver.$('a.gh-editor-back-button');
+    const postsButton = await this.driver.$('a[data-test-link="posts"].gh-editor-back-button');
     await postsButton.click();
 });
 
@@ -42,7 +42,7 @@ When('I click on new post button', async function() {
 })
 
 When('I click on the title input', async function() {
-    let element = await this.driver.$('textarea[placeholder="Post Title"]');
+    let element = await this.driver.$('textarea[placeholder="Post title"]');
     return await element.click();
 })
 
@@ -53,15 +53,13 @@ When('I delete text', async function () {
 
 
 When('I click on the content input', async function() {
-    let element = await this.driver.$('div[data-kg="editor"]');
+    let element = await this.driver.$('div[class="kg-prose"]');
     return await element.click();
 })
 
 When('I click on publish button', async function() {
-    //let element = await this.driver.$('button[data-test-button="publish-flow"]');
-    let element = await this.driver.$(`//span[contains(text(), 'Publish')]`);
+    let element = await this.driver.$('button[data-test-button="publish-flow"]');
     return await element.click();
-
 })
 
 When('I click on continue button', async function() {
@@ -70,12 +68,14 @@ When('I click on continue button', async function() {
 })
 
 When('I click on confirm button', async function() {
-    let element1 = await this.driver.$('button[class="gh-btn gh-btn-black gh-publishmenu-button gh-btn-icon ember-view"]');
+    let element = await this.driver.$('button[data-test-button="continue"]');
+    await element.click();
+    let element1 = await this.driver.$('button[data-test-button="confirm-publish"]');
     return await element1.click();
 })
 
 When('I click on view post', async function() {
-    let element = await this.driver.$(`//a[contains(text(), 'View Post')]`);
+    let element = await this.driver.$('a[data-test-complete-bookmark]');
     return await element.click();
 })
 
@@ -99,9 +99,9 @@ When('I click on preview button', async function() {
     return await element.click();
 })
 
-When('I click on edit button of draft {string}', async function(text) {
-    let element = await this.driver.$$('h3[class="gh-content-entry-title"]');
-    return await element[0].click();
+When('I click on edit button of draft', async function() {
+    let element = await this.driver.$('a.gh-post-list-button');
+    return await element.click();
 })
 
 When('I click on a random link with text {string}', async function (text) {
@@ -768,11 +768,12 @@ Then('The page with the title site should be {string}', async function(expectedT
 Then('I should see the post with title {string}', async function (expectedTitle) {
     const windows = await this.driver.getWindowHandles();
     await this.driver.switchToWindow(windows[windows.length - 1]);
-    const postTitle = await this.driver.$('h1');
+    const postTitle = await this.driver.$('h1.gh-article-title.is-title');
     const titleText = await postTitle.getText();
 
-    assert.equal(titleText,expectedTitle,'El titulo no coincide');
-
+    if (titleText !== expectedTitle) {
+        throw new Error(`Expected title to be "${expectedTitle}", but got "${titleText}"`);
+    }
 });
 
 Then('I should see the post with text {string}', async function (expectedText) {
@@ -781,8 +782,9 @@ Then('I should see the post with text {string}', async function (expectedText) {
     const postText = await this.driver.$('section.gh-content p strong');
     const text = await postText.getText();
 
-    assert.equal(text,expectedText,'El contenido del post no coincide');
-
+    if (text !== expectedText) {
+        throw new Error(`Expected text to be "${expectedText}", but got "${text}"`);
+    }
 });
 
 Then('I shouldn´t see the post with title {string}', async function (text) {
@@ -824,16 +826,17 @@ Then('I should see the post with title {string} and content {string}', async fun
 
     await this.driver.pause(2000);
 
-    const postTitleElement = await this.driver.$('h1[class="article-title"]');
+    const postTitleElement = await this.driver.$('h1.gh-article-title.is-title');
     const titleText = await postTitleElement.getText();
+    if (titleText !== expectedTitle) {
+        throw new Error(`Expected title to be "${expectedTitle}", but got "${titleText}"`);
+    }
 
-    assert.equal(titleText,expectedTitle,'El titulo no coincide');
-
-    const postContentElement = await this.driver.$('p');
+    const postContentElement = await this.driver.$('section.gh-content p');
     const contentText = await postContentElement.getText();
-
-    assert.equal(contentText,expectedContent,'la descripcion no coincide');
-
+    if (contentText !== expectedContent) {
+        throw new Error(`Expected content to be "${expectedContent}", but got "${contentText}"`);
+    }
 });
 
 Then('I expect to see tag {string}', async function (expectedText) {

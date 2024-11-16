@@ -1,0 +1,7 @@
+{
+  "scripts": {
+    "backstop:reference": "npx kraken-run backstop reference --config=./backstop-references/backstop.json",
+    "backstop:test": "npx kraken-run backstop test --config=./backstop-tests/backstop.json",
+    "test:all": "npm run backstop:reference && npm run backstop:test"
+  }
+}
