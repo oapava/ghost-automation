@@ -12,104 +12,104 @@ describe('Crear un post', () => {
         Given.givenNavigateDashboard();
     });
 
-    // it('Escenario 1: Crear post basico', () => {
-    //     // THEN: Visitar pagina de posts
-    //     Given.navigateToPostPage();
+    it('Escenario 1: Crear post basico', () => {
+        // THEN: Visitar pagina de posts
+        Given.navigateToPostPage();
 
-    //     // WHEN: Crear y publicar post 
-    //     When.createAndPublishPost();
+        // WHEN: Crear y publicar post 
+        When.createAndPublishPost();
 
-    //     // THEN: Verificar post publicado
-    //     Then.seePostPublished();
-    // });
+        // THEN: Verificar post publicado
+        Then.seePostPublished();
+    });
 
-    // it('Escenario 2: Crear post con texto en negrita', () => {
-    //     // THEN: Visitar pagina de posts
-    //     Given.navigateToPostPage();
+    it('Escenario 2: Crear post con texto en negrita', () => {
+        // THEN: Visitar pagina de posts
+        Given.navigateToPostPage();
 
-    //     // WHEN: Crear y publicar post 
-    //     When.createAndPublishPostBold();
+        // WHEN: Crear y publicar post 
+        When.createAndPublishPostBold();
 
-    //     // THEN: Verificar post publicado
-    //     Then.seePostPublishedBold();
-    // });
+        // THEN: Verificar post publicado
+        Then.seePostPublishedBold();
+    });
 
-    // it('Escenario 3: Editar post con contenido en markdown', () => {
-    //     // THEN: Visitar pagina de posts
-    //     Given.navigateToPostPage();
+    it('Escenario 3: Editar post con contenido en markdown', () => {
+        // THEN: Visitar pagina de posts
+        Given.navigateToPostPage();
 
-    //     // WHEN: Crear y publicar post 
-    //     When.editAndPublishPostMarkdown();
+        // WHEN: Crear y publicar post 
+        When.editAndPublishPostMarkdown();
 
-    //     // THEN: Verificar post publicado
-    //     Then.seePostPublishedPostMarkdown();
-    // });
+        // THEN: Verificar post publicado
+        Then.seePostPublishedPostMarkdown();
+    });
 
-    // it('Escenario 4: Crear un nuevo Post con imagen de unsplash y guardarlo', () => {
-    //     // THEN: Visitar pagina de posts
-    //     Given.navigateToPostPage();
+    it('Escenario 4: Crear un nuevo Post con imagen de unsplash y guardarlo', () => {
+        // THEN: Visitar pagina de posts
+        Given.navigateToPostPage();
 
-    //     // WHEN: Crear y publicar post 
-    //     When.createAndPublishPostWhithImage();
+        // WHEN: Crear y publicar post 
+        When.createAndPublishPostWhithImage();
 
-    //     // THEN: Verificar post publicado
-    //     Then.seePostPublishedPostWithImage();
-    // });
+        // THEN: Verificar post publicado
+        Then.seePostPublishedPostWithImage();
+    });
 
-    // it('Escenario 5: Crear un nuevo Post con contenido, título y guardarlo', () => {
-    //     // THEN: Visitar pagina de posts
-    //     Given.navigateToPostPage();
+    it('Escenario 5: Crear un nuevo Post con contenido, título y guardarlo', () => {
+        // THEN: Visitar pagina de posts
+        Given.navigateToPostPage();
 
-    //     // WHEN: Crear y publicar post 
-    //     When.createAndPublishPostWhithContent();
+        // WHEN: Crear y publicar post 
+        When.createAndPublishPostWhithContent();
 
-    //     // THEN: Verificar post publicado
-    //     Then.seePostPublishedPostWithContent();
-    // });
+        // THEN: Verificar post publicado
+        Then.seePostPublishedPostWithContent();
+    });
 
-    // it('Escenario 6: Unpublish post publicado', () => {
-    //     // THEN: Visitar pagina de posts
-    //     Given.navigateToPostPage();
+    it('Escenario 6: Unpublish post publicado', () => {
+        // THEN: Visitar pagina de posts
+        Given.navigateToPostPage();
 
-    //     // WHEN: Crear y publicar post 
-    //     When.unpublishPostCreated();
+        // WHEN: Crear y publicar post 
+        When.unpublishPostCreated();
 
-    //     // THEN: Verificar post publicado
-    //     Then.confirmUnpublishPostPublished();
-    // });
+        // THEN: Verificar post publicado
+        Then.confirmUnpublishPostPublished();
+    });
 
-    // it('Escenario 7: Eliminar post publicado', () => {
-    //     // THEN: Visitar pagina de posts
-    //     Given.navigateToPostPagePublished();
+    it('Escenario 7: Eliminar post publicado', () => {
+        // THEN: Visitar pagina de posts
+        Given.navigateToPostPagePublished();
 
-    //     // WHEN: Crear y publicar post 
-    //     When.deletePostPublished();
+        // WHEN: Crear y publicar post 
+        When.deletePostPublished();
 
-    //     // THEN: Verificar post publicado
-    //     Then.confirmDeletedPost();
-    // });
+        // THEN: Verificar post publicado
+        Then.confirmDeletedPost();
+    });
 
-    // it('Escenario 8: Crear Post para que solo sea visible para miembros', () => {
-    //     // THEN: Visitar pagina de posts
-    //     Given.navigateToPostPage();
+    it('Escenario 8: Crear Post para que solo sea visible para miembros', () => {
+        // THEN: Visitar pagina de posts
+        Given.navigateToPostPage();
 
-    //     // WHEN: Crear y publicar post 
-    //     When.createAndPublishPostMembersOnly();
+        // WHEN: Crear y publicar post 
+        When.createAndPublishPostMembersOnly();
 
-    //     // THEN: Verificar post publicado
-    //     Then.seePostPublishedMembersOnly();
-    // });
+        // THEN: Verificar post publicado
+        Then.seePostPublishedMembersOnly();
+    });
 
-    // it('Escenario 9: Crear Post con contenido en HTML', () => {
-    //     // THEN: Visitar pagina de posts
-    //     Given.navigateToPostPage();
+    it('Escenario 9: Crear Post con contenido en HTML', () => {
+        // THEN: Visitar pagina de posts
+        Given.navigateToPostPage();
 
-    //     // WHEN: Crear y publicar post 
-    //     When.createAndPublishPostWithHtml();
+        // WHEN: Crear y publicar post 
+        When.createAndPublishPostWithHtml();
 
-    //     // THEN: Verificar post publicado
-    //     Then.seePostPublishedWithHtml();
-    // });
+        // THEN: Verificar post publicado
+        Then.seePostPublishedWithHtml();
+    });
 
     it('Escenario 10: Crear Pagina con contenido en HTML', () => {
         // THEN: Visitar pagina de posts

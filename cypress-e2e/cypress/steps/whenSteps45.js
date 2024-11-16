@@ -43,6 +43,49 @@ class When {
         return 'Unpublish';
     }
 
+    get asignTagButton(){
+        return 'button[class="gh-btn gh-btn-editor gh-btn-icon only-has-icon gh-actions-cog ml3"]';
+    }
+    
+    get asignTagInput(){
+        return 'input[class="ember-power-select-trigger-multiple-input"]';
+    }
+    
+    get confirmTagAsign(){
+        return 'li[data-option-index="1"]';
+    }
+
+    get anchorPostButton(){
+        return 'a[href="#/posts/"]';
+    }
+
+     
+    get tagNameInput(){
+        return '#tag-name';
+    }
+    
+    get tagColorInput(){
+        return 'input[name="accent-color"]';
+    }
+    
+    get tagSlugInput(){
+        return '#tag-slug';
+    }
+    
+    get tagDescriptionInput(){
+        return '#tag-description';
+    }
+    
+    get tagSaveButton(){
+        return 'button[class="gh-btn gh-btn-primary gh-btn-icon ember-view"]';
+    }
+    
+    get tagCloseSectionButton(){
+        return '.settings-menu-container ';
+    }
+
+    
+
     createAndPublishPost(){ //4.5
         var scenery = 'e1';
         // Hacer click en el botón de "New post"
@@ -56,7 +99,7 @@ class When {
         cy.get(this.titleInput).type('{enter}');
         cy.wait(500);
 
-        this.publishPostAndPage(scenery,'p3');
+        this.publishPostAndPage('4/' + scenery,'p3');
     }
 
     createAndPublishPostBold(){ //4.5
@@ -73,7 +116,7 @@ class When {
         cy.get(this.textAreaContent).first().type('**Contenido en negrita**');
         cy.screenshot(scenery + '/p3_addContentBold');
 
-        this.publishPostAndPage(scenery,'p4');
+        this.publishPostAndPage('4/' + scenery,'p4');
     }
 
     editAndPublishPostMarkdown(){ //4.5
@@ -95,7 +138,7 @@ class When {
         cy.get(this.titleInput).type('{enter}');
         cy.screenshot(scenery + '/p4_editedPost');
 
-        this.publishPostAndPage(scenery,'p5');
+        this.publishPostAndPage('4/' + scenery,'p5');
     }
 
     unpublishPostCreated(){
@@ -146,7 +189,7 @@ class When {
         cy.get(this.titleInput).type('{enter}');
         cy.screenshot(scenery + '/' + step + '_2_addTitlePost');
 
-        this.publishPostAndPage(scenery, step + '_3');
+        this.publishPostAndPage('4/' + scenery, step + '_3');
     }
 
     publishPostAndPage(scenery, step){ //4.5
@@ -170,6 +213,68 @@ class When {
         cy.screenshot(scenery + '/' + step + '_4_returnListPosts', {disableTimersAndAnimations: false});
     }
 
+    createTagAndAsignIt(){
+        this.createNewTag()
+
+        cy.screenshot('4/e16/p1-tag-creado');
+
+        cy.visit(Cypress.env('postPageUrl'));
+
+        // Hacer click en el botón de "New post"
+        cy.get(this.spanElement).contains('New post').click({force:true, waitForAnimations: false, animationDistanceThreshold: 20});
+
+        // Escribimos el título del post
+        cy.get(this.titleInput).type('Post con tag');
+
+        //asignar tag
+        cy.get(this.asignTagButton).click();  // Este es el botón de settings del post
+
+        cy.get(this.asignTagInput).first().type(Cypress.env('tagName'));
+        cy.get(this.confirmTagAsign).first().click();
+
+        cy.get(this.tagCloseSectionButton).trigger('mousedown').first().click();
+
+        cy.get(this.tagCloseSectionButton).invoke('attr', 'style', 'display: none;');
+
+
+        this.publishPostAndPage('4/e16', 'p2');
+
+        cy.get(this.anchorPostButton).first().click({force:true, waitForAnimations: false, animationDistanceThreshold: 20});
+
+    }
+
+    createNewTag(){
+        cy.screenshot('4/e15/p1-crear-nuevo-tag');
+
+        // Hacer clic en el botón "New tag"
+        cy.contains('a.gh-btn-primary', 'New tag').click();
+
+        // Llenar los campos del formulario para crear un nuevo tag
+        const tagColor = 'FF5733';     // Color (en formato hexadecimal)
+        const tagDescription = 'Este es un tag de tecnología';  // Descripción del tag
+
+        // Llenar el campo de nombre del tag
+        cy.get(this.tagNameInput).type(Cypress.env('tagName'));
+
+        // Llenar el campo de color del tag
+        cy.get(this.tagColorInput).first().type(tagColor);
+
+        // Llenar el campo de slug del tag
+        cy.get(this.tagSlugInput).type(Cypress.env('tagName'));
+
+        // Llenar el campo de descripción del tag
+        cy.get(this.tagDescriptionInput).type(tagDescription);
+
+        //Scroll al inicio de la pagina
+        cy.get(this.tagNameInput).scrollIntoView()
+
+        cy.screenshot('4/e15/p2-formulario-completo');
+        // Esperar un momento (opcional si necesitas tiempo para que los cambios se reflejen)
+        cy.wait(1000);
+
+        // Hacer clic en el botón "Save"
+        cy.get(this.tagSaveButton).click();  // Este es el botón de guardar
+    }
 }
 
 export default new When();

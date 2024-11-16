@@ -3,3 +3,4 @@
 # Dependencias de Kraken
 kraken-e2e/node_modules/*
 kraken-e2e/reports/*
+cypress-e2e/cypress/screenshots
