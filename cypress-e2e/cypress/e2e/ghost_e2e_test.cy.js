@@ -23,212 +23,212 @@ describe('Crear un post', () => {
         Then.seePostPublished();
     });
 
-    // it('Escenario 2: Crear post con texto en negrita', () => {
-    //     // THEN: Visitar pagina de posts
-    //     Given.navigateToPostPage();
+    it('Escenario 2: Crear post con texto en negrita', () => {
+        // THEN: Visitar pagina de posts
+        Given.navigateToPostPage();
 
-    //     // WHEN: Crear y publicar post 
-    //     When.createAndPublishPostBold();
+        // WHEN: Crear y publicar post 
+        When.createAndPublishPostBold();
 
-    //     // THEN: Verificar post publicado
-    //     Then.seePostPublishedBold();
-    // });
+        // THEN: Verificar post publicado
+        Then.seePostPublishedBold();
+    });
 
-    // it('Escenario 3: Editar post con contenido en markdown', () => {
-    //     // THEN: Visitar pagina de posts
-    //     Given.navigateToPostPage();
+    it('Escenario 3: Editar post con contenido en markdown', () => {
+        // THEN: Visitar pagina de posts
+        Given.navigateToPostPage();
 
-    //     // WHEN: Crear y publicar post 
-    //     When.editAndPublishPostMarkdown();
+        // WHEN: Crear y publicar post 
+        When.editAndPublishPostMarkdown();
 
-    //     // THEN: Verificar post publicado
-    //     Then.seePostPublishedPostMarkdown();
-    // });
+        // THEN: Verificar post publicado
+        Then.seePostPublishedPostMarkdown();
+    });
 
-    // it('Escenario 4: Crear un nuevo Post con imagen de unsplash y guardarlo', () => {
-    //     // THEN: Visitar pagina de posts
-    //     Given.navigateToPostPage();
+    it('Escenario 4: Crear un nuevo Post con imagen de unsplash y guardarlo', () => {
+        // THEN: Visitar pagina de posts
+        Given.navigateToPostPage();
 
-    //     // WHEN: Crear y publicar post 
-    //     When.createAndPublishPostWhithImage();
+        // WHEN: Crear y publicar post 
+        When.createAndPublishPostWhithImage();
 
-    //     // THEN: Verificar post publicado
-    //     Then.seePostPublishedPostWithImage();
-    // });
+        // THEN: Verificar post publicado
+        Then.seePostPublishedPostWithImage();
+    });
 
-    // it('Escenario 5: Crear un nuevo Post con contenido, título y guardarlo', () => {
-    //     // THEN: Visitar pagina de posts
-    //     Given.navigateToPostPage();
+    it('Escenario 5: Crear un nuevo Post con contenido, título y guardarlo', () => {
+        // THEN: Visitar pagina de posts
+        Given.navigateToPostPage();
 
-    //     // WHEN: Crear y publicar post 
-    //     When.createAndPublishPostWhithContent();
+        // WHEN: Crear y publicar post 
+        When.createAndPublishPostWhithContent();
 
-    //     // THEN: Verificar post publicado
-    //     Then.seePostPublishedPostWithContent();
-    // });
+        // THEN: Verificar post publicado
+        Then.seePostPublishedPostWithContent();
+    });
 
-    // it('Escenario 6: Unpublish post publicado', () => {
-    //     // THEN: Visitar pagina de posts
-    //     Given.navigateToPostPage();
+    it('Escenario 6: Unpublish post publicado', () => {
+        // THEN: Visitar pagina de posts
+        Given.navigateToPostPage();
 
-    //     // WHEN: Crear y publicar post 
-    //     When.unpublishPostCreated();
+        // WHEN: Crear y publicar post 
+        When.unpublishPostCreated();
 
-    //     // THEN: Verificar post publicado
-    //     Then.confirmUnpublishPostPublished();
-    // });
+        // THEN: Verificar post publicado
+        Then.confirmUnpublishPostPublished();
+    });
 
-    // it('Escenario 7: Eliminar post publicado', () => {
-    //     // THEN: Visitar pagina de posts
-    //     Given.navigateToPostPagePublished();
+    it('Escenario 7: Eliminar post publicado', () => {
+        // THEN: Visitar pagina de posts
+        Given.navigateToPostPagePublished();
 
-    //     // WHEN: Crear y publicar post 
-    //     When.deletePostPublished();
+        // WHEN: Crear y publicar post 
+        When.deletePostPublished();
 
-    //     // THEN: Verificar post publicado
-    //     Then.confirmDeletedPost();
-    // });
+        // THEN: Verificar post publicado
+        Then.confirmDeletedPost();
+    });
 
-    // it('Escenario 8: Crear Post para que solo sea visible para miembros', () => {
-    //     // THEN: Visitar pagina de posts
-    //     Given.navigateToPostPage();
+    it('Escenario 8: Crear Post para que solo sea visible para miembros', () => {
+        // THEN: Visitar pagina de posts
+        Given.navigateToPostPage();
 
-    //     // WHEN: Crear y publicar post 
-    //     When.createAndPublishPostMembersOnly();
+        // WHEN: Crear y publicar post 
+        When.createAndPublishPostMembersOnly();
 
-    //     // THEN: Verificar post publicado
-    //     Then.seePostPublishedMembersOnly();
-    // });
+        // THEN: Verificar post publicado
+        Then.seePostPublishedMembersOnly();
+    });
 
-    // it('Escenario 9: Crear Post con contenido en HTML', () => {
-    //     // THEN: Visitar pagina de posts
-    //     Given.navigateToPostPage();
+    it('Escenario 9: Crear Post con contenido en HTML', () => {
+        // THEN: Visitar pagina de posts
+        Given.navigateToPostPage();
 
-    //     // WHEN: Crear y publicar post 
-    //     When.createAndPublishPostWithHtml();
+        // WHEN: Crear y publicar post 
+        When.createAndPublishPostWithHtml();
 
-    //     // THEN: Verificar post publicado
-    //     Then.seePostPublishedWithHtml();
-    // });
+        // THEN: Verificar post publicado
+        Then.seePostPublishedWithHtml();
+    });
 
-    // it('Escenario 10: Crear Pagina con contenido en HTML', () => {
-    //     // THEN: Visitar pagina de posts
-    //     Given.givenNavigateToPagePage();
+    it('Escenario 10: Crear Pagina con contenido en HTML', () => {
+        // THEN: Visitar pagina de posts
+        Given.givenNavigateToPagePage();
 
-    //     // WHEN: Crear y publicar post 
-    //     When.createAndPublishPageWithHtml();
+        // WHEN: Crear y publicar post 
+        When.createAndPublishPageWithHtml();
 
-    //     // THEN: Verificar post publicado
-    //     Then.seePagePublishedWithHtml();
-    // });
+        // THEN: Verificar post publicado
+        Then.seePagePublishedWithHtml();
+    });
 
-    // it('Escenario 11: Crear y publicar una página con un video de YouTube', () => {
-    //     // GIVEN: Visitar Pages
-    //     Given.givenNavigateToPagePage();
+    it('Escenario 11: Crear y publicar una página con un video de YouTube', () => {
+        // GIVEN: Visitar Pages
+        Given.givenNavigateToPagePage();
 
-    //     // WHEN: Click en "New page"
-    //     When.createPageAndPublishWithVideo();
+        // WHEN: Click en "New page"
+        When.createPageAndPublishWithVideo();
 
-    //     // THEN: Validar la publicación de la página
-    //     Then.validatePageWithVideoCreated();
-    // });
+        // THEN: Validar la publicación de la página
+        Then.validatePageWithVideoCreated();
+    });
 
-    // it('Escenario 12: Crear y editar una página en Ghost', () => {
-    //     // GIVEN: Visitar Pages
-    //     Given.givenNavigateToPagePage();
+    it('Escenario 12: Crear y editar una página en Ghost', () => {
+        // GIVEN: Visitar Pages
+        Given.givenNavigateToPagePage();
 
-    //     // WHEN: Crear publicar, editar y guardar
-    //     When.reateAndPublishPageEditAndSave();
+        // WHEN: Crear publicar, editar y guardar
+        When.reateAndPublishPageEditAndSave();
 
-    //     // THEN: Publicar la página
-    //     Then.validatePageWasEditedAndCreated();
-    // });
+        // THEN: Publicar la página
+        Then.validatePageWasEditedAndCreated();
+    });
 
-    // it('Escenario 13: Crear, publicar y eliminar una página en Ghost', () => {
+    it('Escenario 13: Crear, publicar y eliminar una página en Ghost', () => {
 
-    //     // GIVEN: Visitar Pages
-    //     Given.givenNavigateToPagePage();
+        // GIVEN: Visitar Pages
+        Given.givenNavigateToPagePage();
 
-    //     // WHEN: Crear publicar, eliminar pagina
-    //     When.createPublishAndDeletePage();
+        // WHEN: Crear publicar, eliminar pagina
+        When.createPublishAndDeletePage();
 
-    //     // THEN: Validar que se lemino la pagina creada
-    //     Then.validatePageWasCreatedAndDeleted();
+        // THEN: Validar que se lemino la pagina creada
+        Then.validatePageWasCreatedAndDeleted();
 
-    // });
+    });
 
-    // it('Escenario 14: Crear una pagina y agregar un link de youtube invalido', () =>{
-    //     // GIVEN: Visitar Pages
-    //     Given.givenNavigateToPagePage();
+    it('Escenario 14: Crear una pagina y agregar un link de youtube invalido', () =>{
+        // GIVEN: Visitar Pages
+        Given.givenNavigateToPagePage();
 
-    //     // WHEN: Crear publicar, eliminar pagina
-    //     When.createPageAndAddInvalidYoutubeLink();
+        // WHEN: Crear publicar, eliminar pagina
+        When.createPageAndAddInvalidYoutubeLink();
 
-    //     // THEN: Validar que se lemino la pagina creada
-    //     Then.validatePageWasCreateWithWrongVideo();
+        // THEN: Validar que se lemino la pagina creada
+        Then.validatePageWasCreateWithWrongVideo();
 
-    // })
+    })
 
-    // it('Escenario 15: Crear un tag', () => {
-    //     // GIVEN: Visitar Tags
-    //     Given.givenNavigateToTagsPage();
+    it('Escenario 15: Crear un tag', () => {
+        // GIVEN: Visitar Tags
+        Given.givenNavigateToTagsPage();
 
-    //     // WHEN: Crear publicar nuevo tag
-    //     When.createNewTag();
+        // WHEN: Crear publicar nuevo tag
+        When.createNewTag();
 
-    //     // THEN: Validar la creación del tag
-    //     Then.validateTagWasCreated();
-    // });
+        // THEN: Validar la creación del tag
+        Then.validateTagWasCreated();
+    });
 
-    // it('Escenario 16: Crear un tag y asignarlo a un post', () => {
+    it('Escenario 16: Crear un tag y asignarlo a un post', () => {
 
-    //     // GIVEN: Visitar Tags
-    //     Given.givenNavigateToTagsPage();
+        // GIVEN: Visitar Tags
+        Given.givenNavigateToTagsPage();
 
-    //     // WHEN: Crear un tag y asignarlo a post
-    //     When.createTagAndAsignIt();
+        // WHEN: Crear un tag y asignarlo a post
+        When.createTagAndAsignIt();
 
-    //     // GIVEN: Validar la creación del post con el tag asignado
-    //     Then.validatePostWithTag();
-    // });
+        // GIVEN: Validar la creación del post con el tag asignado
+        Then.validatePostWithTag();
+    });
 
-    // it('Escenario 17: Crear un tag y ponerlo en una page', () => {
+    it('Escenario 17: Crear un tag y ponerlo en una page', () => {
 
-    //     // GIVEN: Visitar Tags
-    //     Given.givenNavigateToTagsPage();
+        // GIVEN: Visitar Tags
+        Given.givenNavigateToTagsPage();
 
-    //     // WHEN: Crear y asignar tag a una pagina
-    //     When.createTagAndAsignItToPage();
+        // WHEN: Crear y asignar tag a una pagina
+        When.createTagAndAsignItToPage();
 
-    //     // THEN: Validar si la pagina contiene el tag
-    //     Then.validatePageWithTag();
-    // });
+        // THEN: Validar si la pagina contiene el tag
+        Then.validatePageWithTag();
+    });
 
-    // it('Escenario 18: Crear member', () => {
-    //     // GIVEN: Visitar members
-    //     Given.givenNavigateTomembers();
+    it('Escenario 18: Crear member', () => {
+        // GIVEN: Visitar members
+        Given.givenNavigateTomembers();
 
-    //     When.createNewMember();
+        When.createNewMember();
 
-    //     Then.validateNewMemberExist();
-    // });
+        Then.validateNewMemberExist();
+    });
 
-    // it('Escenario 19: Crear member y eliminarlo', () => {
-    //     // GIVEN: Visitar members
-    //     Given.givenNavigateTomembers();
+    it('Escenario 19: Crear member y eliminarlo', () => {
+        // GIVEN: Visitar members
+        Given.givenNavigateTomembers();
 
-    //     When.createMemberAndDeletIt();
+        When.createMemberAndDeletIt();
 
-    //     Then.validateMemberWasDeleted();
-    // });
+        Then.validateMemberWasDeleted();
+    });
 
-    // it('Escenario 20: Cambiar el título del sitio', () => {
-    //     // GIVEN: Visitar Settings
-    //     Given.givenNavigateToSettings();
+    it('Escenario 20: Cambiar el título del sitio', () => {
+        // GIVEN: Visitar Settings
+        Given.givenNavigateToSettings();
 
-    //     When.updateSiteTitlte();
+        When.updateSiteTitlte();
 
-    //     Then.validateTitleSiteWasEdited();
-    // });
+        Then.validateTitleSiteWasEdited();
+    });
  });
 

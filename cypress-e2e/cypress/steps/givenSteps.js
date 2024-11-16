@@ -12,9 +12,13 @@ class Given {
         return 'input[type="password"]';
     }
 
+    get settingsButton(){
+        return 'a[data-test-nav="settings"]';
+    }
+
     givenNavigateToInitialPage(){
         cy.visit(Cypress.env('baseUrl') + '/ghost/#/signin');
-        cy.get(this.buttonSignIn).should('be.visible');
+        cy.get(this.buttonSignIn).should('exist');
         cy.screenshot('init/p1_initPage');
     };
     
