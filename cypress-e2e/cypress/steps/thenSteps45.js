@@ -25,7 +25,7 @@ class Then {
             return false
           })
         cy.get('.posts-list').should('contain', Cypress.env('tagName')).then(()=>{
-            cy.screenshot('e16/p3-tag-creado',{
+            cy.screenshot('4/e16/p3-tag-creado',{
                 disableTimersAndAnimations: false,
               })
         });

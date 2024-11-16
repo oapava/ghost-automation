@@ -99,7 +99,7 @@ class When {
         cy.get(this.titleInput).type('{enter}');
         cy.wait(500);
 
-        this.publishPostAndPage(scenery,'p3');
+        this.publishPostAndPage('4/' + scenery,'p3');
     }
 
     createAndPublishPostBold(){ //4.5
@@ -116,7 +116,7 @@ class When {
         cy.get(this.textAreaContent).first().type('**Contenido en negrita**');
         cy.screenshot(scenery + '/p3_addContentBold');
 
-        this.publishPostAndPage(scenery,'p4');
+        this.publishPostAndPage('4/' + scenery,'p4');
     }
 
     editAndPublishPostMarkdown(){ //4.5
@@ -138,7 +138,7 @@ class When {
         cy.get(this.titleInput).type('{enter}');
         cy.screenshot(scenery + '/p4_editedPost');
 
-        this.publishPostAndPage(scenery,'p5');
+        this.publishPostAndPage('4/' + scenery,'p5');
     }
 
     unpublishPostCreated(){
@@ -189,7 +189,7 @@ class When {
         cy.get(this.titleInput).type('{enter}');
         cy.screenshot(scenery + '/' + step + '_2_addTitlePost');
 
-        this.publishPostAndPage(scenery, step + '_3');
+        this.publishPostAndPage('4/' + scenery, step + '_3');
     }
 
     publishPostAndPage(scenery, step){ //4.5
@@ -216,7 +216,7 @@ class When {
     createTagAndAsignIt(){
         this.createNewTag()
 
-        cy.screenshot('e16/p1-tag-creado');
+        cy.screenshot('4/e16/p1-tag-creado');
 
         cy.visit(Cypress.env('postPageUrl'));
 
@@ -237,14 +237,14 @@ class When {
         cy.get(this.tagCloseSectionButton).invoke('attr', 'style', 'display: none;');
 
 
-        this.publishPostAndPage('e16', 'p2');
+        this.publishPostAndPage('4/e16', 'p2');
 
         cy.get(this.anchorPostButton).first().click({force:true, waitForAnimations: false, animationDistanceThreshold: 20});
 
     }
 
     createNewTag(){
-        cy.screenshot('e15/p1-crear-nuevo-tag');
+        cy.screenshot('4/e15/p1-crear-nuevo-tag');
 
         // Hacer clic en el botón "New tag"
         cy.contains('a.gh-btn-primary', 'New tag').click();
@@ -268,7 +268,7 @@ class When {
         //Scroll al inicio de la pagina
         cy.get(this.tagNameInput).scrollIntoView()
 
-        cy.screenshot('e15/p2-formulario-completo');
+        cy.screenshot('4/e15/p2-formulario-completo');
         // Esperar un momento (opcional si necesitas tiempo para que los cambios se reflejen)
         cy.wait(1000);
 
