@@ -163,6 +163,18 @@ class When {
     get deleteMemberConfirmButton(){
         return 'button[data-test-button="confirm"]';
     }
+    
+    get editSiteTitleButton(){
+        return 'button[class="cursor-pointer text-grey-900 dark:text-white dark:hover:bg-grey-900 hover:bg-grey-200 hover:text-black inline-flex items-center justify-center whitespace-nowrap rounded text-sm transition font-semibold h-7 px-3"]';
+    }
+    
+    get saveSiteTitleButton(){
+        return 'button[class="cursor-pointer  bg-green text-white hover:bg-green-400 inline-flex items-center justify-center whitespace-nowrap rounded text-sm transition font-bold h-7 px-3"]';
+    }
+    
+    get siteTitleInput(){
+        return 'input[placeholder="Site title"]';
+    }
 
     get spanElement(){
         return 'span';
@@ -178,6 +190,12 @@ class When {
     
     get liElement(){
         return 'li';
+    }
+
+    get time(){
+        const now = new Date();
+        const formattedDate = Math.floor(new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours(), now.getMinutes()).getTime() / 1000);
+        return formattedDate;
     }
 
     //When Methods
@@ -596,7 +614,7 @@ class When {
 
         cy.get(this.memberNameInput).type(Cypress.env('newMemberName'));
 
-        cy.get(this.memberEmailInput).type(Cypress.env('newMemberEmail')+Date.now()+ Cypress.env('domainEmail'));
+        cy.get(this.memberEmailInput).type(Cypress.env('newMemberEmail')+this.time+ Cypress.env('domainEmail'));
 
         cy.screenshot('e18/p1-creacion-member');
 
@@ -610,7 +628,7 @@ class When {
         this.createNewMember();
 
         //Buscar al member
-        cy.get(this.searchMembersInput).type(Cypress.env('newMemberEmail')+Date.now()+ Cypress.env('domainEmail'));
+        cy.get(this.searchMembersInput).type(Cypress.env('newMemberEmail')+this.time+ Cypress.env('domainEmail'));
         cy.screenshot('e19/p1-buscar-miembro');
         //Clickear en el member encontrado
         cy.get(this.detailMemberButton).first().click();
@@ -627,6 +645,17 @@ class When {
  
     }
 
+    updateSiteTitlte(){
+        //Seleccionar editar titulo
+        cy.get(this.editSiteTitleButton).first().click();
+        
+        //Actualización de titulo del sitio
+        cy.get(this.siteTitleInput).clear().type(Cypress.env('updatedSiteTitle'));
+        cy.screenshot('e20/p1-editar-titulo', {disableTimersAndAnimations: false,});
+
+        //Click en el botón de guardar título
+        cy.get(this.saveSiteTitleButton).first().click();
+    }
 }
 
 export default new When();

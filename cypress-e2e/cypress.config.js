@@ -20,7 +20,8 @@ module.exports = {
     tagSlug: "tecnologia",
     newMemberEmail: "p.riverah",
     domainEmail: "@uniandes.edu.co",
-    newMemberName: "Pablo Rivera"
+    newMemberName: "Pablo Rivera",
+    updatedSiteTitle: 'Título actualizado: Automatizacion Uniandes ' + new Date()
   },
   screenshotOnRunFailure: true,
   trashAssetsBeforeRuns: true, 

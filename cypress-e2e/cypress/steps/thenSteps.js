@@ -124,6 +124,13 @@ class Then {
 
         cy.screenshot('e19/p4-listdo-miembros', {disableTimersAndAnimations: false,})
     }
+
+    validateTitleSiteWasEdited(){
+        //Valida que el titulo
+        cy.reload(true);
+        cy.contains(Cypress.env('updatedSiteTitle')).should('exist');
+        cy.screenshot('e20/p2-titulo-actualizado', {disableTimersAndAnimations: false,});
+    }
 }
 
 

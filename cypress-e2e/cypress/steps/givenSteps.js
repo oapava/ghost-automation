@@ -1,4 +1,7 @@
 class Given {
+    get settingsButton(){
+        return 'a[data-test-nav="settings"]';
+    }
 
     givenNavigateToInitialPage(){
         cy.visit(Cypress.env('baseUrl') + '/ghost/#/signin');
@@ -33,6 +36,11 @@ class Given {
     givenNavigateTomembers(){
         cy.visit(Cypress.env('mambersUrl'));
         cy.url().should('include', '/ghost/#/members');
+    };
+    
+    givenNavigateToSettings(){
+        cy.get(this.settingsButton).click();
+        cy.url().should('include', '/ghost/#/settings');
     };
 }
 

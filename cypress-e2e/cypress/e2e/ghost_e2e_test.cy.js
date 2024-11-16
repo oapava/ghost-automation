@@ -210,13 +210,22 @@ describe('Crear un post', () => {
     //     Then.validateNewMemberExist();
     // });
 
-    it('Escenario 19: Crear member y eliminarlo', () => {
-        // GIVEN: Visitar members
-        Given.givenNavigateTomembers();
+    // it('Escenario 19: Crear member y eliminarlo', () => {
+    //     // GIVEN: Visitar members
+    //     Given.givenNavigateTomembers();
 
-        When.createMemberAndDeletIt();
+    //     When.createMemberAndDeletIt();
 
-        Then.validateMemberWasDeleted();
-    });
+    //     Then.validateMemberWasDeleted();
+    // });
+
+    // it('Escenario 20: Cambiar el título del sitio', () => {
+    //     // GIVEN: Visitar Settings
+    //     Given.givenNavigateToSettings();
+
+    //     When.updateSiteTitlte();
+
+    //     Then.validateTitleSiteWasEdited();
+    // });
 });
 
