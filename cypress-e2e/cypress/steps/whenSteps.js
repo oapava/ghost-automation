@@ -128,6 +128,10 @@ class When {
         return 'a[data-test-new-member-button="true"]';
     }
 
+    get returnAnalitics(){
+        return 'a.gh-btn-editor.gh-editor-back-button[data-test-breadcrumb=""]'
+    }
+
     get memberNameInput(){
         return 'input[data-test-input="member-name"]';
     }
@@ -167,7 +171,11 @@ class When {
     get spanElement(){
         return 'span';
     }
-    
+
+    get hrefPostSpan(){
+        return 'data-test-link="posts"';
+    }
+
     get aElement(){
         return 'a';
     }
@@ -208,209 +216,313 @@ class When {
     }
 
     createAndPublishPost(){
+        var scenery = 'e1';
         // Hacer click en el botón de "New post"
         cy.get(this.spanElement).contains('New post').click({force:true, waitForAnimations: false, animationDistanceThreshold: 20});
         cy.get(this.titleInput).should('be.visible');
-        cy.screenshot('e1/p1_newPost');
+        cy.screenshot(scenery + '/p1_newPost');
 
         //Se ingresa titulo y contenido en negrita del post
         cy.get(this.titleInput).type(Cypress.env('titlePostBasic'));
-        cy.screenshot('e1/p2_AddTitlePost');
+        cy.screenshot(scenery + '/p2_addTitlePost');
         cy.get(this.titleInput).type('{enter}');
 
-        this.publishPostAndPage('e1/p3');
-        this.validatePublishPostAndCloseModal('e1/p4');
+        this.publishPostAndPage(scenery,'p3');
+        this.validatePublishPostAndCloseModal(scenery,'p4');
     }
 
     createAndPublishPostBold(){
+        var scenery = 'e2';
         // Hacer click en el botón de "New post"
         cy.get(this.spanElement).contains('New post').click({force:true, waitForAnimations: false, animationDistanceThreshold: 20});
+        cy.get(this.titleInput).should('be.visible');
+        cy.screenshot(scenery + '/p1_newPost');
 
         //Se ingresa titulo del post
         cy.get(this.titleInput).type(Cypress.env('titlePostBold'));
+        cy.screenshot(scenery + '/p2_addTitlePost');
         cy.get(this.titleInput).type('{enter}');
         cy.get(this.textAreaContent).first().type('**Contenido en negrita**');
-        this.publishPostAndPage();
-        this.validatePublishPostAndCloseModal();
+        cy.screenshot(scenery + '/p3_addContentBold');
+
+        this.publishPostAndPage(scenery,'p4');
+        this.validatePublishPostAndCloseModal(scenery,'p5');
     }
 
     editAndPublishPostMarkdown(){
+        var scenery = 'e3';
         //Se crea Post para luego editar
-        this.createAndPublishPost();
+        this.createSimplePost(scenery,'p1')
         cy.visit(Cypress.env('postPageUrl'));
         cy.url().should('include', '/ghost/#/posts');
-        cy.screenshot('e3/p1_pagePost');
+        cy.screenshot(scenery + '/p2_pagePost');
 
         // Se toma el el botón editar del último post
         cy.get('a.gh-post-list-button').first().click({force:true});
         cy.get(this.titleInput).should('be.visible');
-        cy.screenshot('e3/p2_editPost');
+        cy.screenshot(scenery + '/p3_editPost');
 
         //Se ingresa titulo del post
         cy.get(this.textAreaContent).first().type(' **Contenido agregado a post existente** ');
         cy.get(this.titleInput).type('(Editado!)');
         cy.get(this.titleInput).type('{enter}');
-        cy.screenshot('e3/p3_editedPost');
+        cy.screenshot(scenery + '/p4_editedPost');
 
-        this.publishPostAndPage('e3');
-        this.validatePublishPostAndCloseModal('e3');
+        this.publishPostAndPage(scenery,'p5');
+        this.validatePublishPostAndCloseModal(scenery,'p6');
     }
 
     createAndPublishPostWhithImage(){
+        var scenery = 'e4';
         // Hacer click en el botón de "New post"
         cy.get(this.spanElement).contains('New post').click({force:true, waitForAnimations: false, animationDistanceThreshold: 20});
+        cy.get(this.titleInput).should('be.visible');
+        cy.screenshot(scenery + '/p1_newPost');
+
 
         //Se ingresa titulo del post
         cy.get(this.titleInput).type('Post con imagen 1');
+        cy.screenshot(scenery + '/p2_addTitlePost');
         cy.get(this.titleInput).type('{enter}');
         //Agregar imagen
         cy.get(this.unsplashImageButton).first().click({force:true})
         cy.wait(1000)
+        cy.screenshot(scenery + '/p3_unsplashImage');
         cy.contains(this.aElement, 'Insert image').then(($elements) => {
             const randomIndex = Math.floor(Math.random() * $elements.length);
             cy.wrap($elements[randomIndex]).click();
         });
+        cy.screenshot(scenery + '/p4_addhImage');
 
-        this.publishPostAndPage();
-        this.validatePublishPostAndCloseModal();
+        this.publishPostAndPage(scenery,'p5');
+        this.validatePublishPostAndCloseModal(scenery,'p6');
     }
 
     createAndPublishPostWhithContent(){
+        var scenery = 'e5';
         //ir a seccion de crear post
         cy.get(this.createPostButton).click();
         cy.url().should('contain', '/post');
+        cy.screenshot(scenery + '/p1_newPost');
 
         //Se ingresa titulo del post
         cy.get(this.titleInput).type('Post con contenido 1');
+        cy.screenshot(scenery + '/p2_addTitlePost');
         cy.get(this.titleInput).type('{enter}');
         cy.get(this.textAreaContent).first().type('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam viverra dui posuere velit maximus, in commodo leo luctus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam pretium sollicitudin risus eget mattis. Donec luctus eros eu dolor sodales, eu maximus mi feugiat.');
-        
-        this.publishPostAndPage();
-        this.validatePublishPostAndCloseModal();
+        cy.screenshot(scenery + '/p3_addContent');
+
+        this.publishPostAndPage(scenery,'p4');
+        this.validatePublishPostAndCloseModal(scenery,'p5');
+    }
+
+    createDraftPost(scenery, step){
+        // Hacer click en el botón de "New post"
+        cy.get(this.spanElement).contains('New post').click({force:true, waitForAnimations: false, animationDistanceThreshold: 20});
+        cy.get(this.titleInput).should('be.visible');
+        cy.screenshot(scenery + '/' + step + '_1_newPost');
+
+        //Se ingresa titulo y contenido en negrita del post
+        cy.get(this.titleInput).type('Post Draft para prueba Nro 1');
+        cy.get(this.titleInput).type('{enter}');
+        cy.screenshot(scenery + '/' + step + '_2_addTitlePost');
+
+        //Regresar a post sin publicar
+        cy.get(this.hrefPostSpan).first().click();
     }
 
     unpublishPostCreated(){
+        var scenery = 'e6';
+        //Crear post
+        this.createSimplePost(scenery,'p1')
+
         //Se valida que existan Posts
         cy.get(this.titlePostCreated).should('exist').then(() => {
+            cy.screenshot(scenery + '/p2_validatePostCreated');
             cy.get(this.titlePostCreated).first().click();
 
             //Click en opciones
             cy.get(this.analitycOptionssButton).should('be.visible');
+            cy.screenshot(scenery + '/p3_selectPost');
             cy.get(this.analitycOptionssButton).first().click();
 
             //Click en edit post  
             cy.get(this.editPostButton).contains('Edit post').should('be.visible');
+            cy.screenshot(scenery + '/p4_optionPost');
             cy.get(this.editPostButton).contains('Edit post').first().click();
 
             //Click en Unpublish Post
             cy.get(this.updatedFlowButton).should('be.visible');
+            cy.screenshot(scenery + '/p5_unpublishPost');
             cy.get(this.updatedFlowButton).first().click();
 
             //Click en confirmar unpublish
             cy.get(this.revertToDraftButton).should('be.visible');
+            cy.wait(500)
+            cy.screenshot(scenery + '/p6_confirmUnpublishPost');
             cy.get(this.revertToDraftButton).first().click();
+
+            cy.get(this.returnAnalitics).should('be.visible');
+            cy.screenshot(scenery + '/p7_resumeUnpublishPost');
+            cy.get(this.returnAnalitics).first().click();
         });
     }
 
     deletePostPublished(){
+        var scenery = 'e7';
+        this.createSimplePost(scenery,'p1')
+
         //Se valida que existan Posts
         cy.get(this.titlePostCreated).should('exist').then(() => {
             cy.get(this.titlePostCreated).first().click();
+            cy.screenshot(scenery + '/p2_validatePostCreated');
 
             //Click en opciones
             cy.get(this.analitycOptionssButton).should('be.visible');
+            cy.screenshot(scenery + '/p3_selectPost');
             cy.get(this.analitycOptionssButton).first().click();
 
             //Click en delete Post
             cy.get(this.deletePostButton).should('be.visible');
+            cy.screenshot(scenery + '/p4_deletePost');
             cy.get(this.deletePostButton).first().click();
 
             //Click en confirmar delete Post
             cy.get(this.deletePostConfirmButton).should('be.visible');
+            cy.screenshot(scenery + '/p5_confirmDeletePost');
             cy.get(this.deletePostConfirmButton).first().click();
         });
     }
 
+    getPublishedPostCount(){
+        cy.get('.gh-post-list-title') 
+        .its('length') // Obtiene la cantidad de posts
+        .then((postCount) => {
+            cy.log(`Número de posts publicados: ${postCount}`);
+            return cy.wrap(postCount);
+        });
+    }
+
     createAndPublishPostMembersOnly(){
+        var scenery = 'e8';
         //ir a seccion de crear post
         cy.get(this.createPostButton).click();
         cy.url().should('contain', '/post');
+        cy.screenshot(scenery + '/p1_sectionPost');
 
         //Se ingresa titulo del post
         cy.get(this.titleInput).type('Post para miembros 1');
+        cy.screenshot(scenery + '/p2_addTitlePost');
         cy.get(this.titleInput).type('{enter}');
 
         //Se abre el panel de configuracion
         cy.get(this.configurationPanelButton).should('be.visible');
+        cy.screenshot(scenery + '/p3_panelConfigPost');
         cy.get(this.configurationPanelButton).first().click();
         cy.get(this.configurationPanelButton).trigger('mousedown')
 
 
         cy.get(this.postVisibilitySelect).should('be.visible'); // Post Access
         cy.get(this.postVisibilitySelect).select('members') // Select option members
+        cy.screenshot(scenery + '/p4_memberOnliyConfigPost');
         
         cy.get(this.configurationPanelButton).should('be.visible'); //Post settings cerrar panel config
+        cy.screenshot(scenery + '/p5_closeConfigPost');
         cy.get(this.configurationPanelButton).first().click();
          
-        this.publishPostAndPage();
-        this.validatePublishPostAndCloseModal();
+        this.publishPostAndPage(scenery,'p6');
+        this.validatePublishPostAndCloseModal(scenery,'p7');
     }
 
     createAndPublishPostWithHtml(){
+        var scenery = 'e9';
         //ir a seccion de crear post
         cy.get(this.createPostButton).click();
         cy.url().should('contain', '/post');
+        cy.screenshot(scenery + '/p1_sectionPost');
 
         //Se ingresa titulo del post
         cy.get(this.titleInput).type('Post con HTML 1'); // Post title
+        cy.screenshot(scenery + '/p2_addTitlePost');
         cy.get(this.titleInput).type('{enter}');
 
         //Card de opciones
         cy.get(this.buttonAddCard).first().click({force:true, waitForAnimations: false});
+        cy.screenshot(scenery + '/p3_cardOptions');
+
         //Seleccionar HTML
         cy.get(this.htmlEditorButton).first().click({force:true, waitForAnimations: false});
+        cy.screenshot(scenery + '/p4_htmlOptionsSelected');
+
         //Ingresar texto en html
         cy.get(this.cmLineDiv).type('<h2> Prueba texto en post </h2>'); 
+        cy.screenshot(scenery + '/p5_addContentHtml');
         cy.get(this.cmLineDiv).type('{enter}');
 
-        this.publishPostAndPage();
-        this.validatePublishPostAndCloseModal();
+        this.publishPostAndPage(scenery,'p6');
+        this.validatePublishPostAndCloseModal(scenery,'p7');
     }
 
     createAndPublishPageWithHtml(){
+        var scenery = 'e10';
         //Click New Page
         cy.get(this.spanElement).contains('New page').click({force:true, waitForAnimations: false});
+        cy.screenshot(scenery + '/p1_sectionPage');
 
         cy.get(this.titleInput).type('Pagina con HTML 1'); // Page title
+        cy.screenshot(scenery + '/p2_addTitlePage');
         cy.get(this.titleInput).type('{enter}');
 
         //Card de opciones
         cy.get(this.buttonAddCard).first().click({force:true, waitForAnimations: false});
+        cy.screenshot(scenery + '/p3_cardOptions');
+
         //Seleccionar HTML
         cy.get(this.htmlEditorButton).first().click({force:true, waitForAnimations: false});
+        cy.screenshot(scenery + '/p4_htmlOptionsSelected');
+
         //Ingresar texto en html
         cy.get(this.cmLineDiv).type('<h2> Prueba texto pagina </h2>'); 
+        cy.screenshot(scenery + '/p5_addContentHtml');
         cy.get(this.cmLineDiv).type('{enter}');
 
-        this.publishPostAndPage();
-        this.validatePublishPageAndCloseModal();
+        this.publishPostAndPage(scenery,'p6');
+        this.validatePublishPageAndCloseModal(scenery,'p7');
     }
 
-    validatePublishPostAndCloseModal(scenery){
+    validatePublishPostAndCloseModal(scenery, step){
         cy.url().should('include', '/ghost/#/posts');
-
         cy.get(this.closeModalPublishFlow).should('be.visible');
         cy.wait(1000);
-        cy.screenshot(scenery + '_1_postPublished');
+        cy.screenshot(scenery + '/' + step + '_1_postPublished');
         cy.get(this.closeModalPublishFlow).click();
 
         cy.get(this.spanElement).contains('New post').should('be.visible');
-        cy.screenshot(scenery + '_2_listPostFinal');
+        cy.screenshot(scenery + '/' + step + '_2_listPostFinal');
     }
 
-    validatePublishPageAndCloseModal(){
+    validatePublishPageAndCloseModal(scenery, step){
         cy.url().should('include', '/ghost/#/pages');
+        cy.wait(1000);
+        cy.screenshot(scenery + '/' + step + '_1_pagePublished');
+
         cy.get(this.closeModalPublishFlow).click();
+        cy.screenshot(scenery + '/' + step + '_2_listPageFinal');
+    }
+
+    createSimplePost(scenery, step){
+        // Hacer click en el botón de "New post"
+        cy.get(this.spanElement).contains('New post').click({force:true, waitForAnimations: false, animationDistanceThreshold: 20});
+        cy.get(this.titleInput).should('be.visible');
+        cy.screenshot(scenery + '/' + step + '_1_newPost');
+
+        //Se ingresa titulo y contenido en negrita del post
+        cy.get(this.titleInput).type('Post para prueba Nro 1');
+        cy.get(this.titleInput).type('{enter}');
+        cy.screenshot(scenery + '/' + step + '_2_addTitlePost');
+
+        this.publishPostAndPage(scenery, step + '_3');
+        this.validatePublishPostAndCloseModal(scenery, step + '_4');
     }
     
     reateAndPublishPageEditAndSave(){
@@ -421,7 +533,7 @@ class When {
 
         //Publicar post
         cy.get(this.koenigEditorElement).first().click();
-        this.publishPostAndPage();
+        this.publishPostAndPage('e12','p1');
         cy.url().should('contain', '/pages');
 
         // Editar la página recién creada
@@ -436,21 +548,21 @@ class When {
         
     }
 
-    publishPostAndPage(scenery){
+    publishPostAndPage(scenery, step){
         cy.get(this.publishFlowButton).should('be.visible'); // Publish
-        cy.screenshot(scenery + '_0_publishButton', {disableTimersAndAnimations: false});
+        cy.screenshot(scenery + '/' + step + '_0_publishButton', {disableTimersAndAnimations: false});
         cy.get(this.publishFlowButton).first().click(); 
 
         //Continuar a review final
         cy.get(this.publishContinueButton).should('be.visible'); // Continue, final review
         cy.wait(500);
-        cy.screenshot(scenery + '_1_finalReview', {disableTimersAndAnimations: false});
+        cy.screenshot(scenery + '/' + step + '_1_finalReview', {disableTimersAndAnimations: false});
         cy.get(this.publishContinueButton).first().click(); 
 
         //Publicar post
         cy.get(this.confirmPublishButton).should('be.visible'); //Publish post, right now
         cy.wait(500);
-        cy.screenshot(scenery + '_2_publishRightNow', {disableTimersAndAnimations: false});
+        cy.screenshot(scenery + '/' + step + '_2_publishRightNow', {disableTimersAndAnimations: false});
         cy.get(this.confirmPublishButton).first().click(); 
     }
 

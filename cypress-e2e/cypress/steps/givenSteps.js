@@ -35,7 +35,15 @@ class Given {
     navigateToPostPage(){
         cy.visit(Cypress.env('postPageUrl'));
         cy.url().should('include', '/ghost/#/posts');
+        cy.wait(500);
         cy.screenshot('init/p4_postPage');
+    };
+
+    navigateToPostPagePublished(){
+        cy.visit(Cypress.env('baseUrl') + '/ghost/#/posts?type=published');
+        cy.url().should('include', 'posts?type=published');
+        cy.wait(500);
+        cy.screenshot('init/p4_postPagePulished');
     };
     
     givenNavigateToPagePage(){
