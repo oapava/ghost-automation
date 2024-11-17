@@ -10,3 +10,8 @@ kraken-e2e-rc/node_modules/*
 kraken-e2e-rc/reports/*
 pixelmatch/node_modules/*
 Backstop/node_modules/*
+
+cypress-e2e/cypress-ghost-v4/cypress/screenshots/
+cypress-e2e/cypress-ghost-v5/cypress/screenshots/
+output_differences/*
+node_modules
