@@ -16,7 +16,7 @@ Scenario: 1. Crear un Post con un título y guardar este nuevo post
   And I wait for 7 seconds
   And I click on view post
   Then I should see the post with title "Título desde Kraken 1"
-#
+
 @user2 @web
   Scenario: 2. Crear un Post con un contenido en markdown y guardar este nuevo post
   Given I navigate to page "<URLBASE>"
@@ -78,7 +78,6 @@ Scenario: 1. Crear un Post con un título y guardar este nuevo post
     When I delete the post "Publish post and deleted"
     Then I shouldn´t see the post with title "Publish post and deleted"
 
-
   @user9 @web
   Scenario: Escenario 9. Crear Post con contenido HTML
     Given I navigate to page "<URLBASE>"
@@ -88,10 +87,10 @@ Scenario: 1. Crear un Post con un título y guardar este nuevo post
     And I wait for 2 seconds
     And I click on new post button
     And I click on the title input
-    When I enter the post title "Post para HTML"
+    When I enter text "Post para HTML"
     And I click on text input
     And I wait for 2 seconds
-    And I add an HTML card with content "<h2>Prueba texto en post</h2>"
+    And I add an HTML card with content "<h2>Prueba texto en post"
     And I publish the post
     And I wait for 4 seconds
     And I click on view post

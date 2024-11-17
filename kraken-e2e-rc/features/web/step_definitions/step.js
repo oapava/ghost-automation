@@ -78,7 +78,7 @@ When('I click on the content input', async function() {
     let element = await this.driver.$('div[class="kg-prose"]');
     await element.click();
     const screenshot = await this.driver.takeScreenshot();
-    return saveScreenshot(screenshot, 'I_click_on_the_content_input.png');
+    return saveScreenshot(screenshot, 'I_click_on_text_input.png');
 })
 
 When('I click on publish button', async function() {
@@ -812,7 +812,7 @@ Then('The page with the title site should be {string}', async function(expectedT
 Then('I should see the post with title {string}', async function (expectedTitle) {
     const windows = await this.driver.getWindowHandles();
     await this.driver.switchToWindow(windows[windows.length - 1]);
-    const postTitle = await this.driver.$('h1.gh-article-title.is-title');
+    const postTitle = await this.driver.$('h1');
     const titleText = await postTitle.getText();
 
     if (titleText !== expectedTitle) {
@@ -879,13 +879,13 @@ Then('I should see the post with title {string} and content {string}', async fun
 
     await this.driver.pause(2000);
 
-    const postTitleElement = await this.driver.$('h1.gh-article-title.is-title');
+    const postTitleElement = await this.driver.$('h1');
     const titleText = await postTitleElement.getText();
     if (titleText !== expectedTitle) {
         throw new Error(`Expected title to be "${expectedTitle}", but got "${titleText}"`);
     }
 
-    const postContentElement = await this.driver.$('section.gh-content p');
+    const postContentElement = await this.driver.$('p');
     const contentText = await postContentElement.getText();
     if (contentText !== expectedContent) {
         throw new Error(`Expected content to be "${expectedContent}", but got "${contentText}"`);

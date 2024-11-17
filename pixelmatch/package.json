@@ -1,4 +1,10 @@
 {
+  "scripts": {
+    "pixelmatch:reference": "cd.. && cd kraken-e2e-base && npx kraken-node run",
+    "pixelmatch:test": "cd.. && cd kraken-e2e-rc && npx kraken-node run",
+    "pixelmatch:compare": "cd.. && cd pixelmatch && node compare.mjs",
+    "test:all": "npm run pixelmatch:reference && npm run pixelmatch:test && npm run pixelmatch:compare"
+  },
   "devDependencies": {
     "pixelmatch": "^6.0.0"
   }

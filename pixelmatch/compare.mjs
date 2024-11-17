@@ -3,10 +3,12 @@ import path from 'path';
 import pixelmatch from 'pixelmatch';
 import { PNG } from 'pngjs';
 
-// Rutas de las carpetas
-const imgDir1 = 'C:\\Users\\Prive\\Uniandes\\ciclo2\\folderForTesting\\ghost-automation\\pixelmatch\\bitmaps_reference';  // Primera carpeta
-const imgDir2 = 'C:\\Users\\Prive\\Uniandes\\ciclo2\\folderForTesting\\ghost-automation\\pixelmatch\\bitmaps_test';  // Segunda carpeta
-const outputDir = 'C:\\Users\\Prive\\Uniandes\\ciclo2\\folderForTesting\\ghost-automation\\pixelmatch\\results';  // Ruta para guardar los informes y las imágenes de diferencias
+const currentDir = process.cwd();
+
+
+const imgDir1 = path.join(currentDir,  'bitmaps_reference');
+const imgDir2 = path.join(currentDir,   'bitmaps_test');
+const outputDir = path.join(currentDir,  'reports');
 
 // Verificar si el directorio de salida existe, y si no, crearlo
 if (!fs.existsSync(outputDir)) {
@@ -17,12 +19,8 @@ if (!fs.existsSync(outputDir)) {
 const files1 = fs.readdirSync(imgDir1).filter(file => file.endsWith('.png'));
 const files2 = fs.readdirSync(imgDir2).filter(file => file.endsWith('.png'));
 
-if (files1.length !== files2.length) {
-    console.error('Las carpetas no tienen el mismo número de archivos');
-    process.exit(1);
-}
 
-// Acumular los resultados de todas las comparaciones
+// Generar el contenido inicial del reporte HTML
 let htmlContent = `
 <!DOCTYPE html>
 <html lang="en">
@@ -34,26 +32,31 @@ let htmlContent = `
     body {
       font-family: Arial, sans-serif;
       margin: 20px;
+      background-color: #f9f9f9;
     }
     h1 {
-      color: #333;
+      color: #444;
     }
     img {
-      max-width: 100%;
+      max-width: 300px;
       border: 1px solid #ccc;
     }
     .container {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
       margin-top: 20px;
     }
     .info {
-      margin-top: 20px;
+      margin-top: 10px;
       font-size: 16px;
       color: #555;
     }
     .image-row {
-      margin-top: 30px;
       padding: 20px;
       border-bottom: 1px solid #ccc;
+      background-color: #fff;
+      margin-bottom: 20px;
     }
   </style>
 </head>
@@ -61,58 +64,85 @@ let htmlContent = `
   <h1>Reporte de Comparación de Imágenes</h1>
 `;
 
+// Procesar cada par de imágenes
 files1.forEach((file, index) => {
     const img1Path = path.join(imgDir1, file);
-    const img2Path = path.join(imgDir2, files2[index]);
+    const img2Path = files2[index] ? path.join(imgDir2, files2[index]) : null;
 
-    // Leer las imágenes
-    const img1 = fs.readFileSync(img1Path);
-    const img2 = fs.readFileSync(img2Path);
+    if (!img2Path || !fs.existsSync(img2Path)) {
+        return;
+    }
 
-    // Decodificar las imágenes PNG
-    const img1PNG = PNG.sync.read(img1);
-    const img2PNG = PNG.sync.read(img2);
+    try {
+        // Leer las imágenes
+        const img1 = fs.readFileSync(img1Path);
+        const img2 = fs.readFileSync(img2Path);
 
-    // Crear una imagen para la diferencia
-    const { width, height } = img1PNG;
-    const diff = new PNG({ width, height });
+        // Decodificar las imágenes PNG
+        const img1PNG = PNG.sync.read(img1);
+        const img2PNG = PNG.sync.read(img2);
 
-    // Comparar las dos imágenes
-    const numDiffPixels = pixelmatch(
-        img1PNG.data, img2PNG.data, diff.data, width, height, { threshold: 0.1 }
-    );
+        // Validar tamaños de imagen
+        if (img1PNG.width !== img2PNG.width || img1PNG.height !== img2PNG.height) {
+            throw new Error(`Las imágenes no tienen el mismo tamaño: ${file}`);
+        }
 
-    // Guardar la imagen de diferencia
-    const diffPath = path.join(outputDir, `diff_${file}`);
-    fs.writeFileSync(diffPath, PNG.sync.write(diff));
+        // Crear una imagen para la diferencia
+        const { width, height } = img1PNG;
+        const diff = new PNG({ width, height });
 
-    // Añadir la comparación al contenido HTML
-    htmlContent += `
-  <div class="image-row">
-    <h2>Comparación de: ${file}</h2>
-    <div class="container">
-      <h3>Imagen 1</h3>
-      <img src="${img1Path}" alt="Imagen 1">
-      <h3>Imagen 2</h3>
-      <img src="${img2Path}" alt="Imagen 2">
-      <h3>Imagen de Diferencias</h3>
-      <img src="diff_${file}" alt="Diferencias entre las imágenes">
-    </div>
-    <div class="info">
-      <p><strong>Fecha de comparación:</strong> ${new Date().toLocaleString()}</p>
-      <p><strong>Número de píxeles diferentes:</strong> ${numDiffPixels}</p>
-      <p><strong>Umbral de diferencia:</strong> 0.1</p>
-    </div>
-  </div>
-  `;
+        // Comparar las dos imágenes
+        const numDiffPixels = pixelmatch(
+            img1PNG.data,
+            img2PNG.data,
+            diff.data,
+            width,
+            height,
+            { threshold: 0.1 }
+        );
+
+        // Guardar la imagen de diferencia
+        const diffFilename = `diff_${file}`;
+        const diffPath = path.join(outputDir, diffFilename);
+        fs.writeFileSync(diffPath, PNG.sync.write(diff));
+
+        // Añadir la comparación al contenido HTML
+        htmlContent += `
+        <div class="image-row">
+          <h2>Comparación de: ${file}</h2>
+          <div class="container">
+            <div>
+              <h3>Imagen 1</h3>
+              <img src="${path.relative(outputDir, img1Path)}" alt="Imagen 1">
+            </div>
+            <div>
+              <h3>Imagen 2</h3>
+              <img src="${path.relative(outputDir, img2Path)}" alt="Imagen 2">
+            </div>
+            <div>
+              <h3>Diferencias</h3>
+              <img src="${diffFilename}" alt="Diferencias entre las imágenes">
+            </div>
+          </div>
+          <div class="info">
+            <p><strong>Fecha de comparación:</strong> ${new Date().toLocaleString()}</p>
+            <p><strong>Píxeles diferentes:</strong> ${numDiffPixels}</p>
+            <p><strong>Umbral de diferencia:</strong> 0.1</p>
+          </div>
+        </div>
+        `;
+    } catch (error) {
+        console.error(`Error procesando ${file}: ${error.message}`);
+    }
 });
 
+// Finalizar el contenido del reporte HTML
 htmlContent += `
 </body>
 </html>
 `;
 
-// Guardar el reporte HTML con todas las comparaciones
+// Guardar el reporte HTML
 const reportPath = path.join(outputDir, 'reporte_comparacion_general.html');
 fs.writeFileSync(reportPath, htmlContent);
 

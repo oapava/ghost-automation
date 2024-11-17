@@ -898,6 +898,8 @@ When('I click in settings', async function () {
     });
 
     await settingsButton.click();
+    const screenshot = await this.driver.takeScreenshot();
+    return saveScreenshot(screenshot, 'I_click_on_posts_link.png');
 });
 
 When('I delete post', async function () {
@@ -988,7 +990,7 @@ When('I click on posts link using 4.5', async function() {
 
     await element.click();
     const screenshot = await this.driver.takeScreenshot();
-    return saveScreenshot(screenshot, 'I_login_in_ghost.png');
+    return saveScreenshot(screenshot, 'I_click_on_posts_link.png');
 });
 
 When('I add an HTML card in 4.5 version {string}', async function (htmlContent) {
