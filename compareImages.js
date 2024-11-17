@@ -3,8 +3,8 @@ const path = require('path');
 const resemble = require('resemblejs');
 
 // Carpetas base
-const ghost5 = path.join(__dirname, 'cypress-e2e/cypress/screenshots/5');
-const ghost4 = path.join(__dirname, 'cypress-e2e/cypress/screenshots/4');
+const ghost5 = path.join(__dirname, 'cypress-e2e/cypress-ghost-v5/cypress/screenshots/5');
+const ghost4 = path.join(__dirname, 'cypress-e2e/cypress-ghost-v4/cypress/screenshots/4');
 const outputFolder = path.join(__dirname, 'output_differences');
 
 // Archivo de reporte
@@ -85,12 +85,12 @@ function generateHTMLReport(report, summary) {
             <table>
                 <thead>
                     <tr>
-                        <th>Image</th>
-                        <th>Version 1</th>
-                        <th>Version 2</th>
-                        <th>Difference</th>
-                        <th>Mismatch Percentage</th>
-                        <th>Processing Time</th>
+                        <th>Nombre Imagen</th>
+                        <th>Ghost 5.9</th>
+                        <th>Ghost 4.5</th>
+                        <th>Diferencia</th>
+                        <th>Porcentaje de diferencia</th>
+                        <th>Tiempo de procesamiento</th>
                     </tr>
                 </thead>
                 <tbody>

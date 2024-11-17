@@ -195,11 +195,12 @@ class When {
         cy.get(this.titleInput).type('{enter}');
         cy.screenshot(scenery + '/' + step + '_2_addTitlePost');
 
-        this.publishPostAndPage('4/' + scenery, step + '_3');
+        this.publishPostAndPage(scenery, step + '_3');
     }
 
     publishPostAndPage(scenery, step){ //4.5
         cy.get(this.publishFlowButton).should('exist'); // Publish
+        cy.log('Ruta de guardado => ',scenery)
         cy.screenshot(scenery + '/' + step + '_0_publishButton', {disableTimersAndAnimations: false});
         cy.get(this.publishFlowButton).first().click(); 
 
