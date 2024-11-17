@@ -1,9 +1,9 @@
 {
   "name": "sem-5",
   "version": "1.0.0",
-  "main": "compareImages.js",
+  "main": "vr-resemble.js",
   "scripts": {
-    "test": "node compareImages.js"
+    "test": "node vr-resemble.js"
   },
   "keywords": [],
   "author": "",
