@@ -11,5 +11,8 @@
   "description": "",
   "dependencies": {
     "kraken-node": "^1.0.24"
+  },
+  "devDependencies": {
+    "@cucumber/cucumber": "^7.2.1"
   }
 }
