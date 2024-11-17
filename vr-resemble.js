@@ -3,8 +3,8 @@ const path = require('path');
 const resemble = require('resemblejs');
 
 // Carpetas base
-const ghost5 = path.join(__dirname, 'cypress-e2e/cypress-ghost-v5/cypress/screenshots/5');
-const ghost4 = path.join(__dirname, 'cypress-e2e/cypress-ghost-v4/cypress/screenshots/4');
+const ghost5 = path.join(__dirname, 'cypress-e2e/cypress-ghost-v5/cypress/screenshots/ghost_e2e_test.cy.js/5');
+const ghost4 = path.join(__dirname, 'cypress-e2e/cypress-ghost-v4/cypress/screenshots/ghost_4_5_e2e_test.cy.js/4');
 const outputFolder = path.join(__dirname, 'output_differences');
 
 // Archivo de reporte
