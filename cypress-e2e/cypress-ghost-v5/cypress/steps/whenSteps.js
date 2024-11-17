@@ -526,7 +526,7 @@ class When {
         cy.get(this.bodyElement).type('{esc}');
         cy.screenshot('5/e13/p3-pagina-creada');
 
-        cy.visit('http://localhost:2368/ghost/#/pages');
+        cy.visit(Cypress.env('pageUrl'));
         cy.url().should('include', '/ghost/#/pages');
 
         // Buscar la página en la lista por el título y hacer clic derecho para abrir el menú contextual

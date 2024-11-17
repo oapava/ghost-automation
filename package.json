@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "main": "vr-resemble.js",
   "scripts": {
-    "test": "node vr-resemble.js"
+    "test:vr": "node vr-resemble.js",
+    "teste2e:ghostv5":"cd cypress-e2e/cypress-ghost-v5 && cypress run --headless",
+    "teste2e:ghostv4":"cd cypress-e2e/cypress-ghost-v4 && cypress run --headless",
+    "teste2e:all":"npm run test:ghostv5 && npm run test:ghostv4",
+    "test:all": "npm run test:ghostv5 && npm run test:ghostv4 && test:vr"
   },
   "keywords": [],
   "author": "",
