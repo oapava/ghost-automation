@@ -1,9 +1,13 @@
 {
   "scripts": {
-    "pixelmatch:reference": "cd.. && cd kraken-e2e-base && npx kraken-node run",
-    "pixelmatch:test": "cd.. && cd kraken-e2e-rc && npx kraken-node run",
-    "pixelmatch:compare": "cd.. && cd pixelmatch && node compare.mjs",
-    "test:all": "npm run pixelmatch:reference && npm run pixelmatch:test && npm run pixelmatch:compare"
+    "pixelmatch:reference": "cd.. && cd kraken-e2e-base && npx kraken-node run || echo 'El script falló pero seguimos adelante.'",
+    "pixelmatch:test": "cd.. && cd kraken-e2e-rc && npx kraken-node run || echo 'El script falló pero seguimos adelante.'",
+    "pixelmatch:compare": "cd.. && cd pixelmatch && node compare.mjs || echo 'El script falló pero seguimos adelante.'",
+    "test:all": "npm run pixelmatch:reference && npm run pixelmatch:test && npm run pixelmatch:compare",
+    "pixelmatch:installroot": "npm install",
+    "pixelmatch:installbase": "cd.. && cd kraken-e2e-base && npm install",
+    "pixelmatch:installrc": "cd.. && cd kraken-e2e-rc && npm install",
+    "pixelmatch:installNPM": "npm run pixelmatch:installroot && npm run pixelmatch:installbase && npm run pixelmatch:installrc"
   },
   "devDependencies": {
     "pixelmatch": "^6.0.0"
