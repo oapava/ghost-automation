@@ -62,22 +62,20 @@ Feature: Creación de Post
 #  @user4 @web
 #  Scenario: 4. Eliminar post publicado en version 4.5
 #    Given I navigate to page "<URLBASE>"
-#    And I wait for 5 seconds
 #    And I login in ghost "<USERNAME>" "<PASSWORD>"
 #    And I click on posts link using 4.5
-#    When I wait for 2 seconds
+#    And I wait for 2 seconds
 #    And I click on new post button
 #    And I click on the title input
 #    And I enter text "Publish post and deleted"
+#    And I wait for 2 seconds
 #    And I click in text input 4.5
 #    And I wait for 3 seconds
 #    And I publish in version 4.5 the post
 #    And I wait for 5 seconds
 #    And I click in settings
-#    And I delete post
 #    And I wait for 5 seconds
-#    And I confirm the deletion
-#    And I wait for 5 seconds
+#    And I delete and confirm the post deletion
 #    Then I shouldn´t see the post with title "Publish post and deleted"
 
   @user5 @web

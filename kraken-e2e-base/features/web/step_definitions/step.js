@@ -1,5 +1,6 @@
 const { Given, When, Then } = require('@cucumber/cucumber');
 var assert = require('assert-plus');
+const saveScreenshot = require('./utils');
 
 When('I login in ghost {kraken-string} {kraken-string}', async function (email, password){
 
@@ -12,9 +13,11 @@ When('I login in ghost {kraken-string} {kraken-string}', async function (email, 
 
     let element3 = await this.driver.$('button[type="submit"]');
     await this.driver.pause(5000);
-    return await element3.click();
-
+    await element3.click();
+    const screenshot = await this.driver.takeScreenshot();
+    return saveScreenshot(screenshot, 'I_login_in_ghost.png');
 });
+
 When('I click on posts link 4.5', async function() {
     let element = await this.driver.$('a[href="#/posts/"]');
     return await element.click();
@@ -941,6 +944,8 @@ When('I click on posts link using 4.5', async function() {
     }
 
     await element.click();
+    const screenshot = await this.driver.takeScreenshot();
+    return saveScreenshot(screenshot, 'I_login_in_ghost.png');
 });
 
 When('I add an HTML card in 4.5 version {string}', async function (htmlContent) {
@@ -956,4 +961,29 @@ When('I add an HTML card in 4.5 version {string}', async function (htmlContent) 
 
     let htmlInput = await this.driver.$('.gh-cm-editor-textarea');
     await htmlInput.setValue(htmlContent);
+});
+
+When('I delete and confirm the post deletion', async function () {
+    const deleteButton = await this.driver.$('button.settings-menu-delete-button');
+
+    await this.driver.waitUntil(async () => {
+        return (await deleteButton.isDisplayed() && await deleteButton.isEnabled());
+    }, {
+        timeout: 5000,
+        timeoutMsg: 'El botón "Delete post" no se encontró o no estaba habilitado después de 5 segundos'
+    });
+
+    await deleteButton.scrollIntoView();
+    await deleteButton.click();
+
+    const confirmDeleteButton = await this.driver.$('button.gh-btn.gh-btn-red');
+
+    await this.driver.waitUntil(async () => {
+        return (await confirmDeleteButton.isDisplayed() && await confirmDeleteButton.isEnabled());
+    }, {
+        timeout: 5000,
+        timeoutMsg: 'El botón "Delete" en el modal de confirmación no se encontró o no estaba habilitado después de 5 segundos'
+    });
+
+    await confirmDeleteButton.click();
 });
