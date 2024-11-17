@@ -8,3 +8,5 @@ kraken-e2e-base/node_modules/*
 kraken-e2e-base/reports/*
 kraken-e2e-rc/node_modules/*
 kraken-e2e-rc/reports/*
+pixelmatch/node_modules/*
+Backstop/node_modules/*
