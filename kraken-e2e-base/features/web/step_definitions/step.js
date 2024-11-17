@@ -20,12 +20,16 @@ When('I login in ghost {kraken-string} {kraken-string}', async function (email, 
 
 When('I click on posts link 4.5', async function() {
     let element = await this.driver.$('a[href="#/posts/"]');
-    return await element.click();
+    await element.click();
+    const screenshot = await this.driver.takeScreenshot();
+    return saveScreenshot(screenshot, 'I_click_on_posts_link.png');
 })
 
 When('I click on the posts button', async function () {
     const postsButton = await this.driver.$('a.gh-editor-back-button');
     await postsButton.click();
+    const screenshot = await this.driver.takeScreenshot();
+    return saveScreenshot(screenshot, 'I_click_on_the_posts_button.png');
 });
 
 When('I click on pages link', async function() {
@@ -41,30 +45,39 @@ When('I return on posts links', async function() {
 When('I click on new post button', async function() {
     //let element = await this.driver.$('span');
     let element = await this.driver.$(`//span[contains(text(), 'New post')]`);
-    return await element.click();
+    await element.click();
+    const screenshot = await this.driver.takeScreenshot();
+    return saveScreenshot(screenshot, 'I_click_on_new_post_button.png');
 })
 
 When('I click on the title input', async function() {
     let element = await this.driver.$('textarea[placeholder="Post Title"]');
-    return await element.click();
+    await element.click();
+    const screenshot = await this.driver.takeScreenshot();
+    return saveScreenshot(screenshot, 'I_click_on_the_title_input.png');
 })
 
 When('I delete text', async function () {
     const titleInput = await this.driver.$('.gh-editor-title');
     await titleInput.setValue('');
+    const screenshot = await this.driver.takeScreenshot();
+    return saveScreenshot(screenshot, 'I delete text.png');
 });
 
 
 When('I click on the content input', async function() {
     let element = await this.driver.$('div[data-kg="editor"]');
-    return await element.click();
+    await element.click();
+    const screenshot = await this.driver.takeScreenshot();
+    return saveScreenshot(screenshot, 'I_click_on_the_content_input.png');
 })
 
 When('I click on publish button', async function() {
     //let element = await this.driver.$('button[data-test-button="publish-flow"]');
     let element = await this.driver.$(`//span[contains(text(), 'Publish')]`);
-    return await element.click();
-
+    await element.click();
+    const screenshot = await this.driver.takeScreenshot();
+    return saveScreenshot(screenshot, 'I_click_on_publish_button.png');
 })
 
 When('I click on continue button', async function() {
@@ -74,12 +87,16 @@ When('I click on continue button', async function() {
 
 When('I click on confirm button', async function() {
     let element1 = await this.driver.$('button[class="gh-btn gh-btn-black gh-publishmenu-button gh-btn-icon ember-view"]');
-    return await element1.click();
+    await element1.click();
+    const screenshot = await this.driver.takeScreenshot();
+    return saveScreenshot(screenshot, 'I_click_on_publish_button.png');
 })
 
 When('I click on view post', async function() {
     let element = await this.driver.$(`//a[contains(text(), 'View Post')]`);
-    return await element.click();
+    await element.click();
+    const screenshot = await this.driver.takeScreenshot();
+    return saveScreenshot(screenshot, 'I_click_on_view_post.png');
 })
 
 When('I click on view page', async function() {
@@ -104,7 +121,9 @@ When('I click on preview button', async function() {
 
 When('I click on edit button of draft {string}', async function(text) {
     let element = await this.driver.$$('h3[class="gh-content-entry-title"]');
-    return await element[0].click();
+    await element[0].click();
+    const screenshot = await this.driver.takeScreenshot();
+    return saveScreenshot(screenshot, 'I_click_on_edit_button_of_draft.png');
 })
 
 When('I click on a random link with text {string}', async function (text) {
@@ -328,6 +347,9 @@ Then('I should see the title {string} and html {string} description in the post'
     }
 
     console.log('La página con html fue creada exitosamente.');
+
+    const screenshot = await this.driver.takeScreenshot();
+    return saveScreenshot(screenshot, 'I_should_see_the_title_description.png');
 });
 
 Then('I should see the tag {string} in the post', async function (tagName) {
@@ -403,6 +425,9 @@ When('I delete the post {string}', async function (postTitle) {
     await confirmDeleteButton.click();
 
     await this.driver.pause(2000);
+
+    const screenshot = await this.driver.takeScreenshot();
+    return saveScreenshot(screenshot, 'I_delete_the_post.png');
 });
 
 Then('I should see that the page {string} is deleted', async function (pageTitle) {
@@ -542,6 +567,8 @@ When('I enter the post title {string}', async function (title) {
     let element = await this.driver.$('textarea[data-test-editor-title-input]');
     await element.setValue(title);
     await element.addValue('\n');
+    const screenshot = await this.driver.takeScreenshot();
+    return saveScreenshot(screenshot, 'I_enter_the_post_title.png');
 });
 
 When('I open close the post settings panel', async function () {
@@ -561,6 +588,8 @@ When('I publish the post', async function () {
     await continueButton.click();
     let confirmButton = await this.driver.$('button[data-test-button="confirm-publish"]');
     await confirmButton.click();
+    const screenshot = await this.driver.takeScreenshot();
+    return saveScreenshot(screenshot, 'I_publish_the_post.png');
 });
 
 //Escenario 9
@@ -571,6 +600,8 @@ When('I add an HTML card with content {string}', async function (htmlContent) {
     await htmlButton.click();
     let htmlInput = await this.driver.$('div[class="cm-line"]');
     await htmlInput.setValue(htmlContent);
+    const screenshot = await this.driver.takeScreenshot();
+    return saveScreenshot(screenshot, 'I_add_an_HTML_card_with_content.png');
 });
 
 //Escenario 10
@@ -775,6 +806,8 @@ Then('I should see the post with title {string}', async function (expectedTitle)
     const titleText = await postTitle.getText();
 
     assert.equal(titleText,expectedTitle,'El titulo no coincide');
+    const screenshot = await this.driver.takeScreenshot();
+    return saveScreenshot(screenshot, 'I_should_see_the_post_with_text.png');
 
 });
 
@@ -785,6 +818,8 @@ Then('I should see the post with text {string}', async function (expectedText) {
     const text = await postText.getText();
 
     assert.equal(text,expectedText,'El contenido del post no coincide');
+    const screenshot = await this.driver.takeScreenshot();
+    return saveScreenshot(screenshot, 'I_should_see_the_post_with_text.png');
 
 });
 
@@ -797,6 +832,8 @@ Then('I shouldn´t see the post with title {string}', async function (text) {
     }
 
     console.log('El draft del post se elimino correctamente');
+    const screenshot = await this.driver.takeScreenshot();
+    return saveScreenshot(screenshot, 'I_shouldn´t_see_the_post_with_title.png');
 })
 
 
@@ -836,6 +873,8 @@ Then('I should see the post with title {string} and content {string}', async fun
     const contentText = await postContentElement.getText();
 
     assert.equal(contentText,expectedContent,'la descripcion no coincide');
+    const screenshot = await this.driver.takeScreenshot();
+    return saveScreenshot(screenshot, 'I_should_see_the_post_with_title.png');
 
 });
 
@@ -901,7 +940,9 @@ When('I click in text input 4.5', async function() {
 
     await element.scrollIntoView();
 
-    return await element.click();
+    await element.click();
+    const screenshot = await this.driver.takeScreenshot();
+    return saveScreenshot(screenshot, 'I_click_on_text_input.png');
 });
 
 When('I publish in version 4.5 the post', async function () {
@@ -930,6 +971,8 @@ When('I publish in version 4.5 the post', async function () {
         timeoutMsg: 'El botón "Publish" no se encontró o no se mostró después de 5 segundos'
     });
     await publishConfirmButton.click();
+    const screenshot = await this.driver.takeScreenshot();
+    return saveScreenshot(screenshot, 'I_publish_the_post.png');
 });
 
 When('I click on posts link using 4.5', async function() {
@@ -961,6 +1004,8 @@ When('I add an HTML card in 4.5 version {string}', async function (htmlContent) 
 
     let htmlInput = await this.driver.$('.gh-cm-editor-textarea');
     await htmlInput.setValue(htmlContent);
+    const screenshot = await this.driver.takeScreenshot();
+    return saveScreenshot(screenshot, 'I_add_an_HTML_card_with_content.png');
 });
 
 When('I delete and confirm the post deletion', async function () {
@@ -986,4 +1031,6 @@ When('I delete and confirm the post deletion', async function () {
     });
 
     await confirmDeleteButton.click();
+    const screenshot = await this.driver.takeScreenshot();
+    return saveScreenshot(screenshot, 'I_delete_the_post.png')
 });

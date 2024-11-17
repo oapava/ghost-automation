@@ -11,5 +11,9 @@
   "description": "",
   "devDependencies": {
     "kraken-node": "^1.0.24"
+  },
+  "dependencies": {
+    "canvas": "^2.11.2",
+    "kraken-node": "^1.0.24"
   }
 }
