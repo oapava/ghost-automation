@@ -28,12 +28,20 @@ El objetivo es ejecutar las pruebas para ambas versiones utilizando Kraken y lue
 Antes de ejecutar las pruebas, asegúrate de que todas las dependencias estén instaladas. Puedes hacerlo ejecutando el siguiente comando en la raíz del proyecto:
 
     npm run pixelmatch:installNPM
+
+o en windows puedes usar
+
+      windows:pixelmatch:installNPM
    
 ## 2. Limpiar las Capturas de Pantalla Anteriores
 
 Antes de ejecutar las pruebas, es importante limpiar las capturas de pantalla anteriores para evitar confusiones. En la consola debes ubucarte en la carpeta `/pixelmatch` que se encuentra en la raiz del proyecto y ejecuta el siguiente comando:
 
     npm run clean:bitmaps
+
+o en windows puedes usar
+
+      windows:clean:bitmaps
 
 Este script eliminará las carpetas de capturas de pantalla anteriores y creará nuevas carpetas vacías para almacenar las capturas generadas durante la prueba.
 
@@ -43,6 +51,10 @@ Este script eliminará las carpetas de capturas de pantalla anteriores y creará
 Ahora puedes ejecutar el siguiente comando para iniciar las pruebas y la comparación de imágenes:
 
     npm run test:all
+
+o en windows puedes usar
+
+      windows:test:all
 
 ### 3.1 Explicacion de la ejecucion (se realiza automaticamente con el comando npm run test:all)
 
