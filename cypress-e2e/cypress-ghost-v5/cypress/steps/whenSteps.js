@@ -676,11 +676,11 @@ class When {
         cy.get(this.saveMemberButton).click();
 
         cy.get(this.anchorMembersButton).first().click();
-        cy.wait(1000)
     }
 
     createMemberAndDeletIt(){
         //Crear member
+        cy.wait(1000)
         this.createNewMember();
 
         //Buscar al member

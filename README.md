@@ -45,7 +45,7 @@ Antes de comenzar, asegúrate de cumplir con los siguientes requisitos:
 Se debe ubicar desde la consola en la raiz del proyecto, desde alli se ejecuta el siguiente comando el cual se encarga de ejecutar los escenarios de las pruebas e2e en las dos versiones de Ghost y posteriormente realiza las pruebas de regresion visual de forma automatica. 
 
 ```
-test:cy:rsjs:all
+npm run test:cy:rsjs:all
 ```
 
 #### Resultados de las pruebas
@@ -55,12 +55,9 @@ Al finalizar la ejecución de pruebas de regresion visual se genera de forma aut
 
 El informe de resultados en HTML contiene una tabla con el nombre del archivo comparado, la imagen de la ejecución en la versión Ghost 4.5, la imagen de la ejecución en la versión Ghost 5.96, la imagen que refleja las diferencias, el porcentaje de diferencia encontrado y el tiempo de ejecución.
 
-## Pasos para ejecutar las pruebas de forma individual
+#### Observaciones finales
+Los pasos descritos anteriormente se basan en el sistema opertaivo **macOs**, si se ejecuta desde windows se deben realizar desde el Powershell.
 
-### Pruebas E2E con herramientas ( Cypress, Kraken ) 
-1. Para la ejecución de los 40 escenarios realizados en Cypress y Kraken revisar la documentación de este Readme 
-2. Para la ejecución de los 10 escenarios de la versión base en Cypress y Kraken revisar la documentación de este Readme 
+## Pruebas E2E + Pruebas de regresión visual( Kraken + Pixelmatch ) 
 
-### Pruebas de regresión visual con herramientas ( ResembleJS, BackstopJS ) 
-1. Para la ejecución e instrucciones de revisión de informe de ResembleJS y BackstopJS, revisar la documentación de este Readme
-
+Para ejecutar las 20 pruebas e2e sobre la version Ghost 5.96, las 5 pruebas e2e sobre las version Ghost 4.5 y las 5 pruebas de regresion visual con estas herramientas se deben seguir los pasos que se encuentran dentro del archivo **README-PXM.md** que se encuentra dentro de la carpeta `/pixelmatch`

@@ -5,9 +5,9 @@
   "scripts": {
     "teste2e:ghostv5:cy":"cd cypress-e2e/cypress-ghost-v5 && rm -rf ./cypress/screenshots/* && cypress run --headless",
     "teste2e:ghostv4:cy":"cd cypress-e2e/cypress-ghost-v4 && rm -rf ./cypress/screenshots/* && cypress run --headless",
-    "teste2e:all:cy":"npm run teste2e:ghostv5 && npm run teste2e:ghostv4",
+    "teste2e:all:cy":"npm run teste2e:ghostv5:cy && npm run teste2e:ghostv4:cy",
     "test:vr:rsjs": "node vr-resemble.js",
-    "test:cy:rsjs:all": "npm run teste2e:all && npm run test:vr"
+    "test:cy:rsjs:all": "npm run teste2e:all:cy && npm run test:vr:rsjs"
   },
   "keywords": [],
   "author": "",

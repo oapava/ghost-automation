@@ -38,13 +38,7 @@ Antes de comenzar, asegúrate de cumplir con los siguientes requisitos:
     * El repositorio cuenta con dos carpetas para versiones diferentes de Ghost, asegúrate antes de correr las pruebas que Ghost se esté ejecutando en la version que se va a probar. Para la versión V5.96 de Ghost las pruebas están alojadas en cypress-e2e/cypress-ghost-v5. Para la versión V4.5 de Ghost las pruebas están alojadas en cypress-e2e/cypress-ghost-v4.
     * Dentro de cada carpeta de pruebas existe un archivo `cypress.config.js` en el cual se debe configurar el usuario de Ghost y la url con los puertos por donde esta corriendo cada una de las aplicaciones Ghost.
 4. Ejecutar Cypress:
-   Se puede ejecutar Cypress en modo consola o mediante la interfaz grafica:
-    * Ejecutar Cypress por interfaz grafica:
-   Desde la terminal ejecute el siguiente comando:
-   ```
-   cypress open
-   ```
-   Esto abrirá la ventana de navegación de la herramienta Cypress. Para obtener más detalles sobre cómo ejecutar las pruebas puedes ir a esta [wiki](https://github.com/oapava/ghost-automation/wiki/Manual-Interfaz-grafica-Cypress) donde se describe el paso a paso por medio de la interfaz gráfica.
+
     * Ejecutar Cypress por consola:
     Desde una terminal ubíquese en el directorio raíz del proyecto y vaya a la carpeta **'cypress-e2e'**, alli tendra dos subcarpetas ('cypress-ghost-v5' y 'cypress-ghost-v4') que debe seleccionar dependiendo de la version de Ghost que se va a probar. Desde la consola ingrese a la version a probar y ubíquese en el directorio donde se encuntra el archivo  `cypress.config.js`, desde alli ejecuta el siguiente comando:
    ```

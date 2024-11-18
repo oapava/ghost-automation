@@ -1,7 +1,5 @@
 # Guía Paso a Paso para Ejecutar Pruebas de Regresión con PixelMatch en Ghost
 
-# Guía Paso a Paso para Ejecutar Pruebas de Regresión con PixelMatch en Ghost
-
 ## Contexto
 
 Este proceso se enfoca en ejecutar pruebas de regresión visual entre dos versiones de la plataforma Ghost:
@@ -19,6 +17,8 @@ El objetivo es ejecutar las pruebas para ambas versiones utilizando Kraken y lue
 2. **Node.js**  
    Es necesario tener Node.js (versión 16) instalado en tu sistema, ya que Kraken depende de esta versión para funcionar.
 
+3. Las instalaciones de Ghost 4.5 y 5.96 deben estar corriendo en puertos diferentes para que los escenarios de pruebas puedan ser ejecutados por medio de un script unico. La configuracion por defecto es Ghost 4.5 por el puerto 2368 y Ghost 4.96 por el puerto 2369. Si desea modificar estos parametros debe hacerlo dentro de las carpetas `kraken-e2e-base` y `kraken-e2e-rc` en el archivo **properties.json**. En este mismo archivo se debe ingresar el usuario y contraseña que tiene configurado en Ghost.
+
 ---
 
 ## Pasos para Ejecutar las Pruebas
@@ -31,7 +31,7 @@ Antes de ejecutar las pruebas, asegúrate de que todas las dependencias estén i
    
 ## 2. Limpiar las Capturas de Pantalla Anteriores
 
-Antes de ejecutar las pruebas, es importante limpiar las capturas de pantalla anteriores para evitar confusiones. Ejecuta el siguiente comando:
+Antes de ejecutar las pruebas, es importante limpiar las capturas de pantalla anteriores para evitar confusiones. En la consola debes ubucarte en la carpeta `/pixelmatch` que se encuentra en la raiz del proyecto y ejecuta el siguiente comando:
 
     npm run clean:bitmaps
 
