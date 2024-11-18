@@ -3,16 +3,18 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "kraken-node run --config kraken.config.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
-  "dependencies": {
+  "devDependencies": {
+    "cucumber": "^6.0.7",
     "kraken-node": "^1.0.24"
   },
-  "devDependencies": {
-    "@cucumber/cucumber": "^7.2.1"
+  "dependencies": {
+    "canvas": "^2.11.2",
+    "kraken-node": "^1.0.24"
   }
 }

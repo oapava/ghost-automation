@@ -1,0 +1,20 @@
+{
+  "name": "sem-5",
+  "version": "1.0.0",
+  "main": "vr-resemble.js",
+  "scripts": {
+    "teste2e:ghostv5:cy":"cd cypress-e2e/cypress-ghost-v5 && rm -rf ./cypress/screenshots/* && cypress run --headless",
+    "teste2e:ghostv4:cy":"cd cypress-e2e/cypress-ghost-v4 && rm -rf ./cypress/screenshots/* && cypress run --headless",
+    "teste2e:all:cy":"npm run teste2e:ghostv5:cy && npm run teste2e:ghostv4:cy",
+    "test:vr:rsjs": "node vr-resemble.js",
+    "test:cy:rsjs:all": "npm run teste2e:all:cy && npm run test:vr:rsjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "fs-extra": "^11.2.0",
+    "resemblejs": "^5.0.0"
+  }
+}

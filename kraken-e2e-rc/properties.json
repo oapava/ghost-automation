@@ -1,5 +1,6 @@
 {
     "USERNAME": "h.virgueze@uniandes.edu.co",
     "PASSWORD": "1597532580",
-    "URLBASE": "http://localhost:2368/ghost/#/signin"
+    "URLBASE": "http://localhost:2368/ghost/#/signin",
+    "URLPOST": ""
 }
