@@ -1,0 +1,20 @@
+{
+  "name": "kraken-e2e",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "kraken-node run --config kraken.config.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "cucumber": "^6.0.7",
+    "kraken-node": "^1.0.24"
+  },
+  "dependencies": {
+    "canvas": "^2.11.2",
+    "kraken-node": "^1.0.24"
+  }
+}

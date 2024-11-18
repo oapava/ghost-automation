@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "backstop:reference": "cd.. && cd kraken-e2e-base && npx kraken-node run",
+    "backstop:test": "cd.. && cd kraken-e2e-rc && npx kraken-node run",
+    "test:all": "npm run backstop:reference && npm run backstop:test"
+  },
+  "devDependencies": {
+    "pixelmatch": "^6.0.0"
+  }
+}
