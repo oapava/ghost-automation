@@ -1,16 +1,15 @@
 class Then {
-    validatePageWithVideoCreated(){
-        cy.contains('Página con video de YouTube').should('be.visible');
-    }
 
-    validatePageWasEditedAndCreated(){
-        cy.get('.gh-notification').should('be.visible');
-    }
-
-    seePostPublished(){
+    seePostPublished(post){
         cy.visit(Cypress.env('postPageUrl'));
-        cy.contains(Cypress.env('titlePostBasic')).should('exist'); 
+        cy.contains(post.title).should('exist');
     }
+
+
+
+
+
+    //
 
     seePostPublishedBold(){
         cy.visit(Cypress.env('postPageUrl'));
