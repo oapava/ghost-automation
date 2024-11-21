@@ -1,0 +1,51 @@
+{
+  "pagesHtml": [
+    {
+      "title": "Pagina con HTML 1",
+      "htmlContent": "<h2> Prueba texto pagina </h2>"
+    },
+    {
+      "title": "Pagina con HTML 2",
+      "htmlContent": "<h2> Otra prueba de texto </h2>"
+    }
+  ],
+  "videos": [
+    {
+      "title": "Página con video de YouTube 1",
+      "url": "https://www.youtube.com/watch?v=x91MPoITQ3I"
+    },
+    {
+      "title": "Página con video de YouTube 2",
+      "url": "https://www.youtube.com/watch?v=abc123"
+    }
+  ],
+
+  "pagesEdit": [
+    {
+      "title": "My Page to edit",
+      "updatedTitle": "Updated Page Title"
+    }
+  ],
+
+  "pagesDelete": [
+    {
+      "title": "Página de prueba para eliminar",
+      "htmlContent": "<h2>Contenido de la página de prueba</h2>"
+    }
+  ],
+  "pagesError": [
+    {
+      "title": "Página con error en video de YouTube",
+      "invalidYoutubeLink": "https://www.youtu"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Tecnología",
+      "color": "FF5733",
+      "slug": "tecnologia",
+      "description": "Este es un tag de tecnología"
+    }
+  ]
+
+}

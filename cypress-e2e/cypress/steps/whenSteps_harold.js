@@ -7,23 +7,23 @@ class When {
     get titleInput(){
         return 'textarea[data-test-editor-title-input]';
     }
-    
+
     get buttonAddCard(){
         return 'button[aria-label="Add a card"]';
     }
-    
+
     get buttonYoutube(){
         return 'button[data-kg-card-menu-item="YouTube"]';
     }
-    
+
     get inputEmbedUrl(){
         return 'input[data-testid="embed-url"]';
     }
-    
+
     get publishFlowButton(){
         return 'button[data-test-button="publish-flow"]';
     }
-    
+
     get publishContinueButton(){
         return 'button[data-test-button="continue"]';
     }
@@ -31,19 +31,19 @@ class When {
     get closeModalPublishFlow(){
         return 'button[data-test-button="close-publish-flow"]';
     }
-    
+
     get textAreaContent(){
         return 'p[data-koenig-dnd-droppable="true"]';
     }
-    
+
     get unsplashImageButton(){
         return '.gh-editor-feature-image-unsplash';
     }
-    
+
     get createPostButton(){
         return 'a[data-test-nav="new-story"]';
     }
-    
+
     get titlePostCreated(){
         return 'span[title="Go to Analytics"]';
     }
@@ -51,83 +51,83 @@ class When {
     get analitycOptionssButton(){
         return 'button[data-test-button="analytics-actions"]';
     }
-    
+
     get editPostButton(){
         return 'a.edit-post';
     }
-    
+
     get updatedFlowButton(){
         return 'button[data-test-button="update-flow"]';
     }
-    
+
     get revertToDraftButton(){
         return 'button[data-test-button="revert-to-draft"]';
     }
-    
+
     get deletePostButton(){
         return 'button[data-test-button="delete-post"]';
     }
-    
+
     get deletePostConfirmButton(){
         return 'button[data-test-button="delete-post-confirm"]';
     }
-    
+
     get configurationPanelButton(){
         return 'button[data-test-psm-trigger]';
     }
-    
+
     get postVisibilitySelect(){
         return 'select[data-test-select="post-visibility"]';
     }
-    
+
     get htmlEditorButton(){
         return 'button[data-kg-card-menu-item="HTML"]';
     }
-    
+
     get cmLineDiv(){
         return 'div[class="cm-line"]';
     }
-    
+
     get newPageButton(){
         return 'a[href="#/editor/page/"]';
     }
-    
+
     get koenigEditorElement(){
         return '.koenig-react-editor';
     }
-    
+
     get publishSaveButton(){
         return 'button[data-test-button="publish-save"]';
     }
-    
+
     get confirmPublishButton(){
         return 'button[data-test-button="confirm-publish"]';
     }
-    
+
     get contentEntryTitle(){
         return 'h3.gh-content-entry-title';
     }
-    
+
     get deletePageButton(){
         return '[data-test-button="delete"]';
     }
-    
+
     get asignTagButton(){
         return 'button[class="settings-menu-toggle gh-btn gh-btn-editor gh-btn-icon icon-only gh-btn-action-icon"]';
     }
-    
+
     get asignTagInput(){
         return 'input[class="ember-power-select-trigger-multiple-input"]';
     }
-    
+
     get confirmTagAsign(){
         return 'li[data-option-index="1"]';
     }
-    
+
     get anchorPostButton(){
         return 'a[data-test-nav="posts"]';
     }
-    
+
     get createNewMemberButton(){
         return 'a[data-test-new-member-button="true"]';
     }
@@ -139,35 +139,35 @@ class When {
     get memberNameInput(){
         return 'input[data-test-input="member-name"]';
     }
-    
+
     get memberEmailInput(){
         return 'input[data-test-input="member-email"]';
     }
-    
+
     get saveMemberButton(){
         return 'button[data-test-button="save"]';
     }
-    
+
     get anchorMembersButton(){
         return 'a[href="#/members/"]';
     }
-    
+
     get searchMembersInput(){
         return 'input[data-test-input="members-search"]';
     }
-    
+
     get detailMemberButton(){
         return 'a[data-test-table-data="details"]';
     }
-    
+
     get memberActionsButton(){
         return 'button[data-test-button="member-actions"]';
     }
-    
+
     get deleteMemberButton(){
         return 'button[data-test-button="delete-member"]';
     }
-    
+
     get deleteMemberConfirmButton(){
         return 'button[data-test-button="confirm"]';
     }
@@ -181,31 +181,31 @@ class When {
     get editSiteTitleButton(){
         return 'button[class="cursor-pointer text-grey-900 dark:text-white dark:hover:bg-grey-900 hover:bg-grey-200 hover:text-black inline-flex items-center justify-center whitespace-nowrap rounded text-sm transition font-semibold h-7 px-3"]';
     }
-    
+
     get saveSiteTitleButton(){
         return 'button[class="cursor-pointer  bg-green text-white hover:bg-green-400 inline-flex items-center justify-center whitespace-nowrap rounded text-sm transition font-bold h-7 px-3"]';
     }
-    
+
     get siteTitleInput(){
         return 'input[placeholder="Site title"]';
     }
-    
+
     get tagNameInput(){
         return '[data-test-input="tag-name"]';
     }
-    
+
     get tagColorInput(){
         return '[data-test-input="accentColor"]';
     }
-    
+
     get tagSlugInput(){
         return '[data-test-input="tag-slug"]';
     }
-    
+
     get tagDescriptionInput(){
         return '[data-test-input="tag-description"]';
     }
-    
+
     get tagSaveButton(){
         return 'button[data-test-button="save"]';
     }
@@ -221,11 +221,11 @@ class When {
     get aElement(){
         return 'a';
     }
-    
+
     get bodyElement(){
         return 'body';
     }
-    
+
     get liElement(){
         return 'li';
     }
@@ -270,12 +270,12 @@ class When {
         cy.get(this.inputEmbedUrl).should('be.visible').type("https://www.youtube.com/watch?v=x91MPoITQ3I").type('{enter}');
         cy.screenshot('5/e11/p3-nueva-pagina-con-contenido-nuevo');
         cy.wait(1000)
-        
+
         //Continuar a review final
         this.publishPostAndPage('5/e11', 'p3');
 
         cy.get(this.closeModalPublishFlow).click();
-            
+
     }
 
     createAndPublishPost(){
@@ -329,7 +329,7 @@ class When {
         cy.get(this.titleInput).type('(Editado!)');
         cy.get(this.titleInput).type('{enter}');
         cy.screenshot(this.version + scenery + '/p4_editedPost');
-        
+
         cy.get(this.buttonPublishEditedsave).should('be.visible');
         cy.get(this.buttonPublishEditedsave).first().click();
         cy.wait(500)
@@ -413,7 +413,7 @@ class When {
             cy.screenshot(this.version + scenery + '/p3_selectPost');
             cy.get(this.analitycOptionssButton).first().click();
 
-            //Click en edit post  
+            //Click en edit post
             cy.get(this.editPostButton).contains('Edit post').should('exist');
             cy.screenshot(this.version + scenery + '/p4_optionPost');
             cy.get(this.editPostButton).contains('Edit post').first().click();
@@ -462,12 +462,12 @@ class When {
     }
 
     getPublishedPostCount(){
-        cy.get('.gh-post-list-title') 
-        .its('length') // Obtiene la cantidad de posts
-        .then((postCount) => {
-            cy.log(`Número de posts publicados: ${postCount}`);
-            return cy.wrap(postCount);
-        });
+        cy.get('.gh-post-list-title')
+            .its('length') // Obtiene la cantidad de posts
+            .then((postCount) => {
+                cy.log(`Número de posts publicados: ${postCount}`);
+                return cy.wrap(postCount);
+            });
     }
 
     createAndPublishPostMembersOnly(){
@@ -492,11 +492,11 @@ class When {
         cy.get(this.postVisibilitySelect).should('be.visible'); // Post Access
         cy.get(this.postVisibilitySelect).select('members') // Select option members
         cy.screenshot(this.version + scenery + '/p4_memberOnliyConfigPost');
-        
+
         cy.get(this.configurationPanelButton).should('be.visible'); //Post settings cerrar panel config
         cy.screenshot(this.version + scenery + '/p5_closeConfigPost');
         cy.get(this.configurationPanelButton).first().click();
-         
+
         this.publishPostAndPage(this.version + scenery,'p6');
         this.validatePublishPostAndCloseModal(this.version + scenery,'p7');
     }
@@ -663,7 +663,7 @@ class When {
     }
 
     createNewMember(){
-        
+
         //Crear member
         cy.get(this.createNewMemberButton).click();
 
@@ -692,13 +692,13 @@ class When {
         cy.get(this.memberActionsButton).first().click();
         cy.screenshot('5/e19/p2-eliminar-miembro', {disableTimersAndAnimations: false,})
         //Dar boton de eliminar member
-        
+
         cy.get(this.deleteMemberButton).first().click();
         cy.screenshot('5/e19/p3-confirmacion-eliminar-miembro', {disableTimersAndAnimations: false,})
-        
+
         //Dar boton de confirmar eliminar member
         cy.get(this.deleteMemberConfirmButton).first().click()
- 
+
     }
 
     createAndPublishPostWithHtml(){
@@ -722,7 +722,7 @@ class When {
         cy.screenshot(this.version + scenery + '/p4_htmlOptionsSelected');
 
         //Ingresar texto en html
-        cy.get(this.cmLineDiv).type('<h2> Prueba texto en post </h2>'); 
+        cy.get(this.cmLineDiv).type('<h2> Prueba texto en post </h2>');
         cy.screenshot(this.version + scenery + '/p5_addContentHtml');
         cy.get(this.cmLineDiv).type('{enter}');
 
@@ -749,7 +749,7 @@ class When {
         cy.screenshot(this.version + scenery + '/p4_htmlOptionsSelected');
 
         //Ingresar texto en html
-        cy.get(this.cmLineDiv).type('<h2> Prueba texto pagina </h2>'); 
+        cy.get(this.cmLineDiv).type('<h2> Prueba texto pagina </h2>');
         cy.screenshot(this.version + scenery + '/p5_addContentHtml');
         cy.get(this.cmLineDiv).type('{enter}');
 
@@ -793,7 +793,7 @@ class When {
         this.publishPostAndPage(scenery, step + '_3');
         this.validatePublishPostAndCloseModal(scenery, step + '_4');
     }
-    
+
     reateAndPublishPageEditAndSave(){
         // Crear nueva página
         cy.screenshot('5/e12/p1-click-nueva-pagina')
@@ -814,37 +814,203 @@ class When {
         // Guardar la página actualizada
         cy.get(this.publishSaveButton).contains('Update').click();
         cy.screenshot('5/e12/p4-publicacion-pagina-actualizada');
-        
+
     }
 
     publishPostAndPage(scenery, step){
         cy.get(this.publishFlowButton).should('be.visible'); // Publish
         cy.screenshot(scenery + '/' + step + '_0_publishButton', {disableTimersAndAnimations: false});
-        cy.get(this.publishFlowButton).first().click(); 
+        cy.get(this.publishFlowButton).first().click();
 
         //Continuar a review final
         cy.get(this.publishContinueButton).should('be.visible'); // Continue, final review
         cy.wait(500);
         cy.screenshot(scenery + '/' + step + '_1_finalReview', {disableTimersAndAnimations: false});
-        cy.get(this.publishContinueButton).first().click(); 
+        cy.get(this.publishContinueButton).first().click();
 
         //Publicar post
         cy.get(this.confirmPublishButton).should('be.visible'); //Publish post, right now
         cy.wait(500);
         cy.screenshot(scenery + '/' + step + '_2_publishRightNow', {disableTimersAndAnimations: false});
-        cy.get(this.confirmPublishButton).first().click(); 
+        cy.get(this.confirmPublishButton).first().click();
     }
 
     updateSiteTitlte(){
         //Seleccionar editar titulo
         cy.get(this.editSiteTitleButton).first().click();
-        
+
         //Actualización de titulo del sitio
         cy.get(this.siteTitleInput).clear().type(Cypress.env('updatedSiteTitle'));
         cy.screenshot('5/e20/p1-editar-titulo', {disableTimersAndAnimations: false,});
 
         //Click en el botón de guardar título
         cy.get(this.saveSiteTitleButton).first().click();
+    }
+
+    // POOL
+
+    createAndPublishPageWithHtmlPool(){
+        var scenery = 'e10';
+
+        cy.fixture('testData').then((data) => {
+            const pageData = data.pagesHtml[0];
+
+            cy.get(this.spanElement).contains('New page').click({force:true, waitForAnimations: false});
+            cy.screenshot(this.version + scenery + '/p1_sectionPage');
+
+            cy.get(this.titleInput).type(pageData.title);
+            cy.screenshot(this.version + scenery + '/p2_addTitlePage');
+            cy.get(this.titleInput).type('{enter}');
+
+            cy.get(this.buttonAddCard).first().click({force:true, waitForAnimations: false});
+            cy.screenshot(this.version + scenery + '/p3_cardOptions');
+
+            cy.get(this.htmlEditorButton).first().click({force:true, waitForAnimations: false});
+            cy.screenshot(this.version + scenery + '/p4_htmlOptionsSelected');
+
+            cy.get(this.cmLineDiv).type(pageData.htmlContent);
+            cy.screenshot(this.version + scenery + '/p5_addContentHtml');
+            cy.get(this.cmLineDiv).type('{enter}');
+
+            this.publishPostAndPage(this.version + scenery, 'p6');
+            this.validatePublishPageAndCloseModal(this.version + scenery, 'p7');
+        });
+    }
+    createPageAndPublishWithVideoPool(){
+        cy.screenshot('5/e11/p1-visit-page-list');
+        cy.get(this.spanElement).contains('New page').click({force:true, waitForAnimations: false});
+
+        cy.fixture('testData').then((data) => {
+            const videoData = data.videos[0];
+
+            cy.screenshot('5/e11/p2-nueva-page');
+            cy.get(this.titleInput).type(videoData.title + ' ' + this.time);
+            cy.get(this.titleInput).type('{enter}');
+
+            cy.get(this.buttonAddCard).first().click({force:true, waitForAnimations: false});
+
+            cy.get(this.buttonYoutube).scrollIntoView().should('be.visible').click();
+
+            cy.get(this.inputEmbedUrl).should('be.visible').type(videoData.url).type('{enter}');
+            cy.screenshot('5/e11/p3-nueva-pagina-con-contenido-nuevo');
+            cy.wait(1000);
+
+            this.publishPostAndPage('5/e11', 'p3');
+
+            cy.get(this.closeModalPublishFlow).click();
+        });
+    }
+
+    createAndPublishPageEditAndSavePool(){
+        cy.fixture('testData').then((data) => {
+            const pageData = data.pagesEdit[0];
+
+            cy.screenshot('5/e12/p1-click-nueva-pagina');
+            cy.get(this.newPageButton).click();
+            cy.get(this.titleInput).type(pageData.title + '{enter}');
+
+            cy.get(this.koenigEditorElement).first().click();
+            this.publishPostAndPage('5/e12', 'p1');
+            cy.url().should('contain', '/pages');
+
+            cy.get(this.closeModalPublishFlow).click();
+            cy.screenshot('5/e12/p2-pagina-creada-listada');
+            cy.contains(pageData.title).click();
+            cy.get(this.titleInput).clear().type(pageData.updatedTitle + '{enter}').screenshot('5/e12/p3-actualizacion-titulo');
+
+            cy.get(this.publishSaveButton).contains('Update').click();
+            cy.screenshot('5/e12/p4-publicacion-pagina-actualizada');
+        });
+    }
+
+    createPublishAndDeletePagePool(){
+        cy.fixture('testData').then((data) => {
+            const pageData = data.pagesDelete[0];
+
+            cy.screenshot('5/e13/p1-pagina-creada-listada');
+            cy.contains('New page').click({ force: true, waitForAnimations: false });
+
+            cy.get(this.titleInput).type(pageData.title + '{enter}');
+
+            cy.get(this.buttonAddCard).first().click({ force: true, waitForAnimations: false });
+            cy.get(this.htmlEditorButton).first().click({ force: true, waitForAnimations: false });
+            cy.get(this.cmLineDiv).type(pageData.htmlContent + '{enter}');
+
+            cy.screenshot('5/e13/p2-pagina-creada-con-contenido');
+
+            this.publishPostAndPage('5/e13', 'p2');
+
+            cy.url().should('include', '/pages');
+            cy.contains(pageData.title).should('exist');
+            cy.wait(500);
+            cy.get(this.bodyElement).type('{esc}');
+            cy.screenshot('5/e13/p3-pagina-creada');
+
+            cy.visit(Cypress.env('pageUrl'));
+            cy.url().should('include', '/ghost/#/pages');
+
+            cy.contains(this.contentEntryTitle, pageData.title)
+                .closest(this.liElement)
+                .rightclick();
+
+            cy.get(this.deletePageButton)
+                .should('be.visible')
+                .then(() => {
+                    cy.screenshot('5/e13/p4-eliminar-pagina', { capture: 'fullPage' });
+                    cy.get(this.deletePageButton).click();
+                });
+        });
+    }
+    createPageAndAddInvalidYoutubeLinkPool(){
+        cy.fixture('testData').then((data) => {
+            const pageData = data.pagesError[0];
+
+            // Click en "New page"
+            cy.get(this.spanElement).contains('New page').click({force:true, waitForAnimations: false});
+
+            cy.get(this.titleInput).type(pageData.title);
+            cy.get(this.titleInput).type('{enter}');
+
+            cy.get(this.buttonAddCard).first().click({force:true, waitForAnimations: false});
+
+            cy.get(this.buttonYoutube).scrollIntoView().should('be.visible').click();
+
+            cy.get(this.inputEmbedUrl).should('be.visible').type(pageData.invalidYoutubeLink).type('{enter}');
+
+            cy.screenshot('5/e14/p1-contenido-ingresado');
+
+            this.publishPostAndPage('5/e14', 'p1');
+            cy.get(this.closeModalPublishFlow).click();
+            cy.screenshot('5/e14/p2-confirmacion-guardado');
+        });
+    }
+
+    createNewTagPool(){
+        cy.fixture('testData').then((data) => {
+            const tagData = data.tags[0];
+
+            cy.screenshot('5/e15/p1-crear-nuevo-tag');
+            cy.contains('a.gh-btn-primary', 'New tag').click();
+
+            const tagColor = tagData.color;
+            const tagDescription = tagData.description;
+
+            cy.get(this.tagNameInput).type(tagData.name);
+
+            cy.get(this.tagColorInput).type(tagColor);
+
+            cy.get(this.tagSlugInput).type(tagData.slug);
+
+            cy.get(this.tagDescriptionInput).type(tagDescription);
+
+            cy.get(this.tagNameInput).scrollIntoView();
+
+            cy.screenshot('5/e15/p2-formulario-completo');
+            cy.wait(1000);
+
+            cy.get(this.tagSaveButton).click();
+            cy.wait(1000);
+        });
     }
 
 }

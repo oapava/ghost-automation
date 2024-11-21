@@ -1,4 +1,5 @@
 class Then {
+
     validatePageWithVideoCreated(){
         cy.contains('Página con video de YouTube').should('be.visible');
     }
@@ -9,27 +10,27 @@ class Then {
 
     seePostPublished(){
         cy.visit(Cypress.env('postPageUrl'));
-        cy.contains(Cypress.env('titlePostBasic')).should('exist'); 
+        cy.contains(Cypress.env('titlePostBasic')).should('exist');
     }
 
     seePostPublishedBold(){
         cy.visit(Cypress.env('postPageUrl'));
-        cy.contains(Cypress.env('titlePostBold')).should('exist'); 
+        cy.contains(Cypress.env('titlePostBold')).should('exist');
     }
 
     seePostPublishedPostMarkdown(){
         cy.visit(Cypress.env('postPageUrl'));
-        cy.contains('(Editado!)').should('exist'); 
+        cy.contains('(Editado!)').should('exist');
     }
 
     seePostPublishedPostWithImage(){
         cy.visit(Cypress.env('postPageUrl'));
-        cy.contains('Post con imagen 1').should('exist'); 
+        cy.contains('Post con imagen 1').should('exist');
     }
 
     seePostPublishedPostWithContent(){
         cy.visit(Cypress.env('postPageUrl'));
-        cy.contains('Post con contenido 1').should('exist'); 
+        cy.contains('Post con contenido 1').should('exist');
     }
 
     confirmDeletedPost(){
@@ -43,17 +44,17 @@ class Then {
 
     seePostPublishedMembersOnly(){
         cy.visit(Cypress.env('postMembersPageUrl'));
-        cy.contains('Post para miembros 1').should('exist'); 
+        cy.contains('Post para miembros 1').should('exist');
     }
 
     seePostPublishedWithHtml(){
         cy.visit(Cypress.env('postPageUrl'));
-        cy.contains('Post con HTML 1').should('exist'); 
+        cy.contains('Post con HTML 1').should('exist');
     }
 
     seePagePublishedWithHtml(){
         cy.visit(Cypress.env('pageUrl'));
-        cy.contains('Pagina con HTML 1').should('exist'); 
+        cy.contains('Pagina con HTML 1').should('exist');
     }
 
     validatePageWasCreatedAndDeleted(){
@@ -79,29 +80,34 @@ class Then {
         cy.screenshot('5/e15/p3-tag-creado-completo');
     }
 
+    seePagePublishedWithHtmlPool(title) {
+        cy.visit(Cypress.env('pageUrl'));
+        cy.contains(title).should('exist'); // Verificar el título pasado como argumento
+    }
+
     validatePostWithTag(){
         Cypress.on('uncaught:exception', (err, runnable) => {
             return false
-          })
+        })
         cy.get('.posts-list').should('contain', Cypress.env('tagName')).then(()=>{
             cy.screenshot('5/e16/p3-tag-creado',{
                 disableTimersAndAnimations: false,
-              })
+            })
         });
-        
+
         cy.contains(Cypress.env('tagName')).should('exist');
-        
+
     }
 
     validatePageWithTag(){
         Cypress.on('uncaught:exception', (err, runnable) => {
             return false
-          })
+        })
         cy.get('.posts-list').should('contain', Cypress.env('tagName'));
         cy.contains(Cypress.env('tagName')).should('exist').then(()=>{
             cy.screenshot('5/e17/p3-tag-asignado',{
                 disableTimersAndAnimations: false,
-              })
+            })
         });
     }
 
@@ -129,6 +135,7 @@ class Then {
         cy.contains(Cypress.env('updatedSiteTitle')).should('exist');
         cy.screenshot('5/e20/p2-titulo-actualizado', {disableTimersAndAnimations: false,});
     }
+
 }
 
 
