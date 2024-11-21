@@ -1,4 +1,8 @@
 class Then {
+    get temporalFilePath(){
+        return 'cypress/fixtures/tempData.json';
+    }
+
     validatePageWithVideoCreated(){
         cy.contains('Página con video de YouTube').should('be.visible');
     }
@@ -9,12 +13,16 @@ class Then {
 
     seePostPublished(){
         cy.visit(Cypress.env('postPageUrl'));
-        cy.contains(Cypress.env('titlePostBasic')).should('exist'); 
+        cy.get('@fixture').then((data) => {
+            cy.contains(data[0].title).should('exist'); 
+        });
     }
 
     seePostPublishedBold(){
         cy.visit(Cypress.env('postPageUrl'));
-        cy.contains(Cypress.env('titlePostBold')).should('exist'); 
+        cy.get('@fixture').then((data) => {
+            cy.contains(data[1].title).should('exist'); 
+        });
     }
 
     seePostPublishedPostMarkdown(){
@@ -24,12 +32,16 @@ class Then {
 
     seePostPublishedPostWithImage(){
         cy.visit(Cypress.env('postPageUrl'));
-        cy.contains('Post con imagen 1').should('exist'); 
+        cy.get('@fixture').then((data) => {
+            cy.contains(data[4].title).should('exist'); 
+        });
     }
 
     seePostPublishedPostWithContent(){
         cy.visit(Cypress.env('postPageUrl'));
-        cy.contains('Post con contenido 1').should('exist'); 
+        cy.get('@fixture').then((data) => {
+            cy.contains(data[4].title).should('exist'); 
+        });
     }
 
     confirmDeletedPost(){
@@ -128,6 +140,28 @@ class Then {
         cy.reload(true);
         cy.contains(Cypress.env('updatedSiteTitle')).should('exist');
         cy.screenshot('5/e20/p2-titulo-actualizado', {disableTimersAndAnimations: false,});
+    }
+
+    seePostPublishedMokaroo(){
+        cy.visit(Cypress.env('postPageUrl'));
+        cy.readFile(this.temporalFilePath).then(({title}) => {
+            cy.contains(title).should('exist');
+            cy.wait(100);
+            this.cleanFileTemp();
+        });
+    }
+
+    seePostPublishedBoldMokaroo(){
+        cy.visit(Cypress.env('postPageUrl'));
+        cy.readFile(this.temporalFilePath).then(({title}) => {
+            cy.contains(title).should('exist');
+            cy.wait(100);
+            this.cleanFileTemp();
+        });
+    }
+
+    cleanFileTemp(){
+        cy.writeFile(this.temporalFilePath, {})
     }
 }
 

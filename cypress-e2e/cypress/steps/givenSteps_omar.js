@@ -70,6 +70,10 @@ class Given {
         cy.get(this.settingsButton).click();
         cy.url().should('include', '/ghost/#/settings');
     };
+
+    givenLoadPoolData(){
+        cy.fixture('omar.fixtures.json').as('fixture');
+    }
 }
 
 

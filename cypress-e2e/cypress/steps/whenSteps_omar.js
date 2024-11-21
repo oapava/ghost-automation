@@ -249,6 +249,10 @@ class When {
     get buttonPublishEditedsave(){
         return 'button[data-test-button="publish-save"]';
     }
+    
+    get temporalFilePath(){
+        return 'cypress/fixtures/tempData.json';
+    }
 
     //When Methods
     createPageAndPublishWithVideo(){
@@ -286,7 +290,10 @@ class When {
         cy.screenshot(this.version + scenery + '/p1_newPost');
 
         //Se ingresa titulo y contenido en negrita del post
-        cy.get(this.titleInput).type(Cypress.env('titlePostBasic'));
+        cy.get('@fixture').then((data) => {
+            cy.get(this.titleInput).type(data[0].title);
+        });
+
         cy.screenshot(this.version + scenery + '/p2_addTitlePost');
         cy.get(this.titleInput).type('{enter}');
 
@@ -302,10 +309,14 @@ class When {
         cy.screenshot(this.version + scenery + '/p1_newPost');
 
         //Se ingresa titulo del post
-        cy.get(this.titleInput).type(Cypress.env('titlePostBold'));
+        cy.get('@fixture').then((data) => {
+            cy.get(this.titleInput).type(data[1].title);
+        });
         cy.screenshot(this.version + scenery + '/p2_addTitlePost');
         cy.get(this.titleInput).type('{enter}');
-        cy.get(this.textAreaContent).first().type('**Contenido en negrita**');
+        cy.get('@fixture').then((data) => {
+            cy.get(this.textAreaContent).first().type(data[1].content);
+        });
         cy.screenshot(this.version + scenery + '/p3_addContentBold');
 
         this.publishPostAndPage(this.version + scenery,'p4');
@@ -325,7 +336,9 @@ class When {
         cy.get(this.titleInput).should('be.visible');
 
         //Se ingresa titulo del post
-        cy.get(this.textAreaContent).first().type(' **Contenido agregado a post existente** ');
+        cy.get('@fixture').then((data) => {
+            cy.get(this.textAreaContent).first().type(data[3].content);
+        });
         cy.get(this.titleInput).type('(Editado!)');
         cy.get(this.titleInput).type('{enter}');
         cy.screenshot(this.version + scenery + '/p4_editedPost');
@@ -348,7 +361,9 @@ class When {
 
 
         //Se ingresa titulo del post
-        cy.get(this.titleInput).type('Post con imagen 1');
+        cy.get('@fixture').then((data) => {
+            cy.get(this.titleInput).type(data[3].title);
+        });
         cy.screenshot(this.version + scenery + '/p2_addTitlePost');
         cy.get(this.titleInput).type('{enter}');
         //Agregar imagen
@@ -366,6 +381,7 @@ class When {
     }
 
     createAndPublishPostWhithContent(){
+        
         var scenery = 'e5';
         //ir a seccion de crear post
         cy.get(this.createPostButton).click();
@@ -373,10 +389,14 @@ class When {
         cy.screenshot(this.version + scenery + '/p1_newPost');
 
         //Se ingresa titulo del post
-        cy.get(this.titleInput).type('Post con contenido 1');
+        cy.get('@fixture').then((data) => {
+            cy.get(this.titleInput).type(data[4].title);
+        });
         cy.screenshot(this.version + scenery + '/p2_addTitlePost');
         cy.get(this.titleInput).type('{enter}');
-        cy.get(this.textAreaContent).first().type('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam viverra dui posuere velit maximus, in commodo leo luctus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam pretium sollicitudin risus eget mattis. Donec luctus eros eu dolor sodales, eu maximus mi feugiat.');
+        cy.get('@fixture').then((data) => {
+            cy.get(this.textAreaContent).first().type(data[4].content);
+        });
         cy.screenshot(this.version + scenery + '/p3_addContent');
 
         this.publishPostAndPage(this.version + scenery,'p4');
@@ -793,6 +813,23 @@ class When {
         this.publishPostAndPage(scenery, step + '_3');
         this.validatePublishPostAndCloseModal(scenery, step + '_4');
     }
+
+    createSimplePostDynamicRandom(scenery, step, title){
+        // Hacer click en el botón de "New post"
+        cy.get(this.spanElement).contains('New post').click({force:true, waitForAnimations: false, animationDistanceThreshold: 20});
+        cy.get(this.titleInput).should('be.visible');
+        cy.screenshot(scenery + '/' + step + '_1_newPost');
+
+        //Se ingresa titulo y contenido en negrita del post
+        cy.get(this.titleInput).type(title);
+        cy.get(this.titleInput).type('{enter}');
+        cy.get(this.titleInput).type('{enter}');
+        cy.screenshot(scenery + '/' + step + '_2_addTitlePost');
+        cy.wait(1000)
+
+        this.publishPostAndPage(scenery, step + '_3');
+        this.validatePublishPostAndCloseModal(scenery, step + '_4');
+    }
     
     reateAndPublishPageEditAndSave(){
         // Crear nueva página
@@ -845,6 +882,98 @@ class When {
 
         //Click en el botón de guardar título
         cy.get(this.saveSiteTitleButton).first().click();
+    }
+
+    async createAndPublishPostDynamicRandom(){
+        var scenery = 'e6';
+        // Hacer click en el botón de "New post"
+        cy.get(this.spanElement).contains('New post').click({force:true, waitForAnimations: false, animationDistanceThreshold: 20});
+        cy.get(this.titleInput).should('be.visible');
+        cy.screenshot(this.version + scenery + '/p1_newPost');
+
+        //Se ingresa titulo y contenido en negrita del post
+        this.getPostDataMokaroo().then((content)=>{
+            cy.writeFile(this.temporalFilePath, content)
+            cy.get(this.titleInput).type(content.title);
+        })
+
+        cy.screenshot(this.version + scenery + '/p2_addTitlePost');
+        cy.get(this.titleInput).type('{enter}');
+
+        this.publishPostAndPage(this.version + scenery,'p3');
+        this.validatePublishPostAndCloseModal(this.version + scenery,'p4');
+    }
+
+    createAndPublishPostBoldDynamicRandom(){
+        var scenery = 'e7';
+        // Hacer click en el botón de "New post"
+        cy.get(this.spanElement).contains('New post').click({force:true, waitForAnimations: false, animationDistanceThreshold: 20});
+        cy.get(this.titleInput).should('be.visible');
+        cy.screenshot(this.version + scenery + '/p1_newPost');
+
+        //Se ingresa titulo del post
+        this.getPostDataMokaroo().then((content)=>{
+            cy.writeFile(this.temporalFilePath, content)
+            cy.get(this.titleInput).type(content.title);
+        });
+        cy.screenshot(this.version + scenery + '/p2_addTitlePost');
+        cy.get(this.titleInput).type('{enter}');
+        //Se ingresa el contenido
+        cy.readFile(this.temporalFilePath).then(({boldContent}) => {
+            cy.get(this.textAreaContent).first().type(boldContent);
+        });
+        cy.screenshot(this.version + scenery + '/p3_addContentBold');
+
+        this.publishPostAndPage(this.version + scenery,'p4');
+        this.validatePublishPostAndCloseModal(this.version + scenery,'p5');
+    }
+
+    editAndPublishPostMarkdownDynamicRandom(){
+        var scenery = 'e3';
+        //Se crea Post para luego editar con contenido dinamico aleatorio
+        this.getPostDataMokaroo().then((content)=>{
+            this.createSimplePostDynamicRandom(this.version + scenery,'p1', content.title)
+        });
+        cy.visit(Cypress.env('postPageUrl')+ '?type=published');
+        cy.url().should('include', '/posts?type=published');
+        cy.screenshot(this.version + scenery + '/p2_pagePost');
+
+        // Se toma el el titulo  del último post
+        cy.get(this.linkPostListTitle).first().click();
+        cy.get(this.titleInput).should('be.visible');
+
+        //Se ingresa titulo del post
+        this.getPostDataMokaroo().then((content)=>{
+            cy.writeFile(this.temporalFilePath, content)
+            cy.get(this.textAreaContent).first().type(content.boldItalicsContent);
+            cy.writeFile(this.temporalFilePath, {})
+        });
+        cy.get(this.titleInput).type('(Editado!)');
+        cy.get(this.titleInput).type('{enter}');
+        cy.screenshot(this.version + scenery + '/p4_editedPost');
+        
+        cy.get(this.buttonPublishEditedsave).should('be.visible');
+        cy.get(this.buttonPublishEditedsave).first().click();
+        cy.wait(500)
+        cy.get(this.returnEditorPost).first().click();
+
+        cy.url().should('include', '/posts?type=published');
+        cy.screenshot(this.version + scenery + '/p4_editedPost');
+    }
+
+    getPostDataMokaroo(){
+        const url = Cypress.env('mokarooUrl') + '1';
+
+        return cy.request({
+            method: 'GET',
+            url: url,
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          }).then((response) => {
+            expect(response.status).to.eq(200); 
+            return response.body[0];
+          });
     }
 
 }

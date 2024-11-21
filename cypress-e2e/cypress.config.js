@@ -21,7 +21,8 @@ module.exports = {
     newMemberEmail: "p.riverah",
     domainEmail: "@uniandes.edu.co",
     newMemberName: "Pablo Rivera",
-    updatedSiteTitle: 'Título actualizado: Automatizacion Uniandes ' + new Date()
+    updatedSiteTitle: 'Título actualizado: Automatizacion Uniandes ' + new Date(),
+    mokarooUrl: 'https://api.mockaroo.com/api/9b8ba860?key=28962a10&count='
   },
   "screenshotsFolder": "cypress/screenshots"
 };
