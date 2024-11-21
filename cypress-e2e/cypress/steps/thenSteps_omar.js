@@ -160,6 +160,25 @@ class Then {
         });
     }
 
+    seePostPublishedPostWithImageMokaroo(){
+        cy.visit(Cypress.env('postPageUrl'));
+        cy.readFile(this.temporalFilePath).then(({title}) => {
+            cy.contains(title).should('exist');
+            cy.wait(100);
+            this.cleanFileTemp();
+        });
+    }
+
+    seePostPublishedPostWithContentMokaroo(){
+        cy.visit(Cypress.env('postPageUrl'));
+        cy.readFile(this.temporalFilePath).then(({title}) => {
+            cy.log(title)
+            cy.contains(title).should('exist');
+            cy.wait(100);
+            this.cleanFileTemp();
+        });
+    }
+
     cleanFileTemp(){
         cy.writeFile(this.temporalFilePath, {})
     }

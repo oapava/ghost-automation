@@ -961,6 +961,59 @@ class When {
         cy.screenshot(this.version + scenery + '/p4_editedPost');
     }
 
+    createAndPublishPostWhithImageDynamicRandom(){
+        var scenery = 'e8';
+        // Hacer click en el botón de "New post"
+        cy.get(this.spanElement).contains('New post').click({force:true, waitForAnimations: false, animationDistanceThreshold: 20});
+        cy.get(this.titleInput).should('be.visible');
+        cy.screenshot(this.version + scenery + '/p1_newPost');
+
+
+        //Se ingresa titulo del post
+        this.getPostDataMokaroo().then((content)=>{
+            cy.writeFile(this.temporalFilePath, content)
+            cy.get(this.titleInput).first().type(content.title);
+        });
+        cy.screenshot(this.version + scenery + '/p2_addTitlePost');
+        cy.get(this.titleInput).type('{enter}');
+        //Agregar imagen
+        cy.get(this.unsplashImageButton).first().click({force:true})
+        cy.wait(1000)
+        cy.screenshot(this.version + scenery + '/p3_unsplashImage');
+        cy.contains(this.aElement, 'Insert image').then(($elements) => {
+            const randomIndex = Math.floor(Math.random() * $elements.length);
+            cy.wrap($elements[randomIndex]).click();
+        });
+        cy.screenshot(this.version + scenery + '/p4_addhImage');
+
+        this.publishPostAndPage(this.version + scenery,'p5');
+        this.validatePublishPostAndCloseModal(this.version + scenery,'p6');
+    }
+
+    createAndPublishPostWhithContentDynamicRandom(){
+        
+        var scenery = 'e5';
+        //ir a seccion de crear post
+        cy.get(this.createPostButton).click();
+        cy.url().should('contain', '/post');
+        cy.screenshot(this.version + scenery + '/p1_newPost');
+
+        //Se ingresa titulo del post
+        this.getPostDataMokaroo().then((content)=>{
+            cy.writeFile(this.temporalFilePath, content)
+            cy.get(this.titleInput).first().type(content.title);
+        });
+        cy.screenshot(this.version + scenery + '/p2_addTitlePost');
+        cy.get(this.titleInput).type('{enter}');
+        cy.readFile(this.temporalFilePath).then(({content}) => {
+            cy.get(this.textAreaContent).first().type(content);
+        });
+        cy.screenshot(this.version + scenery + '/p3_addContent');
+
+        this.publishPostAndPage(this.version + scenery,'p4');
+        this.validatePublishPostAndCloseModal(this.version + scenery,'p5');
+    }
+
     getPostDataMokaroo(){
         const url = Cypress.env('mokarooUrl') + '1';
 

@@ -91,15 +91,37 @@ describe('Crear un post', () => {
     //     Then.seePostPublishedBold();
     // });
 
-    it('Escenario 8: Editar post con contenido en markdown con data generada aleatoria dinámica', () => {
+    // it('Escenario 8: Editar post con contenido en markdown con data generada aleatoria dinámica', () => {
+    //     // THEN: Visitar pagina de posts
+    //     Given.navigateToPostPage();
+
+    //     // WHEN: Crear y publicar post 
+    //     When.editAndPublishPostMarkdownDynamicRandom();
+
+    //     // THEN: Verificar post publicado
+    //     Then.seePostPublishedPostMarkdown();
+    // });
+
+    // it('Escenario 9: Crear un nuevo Post con imagen de unsplash y guardarlo con data generada aleatoria dinámica', () => {
+    //     // THEN: Visitar pagina de posts
+    //     Given.navigateToPostPage();
+
+    //     // WHEN: Crear y publicar post 
+    //     When.createAndPublishPostWhithImageDynamicRandom();
+
+    //     // THEN: Verificar post publicado
+    //     Then.seePostPublishedPostWithImageMokaroo();
+    // });
+
+    it('Escenario 10: Crear un nuevo Post con contenido, título y guardarlo con data generada aleatoria dinámica', () => {
         // THEN: Visitar pagina de posts
         Given.navigateToPostPage();
 
         // WHEN: Crear y publicar post 
-        When.editAndPublishPostMarkdownDynamicRandom();
+        When.createAndPublishPostWhithContentDynamicRandom();
 
         // THEN: Verificar post publicado
-        Then.seePostPublishedPostMarkdown();
+        Then.seePostPublishedPostWithContentMokaroo();
     });
  });
 
