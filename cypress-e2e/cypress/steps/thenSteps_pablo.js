@@ -110,11 +110,11 @@ class Then {
         cy.get(this.closePublishConfirmationButton).first().click({ force: true, waitForAnimations: false });
     }
 
-    validateNewMemberExist(){
+    validateNewMemberExist(memberName){
         // Verificar que el tag se haya agregado correctamente en el post
-        cy.get('div[data-test-table="members"]').should('contain', Cypress.env('newMemberName'));
+        cy.get('div[data-test-table="members"]').should('contain', memberName);
         // Verificar que el tag aparece en el post
-        cy.contains(Cypress.env('newMemberName')).should('exist');
+        cy.contains(memberName).should('exist');
         cy.screenshot('5/e18/p2-listado-members');
     }
 
@@ -125,14 +125,12 @@ class Then {
         // Verificar que el tag aparece en el post
         cy.contains('No members match the current filter').should('exist');
 
-        cy.screenshot('5/e19/p4-listdo-miembros', {disableTimersAndAnimations: false,})
     }
 
-    validateTitleSiteWasEdited(){
+    validateTitleSiteWasEdited(newTitle){
         //Valida que el titulo
         cy.reload(true);
-        cy.contains(Cypress.env('updatedSiteTitle')).should('exist');
-        cy.screenshot('5/e20/p2-titulo-actualizado', {disableTimersAndAnimations: false,});
+        cy.contains(newTitle).should('exist');
     }
 }
 

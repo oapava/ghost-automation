@@ -14,9 +14,6 @@ describe('Crear un post', () => {
     // it('Escenario 16: Crear un tag y asignarlo a un post', () => {
     //     cy.fixture('tagNames-E16.json').then((data) =>{
     //         cy.wrap(data).each((entry)=>{
-    //             cy.log(`Processing entry: ${JSON.stringify(entry)}`);
-    //             cy.log(entry.tagname);
-    //             cy.log(entry.Post)
     //             // GIVEN: Visitar Tags
     //             Given.givenNavigateToTagsPage();
     //
@@ -30,51 +27,67 @@ describe('Crear un post', () => {
     //         }
     //     )
     // });
+    //
+    // it('Escenario 17: Crear un tag y ponerlo en una page', () => {
+    //     cy.fixture('tagNames-E17.json').then((data) =>{
+    //             cy.wrap(data).each((entry)=>{
+    //                     // GIVEN: Visitar Tags
+    //                     Given.givenNavigateToTagsPage();
+    //
+    //                     // WHEN: Crear y asignar tag a una pagina
+    //                     When.createTagAndAsignItToPage(entry.tagname, entry.Pages);
+    //
+    //                     // THEN: Validar si la pagina contiene el tag
+    //                     Then.validatePageWithTag(entry.tagname);
+    //                 }
+    //             )
+    //         }
+    //     )
+    // });
+    //
+    // it('Escenario 18: Crear member', () => {
+    //     cy.fixture('members-E18.json').then((data) =>{
+    //             cy.wrap(data).each((entry)=>{
+    //                     // GIVEN: Visitar members
+    //                     Given.givenNavigateTomembers();
+    //
+    //                     When.createNewMember(entry.nameMember, entry.email);
+    //
+    //                     Then.validateNewMemberExist(entry.nameMember);
+    //                 }
+    //             )
+    //         }
+    //     )
+    // });
+    //
+    // it('Escenario 19: Crear member y eliminarlo', () => {
+    //     cy.fixture('members-E19.json').then((data) =>{
+    //             cy.wrap(data).each((entry)=>{
+    //                 // GIVEN: Visitar members
+    //                 Given.givenNavigateTomembers();
+    //
+    //                 When.createMemberAndDeletIt(entry.nameMember, entry.email);
+    //
+    //                 Then.validateMemberWasDeleted();
+    //                 }
+    //             )
+    //         }
+    //     )
+    // });
 
-    it('Escenario 17: Crear un tag y ponerlo en una page', () => {
-        cy.fixture('tagNames-E17.json').then((data) =>{
+    it('Escenario 20: Cambiar el título del sitio', () => {
+        // GIVEN: Visitar Settings
+        Given.givenNavigateToSettings();
+        cy.fixture('siteTitle-E20.json').then((data) =>{
                 cy.wrap(data).each((entry)=>{
-                        cy.log(entry.tagname);
-                        cy.log(entry.Pages)
-                        // GIVEN: Visitar Tags
-                        Given.givenNavigateToTagsPage();
 
-                        // WHEN: Crear y asignar tag a una pagina
-                        When.createTagAndAsignItToPage(entry.tagname, entry.Pages);
+                        When.updateSiteTitlte(entry.siteTitle);
 
-                        // THEN: Validar si la pagina contiene el tag
-                        Then.validatePageWithTag(entry.tagname);
+                        Then.validateTitleSiteWasEdited(entry.siteTitle);
                     }
                 )
             }
         )
     });
-
-    // it('Escenario 18: Crear member', () => {
-    //     // GIVEN: Visitar members
-    //     Given.givenNavigateTomembers();
-    //
-    //     When.createNewMember();
-    //
-    //     Then.validateNewMemberExist();
-    // });
-    //
-    // it('Escenario 19: Crear member y eliminarlo', () => {
-    //     // GIVEN: Visitar members
-    //     Given.givenNavigateTomembers();
-    //
-    //     When.createMemberAndDeletIt();
-    //
-    //     Then.validateMemberWasDeleted();
-    // });
-    //
-    // it('Escenario 20: Cambiar el título del sitio', () => {
-    //     // GIVEN: Visitar Settings
-    //     Given.givenNavigateToSettings();
-    //
-    //     When.updateSiteTitlte();
-    //
-    //     Then.validateTitleSiteWasEdited();
-    // });
- });
+});
 

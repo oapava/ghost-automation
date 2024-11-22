@@ -6,5 +6,77 @@
   {
     "tagname": "tag-carro-pages",
     "Pages": "título página carro"
+  },
+  {
+    "tagname": "tag-gato-verde-pages",
+    "Pages": "título página gato verde"
+  },
+  {
+    "tagname": "tag-perro-pages",
+    "Pages": "título página perro"
+  },
+  {
+    "tagname": "tag-casa-pages",
+    "Pages": "título página casa"
+  },
+  {
+    "tagname": "tag-jardín-pages",
+    "Pages": "título página jardín"
+  },
+  {
+    "tagname": "tag-montaña-pages",
+    "Pages": "título página montaña"
+  },
+  {
+    "tagname": "tag-río-pages",
+    "Pages": "título página río"
+  },
+  {
+    "tagname": "tag-avión-pages",
+    "Pages": "título página avión"
+  },
+  {
+    "tagname": "tag-ciudad-pages",
+    "Pages": "título página ciudad"
+  },
+  {
+    "tagname": "tag-mar-pages",
+    "Pages": "título página mar"
+  },
+  {
+    "tagname": "tag-sol-pages",
+    "Pages": "título página sol"
+  },
+  {
+    "tagname": "tag-luna-pages",
+    "Pages": "título página luna"
+  },
+  {
+    "tagname": "tag-estrella-pages",
+    "Pages": "título página estrella"
+  },
+  {
+    "tagname": "tag-flor-pages",
+    "Pages": "título página flor"
+  },
+  {
+    "tagname": "tag-árbol-pages",
+    "Pages": "título página árbol"
+  },
+  {
+    "tagname": "tag-música-pages",
+    "Pages": "título página música"
+  },
+  {
+    "tagname": "tag-libro-pages",
+    "Pages": "título página libro"
+  },
+  {
+    "tagname": "tag-viento-pages",
+    "Pages": "título página viento"
+  },
+  {
+    "tagname": "tag-bosque-pages",
+    "Pages": "título página bosque"
   }
 ]

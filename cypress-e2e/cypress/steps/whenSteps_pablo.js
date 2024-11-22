@@ -250,6 +250,10 @@ class When {
         return 'button[data-test-button="publish-save"]';
     }
 
+    get buttonMemberList(){
+        return 'a[data-test-nav="members"]'
+    }
+
     //When Methods
     createPageAndPublishWithVideo(){
         cy.screenshot('5/e11/p1-visit-page-list');
@@ -660,43 +664,43 @@ class When {
 
     }
 
-    createNewMember(){
+    createNewMember(memberName, emailMember){
         
         //Crear member
         cy.get(this.createNewMemberButton).click();
 
-        cy.get(this.memberNameInput).type(Cypress.env('newMemberName'));
+        cy.get(this.memberNameInput).type(memberName);
 
-        cy.get(this.memberEmailInput).type(Cypress.env('newMemberEmail')+this.time+ Cypress.env('domainEmail'));
-
-        cy.screenshot('5/e18/p1-creacion-member');
+        cy.get(this.memberEmailInput).type(emailMember);
 
         cy.get(this.saveMemberButton).click();
 
         cy.get(this.anchorMembersButton).first().click();
+        cy.get(this.anchorMembersButton).first().click();
     }
 
-    createMemberAndDeletIt(){
+    createMemberAndDeletIt(memberName,memberEmail){
         //Crear member
         cy.wait(1000)
-        this.createNewMember();
+        this.createNewMember(memberName,memberEmail);
 
         //Buscar al member
-        cy.get(this.searchMembersInput).type(Cypress.env('newMemberEmail')+this.time+ Cypress.env('domainEmail'));
-        cy.screenshot('5/e19/p1-buscar-miembro');
+        cy.get(this.searchMembersInput).type(memberEmail);
         //Clickear en el member encontrado
         cy.get(this.detailMemberButton).first().click();
         //Abrir los settings del member
         cy.get(this.memberActionsButton).first().click();
-        cy.screenshot('5/e19/p2-eliminar-miembro', {disableTimersAndAnimations: false,})
         //Dar boton de eliminar member
         
         cy.get(this.deleteMemberButton).first().click();
-        cy.screenshot('5/e19/p3-confirmacion-eliminar-miembro', {disableTimersAndAnimations: false,})
         
         //Dar boton de confirmar eliminar member
-        cy.get(this.deleteMemberConfirmButton).first().click()
- 
+        cy.get(this.deleteMemberConfirmButton).first().click();
+
+        //Volver a la pagina de members
+        cy.get(this.buttonMemberList).first().click;
+        //Buscar al miembro eliminado
+        cy.get(this.searchMembersInput).type(memberEmail);
     }
 
     createAndPublishPostWithHtml(){
@@ -833,13 +837,12 @@ class When {
         cy.get(this.confirmPublishButton).first().click(); 
     }
 
-    updateSiteTitlte(){
+    updateSiteTitlte(newTitle){
         //Seleccionar editar titulo
         cy.get(this.editSiteTitleButton).first().click();
         
         //Actualización de titulo del sitio
-        cy.get(this.siteTitleInput).clear().type(Cypress.env('updatedSiteTitle'));
-        cy.screenshot('5/e20/p1-editar-titulo', {disableTimersAndAnimations: false,});
+        cy.get(this.siteTitleInput).clear().type(newTitle);
 
         //Click en el botón de guardar título
         cy.get(this.saveSiteTitleButton).first().click();
