@@ -6,6 +6,14 @@ class Then {
         return 'button[data-test-button="close-publish-flow"]';
     }
 
+    get buttonMemberList(){
+        return 'a[data-test-nav="members"]'
+    }
+
+    get buttonleaveMemberCreatePage(){
+        return 'button[data-test-leave-button]';
+    }
+
     validatePageWithVideoCreated(){
         cy.contains('Página con video de YouTube').should('be.visible');
     }
@@ -115,7 +123,21 @@ class Then {
         cy.get('div[data-test-table="members"]').should('contain', memberName);
         // Verificar que el tag aparece en el post
         cy.contains(memberName).should('exist');
-        cy.screenshot('5/e18/p2-listado-members');
+    }
+
+    validateNewMemberErrorInvalid(){
+        // Verificar que el error se haya mostrado
+        cy.get('p[class="response"]').should('contain', 'Invalid Email.');
+    }
+
+    validateNewMemberErrorDuplicate(){
+        // Verificar que el error se haya mostrado
+        cy.get('p[class="response"]').should('contain', 'Member already exists. Attempting to add member with existing email address');
+        //Volver a la pagina de la lista de members
+        cy.get(this.buttonMemberList).first().click();
+        //Confirma salida de la pagina
+        cy.get(this.buttonleaveMemberCreatePage).first().click();
+
     }
 
     validateMemberWasDeleted(){

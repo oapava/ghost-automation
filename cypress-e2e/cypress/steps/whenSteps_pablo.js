@@ -143,6 +143,10 @@ class When {
     get memberEmailInput(){
         return 'input[data-test-input="member-email"]';
     }
+
+    get memberNoteInput(){
+        return 'textarea[data-test-input="member-note"]'
+    }
     
     get saveMemberButton(){
         return 'button[data-test-button="save"]';
@@ -679,6 +683,31 @@ class When {
         cy.get(this.anchorMembersButton).first().click();
     }
 
+    createNewMemberStay(memberName, emailMember){
+
+        //Crear member
+        cy.get(this.createNewMemberButton).click();
+
+        cy.get(this.memberNameInput).type(memberName);
+
+        cy.get(this.memberEmailInput).type(emailMember);
+
+        cy.get(this.saveMemberButton).click();
+    }
+
+    createNewMemberNegativeInvalid(memberName, emailMember,noteMember="Default Note"){
+
+        cy.get(this.memberNameInput).clear().type(memberName);
+
+        cy.get(this.memberEmailInput).clear().type(emailMember);
+
+        cy.get(this.memberNoteInput).clear().type(noteMember);
+
+        cy.get(this.saveMemberButton).click();
+
+    }
+
+
     createMemberAndDeletIt(memberName,memberEmail){
         //Crear member
         cy.wait(1000)
@@ -702,6 +731,16 @@ class When {
         //Buscar al miembro eliminado
         cy.get(this.searchMembersInput).type(memberEmail);
     }
+
+    createMemberAndRecreateIt(memberName,memberEmail){
+        //Crear member
+        cy.wait(1000)
+        this.createNewMember(memberName,memberEmail);
+        //Recrear member
+        cy.wait(1000);
+        this.createNewMemberStay(memberName,memberEmail);
+    }
+
 
     createAndPublishPostWithHtml(){
         var scenery = 'e9';

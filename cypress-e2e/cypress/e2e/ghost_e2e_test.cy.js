@@ -4,6 +4,7 @@ import Then from '../steps/thenSteps_pablo';
 
 describe('Crear un post', () => {
     beforeEach(() => {
+
         Cypress.Screenshot.defaults({
             disableTimersAndAnimations: false,
         })
@@ -11,8 +12,8 @@ describe('Crear un post', () => {
         Given.givenLogin();
         Given.givenNavigateDashboard();
     });
-    // it('Escenario 16: Crear un tag y asignarlo a un post', () => {
-    //     cy.fixture('tagNames-E16.json').then((data) =>{
+    // it('Escenario 91: Crear un tag y asignarlo a un post', () => {
+    //     cy.fixture('tagNames-E91.json').then((data) =>{
     //         cy.wrap(data).each((entry)=>{
     //             // GIVEN: Visitar Tags
     //             Given.givenNavigateToTagsPage();
@@ -28,8 +29,8 @@ describe('Crear un post', () => {
     //     )
     // });
     //
-    // it('Escenario 17: Crear un tag y ponerlo en una page', () => {
-    //     cy.fixture('tagNames-E17.json').then((data) =>{
+    // it('Escenario 92: Crear un tag y ponerlo en una page', () => {
+    //     cy.fixture('tagNames-E92.json').then((data) =>{
     //             cy.wrap(data).each((entry)=>{
     //                     // GIVEN: Visitar Tags
     //                     Given.givenNavigateToTagsPage();
@@ -45,8 +46,8 @@ describe('Crear un post', () => {
     //     )
     // });
     //
-    // it('Escenario 18: Crear member', () => {
-    //     cy.fixture('members-E18.json').then((data) =>{
+    // it('Escenario 93: Crear member', () => {
+    //     cy.fixture('members-E93.json').then((data) =>{
     //             cy.wrap(data).each((entry)=>{
     //                     // GIVEN: Visitar members
     //                     Given.givenNavigateTomembers();
@@ -60,8 +61,8 @@ describe('Crear un post', () => {
     //     )
     // });
     //
-    // it('Escenario 19: Crear member y eliminarlo', () => {
-    //     cy.fixture('members-E19.json').then((data) =>{
+    // it('Escenario 94: Crear member y eliminarlo', () => {
+    //     cy.fixture('members-E94.json').then((data) =>{
     //             cy.wrap(data).each((entry)=>{
     //                 // GIVEN: Visitar members
     //                 Given.givenNavigateTomembers();
@@ -75,19 +76,58 @@ describe('Crear un post', () => {
     //     )
     // });
 
-    it('Escenario 20: Cambiar el título del sitio', () => {
-        // GIVEN: Visitar Settings
-        Given.givenNavigateToSettings();
-        cy.fixture('siteTitle-E20.json').then((data) =>{
-                cy.wrap(data).each((entry)=>{
+    // it('Escenario 95: Cambiar el título del sitio', () => {
+    //     // GIVEN: Visitar Settings
+    //     Given.givenNavigateToSettings();
+    //     cy.fixture('siteTitle-E95.json').then((data) =>{
+    //             cy.wrap(data).each((entry)=>{
+    //
+    //                     When.updateSiteTitlte(entry.siteTitle);
+    //
+    //                     Then.validateTitleSiteWasEdited(entry.siteTitle);
+    //                 }
+    //             )
+    //         }
+    //     )
+    // });
+    //
+    // it('Escenario 96: Crear member invalid', () => {
+    //     // GIVEN: Visitar members
+    //     Given.givenNavigateToMembersNegative();
+    //     cy.fixture('membersN-Invalid.json').then((data) =>{
+    //             cy.wrap(data.invalidEmail).each((entry)=>{
+    //
+    //                     When.createNewMemberNegativeInvalid(entry.nameMember, entry.emailMember);
+    //
+    //                     Then.validateNewMemberErrorInvalid();
+    //                 }
+    //             )
+    //         }
+    //     )
+    // });
 
-                        When.updateSiteTitlte(entry.siteTitle);
+    // it('Escenario 97: Crear member y volver a crearlo', () => {
+    //     cy.fixture('members-E94.json').then((data) =>{
+    //             cy.wrap(data).each((entry)=>{
+    //                 // GIVEN: Visitar members
+    //                 Given.givenNavigateTomembers();
+    //
+    //                 When.createMemberAndRecreateIt(entry.nameMember, entry.email);
+    //
+    //                 Then.validateNewMemberErrorDuplicate();
+    //                 }
+    //             )
+    //         }
+    //     )
+    // });
 
-                        Then.validateTitleSiteWasEdited(entry.siteTitle);
-                    }
-                )
-            }
-        )
+    it('Escenario 98: Crear member note invalid', () => {
+        // GIVEN: Visitar members
+        Given.givenNavigateToMembersNegative();
+        cy.fixture('membersN-Invalid.json').then((data) =>{
+            When.createNewMemberNegativeInvalid(data.invalidNote.nameMember, data.invalidNote.emailMember, data.invalidNote.noteMember);
+            //Then.validateNewMemberErrorInvalidNote();
+            })
     });
 });
 

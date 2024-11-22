@@ -16,7 +16,14 @@ class Given {
         return 'a[data-test-nav="settings"]';
     }
 
+    get createNewMemberButton(){
+        return 'a[data-test-new-member-button="true"]';
+    }
+
     givenNavigateToInitialPage(){
+        cy.on('uncaught:exception', (err, runnable) => {
+            return false
+        })
         cy.visit(Cypress.env('baseUrl') + '/ghost/#/signin');
         cy.get(this.buttonSignIn).should('exist');
     };
@@ -62,6 +69,13 @@ class Given {
         cy.visit(Cypress.env('mambersUrl'));
         cy.url().should('include', '/ghost/#/members');
     };
+
+    givenNavigateToMembersNegative(){
+        cy.visit(Cypress.env('mambersUrl'));
+        cy.url().should('include', '/ghost/#/members');
+        //Crear member
+        cy.get(this.createNewMemberButton).click();
+    }
     
     givenNavigateToSettings(){
         cy.get(this.settingsButton).click();
