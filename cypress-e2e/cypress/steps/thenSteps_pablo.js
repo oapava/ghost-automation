@@ -1,4 +1,11 @@
+import Given from "./givenSteps_pablo";
+
 class Then {
+
+    get closePublishConfirmationButton(){
+        return 'button[data-test-button="close-publish-flow"]';
+    }
+
     validatePageWithVideoCreated(){
         cy.contains('Página con video de YouTube').should('be.visible');
     }
@@ -79,30 +86,28 @@ class Then {
         cy.screenshot('5/e15/p3-tag-creado-completo');
     }
 
-    validatePostWithTag(){
+    validatePostWithTag(tagName){
         Cypress.on('uncaught:exception', (err, runnable) => {
             return false
           })
-        cy.get('.posts-list').should('contain', Cypress.env('tagName')).then(()=>{
+        cy.get('.posts-list').should('contain', tagName).then(()=>{
             cy.screenshot('5/e16/p3-tag-creado',{
                 disableTimersAndAnimations: false,
               })
         });
         
-        cy.contains(Cypress.env('tagName')).should('exist');
-        
+        cy.contains(tagName).should('exist');
+        cy.get(this.closePublishConfirmationButton).first().click({ force: true, waitForAnimations: false });
     }
 
-    validatePageWithTag(){
+    validatePageWithTag(tagName){
         Cypress.on('uncaught:exception', (err, runnable) => {
             return false
           })
-        cy.get('.posts-list').should('contain', Cypress.env('tagName'));
-        cy.contains(Cypress.env('tagName')).should('exist').then(()=>{
-            cy.screenshot('5/e17/p3-tag-asignado',{
-                disableTimersAndAnimations: false,
-              })
+        cy.get('.posts-list').should('contain', tagName);
+        cy.contains(tagName).should('exist').then(()=>{
         });
+        cy.get(this.closePublishConfirmationButton).first().click({ force: true, waitForAnimations: false });
     }
 
     validateNewMemberExist(){

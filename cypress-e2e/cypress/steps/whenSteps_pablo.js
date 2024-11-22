@@ -121,7 +121,7 @@ class When {
     }
     
     get confirmTagAsign(){
-        return 'li[data-option-index="1"]';
+        return 'li[data-option-index="0"]';
     }
     
     get anchorPostButton(){
@@ -568,7 +568,7 @@ class When {
         cy.screenshot('5/e14/p2-confirmacion-guardado');
     }
 
-    createNewTag(){
+    createNewTag(tagname){
         cy.screenshot('5/e15/p1-crear-nuevo-tag');
 
         // Hacer clic en el botón "New tag"
@@ -579,13 +579,13 @@ class When {
         const tagDescription = 'Este es un tag de tecnología';  // Descripción del tag
 
         // Llenar el campo de nombre del tag
-        cy.get(this.tagNameInput).type(Cypress.env('tagName'));
+        cy.get(this.tagNameInput).type(tagname);
 
         // Llenar el campo de color del tag
         cy.get(this.tagColorInput).type(tagColor);
 
         // Llenar el campo de slug del tag
-        cy.get(this.tagSlugInput).type(Cypress.env('tagName'));
+        cy.get(this.tagSlugInput).type(tagname);
 
         // Llenar el campo de descripción del tag
         cy.get(this.tagDescriptionInput).type(tagDescription);
@@ -601,8 +601,8 @@ class When {
         cy.wait(1000);
     }
 
-    createTagAndAsignIt(){
-        this.createNewTag()
+    createTagAndAsignIt(tagName, postName){
+        this.createNewTag(tagName)
 
         cy.screenshot('5/e16/p1-tag-creado');
 
@@ -612,12 +612,12 @@ class When {
         cy.get(this.spanElement).contains('New post').click({force:true, waitForAnimations: false, animationDistanceThreshold: 20});
 
         // Escribimos el título del post
-        cy.get(this.titleInput).type('Post con tag');
+        cy.get(this.titleInput).type(postName);
 
         //asignar tag
         cy.get(this.asignTagButton).click();  // Este es el botón de settings del post
 
-        cy.get(this.asignTagInput).first().type(Cypress.env('tagName'));
+        cy.get(this.asignTagInput).first().type(tagName);
         cy.get(this.confirmTagAsign).first().click();
 
         cy.get(this.asignTagButton).then(()=>{
@@ -631,9 +631,9 @@ class When {
 
     }
 
-    createTagAndAsignItToPage(){
+    createTagAndAsignItToPage(tagname,pageName){
 
-        this.createNewTag()
+        this.createNewTag(tagname)
 
         cy.screenshot('5/e17/p1-creacion-del-tag');
 
@@ -643,12 +643,12 @@ class When {
         cy.contains('New page').click({ force: true, waitForAnimations: false });
 
         // Escribir el título de la página
-        cy.get(this.titleInput).type('Páge con tag');
+        cy.get(this.titleInput).type(pageName);
 
         //poner tag
         cy.get(this.asignTagButton).click();  // Este es el botón de settings del post
 
-        cy.get(this.asignTagInput).first().type(Cypress.env('tagName'));
+        cy.get(this.asignTagInput).first().type(tagname);
         cy.get(this.confirmTagAsign).first().click();
 
         cy.screenshot('5/e17/p1-asignacion-de-tag');
@@ -658,8 +658,6 @@ class When {
         //publicar page
         this.publishPostAndPage('5/e17', 'p1');
 
-
-        cy.visit(Cypress.env('pageUrl'));
     }
 
     createNewMember(){
