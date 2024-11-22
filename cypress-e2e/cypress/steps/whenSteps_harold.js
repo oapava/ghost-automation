@@ -1,3 +1,6 @@
+import { faker } from '@faker-js/faker';
+import { setSharedData } from '../utils/sharedData';
+
 class When {
     //Getters Page Objects
     get version(){
@@ -794,7 +797,7 @@ class When {
         this.validatePublishPostAndCloseModal(scenery, step + '_4');
     }
 
-    reateAndPublishPageEditAndSave(){
+    createAndPublishPageEditAndSave(){
         // Crear nueva página
         cy.screenshot('5/e12/p1-click-nueva-pagina')
         cy.get(this.newPageButton).click();
@@ -849,11 +852,12 @@ class When {
 
     // POOL
 
-    createAndPublishPageWithHtmlPool(){
+    createAndPublishPageWithHtmlPool(index){
         var scenery = 'e10';
 
         cy.fixture('testData').then((data) => {
-            const pageData = data.pagesHtml[0];
+            // Usamos el índice recibido como parámetro para obtener los datos de la página
+            const pageData = data.pagesHtml[index];
 
             cy.get(this.spanElement).contains('New page').click({force:true, waitForAnimations: false});
             cy.screenshot(this.version + scenery + '/p1_sectionPage');
@@ -876,23 +880,26 @@ class When {
             this.validatePublishPageAndCloseModal(this.version + scenery, 'p7');
         });
     }
-    createPageAndPublishWithVideoPool(){
-        cy.screenshot('5/e11/p1-visit-page-list');
-        cy.get(this.spanElement).contains('New page').click({force:true, waitForAnimations: false});
+
+    createPageAndPublishWithVideoPool(index) {
+        cy.screenshot(`5/e11/p1-visit-page-list`);
+
+        cy.get(this.spanElement).contains('New page').click({force: true, waitForAnimations: false});
 
         cy.fixture('testData').then((data) => {
-            const videoData = data.videos[0];
+            const videoData = data.videos[index];
 
-            cy.screenshot('5/e11/p2-nueva-page');
-            cy.get(this.titleInput).type(videoData.title + ' ' + this.time);
+            cy.get(this.titleInput).type(`${videoData.title} ${this.time}`);
             cy.get(this.titleInput).type('{enter}');
 
-            cy.get(this.buttonAddCard).first().click({force:true, waitForAnimations: false});
+
+            cy.get(this.buttonAddCard).first().click({force: true, waitForAnimations: false});
 
             cy.get(this.buttonYoutube).scrollIntoView().should('be.visible').click();
 
             cy.get(this.inputEmbedUrl).should('be.visible').type(videoData.url).type('{enter}');
-            cy.screenshot('5/e11/p3-nueva-pagina-con-contenido-nuevo');
+
+            cy.screenshot(`5/e11/p3-nueva-pagina-con-contenido-nuevo`);
             cy.wait(1000);
 
             this.publishPostAndPage('5/e11', 'p3');
@@ -901,9 +908,10 @@ class When {
         });
     }
 
-    createAndPublishPageEditAndSavePool(){
+
+    createAndPublishPageEditAndSavePool(index) {
         cy.fixture('testData').then((data) => {
-            const pageData = data.pagesEdit[0];
+            const pageData = data.pagesEdit[index]; // Usar el índice recibido como parámetro
 
             cy.screenshot('5/e12/p1-click-nueva-pagina');
             cy.get(this.newPageButton).click();
@@ -922,6 +930,7 @@ class When {
             cy.screenshot('5/e12/p4-publicacion-pagina-actualizada');
         });
     }
+
 
     createPublishAndDeletePagePool(){
         cy.fixture('testData').then((data) => {
@@ -985,9 +994,9 @@ class When {
         });
     }
 
-    createNewTagPool(){
+    createNewTagPool(index){
         cy.fixture('testData').then((data) => {
-            const tagData = data.tags[0];
+            const tagData = data.tags[index];
 
             cy.screenshot('5/e15/p1-crear-nuevo-tag');
             cy.contains('a.gh-btn-primary', 'New tag').click();
@@ -996,11 +1005,8 @@ class When {
             const tagDescription = tagData.description;
 
             cy.get(this.tagNameInput).type(tagData.name);
-
             cy.get(this.tagColorInput).type(tagColor);
-
             cy.get(this.tagSlugInput).type(tagData.slug);
-
             cy.get(this.tagDescriptionInput).type(tagDescription);
 
             cy.get(this.tagNameInput).scrollIntoView();
@@ -1011,6 +1017,39 @@ class When {
             cy.get(this.tagSaveButton).click();
             cy.wait(1000);
         });
+    }
+
+
+    createAndPublishPageWithHtmlFaker() {
+        var scenery = 'e10';
+
+        const pageData = {
+            title: faker.lorem.words(5),
+            htmlContent: `<p>${faker.lorem.paragraph()}</p>`
+        };
+
+        // Guardar el título generado en el archivo compartido
+        setSharedData('pageTitle', pageData.title);
+
+        cy.get(this.spanElement).contains('New page').click({ force: true, waitForAnimations: false });
+        cy.screenshot(this.version + scenery + '/p1_sectionPage');
+
+        cy.get(this.titleInput).type(pageData.title);
+        cy.screenshot(this.version + scenery + '/p2_addTitlePage');
+        cy.get(this.titleInput).type('{enter}');
+
+        cy.get(this.buttonAddCard).first().click({ force: true, waitForAnimations: false });
+        cy.screenshot(this.version + scenery + '/p3_cardOptions');
+
+        cy.get(this.htmlEditorButton).first().click({ force: true, waitForAnimations: false });
+        cy.screenshot(this.version + scenery + '/p4_htmlOptionsSelected');
+
+        cy.get(this.cmLineDiv).type(pageData.htmlContent);
+        cy.screenshot(this.version + scenery + '/p5_addContentHtml');
+        cy.get(this.cmLineDiv).type('{enter}');
+
+        this.publishPostAndPage(this.version + scenery, 'p6');
+        this.validatePublishPageAndCloseModal(this.version + scenery, 'p7');
     }
 
 }
