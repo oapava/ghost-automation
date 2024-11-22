@@ -229,7 +229,7 @@ class When {
     createAndPublishPageWithHtml(page, stage){
         //Click New Page
         cy.get(this.spanElement).contains('New page').click({force:true, waitForAnimations: false});
-        cy.screenshot(this.version + stage + '/p1_sectionPage');
+        //cy.screenshot(this.version + stage + '/p1_sectionPage');
 
         if(page.title !== ''){
             cy.get(this.titleInput).type(page.title); // Page title

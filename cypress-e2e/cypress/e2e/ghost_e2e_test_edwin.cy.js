@@ -1,7 +1,7 @@
 import Given from '../steps/givenSteps_edwin';
 import When from '../steps/whenSteps_edwin';
 import Then from '../steps/thenSteps_edwin';
-import { getRandomPost, getPseudoAleatorioPost } from '../steps/functionutils'
+import { getRandomPost, getPseudoAleatorioPost, getPostDataMokaroo } from '../steps/functionutils'
 
 describe('Crear un post', () => {
     beforeEach(() => {
@@ -26,7 +26,7 @@ describe('Crear un post', () => {
     //     Then.seePostPublished(post);
     // });
 
-    // it('E0009 - C1: (PoolDatosApriori) - Crear y publicar un post con contenido en HTML', () => {
+    // it('E0031: (PoolDatosApriori) - Crear y publicar un post con contenido en HTML, datos validos', () => {
     //     const post = getRandomPost("escenariosPositivos");
 
     //     // THEN: Visitar pagina de posts
@@ -39,7 +39,7 @@ describe('Crear un post', () => {
     //     Then.seePostPublishedWithHtml(post);
     // });
 
-    // it('E0009 - C2: (PoolDatosApriori) - ', () => {
+    // it('E0032: (PoolDatosApriori) - Crear y publicar un post con contenido en HTML, formatos erroneos', () => {
     //     const post = getRandomPost("escenarioDataErroneaPositivos");
 
     //     // THEN: Visitar pagina de posts
@@ -52,7 +52,7 @@ describe('Crear un post', () => {
     //     Then.seePostPublishedWithHtml(post);
     // });
 
-    // it('E0009 - C3: (PoolDatosApriori) - ', () => {
+    // it('E0033: (PoolDatosApriori) - Crear y publicar un post con contenido en HTML, caracteres especiales y emoticones', () => {
     //     const post = getRandomPost("escenarioDataErroneaPositivos");
 
     //     // THEN: Visitar pagina de posts
@@ -65,7 +65,7 @@ describe('Crear un post', () => {
     //     Then.seePostPublishedWithHtml(post);
     // });
 
-    // it('E0009 - C4: (PoolDatosApriori) - ', () => {
+    // it('E0034: (PoolDatosApriori) - Crear y publicar un post con contenido en HTML, titulo con 256 caracteres', () => {
     //     const post = getRandomPost("escenarioTitulo256");
 
     //     // THEN: Visitar pagina de posts
@@ -78,7 +78,7 @@ describe('Crear un post', () => {
     //     Then.seePostPublishedWithHtml(post);
     // });
 
-    // it('E0009 - C5: (PoolDatosApriori) - ', () => {
+    // it('E0035: (PoolDatosApriori) - Crear y publicar un post con contenido en HTML, titulo con 255 caracteres ', () => {
     //     const post = getRandomPost("escenarioTitulo255");
 
     //     // THEN: Visitar pagina de posts
@@ -91,7 +91,7 @@ describe('Crear un post', () => {
     //     Then.seePostPublishedWithHtml(post);
     // });
 
-    // it('E0009 - C6: (PoolDatosApriori) - Se publica el post sin titulo', () => {
+    // it('E0036: (PoolDatosApriori) - Crear y publicar un post con contenido en HTML, titulo vacio', () => {
     //     const post = getRandomPost("escenarioTituloVacio");
 
     //     // THEN: Visitar pagina de posts
@@ -101,10 +101,10 @@ describe('Crear un post', () => {
     //     When.createAndPublishPostWithHtml(post);
 
     //     // THEN: Verificar post publicado
-    //     Then.seePostPublishedWithHtml(post);
+    //     Then.seePostPublishedUntitled(post);
     // });
 
-    // it('E0006 - C7: (PoolDatosApriori) - Unpublish post publicado', () => {
+    // it('E0037: (PoolDatosApriori) - Despublicar post publicado, datos validos', () => {
     //     const post = getRandomPost("escenariosPositivos");
 
     //     // THEN: Visitar pagina de posts
@@ -117,7 +117,7 @@ describe('Crear un post', () => {
     //     Then.confirmUnpublishPostPublished(post);
     // });
 
-    // it('E0007 - C8: (PoolDatosApriori) - Eliminar post publicado', () => {
+    // it('E0038: (PoolDatosApriori) - Eliminar post publicado, datos validos', () => {
     //     const post = getRandomPost("escenariosPositivos");
 
     //     // THEN: Visitar pagina de posts
@@ -130,7 +130,7 @@ describe('Crear un post', () => {
     //     Then.confirmDeletedPost(post);
     // });
 
-    // it('E0008 - C9: (PoolDatosApriori) - Crear Post para que solo sea visible para miembros', () => {
+    // it('E0039: (PoolDatosApriori) - Crear Post para que solo sea visible para miembros, datos validos', () => {
     //     const post = getRandomPost("escenariosPositivos");
 
     //     // THEN: Visitar pagina de posts
@@ -143,64 +143,213 @@ describe('Crear un post', () => {
     //     Then.seePostPublishedMembersOnly(post);
     // });
 
-    // it('E0010 - C10: (PoolDatosApriori) - Crear una página nueva con contenido en HTML y publicarla.', () => {
-    //     const post = getRandomPost("escenarioDataErroneaPositivos");
+    // it('E0040: (PoolDatosApriori) - Crear una página con contenido en HTML y publicarla, datos validos', () => {
+    //     const page = getRandomPost("escenariosPositivos");
 
     //     // THEN: Visitar pagina de posts
     //     Given.givenNavigateToPagePage();
 
     //     // WHEN: Crear y publicar post
-    //     When.createAndPublishPageWithHtml(post);
+    //     When.createAndPublishPageWithHtml(page);
 
     //     // THEN: Verificar post publicado
-    //     Then.seePagePublishedWithHtml(post);
+    //     Then.seePagePublishedWithHtml(page);
     // });
 
-    // it('E0010 - C11: (PoolDatosApriori) - Crear una página nueva con contenido en HTML y publicarla.', () => {
-    //     const post = getRandomPost("escenarioDataErroneaPositivos");
+    // it('E0041: (PoolDatosApriori) - Crear una página con contenido en HTML y publicarla, formato y etiquetas erroneas', () => {
+    //     const page = getRandomPost("escenarioDataErroneaPositivos");
 
     //     // THEN: Visitar pagina de posts
     //     Given.givenNavigateToPagePage();
 
     //     // WHEN: Crear y publicar post
-    //     When.createAndPublishPageWithHtml(post);
+    //     When.createAndPublishPageWithHtml(page);
 
     //     // THEN: Verificar post publicado
-    //     Then.seePagePublishedWithHtml(post);
+    //     Then.seePagePublishedWithHtml(page);
     // });
 
-    // it('E0010 - C12: (PoolDatosApriori) - Crear una página nueva con contenido en HTML y publicarla.', () => {
-    //     const post = getRandomPost("escenarioTituloVacio");
+    // it('E0042: (PoolDatosApriori) - Crear una página con contenido en HTML, Sin titulo.', () => {
+    //     const page = getRandomPost("escenarioTituloVacio");
 
-    //     // THEN: Visitar pagina de posts
+    //     // GIVEN: Visitar pagina de posts
     //     Given.givenNavigateToPagePage();
 
     //     // WHEN: Crear y publicar post
-    //     When.createAndPublishPageWithHtml(post);
+    //     When.createAndPublishPageWithHtml(page);
 
     //     // THEN: Verificar post publicado
-    //     Then.seePagePublishedWithHtml(post);
+    //     Then.seePagePublishedWithHtml(page);
     // });
 
-    it('E0009 - C1: (PseudoAleatorioDinamico) - Crear y publicar un post con contenido en HTML', () => {
+    // it('E0043: (PseudoAleatorioDinamico) - Crear y publicar un post con contenido en HTML, datos validos', () => {
+    //     getPostDataMokaroo().then((data) => {
+    //         let post = data["escenariosPositivos"][0];
+    //         // GIVEN: Visitar pagina de posts
+    //         Given.navigateToPostPage();
 
-        getPseudoAleatorioPost("escenariosPositivos")
-        .then(data => {
-            let post = data[0];
+    //         // WHEN: Crear y publicar post
+    //         When.createAndPublishPostWithHtml(post);
+
+    //         // THEN: Verificar post publicado
+    //         Then.seePostPublishedWithHtml(post);
+    //     });
+    // });
+
+    // it('E0044: (PseudoAleatorioDinamico) - Crear y publicar un post con contenido en HTML, formatos erroneos', () => {
+    //     getPostDataMokaroo().then((data) => {
+    //         let post = data["escenarioDataErroneaPositivos"][0];
+    //         // GIVEN: Visitar pagina de posts
+    //         Given.navigateToPostPage();
+
+    //         // WHEN: Crear y publicar post
+    //         When.createAndPublishPostWithHtml(post);
+
+    //         // THEN: Verificar post publicado
+    //         Then.seePostPublishedWithHtml(post);
+    //     });
+    // });
+
+    // it('E0045: (PseudoAleatorioDinamico) - Crear y publicar un post con contenido en HTML, caracteres especiales y emoticones', () => {
+    //     getPostDataMokaroo().then((data) => {
+    //         let post = data["escenarioDataErroneaPositivos"][0];
+    //         // GIVEN: Visitar pagina de posts
+    //         Given.navigateToPostPage();
+
+    //         // WHEN: Crear y publicar post
+    //         When.createAndPublishPostWithHtml(post);
+
+    //         // THEN: Verificar post publicado
+    //         Then.seePostPublishedWithHtml(post);
+    //     });
+    // });
+
+    // it('E0046: (PseudoAleatorioDinamico) - Crear y publicar un post con contenido en HTML, titulo con 256 caracteres', () => {
+    //     getPostDataMokaroo().then((data) => {
+    //         let post = data["escenarioTitulo256"][0];
+    //         // GIVEN: Visitar pagina de posts
+    //         Given.navigateToPostPage();
+
+    //         // WHEN: Crear y publicar post
+    //         When.createAndPublishPostWithHtml(post);
+
+    //         // THEN: Verificar post publicado
+    //         Then.seePostPublishedWithHtml(post);
+    //     });
+    // });
+
+    // it('E0047: (PseudoAleatorioDinamico) - Crear y publicar un post con contenido en HTML, titulo con 255 caracteres', () => {
+    //     getPostDataMokaroo().then((data) => {
+    //         let post = data["escenarioTitulo255"][0];
+    //         // GIVEN: Visitar pagina de posts
+    //         Given.navigateToPostPage();
+
+    //         // WHEN: Crear y publicar post
+    //         When.createAndPublishPostWithHtml(post);
+
+    //         // THEN: Verificar post publicado
+    //         Then.seePostPublishedWithHtml(post);
+    //     });
+    // });
+
+    // it('E0048: (PseudoAleatorioDinamico) - Crear y publicar un post con contenido en HTML, titulo vacio', () => {
+    //     getPostDataMokaroo().then((data) => {
+    //         let post = data["escenarioTituloVacio"][0];
+    //         // GIVEN: Visitar pagina de posts
+    //         Given.navigateToPostPage();
+
+    //         // WHEN: Crear y publicar post
+    //         When.createAndPublishPostWithHtml(post);
+
+    //         // THEN: Verificar post publicado
+    //         Then.seePostPublishedUntitled(post);
+    //     });
+    // });
+
+    // it('E0049: (PseudoAleatorioDinamico) - Despublicar post publicado, datos validos', () => {
+    //     getPostDataMokaroo().then((data) => {
+    //         let post = data["escenariosPositivos"][0];
+    //         // GIVEN: Visitar pagina de posts
+    //         Given.navigateToPostPage();
+
+    //         // WHEN: Crear y publicar post
+    //         When.unpublishPostCreated(post);
+
+    //         // THEN: Verificar post publicado
+    //         Then.confirmUnpublishPostPublished(post);
+    //     });
+    // });
+
+    // it('E0050: (PseudoAleatorioDinamico) -  Eliminar post publicado, datos validos', () => {
+    //     getPostDataMokaroo().then((data) => {
+    //         let post = data["escenariosPositivos"][0];
+    //         // GIVEN: Visitar pagina de posts
+    //         Given.navigateToPostPage();
+
+    //         // WHEN: Crear y publicar post
+    //         When.deletePostPublished(post);
+
+    //         // THEN: Verificar post publicado
+    //         Then.confirmDeletedPost(post);
+    //     });
+    // });
+
+    // it('E0051: (PseudoAleatorioDinamico) -  Crear Post para que solo sea visible para miembros, datos validos', () => {
+    //     getPostDataMokaroo().then((data) => {
+    //         let post = data["escenariosPositivos"][0];
+    //         // GIVEN: Visitar pagina de posts
+    //         Given.navigateToPostPage();
+
+    //         // WHEN: Crear y publicar post
+    //         When.createAndPublishPostMembersOnly(post);
+
+    //         // THEN: Verificar post publicado
+    //         Then.seePostPublishedMembersOnly(post);
+    //     });
+    // });
+
+    it('E0052: (PseudoAleatorioDinamico) -  Crear una página con contenido en HTML y publicarla, datos validos', () => {
+        getPostDataMokaroo().then((data) => {
+            let page = data["escenariosPositivos"][0];
             // GIVEN: Visitar pagina de posts
-            Given.navigateToPostPage();
+            Given.givenNavigateToPagePage();
 
             // WHEN: Crear y publicar post
-            When.createAndPublishPostWithHtml(post);
+            When.createAndPublishPageWithHtml(page);
 
             // THEN: Verificar post publicado
-            Then.seePostPublishedWithHtml(post);
-        })
-        .catch(error => {
-            console.error("Ocurrió un error:", error);
+            Then.seePagePublishedWithHtml(page);
         });
-
     });
+
+    it('E0053: (PseudoAleatorioDinamico) -   Crear una página con contenido en HTML y publicarla, formato y etiquetas erroneas', () => {
+        getPostDataMokaroo().then((data) => {
+            let page = data["escenarioDataErroneaPositivos"][0];
+            // GIVEN: Visitar pagina de posts
+            Given.givenNavigateToPagePage();
+
+            // WHEN: Crear y publicar post
+            When.createAndPublishPageWithHtml(page);
+
+            // THEN: Verificar post publicado
+            Then.seePagePublishedWithHtml(page);
+        });
+    });
+
+    it('E0054: (PseudoAleatorioDinamico) -   Crear una página con contenido en HTML, Sin titulo', () => {
+        getPostDataMokaroo().then((data) => {
+            let page = data["escenarioTituloVacio"][0];
+            // GIVEN: Visitar pagina de posts
+            Given.givenNavigateToPagePage();
+
+            // WHEN: Crear y publicar post
+            When.createAndPublishPageWithHtml(page);
+
+            // THEN: Verificar post publicado
+            Then.seePagePublishedWithHtml(page);
+        });
+    });
+
 
 });
 

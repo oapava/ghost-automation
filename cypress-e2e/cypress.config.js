@@ -12,7 +12,7 @@ module.exports = {
     pageUrl: "http://localhost:2369/ghost/#/pages",
     postMembersPageUrl: "http://localhost:2369/ghost/#/posts?visibility=members",
     postDraftPageUrl: "http://localhost:2369/ghost/#/posts?type=draft",
-    urlMockrooPost:"https://api.mockaroo.com/api/4d41dac0?count=1&key=d84032b0",
+    urlMockarooPost:"https://api.mockaroo.com/api/4d41dac0?count=1&key=d84032b0",
     titlePostBasic: "Post basico 1",
     titlePostBold: "Post en negrita 1",
     tagsUrl: "http://localhost:2369/ghost/#/tags",

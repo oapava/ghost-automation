@@ -13,7 +13,7 @@ export function getRandomPost(scenarioCategory) {
 
 export async function getPseudoAleatorioPost(scenarioCategory){
     try {
-        const response = await fetch(Cypress.env('urlMockrooPost'));
+        const response = await fetch(Cypress.env('urlMockarooPost'));
         if (!response.ok) {
             throw new Error(`Error en la solicitud: ${response.status} ${response.statusText}`);
         }
@@ -28,3 +28,19 @@ export async function getPseudoAleatorioPost(scenarioCategory){
         throw error;
     }
 }
+
+export function getPostDataMokaroo(){
+    const url = Cypress.env('urlMockarooPost');
+
+    return cy.request({
+        method: 'GET',
+        url: url,
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then((response) => {
+        expect(response.status).to.eq(200);
+        return response.body;
+    });
+};
+
