@@ -12,18 +12,18 @@ describe('Crear un post', () => {
         Given.givenNavigateDashboard();
     });
 
-//     it('Escenario 10: Crear Pagina con contenido en HTML', () => {
-//         // THEN: Visitar pagina de posts
+//    it('Escenario 11: Crear y editar una página en Ghost', () => {
+//         // GIVEN: Visitar Pages
 //         Given.givenNavigateToPagePage();
 //
-//         // WHEN: Crear y publicar post
-//         When.createAndPublishPageWithHtmlPool(0);
+//         // WHEN: Crear publicar, editar y guardar
+//         When.createAndPublishPageEditAndSave();
 //
-//         // THEN: Verificar post publicado
-//         Then.seePagePublishedWithHtml();
+//         // THEN: Publicar la página
+//         Then.validatePageWasEditedAndCreated();
 //     });
 //
-//     it('Escenario 11: Crear y publicar una página con un video de YouTube', () => {
+//     it('Escenario 12: Crear y publicar una página con un video de YouTube', () => {
 //         // GIVEN: Visitar Pages
 //         Given.givenNavigateToPagePage();
 //
@@ -34,7 +34,7 @@ describe('Crear un post', () => {
 //         Then.validatePageWithVideoCreated();
 //     });
 //
-//     it('Escenario 12: Crear y editar una página en Ghost', () => {
+//     it('Escenario 13: Crear y editar una página en Ghost', () => {
 //         // GIVEN: Visitar Pages
 //         Given.givenNavigateToPagePage();
 //
@@ -45,7 +45,7 @@ describe('Crear un post', () => {
 //         Then.validatePageWasEditedAndCreated();
 //     });
 //
-//     it('Escenario 13: Crear, publicar y eliminar una página en Ghost', () => {
+//     it('Escenario 14: Crear, publicar y eliminar una página en Ghost', () => {
 //
 //         // GIVEN: Visitar Pages
 //         Given.givenNavigateToPagePage();
@@ -58,11 +58,10 @@ describe('Crear un post', () => {
 //
 //     });
 //
-//     it('Escenario 14: Crear una pagina y agregar un link de youtube invalido', () =>{
+//     it('Escenario 15: Crear una pagina y agregar un link de youtube invalido', () =>{
 //         // GIVEN: Visitar Pages
 //         Given.givenNavigateToPagePage();
 //
-//         // WHEN: Crear publicar, eliminar pagina
 //         When.createPageAndAddInvalidYoutubeLinkPool();
 //
 //         // THEN: Validar que se lemino la pagina creada
@@ -70,7 +69,7 @@ describe('Crear un post', () => {
 //
 //     })
 //
-//     it('Escenario 15: Crear un tag', () => {
+//     it('Escenario 16: Crear un tag', () => {
 //         // GIVEN: Visitar Tags
 //         Given.givenNavigateToTagsPage();
 //
@@ -81,7 +80,7 @@ describe('Crear un post', () => {
 //         Then.validateTagWasCreated();
 //     });
 
-    // it('Escenario 16: Crear y publicar una página con un video de YouTube en la que el título tenga más de 254 caracteres.', () => {
+    // it('Escenario 17: Crear y publicar una página con un video de YouTube en la que el título tenga más de 254 caracteres.', () => {
     //     // THEN: Visitar pagina de posts
     //     Given.givenNavigateToPagePage();
     //
@@ -92,7 +91,7 @@ describe('Crear un post', () => {
     //     Then.seeAlertMessage();
     // });
 
-    //     it('Escenario 17: Crear una página con un título vacío y un video embebido.', () => {
+    //     it('Escenario 18: Crear una página con un título vacío y un video embebido.', () => {
     //     // GIVEN: Visitar Pages
     //     Given.givenNavigateToPagePage();
     //
@@ -103,7 +102,7 @@ describe('Crear un post', () => {
     //     Then.validatePageWithTitleNumberCreated();
     // });
 
-    // it('Escenario 18: Crear múltiples etiquetas con el mismo nombre.', () => {
+    // it('Escenario 19: Crear múltiples etiquetas con el mismo nombre.', () => {
     //     // GIVEN: Visitar Tags
     //     Given.givenNavigateToTagsPage();
     //
@@ -117,7 +116,7 @@ describe('Crear un post', () => {
     //     Then.validateTagWasCreatedName("Ciencia");
     // });
 
-    //      it('Escenario 19: Crear una página con un título que incluye caracteres especiales como #@$%^&*.', () => {
+    //      it('Escenario 20: Crear una página con un título que incluye caracteres especiales como #@$%^&*.', () => {
     //     // THEN: Visitar pagina de posts
     //     Given.givenNavigateToPagePage();
     //
@@ -127,7 +126,7 @@ describe('Crear un post', () => {
     //     // THEN: Verificar post publicado
     //     Then.seePagePublishedWithHtml();
     // });
-    // it('Escenario 20: Crear una etiqueta con un nombre largo+ 200', () => {
+    // it('Escenario 21: Crear una etiqueta con un nombre largo+ 200', () => {
     //     // GIVEN: Visitar Tags
     //     Given.givenNavigateToTagsPage();
     //
@@ -138,7 +137,7 @@ describe('Crear un post', () => {
     //     Then.validateErrorTag();
     // });
 
-    // it('Escenario 21: Crear una etiqueta con un nombre largo+ 200', () => {
+    // it('Escenario 22: Crear una etiqueta con un nombre largo+ 200', () => {
     //     // GIVEN: Visitar Tags
     //     Given.givenNavigateToTagsPage();
     //
@@ -149,7 +148,7 @@ describe('Crear un post', () => {
     //     Then.validateTagWasCreatedName("Etiqueta 🌟 #Test @123");
     // });
 
-    // it('Escenario 21: Crear una etiqueta con un nombre de exactamente 190 caracteres.', () => {
+    // it('Escenario 23: Crear una etiqueta con un nombre de exactamente 190 caracteres.', () => {
     //     // GIVEN: Visitar Tags
     //     Given.givenNavigateToTagsPage();
     //
@@ -160,7 +159,7 @@ describe('Crear un post', () => {
     //     Then.validateTagWasCreatedName("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
     // });
 
-    // it('Escenario 22: Crear una etiqueta con una descripción de exactamente 500 caracteres.', () => {
+    // it('Escenario 24: Crear una etiqueta con una descripción de exactamente 500 caracteres.', () => {
     //     // GIVEN: Visitar Tags
     //     Given.givenNavigateToTagsPage();
     //
@@ -171,7 +170,7 @@ describe('Crear un post', () => {
     //     Then.validateTagWasCreatedName("Etiqueta con descripción larga");
     // });
 
-    // it('Escenario 23: Crear una etiqueta con una descripción de exactamente 500 caracteres.', () => {
+    // it('Escenario 25: Crear una etiqueta con una descripción de exactamente 500 caracteres.', () => {
     //     // GIVEN: Visitar Tags
     //     Given.givenNavigateToTagsPage();
     //
@@ -181,15 +180,61 @@ describe('Crear un post', () => {
     //     // THEN: Validar error del tag
     //     Then.validateErrorDescriptionTag();
     // });
+    //
+    // it('Escenario 26: Crear una etiqueta con una descripción de exactamente 500 caracteres.', () => {
+    //     // GIVEN: Visitar Tags
+    //     Given.givenNavigateToTagsPage();
+    //
+    //     // WHEN: Crear publicar nuevo tag
+    //     When.createNewTagPool(7);
+    //
+    //     // THEN: Validar la creación del tag
+    //     Then.validateTagWasCreatedName("1");
+    // });
 
-    it('Escenario 24: Crear una etiqueta con una descripción de exactamente 500 caracteres.', () => {
-        // GIVEN: Visitar Tags
-        Given.givenNavigateToTagsPage();
+    //     it('Escenario 27: Crear y editar una página en Ghost Faker', () => {
+    //     // GIVEN: Visitar Pages
+    //     Given.givenNavigateToPagePage();
+    //
+    //     // WHEN: Crear publicar, editar y guardar
+    //     When.createAndPublishPageEditAndSaveFaker();
+    //
+    //     // THEN: Publicar la página
+    //     Then.seePageUpdatedWithFaker();
+    // });
 
-        // WHEN: Crear publicar nuevo tag
-        When.createNewTagPool(7);
+    // it('Escenario 28: Crear y publicar una página con un video de YouTube FAKER', () => {
+    //     // GIVEN: Visitar Pages
+    //     Given.givenNavigateToPagePage();
+    //
+    //     // WHEN: Click en "New page"
+    //     When.createPageAndPublishWithVideoFaker();
+    //
+    //     // THEN: Validar la publicación de la página
+    //     Then.seePagePublishedWithVideoFaker();
+    // });
 
-        // THEN: Validar la creación del tag
-        Then.validateTagWasCreatedName("1");
+    // it('Escenario 29: Crear, publicar y eliminar una página en Ghost', () => {
+    //
+    //     // GIVEN: Visitar Pages
+    //     Given.givenNavigateToPagePage();
+    //
+    //     // WHEN: Crear publicar, eliminar pagina
+    //     When.createPublishAndDeletePageFaker();
+    //
+    //     // THEN: Validar que se lemino la pagina creada
+    //     Then.validatePageWasCreatedAndDeleted();
+    //
+    // });
+
+         it('Escenario 30: Crear una página con un título que incluye caracteres especiales como #@$%^&*. Faker', () => {
+        // THEN: Visitar pagina de posts
+        Given.givenNavigateToPagePage();
+
+        // WHEN: Crear y publicar post
+        When.createAndPublishPageWithHtmlFaker();
+
+        // THEN: Verificar post publicado
+        Then.seePagePublishedWithHtmlFaker();
     });
 });

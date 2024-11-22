@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import { setSharedData } from '../utils/sharedData';
+import { setSharedData, getSharedData } from '../utils/sharedData';
 
 class When {
     //Getters Page Objects
@@ -908,7 +908,6 @@ class When {
         });
     }
 
-
     createAndPublishPageEditAndSavePool(index) {
         cy.fixture('testData').then((data) => {
             const pageData = data.pagesEdit[index]; // Usar el índice recibido como parámetro
@@ -1028,7 +1027,6 @@ class When {
             htmlContent: `<p>${faker.lorem.paragraph()}</p>`
         };
 
-        // Guardar el título generado en el archivo compartido
         setSharedData('pageTitle', pageData.title);
 
         cy.get(this.spanElement).contains('New page').click({ force: true, waitForAnimations: false });
@@ -1048,6 +1046,136 @@ class When {
         cy.screenshot(this.version + scenery + '/p5_addContentHtml');
         cy.get(this.cmLineDiv).type('{enter}');
 
+        this.publishPostAndPage(this.version + scenery, 'p6');
+        this.validatePublishPageAndCloseModal(this.version + scenery, 'p7');
+    }
+
+    createPageAndPublishWithVideoFaker() {
+        cy.screenshot(`5/e11/p1-visit-page-list`);
+
+        cy.get(this.spanElement).contains('New page').click({force: true, waitForAnimations: false});
+
+        const randomTitle = faker.lorem.words(5);
+        const randomVideoUrl = faker.internet.url();
+
+        setSharedData('pageVideoTitle', randomTitle);
+
+        cy.get(this.titleInput).type(`${randomTitle} ${this.time}`);
+        cy.get(this.titleInput).type('{enter}');
+
+        cy.get(this.buttonAddCard).first().click({force: true, waitForAnimations: false});
+
+        cy.get(this.buttonYoutube).scrollIntoView().should('be.visible').click();
+
+        cy.get(this.inputEmbedUrl).should('be.visible').type(randomVideoUrl).type('{enter}');
+
+        cy.screenshot(`5/e11/p3-nueva-pagina-con-contenido-nuevo`);
+        cy.wait(1000);
+
+        this.publishPostAndPage('5/e11', 'p3');
+
+        cy.get(this.closeModalPublishFlow).click();
+    }
+
+    createAndPublishPageEditAndSaveFaker(index) {
+        const randomTitle = faker.lorem.words(15);
+        const randomUpdatedTitle = faker.lorem.words(15);
+
+        setSharedData('pageTitle', randomTitle);
+        setSharedData('updatedTitle', randomUpdatedTitle);
+
+        cy.screenshot('5/e12/p1-click-nueva-pagina');
+        cy.get(this.newPageButton).click();
+        cy.get(this.titleInput).type(randomTitle + '{enter}');
+
+        cy.get(this.koenigEditorElement).first().click();
+        this.publishPostAndPage('5/e12', 'p1');
+        cy.url().should('contain', '/pages');
+
+        cy.get(this.closeModalPublishFlow).click();
+        cy.screenshot('5/e12/p2-pagina-creada-listada');
+
+        cy.contains(randomTitle).click();
+
+        cy.get(this.titleInput).clear().type(randomUpdatedTitle + '{enter}').screenshot('5/e12/p3-actualizacion-titulo');
+
+        cy.get(this.publishSaveButton).contains('Update').click();
+        cy.screenshot('5/e12/p4-publicacion-pagina-actualizada');
+    }
+
+    createPublishAndDeletePageFaker() {
+        // Generar datos con Faker
+        const randomTitle = faker.lorem.words(10); // Título aleatorio con 10 letras
+        const randomContent = faker.lorem.words(22); // Contenido HTML aleatorio con un párrafo
+
+        // Iniciar la creación de la página
+        cy.screenshot('5/e13/p1-pagina-creada-listada');
+        cy.contains('New page').click({force: true, waitForAnimations: false});
+
+        // Usar los datos generados para llenar los campos
+        cy.get(this.titleInput).type(randomTitle + '{enter}');
+        cy.get(this.buttonAddCard).first().click({force: true, waitForAnimations: false});
+        cy.get(this.htmlEditorButton).first().click({force: true, waitForAnimations: false});
+        cy.get(this.cmLineDiv).type(randomContent + '{enter}');
+
+        cy.screenshot('5/e13/p2-pagina-creada-con-contenido');
+
+        // Publicar la página
+        this.publishPostAndPage('5/e13', 'p2');
+        cy.url().should('include', '/pages');
+        cy.contains(randomTitle).should('exist'); // Verificar que la página con el título generado existe
+        cy.wait(500);
+        cy.get(this.bodyElement).type('{esc}');
+        cy.screenshot('5/e13/p3-pagina-creada');
+
+        // Verificar la URL y entrar en la lista de páginas
+        cy.visit(Cypress.env('pageUrl'));
+        cy.url().should('include', '/ghost/#/pages');
+
+        // Eliminar la página creada
+        cy.contains(this.contentEntryTitle, randomTitle)
+            .closest(this.liElement)
+            .rightclick();
+
+        cy.get(this.deletePageButton)
+            .should('be.visible')
+            .then(() => {
+                cy.screenshot('5/e13/p4-eliminar-pagina', {capture: 'fullPage'});
+                cy.get(this.deletePageButton).click();
+            });
+    }
+
+    createAndPublishPageWithHtmlFaker() {
+        var scenery = 'e10';
+
+        // Generar datos aleatorios con Faker
+        const randomTitle = faker.lorem.words(5) + ' ' + '#@$%^&*';   // Título con 5 palabras aleatorias
+        const randomHtmlContent = faker.lorem.paragraph() + ' ' + '#@$%^&*';  // Contenido HTML con caracteres especiales
+
+        // Guardar los datos generados para usarlos más tarde
+        setSharedData('pageTitle', randomTitle);
+        setSharedData('htmlContent', randomHtmlContent);
+
+        // Iniciar el proceso de creación de la página
+        cy.get(this.spanElement).contains('New page').click({ force: true, waitForAnimations: false });
+        cy.screenshot(this.version + scenery + '/p1_sectionPage');
+
+        // Usar los datos generados para el título y contenido
+        cy.get(this.titleInput).type(randomTitle);
+        cy.screenshot(this.version + scenery + '/p2_addTitlePage');
+        cy.get(this.titleInput).type('{enter}');
+
+        cy.get(this.buttonAddCard).first().click({ force: true, waitForAnimations: false });
+        cy.screenshot(this.version + scenery + '/p3_cardOptions');
+
+        cy.get(this.htmlEditorButton).first().click({ force: true, waitForAnimations: false });
+        cy.screenshot(this.version + scenery + '/p4_htmlOptionsSelected');
+
+        cy.get(this.cmLineDiv).type(randomHtmlContent);
+        cy.screenshot(this.version + scenery + '/p5_addContentHtml');
+        cy.get(this.cmLineDiv).type('{enter}');
+
+        // Publicar la página y validar la publicación
         this.publishPostAndPage(this.version + scenery, 'p6');
         this.validatePublishPageAndCloseModal(this.version + scenery, 'p7');
     }

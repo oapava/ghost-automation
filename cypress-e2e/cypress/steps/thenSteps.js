@@ -1,3 +1,6 @@
+import { setSharedData, getSharedData } from '../utils/sharedData';
+
+
 class Then {
     validatePageWithVideoCreated(){
         cy.contains('Página con video de YouTube').should('be.visible');
@@ -136,10 +139,8 @@ class Then {
     seePagePublishedWithHtmlFaker() {
         const dynamicTitle = getSharedData('pageTitle');
 
-        // Navegar a la URL de las páginas
         cy.visit(Cypress.env('pageUrl'));
 
-        // Verificar que la página contiene el título generado
         cy.contains(dynamicTitle).should('exist');
     }
 
@@ -169,6 +170,26 @@ class Then {
     validateErrorDescriptionTag(){
         cy.get('.response')
             .should('contain', 'Description cannot be longer than 500 characters.');
+    }
+
+    seePagePublishedWithVideoFaker() {
+        const dynamicTitle = getSharedData('pageVideoTitle');
+
+        cy.visit(Cypress.env('pageUrl'));
+
+        cy.contains(dynamicTitle).should('exist');
+    }
+
+    seePageUpdatedWithFaker() {
+        // Recuperar los datos generados previamente
+        const dynamicTitle = getSharedData('pageTitle');
+        const dynamicUpdatedTitle = getSharedData('updatedTitle');
+
+        // Navegar a la URL de las páginas
+        cy.visit(Cypress.env('pageUrl'));
+
+        // Verificar el título actualizado
+        cy.contains(dynamicUpdatedTitle).should('exist');
     }
 
 }
