@@ -153,7 +153,7 @@ class When {
     }
     
     get anchorMembersButton(){
-        return 'a[href="#/members/"]';
+        return 'a[data-test-nav="members"]';
     }
     
     get searchMembersInput(){
@@ -256,6 +256,14 @@ class When {
 
     get buttonMemberList(){
         return 'a[data-test-nav="members"]'
+    }
+
+    get inputAddRecommendation(){
+        return 'input[placeholder="https://www.example.com"]'
+    }
+
+    get inputShortDescription(){
+        return 'textarea[class="order-2 rounded-lg border bg-grey-150 px-3 py-2 transition-all dark:bg-grey-900 dark:text-white border-transparent placeholder:text-grey-500 hover:bg-grey-100 focus:border-green focus:bg-white focus:shadow-[0_0_0_2px_rgba(48,207,67,0.25)] dark:placeholder:text-grey-800 dark:hover:bg-grey-925 dark:focus:bg-grey-950 mt-1.5 resize-none "]'
     }
 
     //When Methods
@@ -677,7 +685,7 @@ class When {
 
         cy.get(this.memberEmailInput).type(emailMember);
 
-        cy.get(this.saveMemberButton).click();
+        cy.get(this.saveMemberButton).click({waitForAnimations: false});
 
         cy.get(this.anchorMembersButton).first().click();
         cy.get(this.anchorMembersButton).first().click();
@@ -885,6 +893,23 @@ class When {
 
         //Click en el botón de guardar título
         cy.get(this.saveSiteTitleButton).first().click();
+    }
+
+    createRecommendation(URL){
+        //Seleccionar el boton de añadir recomendación
+        cy.get(this.spanElement).contains('Add recommendation').scrollIntoView().should('be.visible').click({force:true, waitForAnimations: true});
+        //Escribir el link de la recomendacion
+        cy.get(this.inputAddRecommendation).type(URL);
+        //Darle click al boton de la recomendación
+        cy.get(this.spanElement).contains('Next').should('be.visible').click({waitForAnimations: true});
+    }
+
+    createRecommendationValid(URL){
+        //Crear la recomendacion
+        this.createRecommendation(URL);
+        cy.wait(3000);
+        //Confirmar añadir la recomendación
+        cy.get(this.spanElement).filter((index, element) => element.textContent.trim() === 'Add').should('be.visible').click({waitForAnimations: true})
     }
 
 }
