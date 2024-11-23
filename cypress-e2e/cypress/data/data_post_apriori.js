@@ -60,8 +60,8 @@ export const dataPostPoolDatosApriori = {
     [
         {
             "title": "Para comenzar, simplemente escribe o pega el texto en el área de texto indicada. Cuando hayas terminado, haz clic en Contar caracteres (contar letras) bajo el área de texto, y observa los resultados que aparecen inmediatamente. También puedes limpiar tuyos",
-            "contentText": "Para comenzar, simplemente escribe o pega el texto en el área de texto indicada.",
-            "htmlText": "<p>Parrafo básico</p><p>Otro parrafo aquí.</p>"
+            "contentText": "Para comenzar, simplemente escribe o pega el texto en el área de texto indicada",
+            "htmlText": "<p>Parrafo básico</p>"
         }
     ],
     escenarioTitulo255:

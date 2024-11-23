@@ -9,7 +9,7 @@ export function getRandomPost(scenarioCategory) {
     }
     const randomIndex = Math.floor(Math.random() * category.length);
     const postData = category[randomIndex];
-    return new Post(postData.title, postData.contentText, postData.markdownText, postData.htmlText);
+    return new Post(postData.title, postData.contentText, postData.htmlText);
 };
 
 export async function getPseudoAleatorioPost(scenarioCategory){
@@ -49,9 +49,7 @@ export function getPostDataMokaroo(){
 function generarHtmlAleatorio() {
     return `
         <h1>${faker.lorem.words(5)}</h1>
-        <p>${faker.lorem.paragraph()}</p>
         <ul>
-            <li>${faker.lorem.sentence()}</li>
             <li>${faker.lorem.sentence()}</li>
         </ul>
     `;
@@ -60,9 +58,8 @@ function generarHtmlAleatorio() {
 function generarBadHtmlAleatorio() {
     return `
         <h1>${faker.lorem.words(5)}</h1>
-        <p>${faker.lorem.paragraph()}</h2>
+        <p>${faker.lorem.paragraph(1)}</h2>
         <ul> <p>
-            <li>${faker.lorem.sentence()}</li>
             <li>${faker.lorem.sentence()}
         </ul>
     `;
@@ -86,7 +83,7 @@ export function getPostDataFaker(tipoEscenario) {
         escenariosPositivos: [
             {
                 title: faker.lorem.sentence(),
-                contentText: faker.lorem.paragraphs(2, '\n\n'),
+                contentText: faker.lorem.paragraphs(1, '\n\n'),
                 htmlText: generarHtmlAleatorio(),
             },
         ],
@@ -100,14 +97,14 @@ export function getPostDataFaker(tipoEscenario) {
         escenarioTitulo256: [
             {
                 title: faker.random.alpha({ count: 256 }),
-                contentText: faker.lorem.paragraphs(2, '\n\n'),
+                contentText: faker.lorem.paragraphs(1, '\n\n'),
                 htmlText: generarHtmlAleatorio(),
             },
         ],
         escenarioTituloVacio: [
             {
                 title: '',
-                contentText: faker.lorem.paragraphs(2, '\n\n'),
+                contentText: faker.lorem.paragraphs(1, '\n\n'),
                 htmlText: generarHtmlAleatorio(),
             },
         ],
@@ -119,5 +116,7 @@ export function getPostDataFaker(tipoEscenario) {
             },
         ],
     };
+
     return data[tipoEscenario][0] || [];
-}
+};
+

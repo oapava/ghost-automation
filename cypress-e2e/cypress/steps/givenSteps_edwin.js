@@ -21,7 +21,7 @@ class Given {
         cy.get(this.buttonSignIn).should('exist');
         //cy.screenshot('5/init/p1_initPage');
     };
-    
+
     givenLogin(){
         cy.get(this.inputEmail).type(Cypress.env('email'), { force: true });
         cy.get(this.inputPass).type(Cypress.env('password'), { force: true });
@@ -35,21 +35,21 @@ class Given {
         cy.url().should('include', '/ghost/#/dashboard');
         //cy.screenshot('5/init/p3_dashboard');
     }
-    
+
     navigateToPostPage(){
         cy.visit(Cypress.env('postPageUrl'));
         cy.url().should('include', '/ghost/#/posts');
-        cy.wait(500);
+        cy.wait(1000);
         //cy.screenshot('5/init/p4_postPage');
     };
 
     navigateToPostPagePublished(){
         cy.visit(Cypress.env('baseUrl') + '/ghost/#/posts?type=published');
         cy.url().should('include', 'posts?type=published');
-        cy.wait(500);
+        cy.wait(1000);
         //cy.screenshot('5/init/p4_postPagePulished');
     };
-    
+
     givenNavigateToPagePage(){
         cy.visit(Cypress.env('pageUrl'));
         cy.url().should('include', '/ghost/#/pages');
@@ -60,12 +60,12 @@ class Given {
         cy.visit(Cypress.env('tagsUrl'));
         cy.url().should('include', '/ghost/#/tags');
     };
-    
+
     givenNavigateTomembers(){
         cy.visit(Cypress.env('mambersUrl'));
         cy.url().should('include', '/ghost/#/members');
     };
-    
+
     givenNavigateToSettings(){
         cy.get(this.settingsButton).click();
         cy.url().should('include', '/ghost/#/settings');

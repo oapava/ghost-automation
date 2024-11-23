@@ -1,4 +1,3 @@
-import { Post } from "../data/post.js";
 import { dataPostPoolDatosApriori } from "../data/data_post_apriori.js";
 
 class When {
@@ -132,6 +131,30 @@ class When {
         this.validatePublishPostAndCloseModal(stage, 0);
     }
 
+    createAndPublishPostWithHtmlError(post, stage){
+        console.log("PostToPublishError -" + JSON.stringify(post));
+        //ir a seccion de crear post
+        cy.get(this.createPostButton).click();
+        cy.url().should('contain', '/post');
+
+        //Se ingresa titulo del post
+        if(post.title !== ""){
+            cy.get(this.titleInput).type('A');
+            cy.get(this.titleInput).type('{enter}');
+            cy.wait(500);
+            cy.get(this.titleInput).type(post.title);
+            cy.get(this.titleInput).type('{enter}');
+        }
+
+        //Contenido del post
+        cy.get(this.textAreaContent).first().type(post.contentText);
+        cy.get(this.textAreaContent).first().type('{enter}');
+
+        cy.get(this.publishFlowButton).should('exist');
+        cy.get(this.publishFlowButton).first().click();
+
+    }
+
     unpublishPostCreated(post, stage){
         //Crear post
         this.createSimplePost(post, stage, 'p1')
@@ -247,9 +270,9 @@ class When {
         //cy.screenshot(this.version + stage + '/p4_htmlOptionsSelected');
 
         //Ingresar texto en html
-        cy.get(this.cmLineDiv).type(page.htmlText); 
+        cy.get(this.cmLineDiv).first().type(page.htmlText); 
         //cy.screenshot(this.version + stage + '/p5_addContentHtml');
-        cy.get(this.cmLineDiv).type('{enter}');
+        cy.get(this.cmLineDiv).first().type('{enter}');
 
         this.publishPostAndPage(this.version + stage,'p6');
         this.validatePublishPageAndCloseModal(this.version + stage,'p7');
