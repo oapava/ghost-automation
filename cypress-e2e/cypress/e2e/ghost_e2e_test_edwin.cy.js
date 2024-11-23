@@ -1,7 +1,7 @@
 import Given from '../steps/givenSteps_edwin';
 import When from '../steps/whenSteps_edwin';
 import Then from '../steps/thenSteps_edwin';
-import { getRandomPost, getPseudoAleatorioPost, getPostDataMokaroo } from '../steps/functionutils'
+import { getRandomPost, getPseudoAleatorioPost, getPostDataMokaroo, getPostDataFaker } from '../steps/functionutils'
 
 describe('Crear un post', () => {
     beforeEach(() => {
@@ -308,48 +308,71 @@ describe('Crear un post', () => {
     //     });
     // });
 
-    it('E0052: (PseudoAleatorioDinamico) -  Crear una página con contenido en HTML y publicarla, datos validos', () => {
-        getPostDataMokaroo().then((data) => {
-            let page = data["escenariosPositivos"][0];
-            // GIVEN: Visitar pagina de posts
-            Given.givenNavigateToPagePage();
+    // it('E0052: (PseudoAleatorioDinamico) -  Crear una página con contenido en HTML y publicarla, datos validos', () => {
+    //     getPostDataMokaroo().then((data) => {
+    //         let page = data["escenariosPositivos"][0];
+    //         // GIVEN: Visitar pagina de posts
+    //         Given.givenNavigateToPagePage();
 
-            // WHEN: Crear y publicar post
-            When.createAndPublishPageWithHtml(page);
+    //         // WHEN: Crear y publicar post
+    //         When.createAndPublishPageWithHtml(page);
 
-            // THEN: Verificar post publicado
-            Then.seePagePublishedWithHtml(page);
-        });
+    //         // THEN: Verificar post publicado
+    //         Then.seePagePublishedWithHtml(page);
+    //     });
+    // });
+
+    // it('E0053: (PseudoAleatorioDinamico) -   Crear una página con contenido en HTML y publicarla, formato y etiquetas erroneas', () => {
+    //     getPostDataMokaroo().then((data) => {
+    //         let page = data["escenarioDataErroneaPositivos"][0];
+    //         // GIVEN: Visitar pagina de posts
+    //         Given.givenNavigateToPagePage();
+
+    //         // WHEN: Crear y publicar post
+    //         When.createAndPublishPageWithHtml(page);
+
+    //         // THEN: Verificar post publicado
+    //         Then.seePagePublishedWithHtml(page);
+    //     });
+    // });
+
+    // it('E0054: (PseudoAleatorioDinamico) -   Crear una página con contenido en HTML, Sin titulo', () => {
+    //     getPostDataMokaroo().then((data) => {
+    //         let page = data["escenarioTituloVacio"][0];
+    //         // GIVEN: Visitar pagina de posts
+    //         Given.givenNavigateToPagePage();
+
+    //         // WHEN: Crear y publicar post
+    //         When.createAndPublishPageWithHtml(page);
+
+    //         // THEN: Verificar post publicado
+    //         Then.seePagePublishedWithHtml(page);
+    //     });
+    // });
+
+    it('E0055: (EscenarioAleatorio) - Crear y publicar un post con contenido en HTML, datos validos', () => {
+        const post = getPostDataFaker("escenariosPositivos");
+        // GIVEN: Visitar pagina de posts
+        Given.navigateToPostPage();
+
+        // WHEN: Crear y publicar post
+        When.createAndPublishPostWithHtml(post);
+
+        // THEN: Verificar post publicado
+        Then.seePostPublishedWithHtml(post);
     });
 
-    it('E0053: (PseudoAleatorioDinamico) -   Crear una página con contenido en HTML y publicarla, formato y etiquetas erroneas', () => {
-        getPostDataMokaroo().then((data) => {
-            let page = data["escenarioDataErroneaPositivos"][0];
-            // GIVEN: Visitar pagina de posts
-            Given.givenNavigateToPagePage();
+    it('E0056: (EscenarioAleatorio) - Crear y publicar un post con contenido en HTML, formatos erroneos', () => {
+        const post = getPostDataFaker("escenarioDataErroneaPositivos");
+        // GIVEN: Visitar pagina de posts
+        Given.navigateToPostPage();
 
-            // WHEN: Crear y publicar post
-            When.createAndPublishPageWithHtml(page);
+        // WHEN: Crear y publicar post
+        When.createAndPublishPostWithHtml(post);
 
-            // THEN: Verificar post publicado
-            Then.seePagePublishedWithHtml(page);
-        });
+        // THEN: Verificar post publicado
+        Then.seePostPublishedWithHtml(post);
     });
-
-    it('E0054: (PseudoAleatorioDinamico) -   Crear una página con contenido en HTML, Sin titulo', () => {
-        getPostDataMokaroo().then((data) => {
-            let page = data["escenarioTituloVacio"][0];
-            // GIVEN: Visitar pagina de posts
-            Given.givenNavigateToPagePage();
-
-            // WHEN: Crear y publicar post
-            When.createAndPublishPageWithHtml(page);
-
-            // THEN: Verificar post publicado
-            Then.seePagePublishedWithHtml(page);
-        });
-    });
-
 
 });
 
