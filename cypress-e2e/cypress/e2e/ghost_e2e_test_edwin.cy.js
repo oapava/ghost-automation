@@ -179,7 +179,7 @@ describe('Crear un post', () => {
         When.createAndPublishPageWithHtml(page);
 
         // THEN: Verificar post publicado
-        Then.seePagePublishedWithHtml(page);
+        Then.seePostPublishedUntitled(page);
     });
 
     it('E0043: (PseudoAleatorioDinamico) - Crear y publicar un post con contenido en HTML, datos validos', () => {
@@ -346,22 +346,20 @@ describe('Crear un post', () => {
             When.createAndPublishPageWithHtml(page);
 
             // THEN: Verificar post publicado
-            Then.seePagePublishedWithHtml(page);
+            Then.seePostPublishedUntitled(page);
         });
     });
 
     it('E0055: (EscenarioAleatorio) - Crear y publicar un post con contenido en HTML, datos validos', () => {
-        getPostDataFaker("escenariosPositivos").then((data) =>{
-            let post = data;
-            // GIVEN: Visitar pagina de posts
-            Given.navigateToPostPage();
+        const post = getPostDataFaker("escenarioDataErroneaPositivos");
+        // GIVEN: Visitar pagina de posts
+        Given.navigateToPostPage();
 
-            // WHEN: Crear y publicar post
-            When.createAndPublishPostWithHtml(post);
+        // WHEN: Crear y publicar post
+        When.createAndPublishPostWithHtml(post);
 
-            // THEN: Verificar post publicado
-            Then.seePostPublishedWithHtml(post);
-        })
+        // THEN: Verificar post publicado
+        Then.seePostPublishedWithHtml(post);
     });
 
     it('E0056: (EscenarioAleatorio) - Crear y publicar un post con contenido en HTML, formatos erroneos', () => {

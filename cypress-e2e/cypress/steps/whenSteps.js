@@ -133,7 +133,7 @@ class When {
     }
 
     get returnAnalitics(){
-        return 'a.gh-btn-editor.gh-editor-back-button[data-test-breadcrumb=""]'
+        return 'a.gh-btn-editor.gh-editor-back-button'
     }
 
     get memberNameInput(){

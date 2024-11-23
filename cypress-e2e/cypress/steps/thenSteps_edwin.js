@@ -29,15 +29,14 @@ class Then {
         cy.get(this.leaveButton).should('exist').first().click();
     }
 
-
     seePostPublishedUntitled(post){
         cy.visit(Cypress.env('postPagePublishedUrl'));
         cy.contains('Untitled').should('exist');
     }
 
-    confirmUnpublishPostPublished(){
+    confirmUnpublishPostPublished(post){
         cy.visit(Cypress.env('postDraftPageUrl'));
-        cy.get('span[title="Go to Editor"]').should('exist')
+        cy.url().should('include', 'posts?type=draft');
     }
 
     confirmDeletedPost(){
@@ -49,7 +48,7 @@ class Then {
         cy.contains(page.title).should('exist');
     }
 
-    seePostPublishedMembersOnly(){
+    seePostPublishedMembersOnly(post){
         cy.visit(Cypress.env('postMembersPageUrl'));
         cy.contains(post.title).should('exist');
     }

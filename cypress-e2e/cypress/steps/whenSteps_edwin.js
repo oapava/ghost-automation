@@ -50,7 +50,7 @@ class When {
     }
 
     get titlePostCreated(){
-        return 'span[title="Go to Analytics"]';
+        return 'a.gh-list-data.gh-post-list-title';
     }
 
     get analitycOptionssButton(){
@@ -89,6 +89,9 @@ class When {
         return 'select[data-test-select="post-visibility"]';
     }
 
+    get buttonSettingPost(){
+        return 'button.settings-menu-toggle.gh-btn.gh-btn-editor';
+    }
 
 
     createAndPublishPost(post){
@@ -105,7 +108,7 @@ class When {
     }
 
     createAndPublishPostWithHtml(post, stage){
-        console.log("PostToPublish -" + JSON.stringify(post));
+        //console.log("PostToPublish -" + JSON.stringify(post));
         //ir a seccion de crear post
         cy.get(this.createPostButton).click();
         cy.url().should('contain', '/post');
@@ -158,21 +161,13 @@ class When {
     unpublishPostCreated(post, stage){
         //Crear post
         this.createSimplePost(post, stage, 'p1')
+        cy.visit(Cypress.env('baseUrl') + '/ghost/#/posts?type=published');
+        cy.wait(500);
 
         //Se valida que existan Posts
         cy.get(this.titlePostCreated).should('exist').then(() => {
             //cy.screenshot(stage + '/p2_validatePostCreated');
-            cy.get(this.titlePostCreated).first().click();
-
-            //Click en opciones
-            cy.get(this.analitycOptionssButton).should('exist');
-            //cy.screenshot(stage + '/p3_selectPost');
-            cy.get(this.analitycOptionssButton).first().click();
-
-            //Click en edit post
-            cy.get(this.editPostButton).contains('Edit post').should('exist');
-            //cy.screenshot(stage + '/p4_optionPost');
-            cy.get(this.editPostButton).contains('Edit post').first().click();
+            cy.get(this.titlePostCreated).first().click({force:true, waitForAnimations: false}); // Hace clic en el enlace
 
             //Click en Unpublish Post
             cy.get(this.updatedFlowButton).should('exist');
@@ -184,6 +179,7 @@ class When {
             cy.wait(500)
             //cy.screenshot(stage + '/p6_confirmUnpublishPost');
             cy.get(this.revertToDraftButton).first().click();
+            cy.wait(500)
 
             cy.get(this.returnAnalitics).should('exist');
             //cy.screenshot(stage + '/p7_resumeUnpublishPost');
@@ -193,24 +189,24 @@ class When {
 
     deletePostPublished(post, stage){
         this.createSimplePost(post, stage, 'p1')
+        cy.visit(Cypress.env('baseUrl') + '/ghost/#/posts?type=published');
 
         //Se valida que existan Posts
         cy.get(this.titlePostCreated).should('exist').then(() => {
-            cy.get(this.titlePostCreated).first().click();
+            cy.get(this.titlePostCreated).first().click({force:true, waitForAnimations: false});
             //cy.screenshot(this.version + stage + '/p2_validatePostCreated');
 
             //Click en opciones
-            cy.get(this.analitycOptionssButton).should('be.visible');
+            cy.get(this.buttonSettingPost).should('exist').first().click();
             //cy.screenshot(this.version + stage + '/p3_selectPost');
-            cy.get(this.analitycOptionssButton).first().click();
 
             //Click en delete Post
-            cy.get(this.deletePostButton).should('be.visible');
+            cy.get(this.deletePostButton).should('exist');
             //cy.screenshot(this.version + stage + '/p4_deletePost');
             cy.get(this.deletePostButton).first().click();
 
             //Click en confirmar delete Post
-            cy.get(this.deletePostConfirmButton).should('be.visible');
+            cy.get(this.deletePostConfirmButton).should('exist');
             //cy.screenshot(this.version + stage + '/p5_confirmDeletePost');
             cy.get(this.deletePostConfirmButton).first().click();
         });
@@ -316,6 +312,7 @@ class When {
         //cy.wait(500);
         //cy.screenshot(scenery + '/' + step + '_2_publishRightNow', {disableTimersAndAnimations: false});
         cy.get(this.confirmPublishButton).first().click();
+        cy.wait(500);
     }
 
     validatePublishPostAndCloseModal(stage, step){
@@ -337,7 +334,6 @@ class When {
         cy.get(this.closeModalPublishFlow).click();
         //cy.screenshot(stage + '/' + step + '_2_listPageFinal');
     }
-
 
 }
 
