@@ -11,6 +11,26 @@
     {
       "title": "Página con #@$%^&* Especiales",
       "htmlContent": "<h2> Esta es una prueba con caracteres especiales en el título. </h2>"
+    },
+    {
+      "title": "Pagina con tabla HTML",
+      "htmlContent": "<table border=\"1\"><thead><tr><th>Caracter</th><th>Descripción</th></tr></thead><tbody><tr><td>#</td><td>Numeral</td></tr><tr><td>@</td><td>Arroba</td></tr><tr><td>$</td><td>Signo de dólar</td></tr><tr><td>%</td><td>Porcentaje</td></tr><tr><td>^</td><td>Acento circunflejo</td></tr><tr><td>&</td><td>Comercial 'y'</td></tr><tr><td>*</td><td>Asterisco</td></tr></tbody></table>"
+    },
+    {
+      "title": "Página con lista HTML",
+      "htmlContent": "<ul><li># Numeral</li><li>@ Arroba</li><li>$ Signo de dólar</li><li>% Porcentaje</li><li>^ Acento circunflejo</li><li>& Comercial 'y'</li><li>* Asterisco</li></ul>"
+    },
+    {
+      "title": "The Rise of Sustainable Energy",
+      "htmlContent": "<div class=\"article-body\"><h1>Exploring New Horizons</h1><p>This is an exciting article about the future of technology. The world is changing at a fast pace, and it's important to stay informed.</p><p><a href=\"https://example.com/article-details\">Read more</a></p></div>"
+    },
+    {
+      "title": "Exploring the Depths of the Ocean",
+      "htmlContent": "<p>Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, turpis et commodo pharetra, est eros bibendum elit, nec luctus magna felis sollicitudin mauris.</p><h3>Learn More:</h3><p>For more details, visit <a href=\"https://example.com\">our website</a> or contact us at <a href=\"mailto:info@example.com\">info@example.com</a>.</p>"
+    },
+    {
+      "title": "How to Start Your Own Business",
+      "htmlContent": "<p>Starting succeed.</p><iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/XYZabcd123\" title=\"Business Tips Video\" frameborder=\"0\" allowfullscreen></iframe><p>If you need advice, feel free to contact us:</p><form><label for=\"name\">Name:</label><input type=\"text\" id=\"name\" name=\"name\"><label for=\"email\">Email:</label><input type=\"email\" id=\"email\" name=\"email\"><input type=\"submit\" value=\"Submit\"></form>"
     }
 
   ],
@@ -22,6 +42,10 @@
     {
       "title": "15748632547895475267",
       "url": "https://www.youtube.com/watch?v=x91MPoITQ3I"
+    },
+    {
+      "title": "volutpat sapien arcu sed augue",
+      "url": "http://dedecms.com/vel/dapibus/at/diam/nam/tristique/tortor.json?vulputate=convallis&ut=duis&ultrices=consequat&vel=dui&augue=nec&vestibulum=nisi&ante=volutpat&ipsum=eleifend&primis=donec&in=ut&faucibus=dolor&orci=morbi&luctus=vel&et=lectus&ultrices=in&posuere=quam&cubilia=fringilla&curae=rhoncus&donec=mauris&pharetra=enim"
     }
   ],
   "pagesEdit": [
@@ -32,14 +56,20 @@
     {
       "title": "My Page to to test 254",
       "updatedTitle": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin convallis tortor id feugiat faucibus. Nam ac lectus justo. Nulla facilisi. Pellentesque commodo lorem at facilisis consequat. Donec eget risus sed nulla accumsan venenatis at in turdddddd. rrraaaaaa"
-    }
+    },
+    {"title":"nulla ut","updatedTitle":"lectus in quam fringilla rhoncus mauris enim leo rhoncus sed"},
+    {"title":"Lorem ipsum dolor", "updatedTitle":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. 🌟 Vivamus lacinia odio vitae vestibulum. 🚀 Curabitur venenatis, nisl in bibendum. 💻 Integer pulvinar leo id viverra. 🎉"}
   ],
 
   "pagesDelete": [
     {
       "title": "Página de prueba para eliminar",
       "htmlContent": "<h2>Contenido de la página de prueba</h2>"
-    }
+    },
+    {
+      "title":"congue diam id ornare imperdiet sapien urna pretium","url":"http://google.fr/quis.jsp?posuere=iaculis&cubilia=justo&curae=in&duis=hac&faucibus=habitasse&accumsan=platea&odio=dictumst&curabitur=etiam&convallis=faucibus&duis=cursus&consequat=urna&dui=ut&nec=tellus&nisi=nulla&volutpat=ut&eleifend=erat&donec=id&ut=mauris&dolor=vulputate&morbi=elementum&vel=nullam&lectus=varius&in=nulla"},
+    {
+      "title":"blandit lacinia erat vestibulum","url":"http://google.de/tempus/vel/pede/morbi/porttitor/lorem/id.js?velit=magna&vivamus=vestibulum&vel=aliquet&nulla=ultrices&eget=erat&eros=tortor&elementum=sollicitudin&pellentesque=mi&quisque=sit&porta=amet&volutpat=lobortis&erat=sapien&quisque=sapien&erat=non&eros=mi&viverra=integer&eget=ac&congue=neque&eget=duis&semper=bibendum&rutrum=morbi&nulla=non&nunc=quam&purus=nec&phasellus=dui&in=luctus&felis=rutrum&donec=nulla&semper=tellus&sapien=in&a=sagittis&libero=dui&nam=vel&dui=nisl&proin=duis&leo=ac&odio=nibh&porttitor=fusce&id=lacus&consequat=purus&in=aliquet&consequat=at&ut=feugiat&nulla=non&sed=pretium&accumsan=quis&felis=lectus&ut=suspendisse&at=potenti&dolor=in&quis=eleifend&odio=quam&consequat=a&varius=odio&integer=in&ac=hac&leo=habitasse&pellentesque=platea&ultrices=dictumst&mattis=maecenas&odio=ut&donec=massa&vitae=quis&nisi=augue&nam=luctus&ultrices=tincidunt&libero=nulla&non=mollis&mattis=molestie&pulvinar=lorem&nulla=quisque&pede=ut&ullamcorper=erat&augue=curabitur&a=gravida&suscipit=nisi&nulla=at&elit=nibh&ac=in&nulla=hac&sed=habitasse"}
   ],
   "pagesError": [
     {
@@ -95,10 +125,13 @@
       "color": "FF5733",
       "slug": "1",
       "description": "1"
+    },
+    {
+      "name": "Descripcion con emojis",
+      "color": "33b8ff",
+      "slug": "1",
+      "description": "Una etiqueta con emojis y símbolos especiales como 🌟, #, @."
     }
 
-
-
   ]
-
 }

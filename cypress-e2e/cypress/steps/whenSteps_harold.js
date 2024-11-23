@@ -888,6 +888,7 @@ class When {
 
         cy.fixture('testData').then((data) => {
             const videoData = data.videos[index];
+            setSharedData("tituloSeleccionado", videoData.title)
 
             cy.get(this.titleInput).type(`${videoData.title} ${this.time}`);
             cy.get(this.titleInput).type('{enter}');
@@ -907,6 +908,7 @@ class When {
             cy.get(this.closeModalPublishFlow).click();
         });
     }
+
 
     createAndPublishPageEditAndSavePool(index) {
         cy.fixture('testData').then((data) => {
@@ -931,9 +933,9 @@ class When {
     }
 
 
-    createPublishAndDeletePagePool(){
+    createPublishAndDeletePagePool(index){
         cy.fixture('testData').then((data) => {
-            const pageData = data.pagesDelete[0];
+            const pageData = data.pagesDelete[index];
 
             cy.screenshot('5/e13/p1-pagina-creada-listada');
             cy.contains('New page').click({ force: true, waitForAnimations: false });
@@ -1007,6 +1009,7 @@ class When {
             cy.get(this.tagColorInput).type(tagColor);
             cy.get(this.tagSlugInput).type(tagData.slug);
             cy.get(this.tagDescriptionInput).type(tagDescription);
+            setSharedData("tagMockaroo", tagData.name)
 
             cy.get(this.tagNameInput).scrollIntoView();
 
@@ -1178,6 +1181,86 @@ class When {
         // Publicar la página y validar la publicación
         this.publishPostAndPage(this.version + scenery, 'p6');
         this.validatePublishPageAndCloseModal(this.version + scenery, 'p7');
+    }
+
+    createNewTagFaker() {
+        const tagData = {
+            name: faker.commerce.productName(),
+                color: faker.internet.color().replace('#', ''),
+                slug: faker.lorem.slug(),
+                description: faker.lorem.paragraph().slice(0, 500)
+            };
+        setSharedData('tagData', tagData);
+
+            cy.screenshot('5/e15/p1-crear-nuevo-tag');
+            cy.contains('a.gh-btn-primary', 'New tag').click();
+
+            cy.get(this.tagNameInput).type(tagData.name);
+            cy.get(this.tagColorInput).type(tagData.color);
+            cy.get(this.tagSlugInput).type(tagData.slug);
+            cy.get(this.tagDescriptionInput).type(tagData.description);
+
+            cy.get(this.tagNameInput).scrollIntoView();
+
+            cy.screenshot('5/e15/p2-formulario-completo');
+            cy.wait(1000);
+
+            cy.get(this.tagSaveButton).click();
+            cy.wait(1000);
+        }
+
+    createNewTagMockaroo(){
+        cy.fixture('mockarooData').then((data) => {
+            const randomIndex = Math.floor(Math.random() * 10);
+            const tagData = data[1];
+
+            cy.screenshot('5/e15/p1-crear-nuevo-tag');
+            cy.contains('a.gh-btn-primary', 'New tag').click();
+
+            const tagColor = tagData.color;
+            const tagDescription = tagData.description;
+            const tagName = tagData.name;
+            console.log(tagName, "este es el nombre")
+
+            cy.get(this.tagNameInput).type(tagData.name);
+            cy.get(this.tagColorInput).type(tagColor);
+            cy.get(this.tagSlugInput).type(tagData.slug);
+            cy.get(this.tagDescriptionInput).type(tagDescription);
+            setSharedData("tagDataTest", tagName)
+
+            cy.get(this.tagNameInput).scrollIntoView();
+
+            cy.screenshot('5/e15/p2-formulario-completo');
+            cy.wait(1000);
+
+            cy.get(this.tagSaveButton).click();
+            cy.wait(1000);
+        });
+    }
+    createNewTagFakerName() {
+        const tagData = {
+            name: faker.lorem.words(50).slice(0, 200),
+            color: faker.internet.color().replace('#', ''),
+            slug: faker.lorem.slug(),
+            description: faker.lorem.paragraph().slice(0, 500)
+        };
+        setSharedData('tagData', tagData);
+
+        cy.screenshot('5/e15/p1-crear-nuevo-tag');
+        cy.contains('a.gh-btn-primary', 'New tag').click();
+
+        cy.get(this.tagNameInput).type(tagData.name);
+        cy.get(this.tagColorInput).type(tagData.color);
+        cy.get(this.tagSlugInput).type(tagData.slug);
+        cy.get(this.tagDescriptionInput).type(tagData.description);
+
+        cy.get(this.tagNameInput).scrollIntoView();
+
+        cy.screenshot('5/e15/p2-formulario-completo');
+        cy.wait(1000);
+
+        cy.get(this.tagSaveButton).click();
+        cy.wait(1000);
     }
 
 }

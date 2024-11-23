@@ -1,12 +1,6 @@
-import { setSharedData, getSharedData } from '../utils/sharedData';
-
-
 class Then {
     validatePageWithVideoCreated(){
         cy.contains('Página con video de YouTube').should('be.visible');
-    }
-    validatePageWithTitleNumberCreated(){
-        cy.contains('15748632547895475267').should('be.visible');
     }
 
     validatePageWasEditedAndCreated(){
@@ -135,63 +129,6 @@ class Then {
         cy.contains(Cypress.env('updatedSiteTitle')).should('exist');
         cy.screenshot('5/e20/p2-titulo-actualizado', {disableTimersAndAnimations: false,});
     }
-
-    seePagePublishedWithHtmlFaker() {
-        const dynamicTitle = getSharedData('pageTitle');
-
-        cy.visit(Cypress.env('pageUrl'));
-
-        cy.contains(dynamicTitle).should('exist');
-    }
-
-    seeAlertMessage() {
-        cy.get('aside.gh-alerts')
-            .should('exist')
-            .within(() => {
-                cy.get('article.gh-alert.gh-alert-red')
-                    .should('be.visible')
-                    .find('.gh-alert-content')
-                    .should('contain.text', 'Title cannot be longer than 255 characters.');
-            });
-    }
-    validateErrorTag(){
-        cy.get('p.response')
-            .should('exist')
-            .should('contain.text', 'Tag names cannot be longer than 191 characters.');
-
-    }
-    validateTagWasCreatedName(tagName){
-        cy.visit(Cypress.env('tagsUrl'));
-        cy.get('.tags-list').should('contain', tagName);
-        cy.contains(tagName).should('exist');
-        cy.screenshot('5/e15/p3-tag-creado-completo');
-    }
-
-    validateErrorDescriptionTag(){
-        cy.get('.response')
-            .should('contain', 'Description cannot be longer than 500 characters.');
-    }
-
-    seePagePublishedWithVideoFaker() {
-        const dynamicTitle = getSharedData('pageVideoTitle');
-
-        cy.visit(Cypress.env('pageUrl'));
-
-        cy.contains(dynamicTitle).should('exist');
-    }
-
-    seePageUpdatedWithFaker() {
-        // Recuperar los datos generados previamente
-        const dynamicTitle = getSharedData('pageTitle');
-        const dynamicUpdatedTitle = getSharedData('updatedTitle');
-
-        // Navegar a la URL de las páginas
-        cy.visit(Cypress.env('pageUrl'));
-
-        // Verificar el título actualizado
-        cy.contains(dynamicUpdatedTitle).should('exist');
-    }
-
 }
 
 
