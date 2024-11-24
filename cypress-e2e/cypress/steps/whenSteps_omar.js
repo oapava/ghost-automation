@@ -1,3 +1,5 @@
+import { getPostDataDynamicrandom, schemaFaker } from '../helpers/helpers';
+
 class When {
     //Getters Page Objects
     get version(){
@@ -253,7 +255,93 @@ class When {
     get temporalFilePath(){
         return 'cypress/fixtures/tempData.json';
     }
+    
+    get removeAuthorPostButton(){
+        return 'span[class="ember-power-select-multiple-remove-btn"]';
+    }
+    
+    get slugPostName(){
+        return 'input[name="post-setting-slug"]';
+    }
+    
+    get customExerptPostText(){
+        return '#custom-excerpt';
+    }
+    
+    get siteTitleConfig(){
+        return 'h2[class="mb-4 ml-2 text-base font-semibold tracking-normal text-black dark:text-grey-400"]';
+    }
+    
+    get h2Element(){
+        return 'h2';
+    }
+    
+    get designSection(){
+        return '#design';
+    }
+    
+    get designOptionsContainer(){
+        return 'div[class="flex items-start justify-between gap-4"]';
+    }
+    
+    get descriptionSitePlaceHolder(){
+        return 'input[value="Thoughts, stories and ideas."]';
+    }
+    
+    get colorConfigInput(){
+        return 'input[aria-label="Color value"]';
+    }
+    
+    get colorConfigInput(){
+        return 'input[aria-label="Color value"]';
+    }
 
+    get navigationSection(){
+        return '#navigation';
+    }
+
+    get navigationOptionsContainer(){
+        return 'div[data-testid="navigation"]';
+    }
+    
+    get newItemNavigationConfig(){
+        return 'input[placeholder="New item label"]';
+    }
+    
+    get nextInputNavigation(){
+        return 'input[value="http://localhost:2369/"]';
+    }
+
+    get navigationItemSecondary(){
+        return 'button[title="Secondary"]';
+    }
+    
+    get staffSection(){
+        return '#staff';
+    }
+    
+    get emailContributorInput(){
+        return 'input[placeholder="jamie@example.com"]';
+    }
+    
+    get InvitationTextButton(){
+        return 'Send invitation';
+    }
+    
+    get ownerButton(){
+        return 'div[data-testid="owner-user"]';
+    }
+    
+    get ownerFormInputs(){
+        return 'input[class="peer z-[1] order-2 h-9 w-full bg-transparent px-3 py-1.5 text-sm placeholder:text-grey-500 dark:placeholder:text-grey-700 md:h-[38px] md:py-2 md:text-md dark:text-white rounded-lg"]';
+    }
+    
+    get ownerButon(){
+        return 'button[class="cursor-pointer bg-black text-white dark:bg-white dark:text-black hover:bg-grey-900 inline-flex items-center justify-center whitespace-nowrap rounded text-sm transition font-bold h-[34px] px-4 min-w-[80px]"]';
+    }
+
+
+    
     //When Methods
     createPageAndPublishWithVideo(){
         cy.screenshot('5/e11/p1-visit-page-list');
@@ -290,7 +378,7 @@ class When {
         cy.screenshot(this.version + scenery + '/p1_newPost');
 
         //Se ingresa titulo y contenido en negrita del post
-        cy.get('@fixture').then((data) => {
+        cy.get('@fixturePost').then((data) => {
             cy.get(this.titleInput).type(data[0].title);
         });
 
@@ -309,12 +397,12 @@ class When {
         cy.screenshot(this.version + scenery + '/p1_newPost');
 
         //Se ingresa titulo del post
-        cy.get('@fixture').then((data) => {
+        cy.get('@fixturePost').then((data) => {
             cy.get(this.titleInput).type(data[1].title);
         });
         cy.screenshot(this.version + scenery + '/p2_addTitlePost');
         cy.get(this.titleInput).type('{enter}');
-        cy.get('@fixture').then((data) => {
+        cy.get('@fixturePost').then((data) => {
             cy.get(this.textAreaContent).first().type(data[1].content);
         });
         cy.screenshot(this.version + scenery + '/p3_addContentBold');
@@ -326,7 +414,13 @@ class When {
     editAndPublishPostMarkdown(){
         var scenery = 'e3';
         //Se crea Post para luego editar
-        this.createSimplePost(this.version + scenery,'p1')
+
+        //Generar indice aleatorio
+        const randomIndex = Math.floor(Math.random() * 51);
+
+        cy.get('@fixturePost').then((data) => {
+            this.createSimplePostDynamicRandom(this.version + scenery,'p1', data[randomIndex].title)
+        });
         cy.visit(Cypress.env('postPageUrl')+ '?type=published');
         cy.url().should('include', '/posts?type=published');
         cy.screenshot(this.version + scenery + '/p2_pagePost');
@@ -336,10 +430,13 @@ class When {
         cy.get(this.titleInput).should('be.visible');
 
         //Se ingresa titulo del post
-        cy.get('@fixture').then((data) => {
+        cy.get('@fixturePost').then((data) => {
             cy.get(this.textAreaContent).first().type(data[3].content);
         });
-        cy.get(this.titleInput).type('(Editado!)');
+        cy.get('@fixturePost').then((data) => {
+            cy.get(this.titleInput).first().type(data[3].title);
+        });
+
         cy.get(this.titleInput).type('{enter}');
         cy.screenshot(this.version + scenery + '/p4_editedPost');
         
@@ -361,8 +458,8 @@ class When {
 
 
         //Se ingresa titulo del post
-        cy.get('@fixture').then((data) => {
-            cy.get(this.titleInput).type(data[3].title);
+        cy.get('@fixturePost').then((data) => {
+            cy.get(this.titleInput).type(data[4].title);
         });
         cy.screenshot(this.version + scenery + '/p2_addTitlePost');
         cy.get(this.titleInput).type('{enter}');
@@ -389,12 +486,12 @@ class When {
         cy.screenshot(this.version + scenery + '/p1_newPost');
 
         //Se ingresa titulo del post
-        cy.get('@fixture').then((data) => {
+        cy.get('@fixturePost').then((data) => {
             cy.get(this.titleInput).type(data[4].title);
         });
         cy.screenshot(this.version + scenery + '/p2_addTitlePost');
         cy.get(this.titleInput).type('{enter}');
-        cy.get('@fixture').then((data) => {
+        cy.get('@fixturePost').then((data) => {
             cy.get(this.textAreaContent).first().type(data[4].content);
         });
         cy.screenshot(this.version + scenery + '/p3_addContent');
@@ -884,7 +981,8 @@ class When {
         cy.get(this.saveSiteTitleButton).first().click();
     }
 
-    async createAndPublishPostDynamicRandom(){
+    async createAndPublishPostDynamicRandom( {title} ){
+        
         var scenery = 'e6';
         // Hacer click en el botón de "New post"
         cy.get(this.spanElement).contains('New post').click({force:true, waitForAnimations: false, animationDistanceThreshold: 20});
@@ -892,10 +990,7 @@ class When {
         cy.screenshot(this.version + scenery + '/p1_newPost');
 
         //Se ingresa titulo y contenido en negrita del post
-        this.getPostDataMokaroo().then((content)=>{
-            cy.writeFile(this.temporalFilePath, content)
-            cy.get(this.titleInput).type(content.title);
-        })
+        cy.get(this.titleInput).type(title);
 
         cy.screenshot(this.version + scenery + '/p2_addTitlePost');
         cy.get(this.titleInput).type('{enter}');
@@ -904,7 +999,7 @@ class When {
         this.validatePublishPostAndCloseModal(this.version + scenery,'p4');
     }
 
-    createAndPublishPostBoldDynamicRandom(){
+    createAndPublishPostBoldDynamicRandom( {title,boldContent } ){
         var scenery = 'e7';
         // Hacer click en el botón de "New post"
         cy.get(this.spanElement).contains('New post').click({force:true, waitForAnimations: false, animationDistanceThreshold: 20});
@@ -912,28 +1007,26 @@ class When {
         cy.screenshot(this.version + scenery + '/p1_newPost');
 
         //Se ingresa titulo del post
-        this.getPostDataMokaroo().then((content)=>{
-            cy.writeFile(this.temporalFilePath, content)
-            cy.get(this.titleInput).type(content.title);
-        });
+        cy.get(this.titleInput).type(title);
+
         cy.screenshot(this.version + scenery + '/p2_addTitlePost');
         cy.get(this.titleInput).type('{enter}');
         //Se ingresa el contenido
-        cy.readFile(this.temporalFilePath).then(({boldContent}) => {
-            cy.get(this.textAreaContent).first().type(boldContent);
-        });
+        cy.get(this.textAreaContent).first().type(boldContent);
+
         cy.screenshot(this.version + scenery + '/p3_addContentBold');
 
         this.publishPostAndPage(this.version + scenery,'p4');
         this.validatePublishPostAndCloseModal(this.version + scenery,'p5');
     }
 
-    editAndPublishPostMarkdownDynamicRandom(){
-        var scenery = 'e3';
+    editAndPublishPostMarkdownDynamicRandom( {boldItalicsContent, title} ){
+        var scenery = 'e8';
         //Se crea Post para luego editar con contenido dinamico aleatorio
-        this.getPostDataMokaroo().then((content)=>{
-            this.createSimplePostDynamicRandom(this.version + scenery,'p1', content.title)
-        });
+        getPostDataDynamicrandom().then(( firstContent )=>{
+            this.createSimplePostDynamicRandom(this.version + scenery,'p1', firstContent.title);
+        })
+
         cy.visit(Cypress.env('postPageUrl')+ '?type=published');
         cy.url().should('include', '/posts?type=published');
         cy.screenshot(this.version + scenery + '/p2_pagePost');
@@ -943,12 +1036,10 @@ class When {
         cy.get(this.titleInput).should('be.visible');
 
         //Se ingresa titulo del post
-        this.getPostDataMokaroo().then((content)=>{
-            cy.writeFile(this.temporalFilePath, content)
-            cy.get(this.textAreaContent).first().type(content.boldItalicsContent);
-            cy.writeFile(this.temporalFilePath, {})
-        });
-        cy.get(this.titleInput).type('(Editado!)');
+        cy.get(this.titleInput).clear();
+        cy.get(this.titleInput).type(title);
+        cy.get(this.textAreaContent).first().type(boldItalicsContent);
+        
         cy.get(this.titleInput).type('{enter}');
         cy.screenshot(this.version + scenery + '/p4_editedPost');
         
@@ -961,8 +1052,8 @@ class When {
         cy.screenshot(this.version + scenery + '/p4_editedPost');
     }
 
-    createAndPublishPostWhithImageDynamicRandom(){
-        var scenery = 'e8';
+    createAndPublishPostWhithImageDynamicRandom( {title, } ){
+        var scenery = 'e9';
         // Hacer click en el botón de "New post"
         cy.get(this.spanElement).contains('New post').click({force:true, waitForAnimations: false, animationDistanceThreshold: 20});
         cy.get(this.titleInput).should('be.visible');
@@ -970,10 +1061,8 @@ class When {
 
 
         //Se ingresa titulo del post
-        this.getPostDataMokaroo().then((content)=>{
-            cy.writeFile(this.temporalFilePath, content)
-            cy.get(this.titleInput).first().type(content.title);
-        });
+        cy.get(this.titleInput).first().type(title);
+        
         cy.screenshot(this.version + scenery + '/p2_addTitlePost');
         cy.get(this.titleInput).type('{enter}');
         //Agregar imagen
@@ -990,7 +1079,124 @@ class When {
         this.validatePublishPostAndCloseModal(this.version + scenery,'p6');
     }
 
-    createAndPublishPostWhithContentDynamicRandom(){
+    createAndPublishPostWhithContentDynamicRandom( {title, content} ){
+        
+        var scenery = 'e10';
+        //ir a seccion de crear post
+        cy.get(this.createPostButton).click();
+        cy.url().should('contain', '/post');
+        cy.screenshot(this.version + scenery + '/p1_newPost');
+
+        //Se ingresa titulo del post
+        cy.get(this.titleInput).first().type(title);
+        
+        cy.screenshot(this.version + scenery + '/p2_addTitlePost');
+        cy.get(this.titleInput).type('{enter}');
+        cy.get(this.textAreaContent).first().type(content);
+        
+        cy.screenshot(this.version + scenery + '/p3_addContent');
+
+        this.publishPostAndPage(this.version + scenery,'p4');
+        this.validatePublishPostAndCloseModal(this.version + scenery,'p5');
+    }
+
+    createAndPublishPostRandom( {title} ){
+        var scenery = 'e11';
+        // Hacer click en el botón de "New post"
+        cy.get(this.spanElement).contains('New post').click({force:true, waitForAnimations: false, animationDistanceThreshold: 20});
+        cy.get(this.titleInput).should('be.visible');
+        cy.screenshot(this.version + scenery + '/p1_newPost');
+
+        //Se ingresa titulo y contenido en negrita del post
+        cy.get('@fixturePost').then((data) => {
+            cy.get(this.titleInput).type(title);
+        });
+
+        cy.screenshot(this.version + scenery + '/p2_addTitlePost');
+        cy.get(this.titleInput).type('{enter}');
+
+        this.publishPostAndPage(this.version + scenery,'p3');
+        this.validatePublishPostAndCloseModal(this.version + scenery,'p4');
+    }
+
+    createAndPublishPostBoldrandom({title, contentBold}){
+        var scenery = 'e12';
+        // Hacer click en el botón de "New post"
+        cy.get(this.spanElement).contains('New post').click({force:true, waitForAnimations: false, animationDistanceThreshold: 20});
+        cy.get(this.titleInput).should('be.visible');
+        cy.screenshot(this.version + scenery + '/p1_newPost');
+
+        //Se ingresa titulo del post
+        cy.get(this.titleInput).type(title);
+
+        cy.screenshot(this.version + scenery + '/p2_addTitlePost');
+        cy.get(this.titleInput).type('{enter}');
+
+        cy.get(this.textAreaContent).first().type(contentBold);
+
+        cy.screenshot(this.version + scenery + '/p3_addContentBold');
+
+        this.publishPostAndPage(this.version + scenery,'p4');
+        this.validatePublishPostAndCloseModal(this.version + scenery,'p5');
+    }
+
+    editAndPublishPostMarkdownRandom( {title, content} ){
+        var scenery = 'e3';
+        //Se crea Post para luego editar
+        const contentFirst = schemaFaker();
+        this.createSimplePostDynamicRandom(this.version + scenery,'p1', contentFirst.title)
+        cy.visit(Cypress.env('postPageUrl')+ '?type=published');
+        cy.url().should('include', '/posts?type=published');
+        cy.screenshot(this.version + scenery + '/p2_pagePost');
+
+        // Se toma el el titulo  del último post
+        cy.get(this.linkPostListTitle).first().click();
+        cy.get(this.titleInput).should('be.visible');
+
+        //Se ingresa titulo del post
+        cy.get(this.textAreaContent).first().type(content);
+
+        cy.get(this.titleInput).clear();
+        cy.get(this.titleInput).type(title);
+        cy.get(this.titleInput).type('{enter}');
+        cy.screenshot(this.version + scenery + '/p4_editedPost');
+        
+        cy.get(this.buttonPublishEditedsave).should('be.visible');
+        cy.get(this.buttonPublishEditedsave).first().click();
+        cy.wait(500)
+        cy.get(this.returnEditorPost).first().click();
+
+        cy.url().should('include', '/posts?type=published');
+        cy.screenshot(this.version + scenery + '/p4_editedPost');
+    }
+
+    createAndPublishPostWhithImageRandom( {title} ){
+        var scenery = 'e14';
+        // Hacer click en el botón de "New post"
+        cy.get(this.spanElement).contains('New post').click({force:true, waitForAnimations: false, animationDistanceThreshold: 20});
+        cy.get(this.titleInput).should('be.visible');
+        cy.screenshot(this.version + scenery + '/p1_newPost');
+
+
+        //Se ingresa titulo del post
+        cy.get(this.titleInput).type(title);
+        cy.screenshot(this.version + scenery + '/p2_addTitlePost');
+        cy.get(this.titleInput).type('{enter}');
+        //Agregar imagen
+        cy.get(this.unsplashImageButton).first().click({force:true})
+        cy.wait(1000)
+        cy.screenshot(this.version + scenery + '/p3_unsplashImage');
+        cy.contains(this.aElement, 'Insert image').then(($elements) => {
+            const randomIndex = Math.floor(Math.random() * $elements.length);
+            cy.wrap($elements[randomIndex]).click();
+        });
+        cy.screenshot(this.version + scenery + '/p4_addhImage');
+
+        this.publishPostAndPage(this.version + scenery,'p5');
+        this.validatePublishPostAndCloseModal(this.version + scenery,'p6');
+    }
+
+    createAndPublishPostWhithContentRandom({title, content}){
         
         var scenery = 'e5';
         //ir a seccion de crear post
@@ -999,35 +1205,291 @@ class When {
         cy.screenshot(this.version + scenery + '/p1_newPost');
 
         //Se ingresa titulo del post
-        this.getPostDataMokaroo().then((content)=>{
-            cy.writeFile(this.temporalFilePath, content)
-            cy.get(this.titleInput).first().type(content.title);
-        });
+        cy.get(this.titleInput).type(title);
+        
         cy.screenshot(this.version + scenery + '/p2_addTitlePost');
         cy.get(this.titleInput).type('{enter}');
-        cy.readFile(this.temporalFilePath).then(({content}) => {
-            cy.get(this.textAreaContent).first().type(content);
-        });
+        cy.get(this.textAreaContent).first().type(content);
+        
         cy.screenshot(this.version + scenery + '/p3_addContent');
 
         this.publishPostAndPage(this.version + scenery,'p4');
         this.validatePublishPostAndCloseModal(this.version + scenery,'p5');
     }
 
-    getPostDataMokaroo(){
-        const url = Cypress.env('mokarooUrl') + '1';
+    removePostAuthorPool(){
+        
+        //Ir a crear un nuevo Post
+        cy.get(this.createPostButton).click();
 
-        return cy.request({
-            method: 'GET',
-            url: url,
-            headers: {
-              'Content-Type': 'application/json'
-            }
-          }).then((response) => {
-            expect(response.status).to.eq(200); 
-            return response.body[0];
-          });
+        //Generar indice aleatorio
+        const randomIndex = Math.floor(Math.random() * 51);
+
+        //Agregar Texto del pool de datos
+        cy.get('@fixturePost').then((data) => {
+            cy.get(this.titleInput).type(data[randomIndex].title);
+        });
+
+        //Agregar contenido del pool de datos
+        cy.get('@fixturePost').then((data) => {
+            cy.get(this.textAreaContent).first().type(data[randomIndex].content);
+        });
+
+        //click en menu de opciones de Post
+        cy.get(this.asignTagButton).click();
+
+        //Eliminar Autor selecionado por defecto
+        cy.get(this.removeAuthorPostButton).first().click();
+
     }
+
+    addCustomUrlPost(){
+        //Ir a crear un nuevo Post
+        cy.get(this.createPostButton).click();
+
+        //Agregar Texto del pool de datos
+        cy.get('@fixturePost').then((data) => {
+            cy.get(this.titleInput).type(data[30].title);
+        });
+
+        //Agregar contenido del pool de datos
+        cy.get('@fixturePost').then((data) => {
+            cy.get(this.textAreaContent).first().type(data[30].content);
+        });
+
+        
+        //click en menu de opciones de Post
+        cy.get(this.asignTagButton).click();
+
+        //Escribir un nuevo slug
+        cy.get('@fixturePost').then((data) => {
+            cy.get(this.slugPostName).invoke('val', '').type(data[30].slug)
+            cy.get(this.titleInput).click()
+        });
+
+    }
+
+    addinvalidExcerpt(){
+         //Ir a crear un nuevo Post
+         cy.get(this.createPostButton).click();
+
+        //Generar indice aleatorio
+        const randomIndex = Math.floor(Math.random() * 51);
+
+         //Agregar Texto del pool de datos
+         cy.get('@fixturePost').then((data) => {
+             cy.get(this.titleInput).type(data[randomIndex].title);
+         });
+ 
+         //Agregar contenido del pool de datos
+         cy.get('@fixturePost').then((data) => {
+             cy.get(this.textAreaContent).first().type(data[randomIndex].content);
+         });
+
+         //click en menu de opciones de Post
+         cy.get(this.asignTagButton).click();
+ 
+         //Escribir un nuevo slug
+         cy.get('@fixturePost').then((data) => {
+             cy.get(this.customExerptPostText).type(data[randomIndex].excerpt)
+             cy.get(this.titleInput).click()
+         });
+ 
+    }
+
+    changebrandConfig(){
+        //Ingresar a la seccion de dise;o y marca
+        cy.get(this.h2Element).contains('Site').scrollIntoView();
+        cy.get(this.designSection).click();
+
+        //Click en cutomize 
+        cy.contains(this.designOptionsContainer, 'Design & branding') 
+            .find('button') 
+            .contains('Customize')
+            .click()
+
+        //Generar indice aleatorio
+        const randomIndex = Math.floor(Math.random() * 51);
+
+        //Cambiar la descripción del sitio
+        cy.get('@fixtureDesign').then((configPool) => {
+            cy.get(this.descriptionSitePlaceHolder).clear().type( configPool[randomIndex].description );
+        });
+
+        //Guardar cambios
+        cy.get('button').contains('Save').first().click();
+        
+    }
+
+    changeNavigationItem(){
+        //Ingresar a la seccion de navegacion
+        cy.get(this.h2Element).contains('Site').scrollIntoView();
+        cy.get(this.navigationSection).click();
+
+        //Click en cutomize 
+        cy.contains(this.navigationOptionsContainer, 'Navigation') 
+            .find('button') 
+            .contains('Customize')
+            .click()
+
+        //Generar indice aleatorio
+        const randomIndex = Math.floor(Math.random() * 50);
+
+        //Cambiar la descripción del sitio
+        cy.get('@fixtureNavigation').then((configPool) => {
+            cy.get(this.newItemNavigationConfig).type( configPool[randomIndex].label);
+            
+            cy.get(this.nextInputNavigation).last().type( configPool[randomIndex].path );
+        });
+
+        //Guardar cambios
+        cy.get('button').contains('Save').first().click();
+    }
+    
+    changeNavigationItemSecondary( {label, path} ){
+        //Ingresar a la seccion de navegacion
+        cy.get(this.h2Element).contains('Site').scrollIntoView();
+        cy.get(this.navigationSection).click();
+
+        //Click en cutomize 
+        cy.contains(this.navigationOptionsContainer, 'Navigation') 
+            .find('button') 
+            .contains('Customize')
+            .click()
+
+        //Ingresar a la secci'on de naegacion secundaria
+        cy.get(this.navigationItemSecondary).click();
+
+        //Cambiar la descripción del sitio
+        cy.get(this.newItemNavigationConfig).type( label);
+        cy.get(this.nextInputNavigation).last().type( path );
+
+        //Guardar cambios
+        cy.get('button').contains('Save').first().click();
+    }
+
+    inviteUserToBeContributor({email}){
+        //Ingresar a la seccion de Staff
+        cy.get(this.h2Element).contains('General settings').scrollIntoView();
+        cy.get(this.staffSection).click();
+
+        //Click en cutomize 
+        cy.contains('Invite people')
+            .click()
+
+        //Agregar Correo
+        cy.get(this.emailContributorInput).type( email );
+        cy.get('span').contains(this.InvitationTextButton).click();
+    }
+
+    testBademailInField({badEmail}){
+        //Ingresar a la seccion de Staff
+        cy.get(this.h2Element).contains('General settings').scrollIntoView();
+        cy.get(this.staffSection).click();
+
+        //Click en cutomize 
+        cy.contains('Invite people')
+            .click()
+
+        //Agregar Correo
+        cy.get(this.emailContributorInput).type( badEmail );
+        cy.get('span').contains(this.InvitationTextButton).click();
+    }
+
+    editOwnerInfo({name,email,location,website,facebook}){
+        //Ingresar a la seccion de navegacion
+        cy.get(this.h2Element).contains('General settings').scrollIntoView();
+        cy.get(this.navigationSection).click();
+
+        //Click en cutomize 
+        cy.get(this.staffSection)
+            .click()
+
+        //Click en cutomize 
+        cy.get(this.ownerButton).click();
+        //Name
+        cy.get(this.ownerFormInputs).eq(0).clear().type(name); 
+        //Location
+        cy.get(this.ownerFormInputs).eq(3).clear().type(location); 
+        
+        //Website
+        cy.get(this.ownerFormInputs).eq(4).clear().type(website); 
+        
+        //Facebook
+        cy.get(this.ownerFormInputs).eq(5).clear().type(facebook); 
+        
+        cy.get(this.ownerButon).click()
+    }
+
+    editOwnerInfoTwitter({twitter}){
+        //Ingresar a la seccion de navegacion
+        cy.get(this.h2Element).contains('General settings').scrollIntoView();
+        cy.get(this.navigationSection).click();
+
+        //Click en cutomize 
+        cy.get(this.staffSection)
+            .click()
+
+        //Click en cutomize 
+        cy.get(this.ownerButton).click();
+
+        //Twitter
+        cy.get(this.ownerFormInputs).eq(6).clear().type(twitter); 
+        cy.get(this.ownerFormInputs).eq(5).click();
+
+    }
+
+    changeNavigationItemSecondaryRandom( {label, path} ){
+        //Ingresar a la seccion de navegacion
+        cy.get(this.h2Element).contains('Site').scrollIntoView();
+        cy.get(this.navigationSection).click();
+
+        //Click en cutomize 
+        cy.contains(this.navigationOptionsContainer, 'Navigation') 
+            .find('button') 
+            .contains('Customize')
+            .click()
+
+        //Ingresar a la secci'on de naegacion secundaria
+        cy.get(this.navigationItemSecondary).click();
+
+        //Cambiar la descripción del sitio
+        cy.get(this.newItemNavigationConfig).type( label);
+        cy.get(this.nextInputNavigation).last().type( path );
+
+        //Guardar cambios
+        cy.get('button').contains('Save').first().click();
+    }
+
+    inviteUserToBeContributorRandom({email}){
+        //Ingresar a la seccion de Staff
+        cy.get(this.h2Element).contains('General settings').scrollIntoView();
+        cy.get(this.staffSection).click();
+
+        //Click en cutomize 
+        cy.contains('Invite people')
+            .click()
+
+        //Agregar Correo
+        cy.get(this.emailContributorInput).type( email );
+        cy.get('span').contains(this.InvitationTextButton).click();
+    }
+
+    testBademailInFieldRandom({badEmail}){
+        //Ingresar a la seccion de Staff
+        cy.get(this.h2Element).contains('General settings').scrollIntoView();
+        cy.get(this.staffSection).click();
+
+        //Click en cutomize 
+        cy.contains('Invite people')
+            .click()
+
+        //Agregar Correo
+        cy.get(this.emailContributorInput).type( badEmail );
+        cy.get('span').contains(this.InvitationTextButton).click();
+    }
+
+    
 
 }
 

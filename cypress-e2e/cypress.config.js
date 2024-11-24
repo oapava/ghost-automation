@@ -22,7 +22,10 @@ module.exports = {
     domainEmail: "@uniandes.edu.co",
     newMemberName: "Pablo Rivera",
     updatedSiteTitle: 'Título actualizado: Automatizacion Uniandes ' + new Date(),
-    mokarooUrl: 'https://api.mockaroo.com/api/9b8ba860?key=28962a10&count='
+    poolDRPost: 'https://api.mockaroo.com/api/9b8ba860?key=28962a10&count=',
+    poolDRWord: 'https://api.mockaroo.com/api/56263e40?key=28962a10&count=',
+    poolDRContributor: 'https://api.mockaroo.com/api/896d1430?key=28962a10&count=',
+    poolDROwner: 'https://api.mockaroo.com/api/d1de2bf0?key=28962a10&count='
   },
   "screenshotsFolder": "cypress/screenshots"
 };
