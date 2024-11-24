@@ -16,6 +16,26 @@ class Given {
         return 'a[data-test-nav="settings"]';
     }
 
+    get buttonSignIn(){
+        return 'button[data-test-button="sign-in"]';
+    }
+
+    get inputEmail(){
+        return 'input[type="email"]';
+    }
+
+    get inputPass(){
+        return 'input[type="password"]';
+    }
+
+    get settingsButton(){
+        return 'a[data-test-nav="settings"]';
+    }
+
+    get createNewMemberButton(){
+        return 'a[data-test-new-member-button="true"]';
+    }
+
     givenNavigateToInitialPage(){
         cy.visit(Cypress.env('baseUrl') + '/ghost/#/signin');
         cy.get(this.buttonSignIn).should('exist');
@@ -79,6 +99,13 @@ class Given {
         cy.fixture('post.fixtures.json').as('fixturePost');
         cy.fixture('design.fixtures.json').as('fixtureDesign');
         cy.fixture('navigation.fixtures.json').as('fixtureNavigation');
+    }
+
+    givenNavigateToMembersNegative(){
+        cy.visit(Cypress.env('mambersUrl'));
+        cy.url().should('include', '/ghost/#/members');
+        //Crear member
+        cy.get(this.createNewMemberButton).click();
     }
 }
 
