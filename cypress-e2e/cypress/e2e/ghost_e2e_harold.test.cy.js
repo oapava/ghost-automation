@@ -127,16 +127,7 @@ describe('Crear un post', () => {
         // THEN: Validar la creación del tag
         Then.validateTagWasCreatedName("Etiqueta con descripción larga");
     });
-    it('Escenario 12: Crear una etiqueta con una descripción de exactamente 501 caracteres.', () => {
-        // GIVEN: Visitar Tags
-        Given.givenNavigateToTagsPage();
 
-        // WHEN: Crear publicar nuevo tag
-        When.createNewTagPool(6);
-
-        // THEN: Validar error del tag
-        Then.validateErrorDescriptionTag();
-    });
     it('Escenario 13: Crear una nombre de 1 caracter.', () => {
         // GIVEN: Visitar Tags
         Given.givenNavigateToTagsPage();
@@ -209,16 +200,7 @@ describe('Crear un post', () => {
         // THEN: Validar la creación del tag
         Then.validateTagWasCreatedName("aasuscipit nulla");
     });
-    it('Escenario 20: Crear un tag usando faker execendiendo maximo de caracteres', () => {
-        // GIVEN: Visitar Tags
-        Given.givenNavigateToTagsPage();
 
-        // WHEN: Crear publicar nuevo tag
-        When.createNewTagFakerName();
-
-        // THEN: Validar la creación del tag
-        Then.validateErrorTag();
-    });
     it('Escenario 21: Crear y publicar una página con un video de YouTube Mockaroo', () => {
         // GIVEN: Visitar Pages
         Given.givenNavigateToPagePage();
@@ -319,16 +301,7 @@ describe('Crear un post', () => {
             // THEN: Verificar post publicado
             Then. seePagePublishedWithHtmlName("How to Start Your Own Business")
         });
-    it('Escenario 31: Crear una etiqueta con un nombre largo+ 200', () => {
-        // GIVEN: Visitar Tags
-        Given.givenNavigateToTagsPage();
 
-        // WHEN: Crear publicar nuevo tag
-        When.createNewTagPool(2);
-
-        // THEN: Validar la creación del tag
-        Then.validateErrorTag();
-    });
     it('Escenario 32: Crear, publicar y eliminar una página en Ghost Mockaroo', () => {
 
         // GIVEN: Visitar Pages
@@ -342,5 +315,34 @@ describe('Crear un post', () => {
 
     });
 
+    it('Escenario 31: Crear una etiqueta con un nombre largo+ 200', () => {
+        // GIVEN: Visitar Tags
+        Given.givenNavigateToTagsPage();
 
+        // WHEN: Crear publicar nuevo tag
+        When.createNewTagPool(2);
+
+        // THEN: Validar la creación del tag
+        Then.validateErrorTag();
+    });
+    it('Escenario 20: Crear un tag usando faker execendiendo maximo de caracteres', () => {
+        // GIVEN: Visitar Tags
+        Given.givenNavigateToTagsPage();
+
+        // WHEN: Crear publicar nuevo tag
+        When.createNewTagFakerName();
+
+        // THEN: Validar la creación del tag
+        Then.validateErrorTag();
+    });
+    it('Escenario 12: Crear una etiqueta con una descripción de exactamente 501 caracteres.', () => {
+        // GIVEN: Visitar Tags
+        Given.givenNavigateToTagsPage();
+
+        // WHEN: Crear publicar nuevo tag
+        When.createNewTagPool(6);
+
+        // THEN: Validar error del tag
+        Then.validateErrorDescriptionTag();
+    });
 });
