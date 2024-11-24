@@ -27,12 +27,17 @@ class Given {
         cy.visit(Cypress.env('baseUrl') + '/ghost/#/signin');
         cy.get(this.buttonSignIn).should('exist');
     };
-    
+
     givenLogin(){
-        cy.get(this.inputEmail).type(Cypress.env('email'), { force: true });
-        cy.get(this.inputPass).type(Cypress.env('password'), { force: true });
-        cy.get(this.buttonSignIn).click();
-        cy.wait(500);
+        cy.session('ghost-session', () => {
+            cy.visit(Cypress.env('baseUrl') + '/ghost/#/signin');
+            cy.get(this.inputEmail).type(Cypress.env('email'), { force: true });
+            cy.get(this.inputPass).type(Cypress.env('password'), { force: true });
+            cy.screenshot('5/init/p2_login');
+            cy.get(this.buttonSignIn).click();
+            cy.wait(500);
+        });
+
     };
 
     givenNavigateDashboard(){

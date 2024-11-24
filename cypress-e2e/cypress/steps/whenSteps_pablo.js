@@ -1,238 +1,5 @@
 class When {
     //Getters Page Objects
-    get version(){
-        return '5/'
-    }
-
-    get titleInput(){
-        return 'textarea[data-test-editor-title-input]';
-    }
-    
-    get buttonAddCard(){
-        return 'button[aria-label="Add a card"]';
-    }
-    
-    get buttonYoutube(){
-        return 'button[data-kg-card-menu-item="YouTube"]';
-    }
-    
-    get inputEmbedUrl(){
-        return 'input[data-testid="embed-url"]';
-    }
-    
-    get publishFlowButton(){
-        return 'button[data-test-button="publish-flow"]';
-    }
-    
-    get publishContinueButton(){
-        return 'button[data-test-button="continue"]';
-    }
-
-    get closeModalPublishFlow(){
-        return 'button[data-test-button="close-publish-flow"]';
-    }
-    
-    get textAreaContent(){
-        return 'p[data-koenig-dnd-droppable="true"]';
-    }
-    
-    get unsplashImageButton(){
-        return '.gh-editor-feature-image-unsplash';
-    }
-    
-    get createPostButton(){
-        return 'a[data-test-nav="new-story"]';
-    }
-    
-    get titlePostCreated(){
-        return 'span[title="Go to Analytics"]';
-    }
-
-    get analitycOptionssButton(){
-        return 'button[data-test-button="analytics-actions"]';
-    }
-    
-    get editPostButton(){
-        return 'a.edit-post';
-    }
-    
-    get updatedFlowButton(){
-        return 'button[data-test-button="update-flow"]';
-    }
-    
-    get revertToDraftButton(){
-        return 'button[data-test-button="revert-to-draft"]';
-    }
-    
-    get deletePostButton(){
-        return 'button[data-test-button="delete-post"]';
-    }
-    
-    get deletePostConfirmButton(){
-        return 'button[data-test-button="delete-post-confirm"]';
-    }
-    
-    get configurationPanelButton(){
-        return 'button[data-test-psm-trigger]';
-    }
-    
-    get postVisibilitySelect(){
-        return 'select[data-test-select="post-visibility"]';
-    }
-    
-    get htmlEditorButton(){
-        return 'button[data-kg-card-menu-item="HTML"]';
-    }
-    
-    get cmLineDiv(){
-        return 'div[class="cm-line"]';
-    }
-    
-    get newPageButton(){
-        return 'a[href="#/editor/page/"]';
-    }
-    
-    get koenigEditorElement(){
-        return '.koenig-react-editor';
-    }
-    
-    get publishSaveButton(){
-        return 'button[data-test-button="publish-save"]';
-    }
-    
-    get confirmPublishButton(){
-        return 'button[data-test-button="confirm-publish"]';
-    }
-    
-    get contentEntryTitle(){
-        return 'h3.gh-content-entry-title';
-    }
-    
-    get deletePageButton(){
-        return '[data-test-button="delete"]';
-    }
-    
-    get asignTagButton(){
-        return 'button[class="settings-menu-toggle gh-btn gh-btn-editor gh-btn-icon icon-only gh-btn-action-icon"]';
-    }
-    
-    get asignTagInput(){
-        return 'input[class="ember-power-select-trigger-multiple-input"]';
-    }
-    
-    get confirmTagAsign(){
-        return 'li[data-option-index="0"]';
-    }
-    
-    get anchorPostButton(){
-        return 'a[data-test-nav="posts"]';
-    }
-    
-    get createNewMemberButton(){
-        return 'a[data-test-new-member-button="true"]';
-    }
-
-    get returnAnalitics(){
-        return 'a.gh-btn-editor.gh-editor-back-button[data-test-breadcrumb=""]'
-    }
-
-    get memberNameInput(){
-        return 'input[data-test-input="member-name"]';
-    }
-    
-    get memberEmailInput(){
-        return 'input[data-test-input="member-email"]';
-    }
-
-    get memberNoteInput(){
-        return 'textarea[data-test-input="member-note"]'
-    }
-    
-    get saveMemberButton(){
-        return 'button[data-test-button="save"]';
-    }
-    
-    get anchorMembersButton(){
-        return 'a[data-test-nav="members"]';
-    }
-    
-    get searchMembersInput(){
-        return 'input[data-test-input="members-search"]';
-    }
-    
-    get detailMemberButton(){
-        return 'a[data-test-table-data="details"]';
-    }
-    
-    get memberActionsButton(){
-        return 'button[data-test-button="member-actions"]';
-    }
-    
-    get deleteMemberButton(){
-        return 'button[data-test-button="delete-member"]';
-    }
-    
-    get deleteMemberConfirmButton(){
-        return 'button[data-test-button="confirm"]';
-    }
-
-    get time(){
-        const now = new Date();
-        const formattedDate = Math.floor(new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours(), now.getMinutes(), now.getSeconds()).getTime() / 1000);
-        return formattedDate;
-    }
-
-    get editSiteTitleButton(){
-        return 'button[class="cursor-pointer text-grey-900 dark:text-white dark:hover:bg-grey-900 hover:bg-grey-200 hover:text-black inline-flex items-center justify-center whitespace-nowrap rounded text-sm transition font-semibold h-7 px-3"]';
-    }
-    
-    get saveSiteTitleButton(){
-        return 'button[class="cursor-pointer  bg-green text-white hover:bg-green-400 inline-flex items-center justify-center whitespace-nowrap rounded text-sm transition font-bold h-7 px-3"]';
-    }
-    
-    get siteTitleInput(){
-        return 'input[placeholder="Site title"]';
-    }
-    
-    get tagNameInput(){
-        return '[data-test-input="tag-name"]';
-    }
-    
-    get tagColorInput(){
-        return '[data-test-input="accentColor"]';
-    }
-    
-    get tagSlugInput(){
-        return '[data-test-input="tag-slug"]';
-    }
-    
-    get tagDescriptionInput(){
-        return '[data-test-input="tag-description"]';
-    }
-    
-    get tagSaveButton(){
-        return 'button[data-test-button="save"]';
-    }
-
-    get spanElement(){
-        return 'span';
-    }
-
-    get hrefPostSpan(){
-        return 'data-test-link="posts"';
-    }
-
-    get aElement(){
-        return 'a';
-    }
-    
-    get bodyElement(){
-        return 'body';
-    }
-    
-    get liElement(){
-        return 'li';
-    }
 
     get buttoGotToAnalitics(){
         return 'a.gh-post-list-button span[title="Go to Analytics"]';
@@ -240,26 +7,6 @@ class When {
 
     get buttoGotToAnalitics(){
         return 'a.gh-post-list-button span[title="Go to Analytics"]';
-    }
-
-    get linkPostListTitle(){
-        return 'a.gh-post-list-title';
-    }
-
-    get returnEditorPost(){
-        return '.gh-btn-editor.gh-editor-back-button';
-    }
-
-    get buttonPublishEditedsave(){
-        return 'button[data-test-button="publish-save"]';
-    }
-
-    get buttonMemberList(){
-        return 'a[data-test-nav="members"]'
-    }
-
-    get inputAddRecommendation(){
-        return 'input[placeholder="https://www.example.com"]'
     }
 
     get inputShortDescription(){
@@ -584,6 +331,449 @@ class When {
         cy.screenshot('5/e14/p2-confirmacion-guardado');
     }
 
+
+    createAndPublishPageEditAndSave(){
+        // Crear nueva página
+        cy.screenshot('5/e12/p1-click-nueva-pagina')
+        cy.get(this.newPageButton).click();
+        cy.get(this.titleInput).type('My Page to edit{enter}');
+
+        //Publicar post
+        cy.get(this.koenigEditorElement).first().click();
+        this.publishPostAndPage('5/e12','p1');
+        cy.url().should('contain', '/pages');
+
+        // Editar la página recién creada
+        cy.get(this.closeModalPublishFlow).click();
+        cy.screenshot('5/e12/p2-pagina-creada-listada');
+        cy.contains('My Page to edit').click();
+        cy.get(this.titleInput).clear().type('Updated Page Title{enter}').screenshot('5/e12/p3-actualizacion-titulo');
+
+        // Guardar la página actualizada
+        cy.get(this.publishSaveButton).contains('Update').click();
+        cy.screenshot('5/e12/p4-publicacion-pagina-actualizada');
+
+    }
+
+    createNewMemberNegativeInvalid(memberName, emailMember,noteMember="Default Note"){
+
+        cy.get(this.memberNameInput).clear().type(memberName);
+
+        cy.get(this.memberEmailInput).clear().type(emailMember);
+
+        cy.get(this.memberNoteInput).clear().type(noteMember);
+
+        cy.get(this.saveMemberButton).click();
+
+    }
+
+    createMemberAndRecreateIt(memberName,memberEmail){
+        //Crear member
+        cy.wait(1000)
+        this.createNewMember(memberName,memberEmail);
+        //Recrear member
+        cy.wait(1000);
+        this.createNewMemberStay(memberName,memberEmail);
+    }
+
+    createRecommendationValid(URL){
+        //Crear la recomendacion
+        this.createRecommendation(URL);
+        cy.wait(10000);
+        //Confirmar añadir la recomendación
+        cy.get(this.spanElement).filter((index, element) => element.textContent.trim() === 'Add').should('be.visible').click({waitForAnimations: true})
+    }
+
+    createAndPublishPostWithHtml(){
+        var scenery = 'e9';
+        //ir a seccion de crear post
+        cy.get(this.createPostButton).click();
+        cy.url().should('contain', '/post');
+        cy.screenshot(this.version + scenery + '/p1_sectionPost');
+
+        //Se ingresa titulo del post
+        cy.get(this.titleInput).type('Post con HTML 1'); // Post title
+        cy.screenshot(this.version + scenery + '/p2_addTitlePost');
+        cy.get(this.titleInput).type('{enter}');
+
+        //Card de opciones
+        cy.get(this.buttonAddCard).first().click({force:true, waitForAnimations: false});
+        cy.screenshot(this.version + scenery + '/p3_cardOptions');
+
+        //Seleccionar HTML
+        cy.get(this.htmlEditorButton).first().click({force:true, waitForAnimations: false});
+        cy.screenshot(this.version + scenery + '/p4_htmlOptionsSelected');
+
+        //Ingresar texto en html
+        cy.get(this.cmLineDiv).type('<h2> Prueba texto en post </h2>'); 
+        cy.screenshot(this.version + scenery + '/p5_addContentHtml');
+        cy.get(this.cmLineDiv).type('{enter}');
+
+        this.publishPostAndPage(this.version + scenery,'p6');
+        this.validatePublishPostAndCloseModal(this.version + scenery,'p7');
+    }
+
+    createAndPublishPageWithHtml(){
+        var scenery = 'e10';
+        //Click New Page
+        cy.get(this.spanElement).contains('New page').click({force:true, waitForAnimations: false});
+        cy.screenshot(this.version + scenery + '/p1_sectionPage');
+
+        cy.get(this.titleInput).type('Pagina con HTML 1'); // Page title
+        cy.screenshot(this.version + scenery + '/p2_addTitlePage');
+        cy.get(this.titleInput).type('{enter}');
+
+        //Card de opciones
+        cy.get(this.buttonAddCard).first().click({force:true, waitForAnimations: false});
+        cy.screenshot(this.version + scenery + '/p3_cardOptions');
+
+        //Seleccionar HTML
+        cy.get(this.htmlEditorButton).first().click({force:true, waitForAnimations: false});
+        cy.screenshot(this.version + scenery + '/p4_htmlOptionsSelected');
+
+        //Ingresar texto en html
+        cy.get(this.cmLineDiv).type('<h2> Prueba texto pagina </h2>'); 
+        cy.screenshot(this.version + scenery + '/p5_addContentHtml');
+        cy.get(this.cmLineDiv).type('{enter}');
+
+        this.publishPostAndPage(this.version + scenery,'p6');
+        this.validatePublishPageAndCloseModal(this.version + scenery,'p7');
+    }
+
+    //Linea 443 desde aca son los que uso
+    //Getter page object
+    get version(){
+        return '5/'
+    }
+
+    get titleInput(){
+        return 'textarea[data-test-editor-title-input]';
+    }
+
+    get buttonAddCard(){
+        return 'button[aria-label="Add a card"]';
+    }
+
+    get buttonYoutube(){
+        return 'button[data-kg-card-menu-item="YouTube"]';
+    }
+
+    get inputEmbedUrl(){
+        return 'input[data-testid="embed-url"]';
+    }
+
+    get publishFlowButton(){
+        return 'button[data-test-button="publish-flow"]';
+    }
+
+    get publishContinueButton(){
+        return 'button[data-test-button="continue"]';
+    }
+
+    get closeModalPublishFlow(){
+        return 'button[data-test-button="close-publish-flow"]';
+    }
+
+    get textAreaContent(){
+        return 'p[data-koenig-dnd-droppable="true"]';
+    }
+
+    get unsplashImageButton(){
+        return '.gh-editor-feature-image-unsplash';
+    }
+
+    get createPostButton(){
+        return 'a[data-test-nav="new-story"]';
+    }
+
+    get titlePostCreated(){
+        return 'span[title="Go to Analytics"]';
+    }
+
+    get analitycOptionssButton(){
+        return 'button[data-test-button="analytics-actions"]';
+    }
+
+    get editPostButton(){
+        return 'a.edit-post';
+    }
+
+    get updatedFlowButton(){
+        return 'button[data-test-button="update-flow"]';
+    }
+
+    get revertToDraftButton(){
+        return 'button[data-test-button="revert-to-draft"]';
+    }
+
+    get deletePostButton(){
+        return 'button[data-test-button="delete-post"]';
+    }
+
+    get deletePostConfirmButton(){
+        return 'button[data-test-button="delete-post-confirm"]';
+    }
+
+    get configurationPanelButton(){
+        return 'button[data-test-psm-trigger]';
+    }
+
+    get postVisibilitySelect(){
+        return 'select[data-test-select="post-visibility"]';
+    }
+
+    get htmlEditorButton(){
+        return 'button[data-kg-card-menu-item="HTML"]';
+    }
+
+    get cmLineDiv(){
+        return 'div[class="cm-line"]';
+    }
+
+    get newPageButton(){
+        return 'a[href="#/editor/page/"]';
+    }
+
+    get koenigEditorElement(){
+        return '.koenig-react-editor';
+    }
+
+    get publishSaveButton(){
+        return 'button[data-test-button="publish-save"]';
+    }
+
+    get confirmPublishButton(){
+        return 'button[data-test-button="confirm-publish"]';
+    }
+
+    get contentEntryTitle(){
+        return 'h3.gh-content-entry-title';
+    }
+
+    get deletePageButton(){
+        return '[data-test-button="delete"]';
+    }
+
+    get asignTagButton(){
+        return 'button[class="settings-menu-toggle gh-btn gh-btn-editor gh-btn-icon icon-only gh-btn-action-icon"]';
+    }
+
+    get asignTagInput(){
+        return 'input[class="ember-power-select-trigger-multiple-input"]';
+    }
+
+    get confirmTagAsign(){
+        return 'li[data-option-index="0"]';
+    }
+
+    get anchorPostButton(){
+        return 'a[data-test-nav="posts"]';
+    }
+
+    get createNewMemberButton(){
+        return 'a[data-test-new-member-button="true"]';
+    }
+
+    get returnAnalitics(){
+        return 'a.gh-btn-editor.gh-editor-back-button[data-test-breadcrumb=""]'
+    }
+
+    get memberNameInput(){
+        return 'input[data-test-input="member-name"]';
+    }
+
+    get memberEmailInput(){
+        return 'input[data-test-input="member-email"]';
+    }
+
+    get memberNoteInput(){
+        return 'textarea[data-test-input="member-note"]'
+    }
+
+    get saveMemberButton(){
+        return 'button[data-test-button="save"]';
+    }
+
+    get anchorMembersButton(){
+        return 'a[data-test-nav="members"]';
+    }
+
+    get searchMembersInput(){
+        return 'input[data-test-input="members-search"]';
+    }
+
+    get detailMemberButton(){
+        return 'a[data-test-table-data="details"]';
+    }
+
+    get memberActionsButton(){
+        return 'button[data-test-button="member-actions"]';
+    }
+
+    get deleteMemberButton(){
+        return 'button[data-test-button="delete-member"]';
+    }
+
+    get deleteMemberConfirmButton(){
+        return 'button[data-test-button="confirm"]';
+    }
+
+    get time(){
+        const now = new Date();
+        const formattedDate = Math.floor(new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours(), now.getMinutes(), now.getSeconds()).getTime() / 1000);
+        return formattedDate;
+    }
+
+    get editSiteTitleButton(){
+        return 'button[class="cursor-pointer text-grey-900 dark:text-white dark:hover:bg-grey-900 hover:bg-grey-200 hover:text-black inline-flex items-center justify-center whitespace-nowrap rounded text-sm transition font-semibold h-7 px-3"]';
+    }
+
+    get saveSiteTitleButton(){
+        return 'button[class="cursor-pointer  bg-green text-white hover:bg-green-400 inline-flex items-center justify-center whitespace-nowrap rounded text-sm transition font-bold h-7 px-3"]';
+    }
+
+    get siteTitleInput(){
+        return 'input[placeholder="Site title"]';
+    }
+
+    get tagNameInput(){
+        return '[data-test-input="tag-name"]';
+    }
+
+    get tagColorInput(){
+        return '[data-test-input="accentColor"]';
+    }
+
+    get tagSlugInput(){
+        return '[data-test-input="tag-slug"]';
+    }
+
+    get tagDescriptionInput(){
+        return '[data-test-input="tag-description"]';
+    }
+
+    get tagSaveButton(){
+        return 'button[data-test-button="save"]';
+    }
+
+    get spanElement(){
+        return 'span';
+    }
+
+    get hrefPostSpan(){
+        return 'data-test-link="posts"';
+    }
+
+    get aElement(){
+        return 'a';
+    }
+
+    get bodyElement(){
+        return 'body';
+    }
+
+    get liElement(){
+        return 'li';
+    }
+
+    get linkPostListTitle(){
+        return 'a.gh-post-list-title';
+    }
+
+    get returnEditorPost(){
+        return '.gh-btn-editor.gh-editor-back-button';
+    }
+
+    get buttonPublishEditedsave(){
+        return 'button[data-test-button="publish-save"]';
+    }
+
+    get buttonMemberList(){
+        return 'a[data-test-nav="members"]'
+    }
+
+    get inputAddRecommendation(){
+        return 'input[placeholder="https://www.example.com"]'
+    }
+
+    //Methods page object
+
+    validatePublishPostAndCloseModal(scenery, step){
+        cy.url().should('include', '/ghost/#/posts');
+        cy.get(this.closeModalPublishFlow).should('be.visible');
+        cy.wait(1000);
+        cy.screenshot(scenery + '/' + step + '_1_postPublished');
+        cy.get(this.closeModalPublishFlow).click();
+
+        cy.get(this.spanElement).contains('New post').should('be.visible');
+        cy.screenshot(scenery + '/' + step + '_2_listPostFinal');
+    }
+
+    validatePublishPageAndCloseModal(scenery, step){
+        cy.url().should('include', '/ghost/#/pages');
+        cy.wait(1000);
+        cy.screenshot(scenery + '/' + step + '_1_pagePublished');
+
+        cy.get(this.closeModalPublishFlow).click();
+        cy.screenshot(scenery + '/' + step + '_2_listPageFinal');
+    }
+
+    createSimplePost(scenery, step){
+        // Hacer click en el botón de "New post"
+        cy.get(this.spanElement).contains('New post').click({force:true, waitForAnimations: false, animationDistanceThreshold: 20});
+        cy.get(this.titleInput).should('be.visible');
+        cy.screenshot(scenery + '/' + step + '_1_newPost');
+
+        //Se ingresa titulo y contenido en negrita del post
+        cy.get(this.titleInput).type('Post para prueba Nro 1');
+        cy.get(this.titleInput).type('{enter}');
+        cy.get(this.titleInput).type('{enter}');
+        cy.screenshot(scenery + '/' + step + '_2_addTitlePost');
+        cy.wait(1000)
+
+        this.publishPostAndPage(scenery, step + '_3');
+        this.validatePublishPostAndCloseModal(scenery, step + '_4');
+    }
+
+
+    publishPostAndPage(scenery, step){
+        cy.get(this.publishFlowButton).should('be.visible'); // Publish
+        cy.screenshot(scenery + '/' + step + '_0_publishButton', {disableTimersAndAnimations: false});
+        cy.get(this.publishFlowButton).first().click(); 
+
+        //Continuar a review final
+        cy.get(this.publishContinueButton).should('be.visible'); // Continue, final review
+        cy.wait(500);
+        cy.screenshot(scenery + '/' + step + '_1_finalReview', {disableTimersAndAnimations: false});
+        cy.get(this.publishContinueButton).first().click(); 
+
+        //Publicar post
+        cy.get(this.confirmPublishButton).should('be.visible'); //Publish post, right now
+        cy.wait(500);
+        cy.screenshot(scenery + '/' + step + '_2_publishRightNow', {disableTimersAndAnimations: false});
+        cy.get(this.confirmPublishButton).first().click(); 
+    }
+
+    updateSiteTitlte(newTitle){
+        //Seleccionar editar titulo
+        cy.get(this.editSiteTitleButton).first().click();
+        
+        //Actualización de titulo del sitio
+        cy.get(this.siteTitleInput).clear().type(newTitle);
+
+        //Click en el botón de guardar título
+        cy.get(this.saveSiteTitleButton).first().click();
+    }
+
+    createRecommendation(URL){
+        //Seleccionar el boton de añadir recomendación
+        cy.get(this.spanElement).contains('Add recommendation').scrollIntoView().should('be.visible').click({force:true, waitForAnimations: true});
+        //Escribir el link de la recomendacion
+        cy.get(this.inputAddRecommendation).type(URL);
+        //Darle click al boton de la recomendación
+        cy.get(this.spanElement).contains('Next').should('be.visible').click({waitForAnimations: true});
+    }
+
     createNewTag(tagname, tagslug=tagname){
         cy.screenshot('5/e15/p1-crear-nuevo-tag');
 
@@ -676,20 +866,6 @@ class When {
 
     }
 
-    createNewMember(memberName, emailMember){
-        
-        //Crear member
-        cy.get(this.createNewMemberButton).click();
-
-        cy.get(this.memberNameInput).type(memberName);
-
-        cy.get(this.memberEmailInput).type(emailMember);
-
-        cy.get(this.saveMemberButton).click({waitForAnimations: false});
-
-        cy.get(this.anchorMembersButton).first().click();
-        cy.get(this.anchorMembersButton).first().click();
-    }
 
     createNewMemberStay(memberName, emailMember){
 
@@ -703,213 +879,60 @@ class When {
         cy.get(this.saveMemberButton).click();
     }
 
-    createNewMemberNegativeInvalid(memberName, emailMember,noteMember="Default Note"){
+    createMemberAndDeletIt(){
+        cy.fixture('members-E94.json').then((data) => {
 
-        cy.get(this.memberNameInput).clear().type(memberName);
+            //Coger un valor aleatorio de un pool de datos
+            const randomIndex = Math.floor(Math.random() * (data.length-1));
+            const nameMember = data[randomIndex].nameMember;
+            const emailMember = data[randomIndex].email;
 
-        cy.get(this.memberEmailInput).clear().type(emailMember);
 
-        cy.get(this.memberNoteInput).clear().type(noteMember);
+            //Crear member
+            cy.wait(1000)
+            this.createNewMember(nameMember, emailMember);
 
-        cy.get(this.saveMemberButton).click();
+            //Buscar al member
+            cy.get(this.searchMembersInput).type(emailMember);
+            //Clickear en el member encontrado
+            cy.get(this.detailMemberButton).first().click();
+            //Abrir los settings del member
+            cy.get(this.memberActionsButton).first().click();
+            //Dar boton de eliminar member
 
+            cy.get(this.deleteMemberButton).first().click();
+
+            //Dar boton de confirmar eliminar member
+            cy.get(this.deleteMemberConfirmButton).first().click();
+
+            //Volver a la pagina de members
+            cy.get(this.buttonMemberList).first().click;
+            //Buscar al miembro eliminado
+            cy.get(this.searchMembersInput).type(emailMember);
+        })
     }
 
-
-    createMemberAndDeletIt(memberName,memberEmail){
+    createNewMember(memberName, emailMember){
         //Crear member
-        cy.wait(1000)
-        this.createNewMember(memberName,memberEmail);
 
-        //Buscar al member
-        cy.get(this.searchMembersInput).type(memberEmail);
-        //Clickear en el member encontrado
-        cy.get(this.detailMemberButton).first().click();
-        //Abrir los settings del member
-        cy.get(this.memberActionsButton).first().click();
-        //Dar boton de eliminar member
-        
-        cy.get(this.deleteMemberButton).first().click();
-        
-        //Dar boton de confirmar eliminar member
-        cy.get(this.deleteMemberConfirmButton).first().click();
+        //Darle click al boton de crear nuevo miembro
+        cy.get(this.createNewMemberButton).click();
 
-        //Volver a la pagina de members
-        cy.get(this.buttonMemberList).first().click;
-        //Buscar al miembro eliminado
-        cy.get(this.searchMembersInput).type(memberEmail);
-    }
+        //Escribir el nombre del miembro
+        cy.get(this.memberNameInput).type(memberName);
 
-    createMemberAndRecreateIt(memberName,memberEmail){
-        //Crear member
-        cy.wait(1000)
-        this.createNewMember(memberName,memberEmail);
-        //Recrear member
-        cy.wait(1000);
-        this.createNewMemberStay(memberName,memberEmail);
-    }
+        //Escribir el email del miembro
+        cy.get(this.memberEmailInput).type(emailMember);
 
+        //Darle click en guardar
+        cy.get(this.saveMemberButton).click({waitForAnimations: true});
 
-    createAndPublishPostWithHtml(){
-        var scenery = 'e9';
-        //ir a seccion de crear post
-        cy.get(this.createPostButton).click();
-        cy.url().should('contain', '/post');
-        cy.screenshot(this.version + scenery + '/p1_sectionPost');
+        //Esperar
+        cy.wait(3000)
 
-        //Se ingresa titulo del post
-        cy.get(this.titleInput).type('Post con HTML 1'); // Post title
-        cy.screenshot(this.version + scenery + '/p2_addTitlePost');
-        cy.get(this.titleInput).type('{enter}');
-
-        //Card de opciones
-        cy.get(this.buttonAddCard).first().click({force:true, waitForAnimations: false});
-        cy.screenshot(this.version + scenery + '/p3_cardOptions');
-
-        //Seleccionar HTML
-        cy.get(this.htmlEditorButton).first().click({force:true, waitForAnimations: false});
-        cy.screenshot(this.version + scenery + '/p4_htmlOptionsSelected');
-
-        //Ingresar texto en html
-        cy.get(this.cmLineDiv).type('<h2> Prueba texto en post </h2>'); 
-        cy.screenshot(this.version + scenery + '/p5_addContentHtml');
-        cy.get(this.cmLineDiv).type('{enter}');
-
-        this.publishPostAndPage(this.version + scenery,'p6');
-        this.validatePublishPostAndCloseModal(this.version + scenery,'p7');
-    }
-
-    createAndPublishPageWithHtml(){
-        var scenery = 'e10';
-        //Click New Page
-        cy.get(this.spanElement).contains('New page').click({force:true, waitForAnimations: false});
-        cy.screenshot(this.version + scenery + '/p1_sectionPage');
-
-        cy.get(this.titleInput).type('Pagina con HTML 1'); // Page title
-        cy.screenshot(this.version + scenery + '/p2_addTitlePage');
-        cy.get(this.titleInput).type('{enter}');
-
-        //Card de opciones
-        cy.get(this.buttonAddCard).first().click({force:true, waitForAnimations: false});
-        cy.screenshot(this.version + scenery + '/p3_cardOptions');
-
-        //Seleccionar HTML
-        cy.get(this.htmlEditorButton).first().click({force:true, waitForAnimations: false});
-        cy.screenshot(this.version + scenery + '/p4_htmlOptionsSelected');
-
-        //Ingresar texto en html
-        cy.get(this.cmLineDiv).type('<h2> Prueba texto pagina </h2>'); 
-        cy.screenshot(this.version + scenery + '/p5_addContentHtml');
-        cy.get(this.cmLineDiv).type('{enter}');
-
-        this.publishPostAndPage(this.version + scenery,'p6');
-        this.validatePublishPageAndCloseModal(this.version + scenery,'p7');
-    }
-
-    validatePublishPostAndCloseModal(scenery, step){
-        cy.url().should('include', '/ghost/#/posts');
-        cy.get(this.closeModalPublishFlow).should('be.visible');
-        cy.wait(1000);
-        cy.screenshot(scenery + '/' + step + '_1_postPublished');
-        cy.get(this.closeModalPublishFlow).click();
-
-        cy.get(this.spanElement).contains('New post').should('be.visible');
-        cy.screenshot(scenery + '/' + step + '_2_listPostFinal');
-    }
-
-    validatePublishPageAndCloseModal(scenery, step){
-        cy.url().should('include', '/ghost/#/pages');
-        cy.wait(1000);
-        cy.screenshot(scenery + '/' + step + '_1_pagePublished');
-
-        cy.get(this.closeModalPublishFlow).click();
-        cy.screenshot(scenery + '/' + step + '_2_listPageFinal');
-    }
-
-    createSimplePost(scenery, step){
-        // Hacer click en el botón de "New post"
-        cy.get(this.spanElement).contains('New post').click({force:true, waitForAnimations: false, animationDistanceThreshold: 20});
-        cy.get(this.titleInput).should('be.visible');
-        cy.screenshot(scenery + '/' + step + '_1_newPost');
-
-        //Se ingresa titulo y contenido en negrita del post
-        cy.get(this.titleInput).type('Post para prueba Nro 1');
-        cy.get(this.titleInput).type('{enter}');
-        cy.get(this.titleInput).type('{enter}');
-        cy.screenshot(scenery + '/' + step + '_2_addTitlePost');
-        cy.wait(1000)
-
-        this.publishPostAndPage(scenery, step + '_3');
-        this.validatePublishPostAndCloseModal(scenery, step + '_4');
-    }
-    
-    reateAndPublishPageEditAndSave(){
-        // Crear nueva página
-        cy.screenshot('5/e12/p1-click-nueva-pagina')
-        cy.get(this.newPageButton).click();
-        cy.get(this.titleInput).type('My Page to edit{enter}');
-
-        //Publicar post
-        cy.get(this.koenigEditorElement).first().click();
-        this.publishPostAndPage('5/e12','p1');
-        cy.url().should('contain', '/pages');
-
-        // Editar la página recién creada
-        cy.get(this.closeModalPublishFlow).click();
-        cy.screenshot('5/e12/p2-pagina-creada-listada');
-        cy.contains('My Page to edit').click();
-        cy.get(this.titleInput).clear().type('Updated Page Title{enter}').screenshot('5/e12/p3-actualizacion-titulo');
-
-        // Guardar la página actualizada
-        cy.get(this.publishSaveButton).contains('Update').click();
-        cy.screenshot('5/e12/p4-publicacion-pagina-actualizada');
-        
-    }
-
-    publishPostAndPage(scenery, step){
-        cy.get(this.publishFlowButton).should('be.visible'); // Publish
-        cy.screenshot(scenery + '/' + step + '_0_publishButton', {disableTimersAndAnimations: false});
-        cy.get(this.publishFlowButton).first().click(); 
-
-        //Continuar a review final
-        cy.get(this.publishContinueButton).should('be.visible'); // Continue, final review
-        cy.wait(500);
-        cy.screenshot(scenery + '/' + step + '_1_finalReview', {disableTimersAndAnimations: false});
-        cy.get(this.publishContinueButton).first().click(); 
-
-        //Publicar post
-        cy.get(this.confirmPublishButton).should('be.visible'); //Publish post, right now
-        cy.wait(500);
-        cy.screenshot(scenery + '/' + step + '_2_publishRightNow', {disableTimersAndAnimations: false});
-        cy.get(this.confirmPublishButton).first().click(); 
-    }
-
-    updateSiteTitlte(newTitle){
-        //Seleccionar editar titulo
-        cy.get(this.editSiteTitleButton).first().click();
-        
-        //Actualización de titulo del sitio
-        cy.get(this.siteTitleInput).clear().type(newTitle);
-
-        //Click en el botón de guardar título
-        cy.get(this.saveSiteTitleButton).first().click();
-    }
-
-    createRecommendation(URL){
-        //Seleccionar el boton de añadir recomendación
-        cy.get(this.spanElement).contains('Add recommendation').scrollIntoView().should('be.visible').click({force:true, waitForAnimations: true});
-        //Escribir el link de la recomendacion
-        cy.get(this.inputAddRecommendation).type(URL);
-        //Darle click al boton de la recomendación
-        cy.get(this.spanElement).contains('Next').should('be.visible').click({waitForAnimations: true});
-    }
-
-    createRecommendationValid(URL){
-        //Crear la recomendacion
-        this.createRecommendation(URL);
-        cy.wait(10000);
-        //Confirmar añadir la recomendación
-        cy.get(this.spanElement).filter((index, element) => element.textContent.trim() === 'Add').should('be.visible').click({waitForAnimations: true})
+        //Refrescar la pagina
+        cy.get(this.anchorMembersButton).first().click();
+        cy.reload(true);
     }
 
 }
