@@ -535,7 +535,7 @@ class When {
         cy.screenshot(this.version + scenery + '/p2_pagePost');
 
         // Se toma el el titulo  del último post
-        cy.get(this.linkPostListTitle).first().click();
+        cy.get(this.linkPostListTitle).first().click({force: true});
         cy.get(this.titleInput).should('be.visible');
 
         //Se ingresa titulo del post
@@ -554,6 +554,7 @@ class When {
         cy.wait(500)
         cy.get(this.returnEditorPost).first().click();
 
+        cy.visit(Cypress.env('postPageUrl')+ '?type=published');
         cy.url().should('include', '/posts?type=published');
         cy.screenshot(this.version + scenery + '/p4_editedPost');
     }
@@ -660,7 +661,7 @@ class When {
         cy.screenshot(this.version + scenery + '/p2_pagePost');
 
         // Se toma el el titulo  del último post
-        cy.get(this.linkPostListTitle).first().click();
+        cy.get(this.linkPostListTitle).first().click({force: true});
         cy.get(this.titleInput).should('be.visible');
 
         //Se ingresa titulo del post
@@ -778,7 +779,7 @@ class When {
         cy.screenshot(this.version + scenery + '/p2_pagePost');
 
         // Se toma el el titulo  del último post
-        cy.get(this.linkPostListTitle).first().click();
+        cy.get(this.linkPostListTitle).first().click({force: true});
         cy.get(this.titleInput).should('be.visible');
 
         //Se ingresa titulo del post

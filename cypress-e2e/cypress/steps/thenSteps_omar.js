@@ -133,7 +133,6 @@ class Then {
     }
 
     seePostPublishedPostMarkdown(){
-        cy.visit(Cypress.env('postPageUrl'));
         this.generalScroll(this.mainScrollPost);
         cy.get('@fixturePost').then((data) => {
             cy.contains(data[3].title).should('exist'); 
@@ -170,7 +169,6 @@ class Then {
 
     seePostPublishedPostMarkdownMokaroo({title}){
         this.generalScroll(this.mainScrollPost);
-        cy.visit(Cypress.env('postPageUrl'));
         cy.contains(title).should('exist'); 
     }
 
@@ -200,13 +198,12 @@ class Then {
 
     seePostPublishedPostMarkdownRandom({title}){
         this.generalScroll(this.mainScrollPost);
-        cy.visit(Cypress.env('postPageUrl'));
         cy.contains(title).should('exist'); 
     }
 
     seePostPublishedPostWithImageRandom( {title} ){
-        this.generalScroll(this.mainScrollPost);
         cy.visit(Cypress.env('postPageUrl'));
+        this.generalScroll(this.mainScrollPost);
         cy.contains(title).should('exist'); 
     }
 
