@@ -31,6 +31,46 @@ class Then {
         return 'input[placeholder="jamie@example.com"]';
     }
 
+    get closePublishConfirmationButton(){
+        return 'button[data-test-button="close-publish-flow"]';
+    }
+
+    get buttonMemberList(){
+        return 'a[data-test-nav="members"]'
+    }
+
+    get buttonleaveMemberCreatePage(){
+        return 'button[data-test-leave-button]';
+    }
+
+    get spanElement(){
+        return 'span';
+    }
+
+    get pageListContainer(){
+        return '.posts-list';
+    }
+
+    get alertCloseNotificationButton(){
+        return 'button.gh-alert-close[data-test-button="close-notification"]';
+    }
+
+    get returnPost(){
+        return 'a[data-test-link="posts"]';
+    }
+
+    get leaveButton(){
+        return 'button.gh-btn.gh-btn-red[data-test-leave-button]';
+    }
+    
+    get searchButton(){
+        return 'button[data-test-button="search"]';
+    }
+    
+    get searchInput(){
+        return 'input[placeholder="Search site"]';
+    }
+
     validatePageWithVideoCreated(){
         cy.contains('Página con video de YouTube').should('be.visible');
     }
@@ -222,6 +262,97 @@ class Then {
     validateInvitationWasNotSendRandom({email}){
         cy.get(this.emailContributorInput).should('have.value', email);
     }
+
+    //PABLO
+
+    validatePostWithTag(tagName){
+        Cypress.on('uncaught:exception', (err, runnable) => {
+            return false
+        })
+        cy.get('.posts-list').should('contain', tagName).then(()=>{
+            cy.screenshot('5/e16/p3-tag-creado',{
+                disableTimersAndAnimations: false,
+            })
+        });
+
+        cy.contains(tagName).should('exist');
+        cy.get(this.closePublishConfirmationButton).first().click({ force: true, waitForAnimations: false });
+    }
+
+    validatePageWithTag({tagname}){
+        Cypress.on('uncaught:exception', (err, runnable) => {
+            return false
+        })
+        cy.log(tagname)
+
+
+        cy.get(this.pageListContainer).should('contain', tagname);
+    }
+
+    validateMemberWasDeleted(){
+        // Verificar que el tag se haya agregado correctamente en el post
+        cy.get('div[class="gh-members-empty"]').should('contain', 'No members match the current filter');
+
+        // Verificar que el tag aparece en el post
+        cy.contains('No members match the current filter').should('exist');
+
+    }
+
+    validateTitleSiteWasEdited(newTitle){
+        //Valida que el titulo
+        cy.reload(true);
+        cy.contains(newTitle).should('exist');
+    }
+
+    validateNewMemberExist(memberName){
+        //Esperar un tiempo y ir a la Members page
+        cy.wait(2000);
+        //Recargar la pagina
+        cy.reload(true);
+        // Verificar que el tag se haya agregado correctamente en el post
+        cy.get('div[data-test-table="members"]').should('contain', memberName);
+        // Verificar que el tag aparece en el post
+        cy.contains(memberName).should('exist');
+    }
+
+    //EDWIN
+
+    seePostPublishedWithHtml(post){
+        cy.visit(Cypress.env('postPagePublishedUrl'));
+        cy.contains(post.title).should('exist');
+    }
+
+    seePostPublishError(post){
+        cy.contains('Validation failed').should('exist');
+        cy.get(this.alertCloseNotificationButton).should('exist').first().click();
+        cy.get(this.returnPost).should('exist').first().click();
+        cy.get(this.leaveButton).should('exist').first().click();
+    }
+
+    seePostPublishedUntitled(post){
+        cy.visit(Cypress.env('postPagePublishedUrl'));
+        cy.contains('Untitled').should('exist');
+    }
+
+    confirmUnpublishPostPublished(post){
+        cy.visit(Cypress.env('postDraftPageUrl'));
+        cy.url().should('include', 'posts?type=draft');
+    }
+
+    confirmDeletedPost(){
+        cy.visit(Cypress.env('postPageUrl'));
+    }
+
+    seePagePublishedWithHtml(page){
+        cy.visit(Cypress.env('pageUrl'));
+        cy.contains(page.title).should('exist');
+    }
+
+    seePostPublishedMembersOnly(post){
+        cy.visit(Cypress.env('postMembersPageUrl'));
+        cy.contains(post.title).should('exist');
+    }
+
 
     //Utils
     generalScroll(element){

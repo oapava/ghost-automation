@@ -18,3 +18,16 @@ import './commands'
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
+
+Cypress.on('uncaught:exception', (err) => {
+    if (err.message.includes('The play() request was interrupted')) {
+        return false;
+    }
+});
+
+Cypress.on('uncaught:exception', (err) => {
+    if (err.message.includes('TransitionAborted')) {
+        // Devuelve false para evitar que Cypress falle la prueba
+        return false;
+    }
+});

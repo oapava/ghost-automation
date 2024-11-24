@@ -332,7 +332,25 @@ class When {
         return 'button[class="cursor-pointer bg-black text-white dark:bg-white dark:text-black hover:bg-grey-900 inline-flex items-center justify-center whitespace-nowrap rounded text-sm transition font-bold h-[34px] px-4 min-w-[80px]"]';
     }
 
+    get memberNoteInput(){
+        return 'textarea[data-test-input="member-note"]'
+    }
 
+    get buttonMemberList(){
+        return 'a[data-test-nav="members"]'
+    }
+
+    get inputAddRecommendation(){
+        return 'input[placeholder="https://www.example.com"]'
+    }
+
+    get buttonSettingPost(){
+        return 'button.settings-menu-toggle.gh-btn.gh-btn-editor';
+    }
+
+    get closePublishConfirmationButton(){
+        return 'button[data-test-button="close-publish-flow"]';
+    }
     
     //When Methods
 
@@ -974,6 +992,396 @@ class When {
         cy.get('span').contains(this.InvitationTextButton).click();
     }
 
+    //PABLO
+
+    //Methods page object
+
+    validatePublishPageAndCloseModal(scenery, step){
+        cy.url().should('include', '/ghost/#/pages');
+        cy.wait(1000);
+        cy.screenshot(scenery + '/' + step + '_1_pagePublished');
+
+        cy.get(this.closeModalPublishFlow).click();
+        cy.screenshot(scenery + '/' + step + '_2_listPageFinal');
+    }
+
+    createSimplePost(scenery, step){
+        // Hacer click en el botón de "New post"
+        cy.get(this.spanElement).contains('New post').click({force:true, waitForAnimations: false, animationDistanceThreshold: 20});
+        cy.get(this.titleInput).should('be.visible');
+        cy.screenshot(scenery + '/' + step + '_1_newPost');
+
+        //Se ingresa titulo y contenido en negrita del post
+        cy.get(this.titleInput).type('Post para prueba Nro 1');
+        cy.get(this.titleInput).type('{enter}');
+        cy.get(this.titleInput).type('{enter}');
+        cy.screenshot(scenery + '/' + step + '_2_addTitlePost');
+        cy.wait(1000)
+
+        this.publishPostAndPage(scenery, step + '_3');
+        this.validatePublishPostAndCloseModal(scenery, step + '_4');
+    }
+
+    updateSiteTitlte(newTitle){
+        //Seleccionar editar titulo
+        cy.get(this.editSiteTitleButton).first().click();
+        
+        //Actualización de titulo del sitio
+        cy.get(this.siteTitleInput).clear().type(newTitle);
+
+        //Click en el botón de guardar título
+        cy.get(this.saveSiteTitleButton).first().click();
+    }
+
+    createRecommendation(URL){
+        //Seleccionar el boton de añadir recomendación
+        cy.get(this.spanElement).contains('Add recommendation').scrollIntoView().should('be.visible').click({force:true, waitForAnimations: true});
+        //Escribir el link de la recomendacion
+        cy.get(this.inputAddRecommendation).type(URL);
+        //Darle click al boton de la recomendación
+        cy.get(this.spanElement).contains('Next').should('be.visible').click({waitForAnimations: true});
+    }
+
+    createNewTag(tagname, tagslug=tagname){
+        cy.screenshot('5/e15/p1-crear-nuevo-tag');
+
+        // Hacer clic en el botón "New tag"
+        cy.contains('a.gh-btn-primary', 'New tag').click();
+
+        // Llenar los campos del formulario para crear un nuevo tag
+        const tagColor = 'FF5733';     // Color (en formato hexadecimal)
+        const tagDescription = 'Este es un tag de tecnología';  // Descripción del tag
+
+        // Llenar el campo de nombre del tag
+        cy.get(this.tagNameInput).type(tagname);
+
+        // Llenar el campo de color del tag
+        cy.get(this.tagColorInput).type(tagColor);
+
+        // Llenar el campo de slug del tag
+        cy.get(this.tagSlugInput).type(tagslug);
+
+        // Llenar el campo de descripción del tag
+        cy.get(this.tagDescriptionInput).type(tagDescription);
+
+        //Scroll al inicio de la pagina
+        cy.get(this.tagNameInput).scrollIntoView()
+
+        cy.screenshot('5/e15/p2-formulario-completo');
+        // Esperar un momento (opcional si necesitas tiempo para que los cambios se reflejen)
+        cy.wait(1000);
+
+        cy.get(this.tagSaveButton).click();  // Este es el botón de guardar
+        cy.wait(1000);
+    }
+
+    createTagAndAsignIt(tagName, postName){
+        this.createNewTag(tagName)
+
+        cy.screenshot('5/e16/p1-tag-creado');
+
+        cy.visit(Cypress.env('postPageUrl'));
+
+        // Hacer click en el botón de "New post"
+        cy.get(this.spanElement).contains('New post').click({force:true, waitForAnimations: false, animationDistanceThreshold: 20});
+
+        // Escribimos el título del post
+        cy.get(this.titleInput).type(postName);
+
+        //asignar tag
+        cy.get(this.asignTagButton).click();  // Este es el botón de settings del post
+
+        cy.get(this.asignTagInput).first().type(tagName);
+        cy.get(this.confirmTagAsign).first().click();
+
+        cy.get(this.asignTagButton).then(()=>{
+            cy.screenshot('5/e16/p2-asignacion-tag');
+            cy.get(this.asignTagButton).click();
+        });
+
+        this.publishPostAndPage('5/e16', 'p2');
+
+        cy.get(this.anchorPostButton).click({force:true, waitForAnimations: false, animationDistanceThreshold: 20});
+
+    }
+
+    createTagAndAsignItToPage(tagname,pageName){
+
+        this.createNewTag(tagname)
+
+        cy.screenshot('5/e17/p1-creacion-del-tag');
+
+        cy.visit(Cypress.env('pageUrl'));
+
+        // Hacer click en "New page" para crear una nueva página
+        cy.contains('New page').click({ force: true, waitForAnimations: false });
+
+        // Escribir el título de la página
+        cy.get(this.titleInput).type(pageName);
+
+        //poner tag
+        cy.get(this.asignTagButton).click();  // Este es el botón de settings del post
+
+        cy.get(this.asignTagInput).first().type(tagname);
+        cy.get(this.confirmTagAsign).first().click();
+
+        cy.screenshot('5/e17/p1-asignacion-de-tag');
+
+        cy.get(this.asignTagButton).click();  // Este es el botón para cerrar setting
+
+        //publicar page
+        this.publishPostAndPage('5/e17', 'p1');
+
+        cy.get(this.closePublishConfirmationButton).first().click({ force: true, waitForAnimations: false });
+
+    }
+
+
+    createNewMemberStay(memberName, emailMember){
+
+        //Crear member
+        cy.get(this.createNewMemberButton).click();
+
+        cy.get(this.memberNameInput).type(memberName);
+
+        cy.get(this.memberEmailInput).type(emailMember);
+
+        cy.get(this.saveMemberButton).click();
+    }
+
+    createMemberAndDeletIt(){
+        cy.fixture('members-E94.json').then((data) => {
+
+            //Coger un valor aleatorio de un pool de datos
+            const randomIndex = Math.floor(Math.random() * (data.length-1));
+            const nameMember = data[randomIndex].nameMember;
+            const emailMember = data[randomIndex].email;
+
+
+            //Crear member
+            cy.wait(1000)
+            this.createNewMember(nameMember, emailMember);
+
+            //Buscar al member
+            cy.get(this.searchMembersInput).type(emailMember);
+            //Clickear en el member encontrado
+            cy.get(this.detailMemberButton).first().click();
+            //Abrir los settings del member
+            cy.get(this.memberActionsButton).first().click();
+            //Dar boton de eliminar member
+
+            cy.get(this.deleteMemberButton).first().click();
+
+            //Dar boton de confirmar eliminar member
+            cy.get(this.deleteMemberConfirmButton).first().click();
+
+            //Volver a la pagina de members
+            cy.get(this.buttonMemberList).first().click;
+            //Buscar al miembro eliminado
+            cy.get(this.searchMembersInput).type(emailMember);
+        })
+    }
+
+    createNewMember(memberName, emailMember){
+        //Crear member
+
+        //Darle click al boton de crear nuevo miembro
+        cy.get(this.createNewMemberButton).click();
+
+        //Escribir el nombre del miembro
+        cy.get(this.memberNameInput).type(memberName);
+
+        //Escribir el email del miembro
+        cy.get(this.memberEmailInput).type(emailMember);
+
+        //Darle click en guardar
+        cy.get(this.saveMemberButton).click({waitForAnimations: true});
+
+        //Esperar
+        cy.wait(3000)
+
+        //Refrescar la pagina
+        cy.get(this.anchorMembersButton).first().click();
+        cy.reload(true);
+    }
+
+    //EDWIN
+
+    
+
+
+    createAndPublishPostWithHtml(post, stage){
+        //console.log("PostToPublish -" + JSON.stringify(post));
+        //ir a seccion de crear post
+        //cy.get(this.createPostButton).first().click();
+        cy.visit(Cypress.env('postPageUrl'));
+        cy.get(this.spanElement).contains('New post').first().click({force:true, waitForAnimations: false, animationDistanceThreshold: 20});
+        
+        cy.url().should('contain', '/post');
+
+        //Se ingresa titulo del post
+        if(post.title !== ""){
+            cy.get(this.titleInput).type(post.title);
+            cy.get(this.titleInput).type('{enter}');
+        }
+
+        //Contenido del post
+        cy.get(this.textAreaContent).first().type(post.contentText);
+        cy.get(this.textAreaContent).first().type('{enter}');
+
+        //Card de opciones + html
+        cy.get(this.buttonAddCard).first().click({force:true, waitForAnimations: false});
+        cy.get(this.htmlEditorButton).first().click({force:true, waitForAnimations: false});
+
+        //Ingresar texto en html
+        cy.get(this.cmLineDiv).type(post.htmlText);
+
+        this.publishPostAndPage(stage, 0);
+        this.validatePublishPostAndCloseModal(stage, 0);
+    }
+
+    createAndPublishPostWithHtmlError(post, stage){
+
+        cy.log('ts', JSON.stringify(post))
+        //ir a seccion de crear post
+        cy.get(this.createPostButton).first().click();
+        cy.url().should('contain', '/post');
+
+        //Se ingresa titulo del post
+        if(post.title !== ""){
+            cy.get(this.titleInput).type('A');
+            cy.get(this.titleInput).type('{enter}');
+            cy.wait(500);
+            cy.get(this.titleInput).type(post.title);
+            cy.get(this.titleInput).type('{enter}');
+        }
+
+        //Contenido del post
+        cy.get(this.textAreaContent).first().type(post.contentText);
+        cy.get(this.textAreaContent).first().type('{enter}');
+
+        cy.get(this.publishFlowButton).should('exist');
+        cy.get(this.publishFlowButton).first().click();
+
+    }
+
+    unpublishPostCreated(post, stage){
+        //Crear post
+        this.createSimplePost(post, stage, 'p1')
+        cy.visit(Cypress.env('baseUrl') + '/ghost/#/posts?type=published');
+        cy.wait(500);
+
+        //Se valida que existan Posts
+        cy.get(this.contentEntryTitle).should('exist').then(() => {
+            //cy.screenshot(stage + '/p2_validatePostCreated');
+            cy.get(this.contentEntryTitle).first().click({force:true, waitForAnimations: false}); // Hace clic en el enlace
+
+            //Click en Unpublish Post
+            cy.get(this.updatedFlowButton).should('exist');
+            //cy.screenshot(stage+ '/p5_unpublishPost');
+            cy.get(this.updatedFlowButton).first().click();
+
+            //Click en confirmar unpublish
+            cy.get(this.revertToDraftButton).should('exist');
+            cy.wait(500)
+            //cy.screenshot(stage + '/p6_confirmUnpublishPost');
+            cy.get(this.revertToDraftButton).first().click();
+            cy.wait(500)
+
+            cy.get(this.returnAnalitics).should('exist');
+            //cy.screenshot(stage + '/p7_resumeUnpublishPost');
+            cy.get(this.returnAnalitics).first().click();
+        });
+    }
+
+    deletePostPublished(post, stage){
+        this.createSimplePost(post, stage, 'p1')
+        cy.visit(Cypress.env('baseUrl') + '/ghost/#/posts?type=published');
+
+        //Se valida que existan Posts
+        cy.get(this.contentEntryTitle).should('exist').then(() => {
+            cy.get(this.contentEntryTitle).first().click({force:true, waitForAnimations: false});
+            //cy.screenshot(this.version + stage + '/p2_validatePostCreated');
+
+            //Click en opciones
+            cy.get(this.buttonSettingPost).should('exist').first().click();
+            //cy.screenshot(this.version + stage + '/p3_selectPost');
+
+            //Click en delete Post
+            cy.get(this.deletePostButton).should('exist');
+            //cy.screenshot(this.version + stage + '/p4_deletePost');
+            cy.get(this.deletePostButton).first().click();
+
+            //Click en confirmar delete Post
+            cy.get(this.deletePostConfirmButton).should('exist');
+            //cy.screenshot(this.version + stage + '/p5_confirmDeletePost');
+            cy.get(this.deletePostConfirmButton).first().click();
+        });
+    }
+
+    createAndPublishPostMembersOnly(post, stage){
+        //ir a seccion de crear post
+        cy.get(this.createPostButton).click();
+        cy.url().should('contain', '/post');
+        //cy.screenshot(this.version + stage + '/p1_sectionPost');
+
+        //Se ingresa titulo del post
+        cy.get(this.titleInput).type(post.title);
+        cy.get(this.titleInput).type('{enter}');
+
+        cy.get(this.textAreaContent).first().type(post.contentText);
+        //cy.screenshot(this.version + stage + '/p2_addContentPost');
+        cy.get(this.textAreaContent).first().type('{enter}');
+
+        //Se abre el panel de configuracion
+        cy.get(this.configurationPanelButton).should('be.visible');
+        //cy.screenshot(this.version + stage + '/p3_panelConfigPost');
+        cy.get(this.configurationPanelButton).first().click();
+        cy.get(this.configurationPanelButton).trigger('mousedown')
+
+
+        cy.get(this.postVisibilitySelect).should('be.visible'); // Post Access
+        cy.get(this.postVisibilitySelect).select('members') // Select option members
+        //cy.screenshot(this.version + stage + '/p4_memberOnliyConfigPost');
+
+        cy.get(this.configurationPanelButton).should('be.visible'); //Post settings cerrar panel config
+        //cy.screenshot(this.version + stage + '/p5_closeConfigPost');
+        cy.get(this.configurationPanelButton).first().click();
+
+        this.publishPostAndPage(this.version + stage,'p6');
+        this.validatePublishPostAndCloseModal(this.version + stage,'p7');
+    }
+
+    createAndPublishPageWithHtml(page, stage){
+        //Click New Page
+        cy.get(this.spanElement).contains('New page').click({force:true, waitForAnimations: false});
+        //cy.screenshot(this.version + stage + '/p1_sectionPage');
+
+        if(page.title !== ''){
+            cy.get(this.titleInput).type(page.title); // Page title
+            //cy.screenshot(this.version + stage + '/p2_addTitlePage');
+            cy.get(this.titleInput).type('{enter}');
+        }
+
+        cy.get(this.textAreaContent).first().type(page.contentText);
+        cy.get(this.textAreaContent).first().type('{enter}');
+
+        //Card de opciones + HTML
+        cy.get(this.buttonAddCard).first().click({force:true, waitForAnimations: false});
+        //cy.screenshot(this.version + stage + '/p3_cardOptions');
+        cy.get(this.htmlEditorButton).first().click({force:true, waitForAnimations: false});
+        //cy.screenshot(this.version + stage + '/p4_htmlOptionsSelected');
+
+        //Ingresar texto en html
+        cy.get(this.cmLineDiv).first().type(page.htmlText); 
+        //cy.screenshot(this.version + stage + '/p5_addContentHtml');
+        cy.get(this.cmLineDiv).first().type('{enter}');
+
+        this.publishPostAndPage(this.version + stage,'p6');
+        this.validatePublishPageAndCloseModal(this.version + stage,'p7');
+    }
+
+
     //Utils
     validatePublishPostAndCloseModal(scenery, step){
         cy.url().should('include', '/ghost/#/posts');
@@ -1021,8 +1429,6 @@ class When {
         cy.screenshot(scenery + '/' + step + '_2_publishRightNow', {disableTimersAndAnimations: false});
         cy.get(this.confirmPublishButton).first().click(); 
     }
-
-    
 
 }
 
