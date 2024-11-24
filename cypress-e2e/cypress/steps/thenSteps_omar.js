@@ -397,16 +397,6 @@ class Then {
         cy.get(this.closePublishConfirmationButton).first().click({ force: true, waitForAnimations: false });
     }
 
-    validatePageWithTag(tagName){
-        Cypress.on('uncaught:exception', (err, runnable) => {
-            return false
-        })
-        cy.get(this.postList).should('contain', tagName);
-        cy.contains(tagName).should('exist').then(()=>{
-        });
-        cy.get(this.closePublishConfirmationButton).first().click({ force: true, waitForAnimations: false });
-    }
-
     validateMemberWasDeleted(){
         // Verificar que el tag se haya agregado correctamente en el post
         cy.get(this.listEmpty).should('contain', 'No members match the current filter');

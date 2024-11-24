@@ -52,53 +52,53 @@ describe('Pruebas E2E Ghost', () => {
         Then.seePostPublishedPostMarkdown();
     });
 
-    // it('Escenario 4: Crear un nuevo Post con imagen de unsplash y guardarlo', () => {
-    //     // THEN: Visitar pagina de posts
-    //     Given.navigateToPostPage();
+    it('Escenario 4: Crear un nuevo Post con imagen de unsplash y guardarlo', () => {
+        // THEN: Visitar pagina de posts
+        Given.navigateToPostPage();
 
-    //     // WHEN: Crear y publicar post 
-    //     When.createAndPublishPostWhithImage();
+        // WHEN: Crear y publicar post 
+        When.createAndPublishPostWhithImage();
 
-    //     // THEN: Verificar post publicado
-    //     Then.seePostPublishedPostWithImage();
-    // });
+        // THEN: Verificar post publicado
+        Then.seePostPublishedPostWithImage();
+    });
 
-    // it('Escenario 5: Crear un nuevo Post con contenido, título y guardarlo', () => {
-    //     // THEN: Visitar pagina de posts
-    //     Given.navigateToPostPage();
+    it('Escenario 5: Crear un nuevo Post con contenido, título y guardarlo', () => {
+        // THEN: Visitar pagina de posts
+        Given.navigateToPostPage();
 
-    //     // WHEN: Crear y publicar post 
-    //     When.createAndPublishPostWhithContent();
+        // WHEN: Crear y publicar post 
+        When.createAndPublishPostWhithContent();
 
-    //     // THEN: Verificar post publicado
-    //     Then.seePostPublishedPostWithContent();
-    // });
+        // THEN: Verificar post publicado
+        Then.seePostPublishedPostWithContent();
+    });
 
-    // it('Escenario 6: Crear post basico con data generada aleatoria dinámica', () => {
-    //     getPostDataDynamicrandom().then((content)=>{
-    //         // GIVEN: Visitar pagina de posts
-    //         Given.navigateToPostPage();
+    it('Escenario 6: Crear post basico con data generada aleatoria dinámica', () => {
+        getPostDataDynamicrandom().then((content)=>{
+            // GIVEN: Visitar pagina de posts
+            Given.navigateToPostPage();
     
-    //         // WHEN: Crear y publicar post 
-    //         When.createAndPublishPostDynamicRandom( content );
+            // WHEN: Crear y publicar post 
+            When.createAndPublishPostDynamicRandom( content );
     
-    //         // THEN: Verificar post publicado
-    //         Then.seePostPublishedMokaroo( content );
-    //     })
-    // });
+            // THEN: Verificar post publicado
+            Then.seePostPublishedMokaroo( content );
+        })
+    });
 
-    // it('Escenario 7: Crear post con texto en negrita con data generada aleatoria dinámica', () => {
-    //     getPostDataDynamicrandom().then((content)=>{
-    //         // THEN: Visitar pagina de posts
-    //         Given.navigateToPostPage();
+    it('Escenario 7: Crear post con texto en negrita con data generada aleatoria dinámica', () => {
+        getPostDataDynamicrandom().then((content)=>{
+            // THEN: Visitar pagina de posts
+            Given.navigateToPostPage();
     
-    //         // WHEN: Crear y publicar post 
-    //         When.createAndPublishPostBoldDynamicRandom( content );
+            // WHEN: Crear y publicar post 
+            When.createAndPublishPostBoldDynamicRandom( content );
     
-    //         // THEN: Verificar post publicado
-    //         Then.seePostPublishedBoldMokaroo( content );
-    //     });
-    // });
+            // THEN: Verificar post publicado
+            Then.seePostPublishedBoldMokaroo( content );
+        });
+    });
 
     it('Escenario 8: Editar post con contenido en markdown con data generada aleatoria dinámica', () => {
         getPostDataDynamicrandom().then((content)=>{
@@ -113,57 +113,57 @@ describe('Pruebas E2E Ghost', () => {
         })
     });
 
-    // it('Escenario 9: Crear un nuevo Post con imagen de unsplash y guardarlo con data generada aleatoria dinámica', () => {
-    //     getPostDataDynamicrandom().then((content)=>{
-    //         // THEN: Visitar pagina de posts
-    //         Given.navigateToPostPage();
+    it('Escenario 9: Crear un nuevo Post con imagen de unsplash y guardarlo con data generada aleatoria dinámica', () => {
+        getPostDataDynamicrandom().then((content)=>{
+            // THEN: Visitar pagina de posts
+            Given.navigateToPostPage();
     
-    //         // WHEN: Crear y publicar post 
-    //         When.createAndPublishPostWhithImageDynamicRandom( content );
+            // WHEN: Crear y publicar post 
+            When.createAndPublishPostWhithImageDynamicRandom( content );
     
-    //         // THEN: Verificar post publicado
-    //         Then.seePostPublishedPostWithImageMokaroo( content );
-    //     })
-    // });
+            // THEN: Verificar post publicado
+            Then.seePostPublishedPostWithImageMokaroo( content );
+        })
+    });
 
-    // it('Escenario 10: Crear un nuevo Post con contenido, título y guardarlo con data generada aleatoria dinámica', () => {
-    //     getPostDataDynamicrandom().then((content)=>{
-    //         // THEN: Visitar pagina de posts
-    //         Given.navigateToPostPage();
+    it('Escenario 10: Crear un nuevo Post con contenido, título y guardarlo con data generada aleatoria dinámica', () => {
+        getPostDataDynamicrandom().then((content)=>{
+            // THEN: Visitar pagina de posts
+            Given.navigateToPostPage();
     
-    //         // WHEN: Crear y publicar post 
-    //         When.createAndPublishPostWhithContentDynamicRandom( content );
+            // WHEN: Crear y publicar post 
+            When.createAndPublishPostWhithContentDynamicRandom( content );
     
-    //         // THEN: Verificar post publicado
-    //         Then.seePostPublishedPostWithContentMokaroo( content );
-    //     })
-    // });
+            // THEN: Verificar post publicado
+            Then.seePostPublishedPostWithContentMokaroo( content );
+        })
+    });
 
-    // it('Escenario 11: Crear post basico con data aleatoria', () => {
-    //     const content = schemaFaker();
+    it('Escenario 11: Crear post basico con data aleatoria', () => {
+        const content = schemaFaker();
 
-    //     // THEN: Visitar pagina de posts
-    //     Given.navigateToPostPage();
+        // THEN: Visitar pagina de posts
+        Given.navigateToPostPage();
 
-    //     // WHEN: Crear y publicar post 
-    //     When.createAndPublishPostRandom( content );
+        // WHEN: Crear y publicar post 
+        When.createAndPublishPostRandom( content );
 
-    //     // THEN: Verificar post publicado
-    //     Then.seePostPublishedRandom( content );
-    // });
+        // THEN: Verificar post publicado
+        Then.seePostPublishedRandom( content );
+    });
 
-    // it('Escenario 12: Crear post con texto en negrita con data aleatoria', () => {
-    //     const content = schemaFaker();
+    it('Escenario 12: Crear post con texto en negrita con data aleatoria', () => {
+        const content = schemaFaker();
 
-    //     // THEN: Visitar pagina de posts
-    //     Given.navigateToPostPage();
+        // THEN: Visitar pagina de posts
+        Given.navigateToPostPage();
 
-    //     // WHEN: Crear y publicar post 
-    //     When.createAndPublishPostBoldrandom( content );
+        // WHEN: Crear y publicar post 
+        When.createAndPublishPostBoldrandom( content );
 
-    //     // THEN: Verificar post publicado
-    //     Then.seePostPublishedBoldRandom( content );
-    // });
+        // THEN: Verificar post publicado
+        Then.seePostPublishedBoldRandom( content );
+    });
 
     it('Escenario 13: Editar post con contenido en markdown con data aleatoria', () => {
         const content = schemaFaker();
@@ -178,980 +178,980 @@ describe('Pruebas E2E Ghost', () => {
         Then.seePostPublishedPostMarkdownRandom( content );
     });
 
-    // it('Escenario 14: Crear un nuevo Post con imagen de unsplash y guardarlo con data aleatoria', () => {
-    //     const content = schemaFaker();
+    it('Escenario 14: Crear un nuevo Post con imagen de unsplash y guardarlo con data aleatoria', () => {
+        const content = schemaFaker();
 
-    //     // THEN: Visitar pagina de posts
-    //     Given.navigateToPostPage();
+        // THEN: Visitar pagina de posts
+        Given.navigateToPostPage();
 
-    //     // WHEN: Crear y publicar post 
-    //     When.createAndPublishPostWhithImageRandom( content );
+        // WHEN: Crear y publicar post 
+        When.createAndPublishPostWhithImageRandom( content );
 
-    //     // THEN: Verificar post publicado
-    //     Then.seePostPublishedPostWithImageRandom( content );
-    // });
+        // THEN: Verificar post publicado
+        Then.seePostPublishedPostWithImageRandom( content );
+    });
 
-    // it('Escenario 15: Crear un nuevo Post con contenido, título y guardarlo con data aleatoria', () => {
-    //     const content = schemaFaker();
+    it('Escenario 15: Crear un nuevo Post con contenido, título y guardarlo con data aleatoria', () => {
+        const content = schemaFaker();
 
-    //     // THEN: Visitar pagina de posts
-    //     Given.navigateToPostPage();
+        // THEN: Visitar pagina de posts
+        Given.navigateToPostPage();
 
-    //     // WHEN: Crear y publicar post 
-    //     When.createAndPublishPostWhithContentRandom( content );
+        // WHEN: Crear y publicar post 
+        When.createAndPublishPostWhithContentRandom( content );
 
-    //     // THEN: Verificar post publicado
-    //     Then.seePostPublishedPostWithContentRandom( content );
-    // });
+        // THEN: Verificar post publicado
+        Then.seePostPublishedPostWithContentRandom( content );
+    });
 
-    // it('Escenario 16: Comprobar si aparece el error al no tener seleccionado un autor en un post', () => {
-    //     // THEN: Visitar pagina de posts
-    //     Given.navigateToPostPage();
+    it('Escenario 16: Comprobar si aparece el error al no tener seleccionado un autor en un post', () => {
+        // THEN: Visitar pagina de posts
+        Given.navigateToPostPage();
 
-    //     // WHEN: Crear y publicar post 
-    //     When.removePostAuthorPool();
+        // WHEN: Crear y publicar post 
+        When.removePostAuthorPool();
 
-    //     // THEN: Verificar post publicado
-    //     Then.validateRemovePostAuthorError();
-    // })
+        // THEN: Verificar post publicado
+        Then.validateRemovePostAuthorError();
+    })
 
-    // it('Escenario 17: Agregar una URL personalizada a una publicación en un Post', () => {
-    //     // THEN: Visitar pagina de posts
-    //     Given.navigateToPostPage();
+    it('Escenario 17: Agregar una URL personalizada a una publicación en un Post', () => {
+        // THEN: Visitar pagina de posts
+        Given.navigateToPostPage();
 
-    //     // WHEN: Crear y publicar post 
-    //     When.addCustomUrlPost();
+        // WHEN: Crear y publicar post 
+        When.addCustomUrlPost();
 
-    //     // THEN: Verificar post publicado
-    //     Then.validateSlugAdded();
-    // })
+        // THEN: Verificar post publicado
+        Then.validateSlugAdded();
+    })
 
-    // it('Escenario 18: Comprobar que el Exerpt no supere los 300 caracteres', () => {
-    //     // THEN: Visitar pagina de posts
-    //     Given.navigateToPostPage();
+    it('Escenario 18: Comprobar que el Exerpt no supere los 300 caracteres', () => {
+        // THEN: Visitar pagina de posts
+        Given.navigateToPostPage();
 
-    //     // WHEN: Crear y publicar post 
-    //     When.addinvalidExcerpt();
+        // WHEN: Crear y publicar post 
+        When.addinvalidExcerpt();
 
-    //     // THEN: Verificar post publicado
-    //     Then.validateErrorExcerpt();
-    // })
+        // THEN: Verificar post publicado
+        Then.validateErrorExcerpt();
+    })
 
-    // it('Escenario 19: Cambiar las configuraciones de brand del sitio', () => {
-    //     // THEN: Visitar pagina de posts
-    //     Given.givenNavigateToSettings();
+    it('Escenario 19: Cambiar las configuraciones de brand del sitio', () => {
+        // THEN: Visitar pagina de posts
+        Given.givenNavigateToSettings();
 
-    //     // WHEN: Crear y publicar post 
-    //     When.changebrandConfig();
+        // WHEN: Crear y publicar post 
+        When.changebrandConfig();
 
-    //     // THEN: Verificar post publicado
-    //     Then.validateSiteDescriptionHasBeenSaved();
-    // })
+        // THEN: Verificar post publicado
+        Then.validateSiteDescriptionHasBeenSaved();
+    })
 
-    // it('Escenario 20: Comprobar que se asigne un label al crear un nuevo item de navegación primario', () => {
-    //     // THEN: Visitar pagina de posts
-    //     Given.givenNavigateToSettings();
+    it('Escenario 20: Comprobar que se asigne un label al crear un nuevo item de navegación primario', () => {
+        // THEN: Visitar pagina de posts
+        Given.givenNavigateToSettings();
 
-    //     // WHEN: Crear y publicar post 
-    //     When.changeNavigationItem();
+        // WHEN: Crear y publicar post 
+        When.changeNavigationItem();
 
-    //     // THEN: Verificar post publicado
-    //     Then.validateNavigationItemWasSaved();
-    // })
+        // THEN: Verificar post publicado
+        Then.validateNavigationItemWasSaved();
+    })
     
-    // it('Escenario 21: Comprobar que se asigne un label al crear un nuevo item de navegación Secundario de una fuente de datos aleatorio dinámico', () => {
-    //     getLinkDataDynamicrandom().then((navigate)=>{
-    //         // THEN: Visitar pagina de posts
-    //         Given.givenNavigateToSettings();
+    it('Escenario 21: Comprobar que se asigne un label al crear un nuevo item de navegación Secundario de una fuente de datos aleatorio dinámico', () => {
+        getLinkDataDynamicrandom().then((navigate)=>{
+            // THEN: Visitar pagina de posts
+            Given.givenNavigateToSettings();
     
-    //         // WHEN: Crear y publicar post 
-    //         When.changeNavigationItemSecondary( navigate );
+            // WHEN: Crear y publicar post 
+            When.changeNavigationItemSecondary( navigate );
     
-    //         // THEN: Verificar post publicado
-    //         Then.validateNavigationItemSecondaryWasSaved( navigate );
-    //     })
-    // })
+            // THEN: Verificar post publicado
+            Then.validateNavigationItemSecondaryWasSaved( navigate );
+        })
+    })
 
-    // it('Escenario 22: Invitar un nuevo usuario al staff con rol "Contributor"', () => {
-    //     getContributorDataDynamicrandom().then((contributor)=>{
-    //         // THEN: Visitar pagina de posts
-    //         Given.givenNavigateToSettings();
+    it('Escenario 22: Invitar un nuevo usuario al staff con rol "Contributor"', () => {
+        getContributorDataDynamicrandom().then((contributor)=>{
+            // THEN: Visitar pagina de posts
+            Given.givenNavigateToSettings();
     
-    //         // WHEN: Crear y publicar post 
-    //         When.inviteUserToBeContributor( contributor );
+            // WHEN: Crear y publicar post 
+            When.inviteUserToBeContributor( contributor );
     
-    //         // THEN: Verificar post publicado
-    //         Then.validateInvitationWasNotSend(contributor);
-    //     })
-    // })
+            // THEN: Verificar post publicado
+            Then.validateInvitationWasNotSend(contributor);
+        })
+    })
 
-    // it('Escenario 23: Comprobar que insgrese un correo válido', () => {
-    //     getContributorDataDynamicrandom().then((contributor)=>{
-    //         // THEN: Visitar pagina de posts
-    //         Given.givenNavigateToSettings();
+    it('Escenario 23: Comprobar que insgrese un correo válido', () => {
+        getContributorDataDynamicrandom().then((contributor)=>{
+            // THEN: Visitar pagina de posts
+            Given.givenNavigateToSettings();
     
-    //         // WHEN: Crear y publicar post 
-    //         When.testBademailInField( contributor );
+            // WHEN: Crear y publicar post 
+            When.testBademailInField( contributor );
     
-    //         // THEN: Verificar post publicado
-    //         Then.validateBadEmailError();
-    //     })
-    // })
+            // THEN: Verificar post publicado
+            Then.validateBadEmailError();
+        })
+    })
 
-    // it('Escenario 24: Modificar información del owner del sitio', () => {
-    //     getOwnerDataDynamicrandom().then((owner)=>{
-    //         // THEN: Visitar pagina de posts
-    //         Given.givenNavigateToSettings();
+    it('Escenario 24: Modificar información del owner del sitio', () => {
+        getOwnerDataDynamicrandom().then((owner)=>{
+            // THEN: Visitar pagina de posts
+            Given.givenNavigateToSettings();
     
-    //         // WHEN: Crear y publicar post 
-    //         When.editOwnerInfo( owner );
+            // WHEN: Crear y publicar post 
+            When.editOwnerInfo( owner );
     
-    //         // THEN: Verificar post publicado
-    //         Then.validateFieldsComplete( owner );
-    //     })
-    // })
+            // THEN: Verificar post publicado
+            Then.validateFieldsComplete( owner );
+        })
+    })
     
-    // it('Escenario 25: Comprobar que se asigne un usuario valido para Twitter en el formulario de owner', () => {
-    //     getOwnerDataDynamicrandom().then((owner)=>{
-    //         // THEN: Visitar pagina de posts
-    //         Given.givenNavigateToSettings();
+    it('Escenario 25: Comprobar que se asigne un usuario valido para Twitter en el formulario de owner', () => {
+        getOwnerDataDynamicrandom().then((owner)=>{
+            // THEN: Visitar pagina de posts
+            Given.givenNavigateToSettings();
     
-    //         // WHEN: Crear y publicar post 
-    //         When.editOwnerInfoTwitter( owner );
+            // WHEN: Crear y publicar post 
+            When.editOwnerInfoTwitter( owner );
     
-    //         // THEN: Verificar post publicado
-    //         Then.validateErrorTwitter( owner );
-    //     })
-    // })
+            // THEN: Verificar post publicado
+            Then.validateErrorTwitter( owner );
+        })
+    })
 
-    // it('Escenario 26: Comprobar que se asigne un label al crear un nuevo item de navegación Secundario con data aleatoria', () => {
-    //     const link = linkSchemaFaker();
+    it('Escenario 26: Comprobar que se asigne un label al crear un nuevo item de navegación Secundario con data aleatoria', () => {
+        const link = linkSchemaFaker();
 
-    //     // THEN: Visitar pagina de posts
-    //     Given.givenNavigateToSettings();
+        // THEN: Visitar pagina de posts
+        Given.givenNavigateToSettings();
 
-    //     // WHEN: Crear y publicar post 
-    //     When.changeNavigationItemSecondaryRandom( link );
+        // WHEN: Crear y publicar post 
+        When.changeNavigationItemSecondaryRandom( link );
 
-    //     // THEN: Verificar post publicado
-    //     Then.validateNavigationItemSecondaryWasSavedRandom( link )
-    // })
+        // THEN: Verificar post publicado
+        Then.validateNavigationItemSecondaryWasSavedRandom( link )
+    })
     
-    // it('Escenario 27: Invitar un nuevo usuario al staff con rol "Contributor" con data aleatoria', () => {
-    //     const contributor = contributorSchemaFaker();
+    it('Escenario 27: Invitar un nuevo usuario al staff con rol "Contributor" con data aleatoria', () => {
+        const contributor = contributorSchemaFaker();
 
-    //     // THEN: Visitar pagina de posts
-    //     Given.givenNavigateToSettings();
+        // THEN: Visitar pagina de posts
+        Given.givenNavigateToSettings();
 
-    //     // WHEN: Crear y publicar post 
-    //     When.inviteUserToBeContributorRandom( contributor );
+        // WHEN: Crear y publicar post 
+        When.inviteUserToBeContributorRandom( contributor );
 
-    //     // THEN: Verificar post publicado
-    //     Then.validateInvitationWasNotSendRandom( contributor );
-    // })
+        // THEN: Verificar post publicado
+        Then.validateInvitationWasNotSendRandom( contributor );
+    })
     
-    // it('Escenario 28: Comprobar que insgrese un correo válido con data aleatoria', () => {
-    //     const contributor = contributorSchemaFaker();
+    it('Escenario 28: Comprobar que insgrese un correo válido con data aleatoria', () => {
+        const contributor = contributorSchemaFaker();
 
-    //     // THEN: Visitar pagina de posts
-    //     Given.givenNavigateToSettings();
+        // THEN: Visitar pagina de posts
+        Given.givenNavigateToSettings();
 
-    //     // WHEN: Crear y publicar post 
-    //     When.testBademailInFieldRandom( contributor );
+        // WHEN: Crear y publicar post 
+        When.testBademailInFieldRandom( contributor );
 
-    //     // THEN: Verificar post publicado
-    //     Then.validateBadEmailError();
-    // })
+        // THEN: Verificar post publicado
+        Then.validateBadEmailError();
+    })
 
-    // it('Escenario 29: Modificar información del owner del sitio con data aleatoria', () => {
-    //     const owner = ownerSchemaFaker();
+    it('Escenario 29: Modificar información del owner del sitio con data aleatoria', () => {
+        const owner = ownerSchemaFaker();
 
-    //     // THEN: Visitar pagina de posts
-    //     Given.givenNavigateToSettings();
+        // THEN: Visitar pagina de posts
+        Given.givenNavigateToSettings();
     
-    //     // WHEN: Crear y publicar post 
-    //     When.editOwnerInfo( owner );
+        // WHEN: Crear y publicar post 
+        When.editOwnerInfo( owner );
 
-    //     // THEN: Verificar post publicado
-    //     Then.validateFieldsComplete( owner );
-    // })
+        // THEN: Verificar post publicado
+        Then.validateFieldsComplete( owner );
+    })
 
-    // it('Escenario 30: Comprobar que se asigne un usuario valido para Twitter en el formulario de owner con data aleatoria', () => {
-    //     const owner = ownerSchemaFaker();
+    it('Escenario 30: Comprobar que se asigne un usuario valido para Twitter en el formulario de owner con data aleatoria', () => {
+        const owner = ownerSchemaFaker();
 
-    //     // THEN: Visitar pagina de posts
-    //     Given.givenNavigateToSettings();
+        // THEN: Visitar pagina de posts
+        Given.givenNavigateToSettings();
 
-    //     // WHEN: Crear y publicar post 
-    //     When.editOwnerInfoTwitter( owner );
+        // WHEN: Crear y publicar post 
+        When.editOwnerInfoTwitter( owner );
 
-    //     // THEN: Verificar post publicado
-    //     Then.validateErrorTwitter( owner );
-    // })
+        // THEN: Verificar post publicado
+        Then.validateErrorTwitter( owner );
+    })
 
-    // //EDWIN
+    //EDWIN
 
-    // it('E0031: (PoolDatosApriori) - Crear y publicar un post con contenido en HTML, datos validos', () => {
-    //     const post = getRandomPost("escenariosPositivos");
+    it('E0031: (PoolDatosApriori) - Crear y publicar un post con contenido en HTML, datos validos', () => {
+        const post = getRandomPost("escenariosPositivos");
 
-    //     // THEN: Visitar pagina de posts
-    //     Given.navigateToPostPage();
+        // THEN: Visitar pagina de posts
+        Given.navigateToPostPage();
 
-    //     // WHEN: Crear y publicar post
-    //     When.createAndPublishPostWithHtml(post);
+        // WHEN: Crear y publicar post
+        When.createAndPublishPostWithHtml(post);
 
-    //     // THEN: Verificar post publicado
-    //     Then.seePostPublishedWithHtml(post);
-    // });
+        // THEN: Verificar post publicado
+        Then.seePostPublishedWithHtml(post);
+    });
 
-    // it('E0032: (PoolDatosApriori) - Crear y publicar un post con contenido en HTML, formatos erroneos', () => {
-    //     const post = getRandomPost("escenarioDataErroneaPositivos");
+    it('E0032: (PoolDatosApriori) - Crear y publicar un post con contenido en HTML, formatos erroneos', () => {
+        const post = getRandomPost("escenarioDataErroneaPositivos");
 
-    //     // THEN: Visitar pagina de posts
-    //     Given.navigateToPostPage();
+        // THEN: Visitar pagina de posts
+        Given.navigateToPostPage();
 
-    //     // WHEN: Crear y publicar post
-    //     When.createAndPublishPostWithHtml(post);
+        // WHEN: Crear y publicar post
+        When.createAndPublishPostWithHtml(post);
 
-    //     // THEN: Verificar post publicado
-    //     Then.seePostPublishedWithHtml(post);
-    // });
+        // THEN: Verificar post publicado
+        Then.seePostPublishedWithHtml(post);
+    });
 
-    // it('E0033: (PoolDatosApriori) - Crear y publicar un post con contenido en HTML, caracteres especiales y emoticones', () => {
-    //     const post = getRandomPost("escenarioDataErroneaPositivos");
+    it('E0033: (PoolDatosApriori) - Crear y publicar un post con contenido en HTML, caracteres especiales y emoticones', () => {
+        const post = getRandomPost("escenarioDataErroneaPositivos");
 
-    //     // THEN: Visitar pagina de posts
-    //     Given.navigateToPostPage();
+        // THEN: Visitar pagina de posts
+        Given.navigateToPostPage();
 
-    //     // WHEN: Crear y publicar post
-    //     When.createAndPublishPostWithHtml(post);
+        // WHEN: Crear y publicar post
+        When.createAndPublishPostWithHtml(post);
 
-    //     // THEN: Verificar post publicado
-    //     Then.seePostPublishedWithHtml(post);
-    // });
+        // THEN: Verificar post publicado
+        Then.seePostPublishedWithHtml(post);
+    });
 
-    // it('E0034: (PoolDatosApriori) - Crear y publicar un post con contenido en HTML, titulo con 256 caracteres', () => {
-    //     const post = getRandomPost("escenarioTitulo256");
+    it('E0034: (PoolDatosApriori) - Crear y publicar un post con contenido en HTML, titulo con 256 caracteres', () => {
+        const post = getRandomPost("escenarioTitulo256");
 
-    //     // THEN: Visitar pagina de posts
-    //     Given.navigateToPostPage();
+        // THEN: Visitar pagina de posts
+        Given.navigateToPostPage();
 
-    //     // WHEN: Crear y publicar post
-    //     When.createAndPublishPostWithHtmlError(post);
+        // WHEN: Crear y publicar post
+        When.createAndPublishPostWithHtmlError(post);
 
-    //     // THEN: Verificar post publicado
-    //     Then.seePostPublishError(post);
-    // });
+        // THEN: Verificar post publicado
+        Then.seePostPublishError(post);
+    });
 
-    // it('E0035: (PoolDatosApriori) - Crear y publicar un post con contenido en HTML, titulo con 255 caracteres ', () => {
-    //     const post = getRandomPost("escenarioTitulo255");
+    it('E0035: (PoolDatosApriori) - Crear y publicar un post con contenido en HTML, titulo con 255 caracteres ', () => {
+        const post = getRandomPost("escenarioTitulo255");
 
-    //     // THEN: Visitar pagina de posts
-    //     Given.navigateToPostPage();
+        // THEN: Visitar pagina de posts
+        Given.navigateToPostPage();
 
-    //     // WHEN: Crear y publicar post
-    //     When.createAndPublishPostWithHtml(post);
+        // WHEN: Crear y publicar post
+        When.createAndPublishPostWithHtml(post);
 
-    //     // THEN: Verificar post publicado
-    //     Then.seePostPublishedWithHtml(post);
-    // });
+        // THEN: Verificar post publicado
+        Then.seePostPublishedWithHtml(post);
+    });
 
-    // it('E0036: (PoolDatosApriori) - Crear y publicar un post con contenido en HTML, titulo vacio', () => {
-    //     const post = getRandomPost("escenarioTituloVacio");
+    it('E0036: (PoolDatosApriori) - Crear y publicar un post con contenido en HTML, titulo vacio', () => {
+        const post = getRandomPost("escenarioTituloVacio");
 
-    //     // THEN: Visitar pagina de posts
-    //     Given.navigateToPostPage();
+        // THEN: Visitar pagina de posts
+        Given.navigateToPostPage();
 
-    //     // WHEN: Crear y publicar post
-    //     When.createAndPublishPostWithHtml(post);
+        // WHEN: Crear y publicar post
+        When.createAndPublishPostWithHtml(post);
 
-    //     // THEN: Verificar post publicado
-    //     Then.seePostPublishedUntitled(post);
-    // });
+        // THEN: Verificar post publicado
+        Then.seePostPublishedUntitled(post);
+    });
 
-    // it('E0037: (PoolDatosApriori) - Despublicar post publicado, datos validos', () => {
-    //     const post = getRandomPost("escenariosPositivos");
+    it('E0037: (PoolDatosApriori) - Despublicar post publicado, datos validos', () => {
+        const post = getRandomPost("escenariosPositivos");
 
-    //     // THEN: Visitar pagina de posts
-    //     Given.navigateToPostPage();
+        // THEN: Visitar pagina de posts
+        Given.navigateToPostPage();
 
-    //     // WHEN: Crear y publicar post
-    //     When.unpublishPostCreated(post);
+        // WHEN: Crear y publicar post
+        When.unpublishPostCreated(post);
 
-    //     // THEN: Verificar post publicado
-    //     Then.confirmUnpublishPostPublished(post);
-    // });
+        // THEN: Verificar post publicado
+        Then.confirmUnpublishPostPublished(post);
+    });
 
-    // it('E0038: (PoolDatosApriori) - Eliminar post publicado, datos validos', () => {
-    //     const post = getRandomPost("escenariosPositivos");
+    it('E0038: (PoolDatosApriori) - Eliminar post publicado, datos validos', () => {
+        const post = getRandomPost("escenariosPositivos");
 
-    //     // THEN: Visitar pagina de posts
-    //     Given.navigateToPostPage();
+        // THEN: Visitar pagina de posts
+        Given.navigateToPostPage();
 
-    //     // WHEN: Crear y publicar post
-    //     When.deletePostPublished(post);
+        // WHEN: Crear y publicar post
+        When.deletePostPublished(post);
 
-    //     // THEN: Verificar post publicado
-    //     Then.confirmDeletedPost(post);
-    // });
+        // THEN: Verificar post publicado
+        Then.confirmDeletedPost(post);
+    });
 
-    // it('E0039: (PoolDatosApriori) - Crear Post para que solo sea visible para miembros, datos validos', () => {
-    //     const post = getRandomPost("escenariosPositivos");
+    it('E0039: (PoolDatosApriori) - Crear Post para que solo sea visible para miembros, datos validos', () => {
+        const post = getRandomPost("escenariosPositivos");
 
-    //     // THEN: Visitar pagina de posts
-    //     Given.navigateToPostPage();
+        // THEN: Visitar pagina de posts
+        Given.navigateToPostPage();
 
-    //     // WHEN: Crear y publicar post
-    //     When.createAndPublishPostMembersOnly(post);
+        // WHEN: Crear y publicar post
+        When.createAndPublishPostMembersOnly(post);
 
-    //     // THEN: Verificar post publicado
-    //     Then.seePostPublishedMembersOnly(post);
-    // });
+        // THEN: Verificar post publicado
+        Then.seePostPublishedMembersOnly(post);
+    });
 
-    // it('E0040: (PoolDatosApriori) - Crear una página con contenido en HTML y publicarla, datos validos', () => {
-    //     const page = getRandomPost("escenariosPositivos");
+    it('E0040: (PoolDatosApriori) - Crear una página con contenido en HTML y publicarla, datos validos', () => {
+        const page = getRandomPost("escenariosPositivos");
 
-    //     // THEN: Visitar pagina de posts
-    //     Given.givenNavigateToPagePage();
+        // THEN: Visitar pagina de posts
+        Given.givenNavigateToPagePage();
 
-    //     // WHEN: Crear y publicar post
-    //     When.createAndPublishPageWithHtml(page);
+        // WHEN: Crear y publicar post
+        When.createAndPublishPageWithHtml(page);
 
-    //     // THEN: Verificar post publicado
-    //     Then.seePagePublishedWithHtml(page);
-    // });
+        // THEN: Verificar post publicado
+        Then.seePagePublishedWithHtml(page);
+    });
 
-    // it('E0041: (PoolDatosApriori) - Crear una página con contenido en HTML y publicarla, formato y etiquetas erroneas', () => {
-    //     const page = getRandomPost("escenarioDataErroneaPositivos");
+    it('E0041: (PoolDatosApriori) - Crear una página con contenido en HTML y publicarla, formato y etiquetas erroneas', () => {
+        const page = getRandomPost("escenarioDataErroneaPositivos");
 
-    //     // THEN: Visitar pagina de posts
-    //     Given.givenNavigateToPagePage();
+        // THEN: Visitar pagina de posts
+        Given.givenNavigateToPagePage();
 
-    //     // WHEN: Crear y publicar post
-    //     When.createAndPublishPageWithHtml(page);
+        // WHEN: Crear y publicar post
+        When.createAndPublishPageWithHtml(page);
 
-    //     // THEN: Verificar post publicado
-    //     Then.seePagePublishedWithHtml(page);
-    // });
+        // THEN: Verificar post publicado
+        Then.seePagePublishedWithHtml(page);
+    });
 
-    // it('E0042: (PoolDatosApriori) - Crear una página con contenido en HTML, Sin titulo.', () => {
-    //     const page = getRandomPost("escenarioTituloVacio");
+    it('E0042: (PoolDatosApriori) - Crear una página con contenido en HTML, Sin titulo.', () => {
+        const page = getRandomPost("escenarioTituloVacio");
 
-    //     // GIVEN: Visitar pagina de posts
-    //     Given.givenNavigateToPagePage();
+        // GIVEN: Visitar pagina de posts
+        Given.givenNavigateToPagePage();
 
-    //     // WHEN: Crear y publicar post
-    //     When.createAndPublishPageWithHtml(page);
+        // WHEN: Crear y publicar post
+        When.createAndPublishPageWithHtml(page);
 
-    //     // THEN: Verificar post publicado
-    //     Then.seePostPublishedUntitled(page);
-    // });
+        // THEN: Verificar post publicado
+        Then.seePostPublishedUntitled(page);
+    });
 
-    // it('E0043: (PseudoAleatorioDinamico) - Crear y publicar un post con contenido en HTML, datos validos', () => {
-    //     getPostDataMokaroo().then((data) => {
-    //         let post = data["escenariosPositivos"][0];
-    //         // GIVEN: Visitar pagina de posts
-    //         Given.navigateToPostPage();
+    it('E0043: (PseudoAleatorioDinamico) - Crear y publicar un post con contenido en HTML, datos validos', () => {
+        getPostDataMokaroo().then((data) => {
+            let post = data["escenariosPositivos"][0];
+            // GIVEN: Visitar pagina de posts
+            Given.navigateToPostPage();
 
-    //         // WHEN: Crear y publicar post
-    //         When.createAndPublishPostWithHtml(post);
+            // WHEN: Crear y publicar post
+            When.createAndPublishPostWithHtml(post);
 
-    //         // THEN: Verificar post publicado
-    //         Then.seePostPublishedWithHtml(post);
-    //     });
-    // });
+            // THEN: Verificar post publicado
+            Then.seePostPublishedWithHtml(post);
+        });
+    });
 
-    // it('E0044: (PseudoAleatorioDinamico) - Crear y publicar un post con contenido en HTML, formatos erroneos', () => {
-    //     getPostDataMokaroo().then((data) => {
-    //         let post = data["escenarioDataErroneaPositivos"][0];
-    //         // GIVEN: Visitar pagina de posts
-    //         Given.navigateToPostPage();
-
-    //         // WHEN: Crear y publicar post
-    //         When.createAndPublishPostWithHtml(post);
+    it('E0044: (PseudoAleatorioDinamico) - Crear y publicar un post con contenido en HTML, formatos erroneos', () => {
+        getPostDataMokaroo().then((data) => {
+            let post = data["escenarioDataErroneaPositivos"][0];
+            // GIVEN: Visitar pagina de posts
+            Given.navigateToPostPage();
+
+            // WHEN: Crear y publicar post
+            When.createAndPublishPostWithHtml(post);
 
-    //         // THEN: Verificar post publicado
-    //         Then.seePostPublishedWithHtml(post);
-    //     });
-    // });
-
-    // it('E0045: (PseudoAleatorioDinamico) - Crear y publicar un post con contenido en HTML, caracteres especiales y emoticones', () => {
-    //     getPostDataMokaroo().then((data) => {
-    //         let post = data["escenarioDataErroneaPositivos"][0];
-    //         // GIVEN: Visitar pagina de posts
-    //         Given.navigateToPostPage();
-
-    //         // WHEN: Crear y publicar post
-    //         When.createAndPublishPostWithHtml(post);
-
-    //         // THEN: Verificar post publicado
-    //         Then.seePostPublishedWithHtml(post);
-    //     });
-    // });
-
-    // it('E0046: (PseudoAleatorioDinamico) - Crear y publicar un post con contenido en HTML, titulo con 256 caracteres', () => {
-    //     getPostDataMokaroo().then((data) => {
-    //         let post = data["escenarioTitulo256"][0];
-    //         // GIVEN: Visitar pagina de posts
-    //         Given.navigateToPostPage();
-
-    //         // WHEN: Crear y publicar post
-    //         When.createAndPublishPostWithHtmlError(post);
-
-    //         // THEN: Verificar post publicado
-    //         Then.seePostPublishError(post);
-    //     });
-    // });
-
-    // it('E0047: (PseudoAleatorioDinamico) - Crear y publicar un post con contenido en HTML, titulo con 255 caracteres', () => {
-    //     getPostDataMokaroo().then((data) => {
-    //         let post = data["escenarioTitulo255"][0];
-    //         // GIVEN: Visitar pagina de posts
-    //         Given.navigateToPostPage();
-
-    //         // WHEN: Crear y publicar post
-    //         When.createAndPublishPostWithHtml(post);
-
-    //         // THEN: Verificar post publicado
-    //         Then.seePostPublishedWithHtml(post);
-    //     });
-    // });
-
-    // it('E0048: (PseudoAleatorioDinamico) - Crear y publicar un post con contenido en HTML, titulo vacio', () => {
-    //     getPostDataMokaroo().then((data) => {
-    //         let post = data["escenarioTituloVacio"][0];
-    //         // GIVEN: Visitar pagina de posts
-    //         Given.navigateToPostPage();
-
-    //         // WHEN: Crear y publicar post
-    //         When.createAndPublishPostWithHtml(post);
-
-    //         // THEN: Verificar post publicado
-    //         Then.seePostPublishedUntitled(post);
-    //     });
-    // });
-
-    // it('E0049: (PseudoAleatorioDinamico) - Despublicar post publicado, datos validos', () => {
-    //     getPostDataMokaroo().then((data) => {
-    //         let post = data["escenariosPositivos"][0];
-    //         // GIVEN: Visitar pagina de posts
-    //         Given.navigateToPostPage();
-
-    //         // WHEN: Crear y publicar post
-    //         When.unpublishPostCreated(post);
-
-    //         // THEN: Verificar post publicado
-    //         Then.confirmUnpublishPostPublished(post);
-    //     });
-    // });
-
-    // it('E0050: (PseudoAleatorioDinamico) -  Eliminar post publicado, datos validos', () => {
-    //     getPostDataMokaroo().then((data) => {
-    //         let post = data["escenariosPositivos"][0];
-    //         // GIVEN: Visitar pagina de posts
-    //         Given.navigateToPostPage();
-
-    //         // WHEN: Crear y publicar post
-    //         When.deletePostPublished(post);
+            // THEN: Verificar post publicado
+            Then.seePostPublishedWithHtml(post);
+        });
+    });
+
+    it('E0045: (PseudoAleatorioDinamico) - Crear y publicar un post con contenido en HTML, caracteres especiales y emoticones', () => {
+        getPostDataMokaroo().then((data) => {
+            let post = data["escenarioDataErroneaPositivos"][0];
+            // GIVEN: Visitar pagina de posts
+            Given.navigateToPostPage();
+
+            // WHEN: Crear y publicar post
+            When.createAndPublishPostWithHtml(post);
+
+            // THEN: Verificar post publicado
+            Then.seePostPublishedWithHtml(post);
+        });
+    });
+
+    it('E0046: (PseudoAleatorioDinamico) - Crear y publicar un post con contenido en HTML, titulo con 256 caracteres', () => {
+        getPostDataMokaroo().then((data) => {
+            let post = data["escenarioTitulo256"][0];
+            // GIVEN: Visitar pagina de posts
+            Given.navigateToPostPage();
+
+            // WHEN: Crear y publicar post
+            When.createAndPublishPostWithHtmlError(post);
+
+            // THEN: Verificar post publicado
+            Then.seePostPublishError(post);
+        });
+    });
+
+    it('E0047: (PseudoAleatorioDinamico) - Crear y publicar un post con contenido en HTML, titulo con 255 caracteres', () => {
+        getPostDataMokaroo().then((data) => {
+            let post = data["escenarioTitulo255"][0];
+            // GIVEN: Visitar pagina de posts
+            Given.navigateToPostPage();
+
+            // WHEN: Crear y publicar post
+            When.createAndPublishPostWithHtml(post);
+
+            // THEN: Verificar post publicado
+            Then.seePostPublishedWithHtml(post);
+        });
+    });
+
+    it('E0048: (PseudoAleatorioDinamico) - Crear y publicar un post con contenido en HTML, titulo vacio', () => {
+        getPostDataMokaroo().then((data) => {
+            let post = data["escenarioTituloVacio"][0];
+            // GIVEN: Visitar pagina de posts
+            Given.navigateToPostPage();
+
+            // WHEN: Crear y publicar post
+            When.createAndPublishPostWithHtml(post);
+
+            // THEN: Verificar post publicado
+            Then.seePostPublishedUntitled(post);
+        });
+    });
+
+    it('E0049: (PseudoAleatorioDinamico) - Despublicar post publicado, datos validos', () => {
+        getPostDataMokaroo().then((data) => {
+            let post = data["escenariosPositivos"][0];
+            // GIVEN: Visitar pagina de posts
+            Given.navigateToPostPage();
+
+            // WHEN: Crear y publicar post
+            When.unpublishPostCreated(post);
+
+            // THEN: Verificar post publicado
+            Then.confirmUnpublishPostPublished(post);
+        });
+    });
+
+    it('E0050: (PseudoAleatorioDinamico) -  Eliminar post publicado, datos validos', () => {
+        getPostDataMokaroo().then((data) => {
+            let post = data["escenariosPositivos"][0];
+            // GIVEN: Visitar pagina de posts
+            Given.navigateToPostPage();
+
+            // WHEN: Crear y publicar post
+            When.deletePostPublished(post);
 
-    //         // THEN: Verificar post publicado
-    //         Then.confirmDeletedPost(post);
-    //     });
-    // });
-
-    // it('E0051: (PseudoAleatorioDinamico) -  Crear Post para que solo sea visible para miembros, datos validos', () => {
-    //     getPostDataMokaroo().then((data) => {
-    //         let post = data["escenariosPositivos"][0];
-    //         // GIVEN: Visitar pagina de posts
-    //         Given.navigateToPostPage();
+            // THEN: Verificar post publicado
+            Then.confirmDeletedPost(post);
+        });
+    });
+
+    it('E0051: (PseudoAleatorioDinamico) -  Crear Post para que solo sea visible para miembros, datos validos', () => {
+        getPostDataMokaroo().then((data) => {
+            let post = data["escenariosPositivos"][0];
+            // GIVEN: Visitar pagina de posts
+            Given.navigateToPostPage();
 
-    //         // WHEN: Crear y publicar post
-    //         When.createAndPublishPostMembersOnly(post);
+            // WHEN: Crear y publicar post
+            When.createAndPublishPostMembersOnly(post);
 
-    //         // THEN: Verificar post publicado
-    //         Then.seePostPublishedMembersOnly(post);
-    //     });
-    // });
+            // THEN: Verificar post publicado
+            Then.seePostPublishedMembersOnly(post);
+        });
+    });
 
-    // it('E0052: (PseudoAleatorioDinamico) -  Crear una página con contenido en HTML y publicarla, datos validos', () => {
-    //     getPostDataMokaroo().then((data) => {
-    //         let page = data["escenariosPositivos"][0];
-    //         // GIVEN: Visitar pagina de posts
-    //         Given.givenNavigateToPagePage();
+    it('E0052: (PseudoAleatorioDinamico) -  Crear una página con contenido en HTML y publicarla, datos validos', () => {
+        getPostDataMokaroo().then((data) => {
+            let page = data["escenariosPositivos"][0];
+            // GIVEN: Visitar pagina de posts
+            Given.givenNavigateToPagePage();
 
-    //         // WHEN: Crear y publicar post
-    //         When.createAndPublishPageWithHtml(page);
+            // WHEN: Crear y publicar post
+            When.createAndPublishPageWithHtml(page);
 
-    //         // THEN: Verificar post publicado
-    //         Then.seePagePublishedWithHtml(page);
-    //     });
-    // });
+            // THEN: Verificar post publicado
+            Then.seePagePublishedWithHtml(page);
+        });
+    });
 
-    // it('E0053: (PseudoAleatorioDinamico) -   Crear una página con contenido en HTML y publicarla, formato y etiquetas erroneas', () => {
-    //     getPostDataMokaroo().then((data) => {
-    //         let page = data["escenarioDataErroneaPositivos"][0];
-    //         // GIVEN: Visitar pagina de posts
-    //         Given.givenNavigateToPagePage();
+    it('E0053: (PseudoAleatorioDinamico) -   Crear una página con contenido en HTML y publicarla, formato y etiquetas erroneas', () => {
+        getPostDataMokaroo().then((data) => {
+            let page = data["escenarioDataErroneaPositivos"][0];
+            // GIVEN: Visitar pagina de posts
+            Given.givenNavigateToPagePage();
 
-    //         // WHEN: Crear y publicar post
-    //         When.createAndPublishPageWithHtml(page);
+            // WHEN: Crear y publicar post
+            When.createAndPublishPageWithHtml(page);
 
-    //         // THEN: Verificar post publicado
-    //         Then.seePagePublishedWithHtml(page);
-    //     });
-    // });
+            // THEN: Verificar post publicado
+            Then.seePagePublishedWithHtml(page);
+        });
+    });
 
-    // it('E0054: (PseudoAleatorioDinamico) -   Crear una página con contenido en HTML, Sin titulo', () => {
-    //     getPostDataMokaroo().then((data) => {
-    //         let page = data["escenarioTituloVacio"][0];
-    //         // GIVEN: Visitar pagina de posts
-    //         Given.givenNavigateToPagePage();
+    it('E0054: (PseudoAleatorioDinamico) -   Crear una página con contenido en HTML, Sin titulo', () => {
+        getPostDataMokaroo().then((data) => {
+            let page = data["escenarioTituloVacio"][0];
+            // GIVEN: Visitar pagina de posts
+            Given.givenNavigateToPagePage();
 
-    //         // WHEN: Crear y publicar post
-    //         When.createAndPublishPageWithHtml(page);
+            // WHEN: Crear y publicar post
+            When.createAndPublishPageWithHtml(page);
 
-    //         // THEN: Verificar post publicado
-    //         Then.seePostPublishedUntitled(page);
-    //     });
-    // });
+            // THEN: Verificar post publicado
+            Then.seePostPublishedUntitled(page);
+        });
+    });
 
-    // it('E0055: (EscenarioAleatorio) - Crear y publicar un post con contenido en HTML, datos validos', () => {
-    //     const post = getPostDataFaker("escenarioDataErroneaPositivos");
-    //     // GIVEN: Visitar pagina de posts
-    //     Given.navigateToPostPage();
+    it('E0055: (EscenarioAleatorio) - Crear y publicar un post con contenido en HTML, datos validos', () => {
+        const post = getPostDataFaker("escenarioDataErroneaPositivos");
+        // GIVEN: Visitar pagina de posts
+        Given.navigateToPostPage();
 
-    //     // WHEN: Crear y publicar post
-    //     When.createAndPublishPostWithHtml(post);
+        // WHEN: Crear y publicar post
+        When.createAndPublishPostWithHtml(post);
 
-    //     // THEN: Verificar post publicado
-    //     Then.seePostPublishedWithHtml(post);
-    // });
+        // THEN: Verificar post publicado
+        Then.seePostPublishedWithHtml(post);
+    });
 
-    // it('E0056: (EscenarioAleatorio) - Crear y publicar un post con contenido en HTML, formatos erroneos', () => {
-    //     const post = getPostDataFaker("escenarioDataErroneaPositivos");
-    //     // GIVEN: Visitar pagina de posts
-    //     Given.navigateToPostPage();
+    it('E0056: (EscenarioAleatorio) - Crear y publicar un post con contenido en HTML, formatos erroneos', () => {
+        const post = getPostDataFaker("escenarioDataErroneaPositivos");
+        // GIVEN: Visitar pagina de posts
+        Given.navigateToPostPage();
 
-    //     // WHEN: Crear y publicar post
-    //     When.createAndPublishPostWithHtml(post);
+        // WHEN: Crear y publicar post
+        When.createAndPublishPostWithHtml(post);
 
-    //     // THEN: Verificar post publicado
-    //     Then.seePostPublishedWithHtml(post);
-    // });
+        // THEN: Verificar post publicado
+        Then.seePostPublishedWithHtml(post);
+    });
 
 
-    // it('E0057: (EscenarioAleatorio) - Crear y publicar un post con contenido en HTML, titulo con 256 caracteres', () => {
-    //     const post = getPostDataFaker("escenarioTitulo256");
+    it('E0057: (EscenarioAleatorio) - Crear y publicar un post con contenido en HTML, titulo con 256 caracteres', () => {
+        const post = getPostDataFaker("escenarioTitulo256");
 
-    //     // THEN: Visitar pagina de posts
-    //     Given.navigateToPostPage();
+        // THEN: Visitar pagina de posts
+        Given.navigateToPostPage();
 
-    //     // WHEN: Crear y publicar post
-    //     When.createAndPublishPostWithHtmlError(post);
+        // WHEN: Crear y publicar post
+        When.createAndPublishPostWithHtmlError(post);
 
-    //     // THEN: Verificar post publicado
-    //     Then.seePostPublishError(post);
-    // });
+        // THEN: Verificar post publicado
+        Then.seePostPublishError(post);
+    });
 
-    // it('E0058: (EscenarioAleatorio) - Crear y publicar un post con contenido en HTML, titulo con 255 caracteres ', () => {
-    //     const post = getPostDataFaker("escenarioTitulo255");
+    it('E0058: (EscenarioAleatorio) - Crear y publicar un post con contenido en HTML, titulo con 255 caracteres ', () => {
+        const post = getPostDataFaker("escenarioTitulo255");
 
-    //     // THEN: Visitar pagina de posts
-    //     Given.navigateToPostPage();
+        // THEN: Visitar pagina de posts
+        Given.navigateToPostPage();
 
-    //     // WHEN: Crear y publicar post
-    //     When.createAndPublishPostWithHtml(post);
+        // WHEN: Crear y publicar post
+        When.createAndPublishPostWithHtml(post);
 
-    //     // THEN: Verificar post publicado
-    //     Then.seePostPublishedWithHtml(post);
-    // });
+        // THEN: Verificar post publicado
+        Then.seePostPublishedWithHtml(post);
+    });
 
-    // it('E0059: (EscenarioAleatorio) - Crear y publicar un post con contenido en HTML, titulo vacio', () => {
-    //     const post = getPostDataFaker("escenarioTituloVacio");
+    it('E0059: (EscenarioAleatorio) - Crear y publicar un post con contenido en HTML, titulo vacio', () => {
+        const post = getPostDataFaker("escenarioTituloVacio");
 
-    //     // THEN: Visitar pagina de posts
-    //     Given.navigateToPostPage();
+        // THEN: Visitar pagina de posts
+        Given.navigateToPostPage();
 
-    //     // WHEN: Crear y publicar post
-    //     When.createAndPublishPostWithHtml(post);
+        // WHEN: Crear y publicar post
+        When.createAndPublishPostWithHtml(post);
 
-    //     // THEN: Verificar post publicado
-    //     Then.seePostPublishedUntitled(post);
-    // });
+        // THEN: Verificar post publicado
+        Then.seePostPublishedUntitled(post);
+    });
 
-    // it('E0060: (EscenarioAleatorio) - Crear una página con contenido en HTML y publicarla, datos validos', () => {
-    //     const post = getPostDataFaker("escenariosPositivos");
+    it('E0060: (EscenarioAleatorio) - Crear una página con contenido en HTML y publicarla, datos validos', () => {
+        const post = getPostDataFaker("escenariosPositivos");
 
-    //     // THEN: Visitar pagina de posts
-    //     Given.givenNavigateToPagePage();
+        // THEN: Visitar pagina de posts
+        Given.givenNavigateToPagePage();
 
-    //     // WHEN: Crear y publicar post
-    //     When.createAndPublishPageWithHtml(post);
+        // WHEN: Crear y publicar post
+        When.createAndPublishPageWithHtml(post);
 
-    //     // THEN: Verificar post publicado
-    //     Then.seePagePublishedWithHtml(post);
-    // });
+        // THEN: Verificar post publicado
+        Then.seePagePublishedWithHtml(post);
+    });
 
-    // //PABLO
+    //PABLO
 
-    // it('Escenario 91: Crear un tag y asignarlo a un post', () => {
-    //     cy.fixture('tagNames-E91.json').then((data) =>{
-    //         const randomIndex = Math.floor(Math.random() * (data.length-1));
-    //         // GIVEN: Visitar Tags
-    //         Given.givenNavigateToTagsPage();
+    it('Escenario 91: Crear un tag y asignarlo a un post', () => {
+        cy.fixture('tagNames-E91.json').then((data) =>{
+            const randomIndex = Math.floor(Math.random() * (data.length-1));
+            // GIVEN: Visitar Tags
+            Given.givenNavigateToTagsPage();
 
-    //         // WHEN: Crear un tag y asignarlo a post
-    //         When.createTagAndAsignIt(data[randomIndex].tagname,data[randomIndex].Post);
+            // WHEN: Crear un tag y asignarlo a post
+            When.createTagAndAsignIt(data[randomIndex].tagname,data[randomIndex].Post);
 
-    //         // THEN: Validar la creación del post con el tag asignado
-    //         Then.validatePostWithTag(data[randomIndex].tagname);
+            // THEN: Validar la creación del post con el tag asignado
+            Then.validatePostWithTag(data[randomIndex].tagname);
 
-    //         }
-    //     )
-    // });
+            }
+        )
+    });
 
 
-    // it('Escenario 92: Crear un tag y ponerlo en una page', () => {
-    //     cy.fixture('tagNames-E92.json').then((data) =>{
-    //         const randomIndex = Math.floor(Math.random() * (data.length-1));
-    //         // GIVEN: Visitar Tags
-    //         Given.givenNavigateToTagsPage();
+    it('Escenario 92: Crear un tag y ponerlo en una page', () => {
+        cy.fixture('tagNames-E92.json').then((data) =>{
+            const randomIndex = Math.floor(Math.random() * (data.length-1));
+            // GIVEN: Visitar Tags
+            Given.givenNavigateToTagsPage();
 
-    //         // WHEN: Crear y asignar tag a una pagina
-    //         When.createTagAndAsignItToPage(data[randomIndex].tagname, data[randomIndex].Pages);
+            // WHEN: Crear y asignar tag a una pagina
+            When.createTagAndAsignItToPage(data[randomIndex].tagname, data[randomIndex].Pages);
 
-    //         // THEN: Validar si la pagina contiene el tag
-    //         Then.validatePageWithTag(data[randomIndex]);
+            // THEN: Validar si la pagina contiene el tag
+            Then.validatePageWithTag(data[randomIndex]);
 
-    //         }
-    //     )
-    // });
+            }
+        )
+    });
 
-    // it('Escenario 93: Crear member', () => {
-    //     cy.fixture('members-E93.json').then((data) =>{
-    //         const randomIndex = Math.floor(Math.random() * (data.length-1));
-    //         // GIVEN: Visitar members
-    //         Given.givenNavigateTomembers();
+    it('Escenario 93: Crear member', () => {
+        cy.fixture('members-E93.json').then((data) =>{
+            const randomIndex = Math.floor(Math.random() * (data.length-1));
+            // GIVEN: Visitar members
+            Given.givenNavigateTomembers();
 
-    //         When.createNewMember(data[randomIndex].nameMember, data[randomIndex].email);
+            When.createNewMember(data[randomIndex].nameMember, data[randomIndex].email);
 
-    //         Then.validateNewMemberExist(data[randomIndex].nameMember);
-    //         }
-    //     )
-    // });
+            Then.validateNewMemberExist(data[randomIndex].nameMember);
+            }
+        )
+    });
 
-    // it('Escenario 94: Crear member y eliminarlo', () => {
-    //     // GIVEN: Visitar members
-    //     Given.givenNavigateTomembers();
+    it('Escenario 94: Crear member y eliminarlo', () => {
+        // GIVEN: Visitar members
+        Given.givenNavigateTomembers();
 
-    //     When.createMemberAndDeletIt();
+        When.createMemberAndDeletIt();
 
-    //     Then.validateMemberWasDeleted();
-    // });
+        Then.validateMemberWasDeleted();
+    });
 
-    // it('Escenario 95: Cambiar el título del sitio', () => {
-    //     // GIVEN: Visitar Settings
-    //     Given.givenNavigateToSettings();
-    //     cy.fixture('siteTitle-E95.json').then((data) =>{
-    //         const randomIndex = Math.floor(Math.random() * (data.length-1));
+    it('Escenario 95: Cambiar el título del sitio', () => {
+        // GIVEN: Visitar Settings
+        Given.givenNavigateToSettings();
+        cy.fixture('siteTitle-E95.json').then((data) =>{
+            const randomIndex = Math.floor(Math.random() * (data.length-1));
 
-    //         When.updateSiteTitlte(data[randomIndex].siteTitle);
+            When.updateSiteTitlte(data[randomIndex].siteTitle);
 
-    //         Then.validateTitleSiteWasEdited(data[randomIndex].siteTitle);
+            Then.validateTitleSiteWasEdited(data[randomIndex].siteTitle);
 
-    //         }
-    //     )
-    // });
+            }
+        )
+    });
 
-    // it('Escenario 96: Crear member invalid', () => {
-    //     // GIVEN: Visitar members
-    //     Given.givenNavigateToMembersNegative();
+    it('Escenario 96: Crear member invalid', () => {
+        // GIVEN: Visitar members
+        Given.givenNavigateToMembersNegative();
 
-    //     When.createNewMemberNegativeInvalid();
+        When.createNewMemberNegativeInvalid();
 
-    //     Then.validateNewMemberErrorInvalid();
-    // });
+        Then.validateNewMemberErrorInvalid();
+    });
 
-    // it('Escenario 97: Crear member y volver a crearlo', () => {
-    //     // GIVEN: Visitar members
-    //     Given.givenNavigateTomembers();
+    it('Escenario 97: Crear member y volver a crearlo', () => {
+        // GIVEN: Visitar members
+        Given.givenNavigateTomembers();
 
-    //     When.createMemberAndRecreateIt();
+        When.createMemberAndRecreateIt();
 
-    //     Then.validateNewMemberErrorDuplicate();
-    // });
+        Then.validateNewMemberErrorDuplicate();
+    });
 
-    // it('Escenario 98: Crear member note invalid', () => {
-    //     // GIVEN: Visitar members
-    //     Given.givenNavigateToMembersNegative();
+    it('Escenario 98: Crear member note invalid', () => {
+        // GIVEN: Visitar members
+        Given.givenNavigateToMembersNegative();
 
-    //     When.createNewMemberNegativeInvalidNote();
+        When.createNewMemberNegativeInvalidNote();
 
-    //     Then.validateNewMemberErrorInvalidNote();
-    // });
+        Then.validateNewMemberErrorInvalidNote();
+    });
 
-    // it('Escenario 99: Crear recomendación en los settings de la pagina', () => {
-    //     // GIVEN: Visitar los settings de la pagina
-    //     Given.givenNavigateToSettings();
-    //     //Crear la recomendación
-    //     When.createRecommendationValid();
+    it('Escenario 99: Crear recomendación en los settings de la pagina', () => {
+        // GIVEN: Visitar los settings de la pagina
+        Given.givenNavigateToSettings();
+        //Crear la recomendación
+        When.createRecommendationValid();
 
-    //     Then.validateNewRecommendationValid();
-    // });
+        Then.validateNewRecommendationValid();
+    });
 
-    // it('Escenario 100: Crear recomendación invalida en los settings de la pagina', () => {
-    //     // GIVEN: Visitar los settings de la pagina
-    //     Given.givenNavigateToSettings();
-    //     cy.fixture('urlRecommendatiosInvalid.json').then((data) =>{
-    //         cy.wrap(data).each((entry)=> {
-    //             //Crear la recomendación
-    //             When.createRecommendation(entry.invalidURL);
-    //             Then.validateNewRecommendationInvalid();
-    //         });
-    //     });
-    // });
+    it('Escenario 100: Crear recomendación invalida en los settings de la pagina', () => {
+        // GIVEN: Visitar los settings de la pagina
+        Given.givenNavigateToSettings();
+        cy.fixture('urlRecommendatiosInvalid.json').then((data) =>{
+            cy.wrap(data).each((entry)=> {
+                //Crear la recomendación
+                When.createRecommendation(entry.invalidURL);
+                Then.validateNewRecommendationInvalid();
+            });
+        });
+    });
 
-    // it('Escenario 101: Crear un tag y asignarlo a un post - Mockaroo', () => {
-    //     fetchMockarooData('tagPostValid.json', Cypress.env('apiKeyMockarooPablo')).then((data) => {
-    //         const randomIndex = Math.floor(Math.random() * (data.length-1));
-    //         // GIVEN: Visitar Tags
-    //         Given.givenNavigateToTagsPage();
+    it('Escenario 101: Crear un tag y asignarlo a un post - Mockaroo', () => {
+        fetchMockarooData('tagPostValid.json', Cypress.env('apiKeyMockarooPablo')).then((data) => {
+            const randomIndex = Math.floor(Math.random() * (data.length-1));
+            // GIVEN: Visitar Tags
+            Given.givenNavigateToTagsPage();
 
-    //         // WHEN: Crear un tag y asignarlo a post
-    //         When.createTagAndAsignIt(data[randomIndex].tagname,data[randomIndex].nameTitle);
+            // WHEN: Crear un tag y asignarlo a post
+            When.createTagAndAsignIt(data[randomIndex].tagname,data[randomIndex].nameTitle);
 
-    //         // THEN: Validar la creación del post con el tag asignado
-    //         Then.validatePostWithTag(data[randomIndex].tagname);
-    //     });
-    // });
+            // THEN: Validar la creación del post con el tag asignado
+            Then.validatePostWithTag(data[randomIndex].tagname);
+        });
+    });
 
-    // it('Escenario 102: Crear un tag y ponerlo en una page - Mockaroo', () => {
-    //     fetchMockarooData('tagPostValid.json', Cypress.env('apiKeyMockarooPablo')).then((data) =>{
-    //             const randomIndex = Math.floor(Math.random() * (data.length-1));
-    //             // GIVEN: Visitar Tags
-    //             Given.givenNavigateToTagsPage();
+    it('Escenario 102: Crear un tag y ponerlo en una page - Mockaroo', () => {
+        fetchMockarooData('tagPostValid.json', Cypress.env('apiKeyMockarooPablo')).then((data) =>{
+                const randomIndex = Math.floor(Math.random() * (data.length-1));
+                // GIVEN: Visitar Tags
+                Given.givenNavigateToTagsPage();
 
-    //             // WHEN: Crear y asignar tag a una pagina
-    //             When.createTagAndAsignItToPage(data[randomIndex].tagname, data[randomIndex].nameTitle);
+                // WHEN: Crear y asignar tag a una pagina
+                When.createTagAndAsignItToPage(data[randomIndex].tagname, data[randomIndex].nameTitle);
 
-    //             // THEN: Validar si la pagina contiene el tag
-    //             Then.validatePageWithTag(data[randomIndex].tagname);
-    //         }
-    //     )
-    // });
+                // THEN: Validar si la pagina contiene el tag
+                Then.validatePageWithTag(data[randomIndex].tagname);
+            }
+        )
+    });
 
-    // it('Escenario 103: Crear member - Mockaroo', () => {
-    //     fetchMockarooData('memberValid.json', Cypress.env('apiKeyMockarooPablo')).then((data) =>{
-    //         const randomIndex = Math.floor(Math.random() * (data.length-1));
+    it('Escenario 103: Crear member - Mockaroo', () => {
+        fetchMockarooData('memberValid.json', Cypress.env('apiKeyMockarooPablo')).then((data) =>{
+            const randomIndex = Math.floor(Math.random() * (data.length-1));
 
-    //         // GIVEN: Visitar members
-    //         Given.givenNavigateTomembers();
+            // GIVEN: Visitar members
+            Given.givenNavigateTomembers();
 
-    //         When.createNewMember(data[randomIndex].nameMember, data[randomIndex].emailMember);
+            When.createNewMember(data[randomIndex].nameMember, data[randomIndex].emailMember);
 
-    //         Then.validateNewMemberExist(data[randomIndex].nameMember);
+            Then.validateNewMemberExist(data[randomIndex].nameMember);
 
-    //         }
-    //     )
-    // });
+            }
+        )
+    });
 
-    // it('Escenario 104: Crear member y eliminarlo - Mockaroo', () => {
-    //     // GIVEN: Visitar members
-    //     Given.givenNavigateTomembers();
+    it('Escenario 104: Crear member y eliminarlo - Mockaroo', () => {
+        // GIVEN: Visitar members
+        Given.givenNavigateTomembers();
 
-    //     When.createMemberAndDeletItMockaroo();
+        When.createMemberAndDeletItMockaroo();
 
-    //     Then.validateMemberWasDeleted();
-    // });
+        Then.validateMemberWasDeleted();
+    });
 
-    // it('Escenario 105: Cambiar el título del sitio - Mockaroo', () => {
-    //     // GIVEN: Visitar Settings
-    //     Given.givenNavigateToSettings();
-    //     fetchMockarooData('pageTitle.json', Cypress.env('apiKeyMockarooPablo')).then((data) =>{
-    //         const randomIndex = Math.floor(Math.random() * (data.length-1));
+    it('Escenario 105: Cambiar el título del sitio - Mockaroo', () => {
+        // GIVEN: Visitar Settings
+        Given.givenNavigateToSettings();
+        fetchMockarooData('pageTitle.json', Cypress.env('apiKeyMockarooPablo')).then((data) =>{
+            const randomIndex = Math.floor(Math.random() * (data.length-1));
 
-    //         When.updateSiteTitlte(data[randomIndex].title);
+            When.updateSiteTitlte(data[randomIndex].title);
 
-    //         Then.validateTitleSiteWasEdited(data[randomIndex].title);
-    //         }
-    //     )
-    // });
+            Then.validateTitleSiteWasEdited(data[randomIndex].title);
+            }
+        )
+    });
 
-    // it('Escenario 106: Crear member invalid - Mockaroo', () => {
-    //     // GIVEN: Visitar members
-    //     Given.givenNavigateToMembersNegative();
+    it('Escenario 106: Crear member invalid - Mockaroo', () => {
+        // GIVEN: Visitar members
+        Given.givenNavigateToMembersNegative();
 
-    //     When.createNewMemberNegativeInvalidMockaroo();
+        When.createNewMemberNegativeInvalidMockaroo();
 
-    //     Then.validateNewMemberErrorInvalid();
-    // });
+        Then.validateNewMemberErrorInvalid();
+    });
 
-    // it('Escenario 107: Crear member y volver a crearlo - Mockaroo', () => {
-    //     // GIVEN: Visitar members
-    //     Given.givenNavigateTomembers();
+    it('Escenario 107: Crear member y volver a crearlo - Mockaroo', () => {
+        // GIVEN: Visitar members
+        Given.givenNavigateTomembers();
 
-    //     When.createMemberAndRecreateItMockaroo();
+        When.createMemberAndRecreateItMockaroo();
 
-    //     Then.validateNewMemberErrorDuplicate();
-    // });
+        Then.validateNewMemberErrorDuplicate();
+    });
 
-    // it('Escenario 108: Crear tag con slug superior a 191 caracteres - Mockaroo', () => {
-    //     const randonTagName = faker.lorem.slug(2);
-    //     const randomInvalidSlug = faker.string.alphanumeric(192);
+    it('Escenario 108: Crear tag con slug superior a 191 caracteres - Mockaroo', () => {
+        const randonTagName = faker.lorem.slug(2);
+        const randomInvalidSlug = faker.string.alphanumeric(192);
 
-    //     //GIVEN: Visitar Tags
-    //     Given.givenNavigateToTagsPage();
+        //GIVEN: Visitar Tags
+        Given.givenNavigateToTagsPage();
 
-    //     // WHEN: Crear y asignar tag a una pagina
-    //     When.createNewTag(randonTagName, randomInvalidSlug);
+        // WHEN: Crear y asignar tag a una pagina
+        When.createNewTag(randonTagName, randomInvalidSlug);
 
-    //     Then.validateNewTagErrorInvalidSlug();
+        Then.validateNewTagErrorInvalidSlug();
 
-    // });
+    });
 
-    // it('Escenario 109: Crear recomendación en los settings de la pagina - Mockaroo', () => {
-    //     // GIVEN: Visitar los settings de la pagina
-    //     Given.givenNavigateToSettings();
+    it('Escenario 109: Crear recomendación en los settings de la pagina - Mockaroo', () => {
+        // GIVEN: Visitar los settings de la pagina
+        Given.givenNavigateToSettings();
 
-    //     //Crear la recomendación
-    //     When.createRecommendationValidMockaroo();
+        //Crear la recomendación
+        When.createRecommendationValidMockaroo();
 
-    //     Then.validateNewRecommendationValid();
-    // });
+        Then.validateNewRecommendationValid();
+    });
 
-    // it('Escenario 110: Crear recomendación con link invalido en los settings de la pagina - Mockaroo', () => {
-    //     // GIVEN: Visitar los settings de la pagina
-    //     Given.givenNavigateToSettings();
-    //     fetchMockarooData('invalidLinkRecommendation.json', Cypress.env('apiKeyMockarooPablo')).then((data) =>{
-    //         const randomIndex = Math.floor(Math.random() * (data.length-1));
-    //         //Crear la recomendación
-    //         When.createRecommendation(data[randomIndex].invalidURL);
+    it('Escenario 110: Crear recomendación con link invalido en los settings de la pagina - Mockaroo', () => {
+        // GIVEN: Visitar los settings de la pagina
+        Given.givenNavigateToSettings();
+        fetchMockarooData('invalidLinkRecommendation.json', Cypress.env('apiKeyMockarooPablo')).then((data) =>{
+            const randomIndex = Math.floor(Math.random() * (data.length-1));
+            //Crear la recomendación
+            When.createRecommendation(data[randomIndex].invalidURL);
 
-    //         Then.validateNewRecommendationInvalid();
-    //     });
-    // });
+            Then.validateNewRecommendationInvalid();
+        });
+    });
 
-    // it('Escenario 111: Crear un tag y asignarlo a un post - Faker', () => {
-    //     const randomTagName = faker.lorem.slug(2);
-    //     const randomTitlePost = faker.lorem.words(5);
+    it('Escenario 111: Crear un tag y asignarlo a un post - Faker', () => {
+        const randomTagName = faker.lorem.slug(2);
+        const randomTitlePost = faker.lorem.words(5);
 
-    //     // GIVEN: Visitar Tags
-    //     Given.givenNavigateToTagsPage();
+        // GIVEN: Visitar Tags
+        Given.givenNavigateToTagsPage();
 
-    //     // WHEN: Crear un tag y asignarlo a post
-    //     When.createTagAndAsignIt(randomTagName,randomTitlePost);
+        // WHEN: Crear un tag y asignarlo a post
+        When.createTagAndAsignIt(randomTagName,randomTitlePost);
 
-    //     // THEN: Validar la creación del post con el tag asignado
-    //     Then.validatePostWithTag(randomTagName);
-    // });
+        // THEN: Validar la creación del post con el tag asignado
+        Then.validatePostWithTag(randomTagName);
+    });
 
-    // it('Escenario 112: Crear un tag y ponerlo en una page - Faker', () => {
-    //     const randomTagName = faker.lorem.slug(2);
-    //     const randomTitlePage = faker.lorem.words(5);
-    //     // GIVEN: Visitar Tags
-    //     Given.givenNavigateToTagsPage();
+    it('Escenario 112: Crear un tag y ponerlo en una page - Faker', () => {
+        const randomTagName = faker.lorem.slug(2);
+        const randomTitlePage = faker.lorem.words(5);
+        // GIVEN: Visitar Tags
+        Given.givenNavigateToTagsPage();
 
-    //     // WHEN: Crear y asignar tag a una pagina
-    //     When.createTagAndAsignItToPage(randomTagName, randomTitlePage);
+        // WHEN: Crear y asignar tag a una pagina
+        When.createTagAndAsignItToPage(randomTagName, randomTitlePage);
 
-    //     // THEN: Validar si la pagina contiene el tag
-    //     Then.validatePageWithTag(randomTagName);
-    // });
+        // THEN: Validar si la pagina contiene el tag
+        Then.validatePageWithTag(randomTagName);
+    });
 
-    // it('Escenario 113: Crear member - Faker', () => {
-    //     const randomNameMember = faker.lorem.words(2);
-    //     const randomEmailMember = faker.internet.email();
+    it('Escenario 113: Crear member - Faker', () => {
+        const randomNameMember = faker.lorem.words(2);
+        const randomEmailMember = faker.internet.email();
 
-    //     // GIVEN: Visitar members
-    //     Given.givenNavigateTomembers();
+        // GIVEN: Visitar members
+        Given.givenNavigateTomembers();
 
-    //     When.createNewMember(randomNameMember,randomEmailMember);
+        When.createNewMember(randomNameMember,randomEmailMember);
 
-    //     Then.validateNewMemberExist(randomNameMember);
+        Then.validateNewMemberExist(randomNameMember);
 
-    // });
+    });
 
-    // it('Escenario 114: Crear member y eliminarlo - Faker', () => {
-    //     const randomNameMember = faker.lorem.words(2);
-    //     const randomEmailMember = faker.internet.email();
-    //     // GIVEN: Visitar members
-    //     Given.givenNavigateTomembers();
+    it('Escenario 114: Crear member y eliminarlo - Faker', () => {
+        const randomNameMember = faker.lorem.words(2);
+        const randomEmailMember = faker.internet.email();
+        // GIVEN: Visitar members
+        Given.givenNavigateTomembers();
 
-    //     When.createMemberAndDeletItFaker(randomNameMember, randomEmailMember);
+        When.createMemberAndDeletItFaker(randomNameMember, randomEmailMember);
 
-    //     Then.validateMemberWasDeleted();
-    // });
+        Then.validateMemberWasDeleted();
+    });
 
-    // it('Escenario 115: Cambiar el título del sitio - Faker', () => {
-    //     const randomUpdatedTitle = faker.lorem.words(2);
-    //     // GIVEN: Visitar Settings
-    //     Given.givenNavigateToSettings();
+    it('Escenario 115: Cambiar el título del sitio - Faker', () => {
+        const randomUpdatedTitle = faker.lorem.words(2);
+        // GIVEN: Visitar Settings
+        Given.givenNavigateToSettings();
 
-    //     When.updateSiteTitlte(randomUpdatedTitle);
+        When.updateSiteTitlte(randomUpdatedTitle);
 
-    //     Then.validateTitleSiteWasEdited(randomUpdatedTitle);
-    // });
+        Then.validateTitleSiteWasEdited(randomUpdatedTitle);
+    });
 
-    // it('Escenario 116: Crear member invalid - Faker', () => {
-    //     const randomNameMember = faker.lorem.words(2);
-    //     const invalidEmailMember = faker.lorem.words(2);
+    it('Escenario 116: Crear member invalid - Faker', () => {
+        const randomNameMember = faker.lorem.words(2);
+        const invalidEmailMember = faker.lorem.words(2);
 
-    //     // GIVEN: Visitar members
-    //     Given.givenNavigateToMembersNegative();
+        // GIVEN: Visitar members
+        Given.givenNavigateToMembersNegative();
 
-    //     When.createNewMemberNegativeInvalidFaker(randomNameMember, invalidEmailMember);
+        When.createNewMemberNegativeInvalidFaker(randomNameMember, invalidEmailMember);
 
-    //     Then.validateNewMemberErrorInvalid();
-    // });
+        Then.validateNewMemberErrorInvalid();
+    });
 
-    // it('Escenario 117: Crear member y volver a crearlo - Faker', () => {
-    //     const randomNameMember = faker.lorem.words(2);
-    //     const randomEmailMember = faker.internet.email();
-    //     // GIVEN: Visitar members
-    //     Given.givenNavigateTomembers();
+    it('Escenario 117: Crear member y volver a crearlo - Faker', () => {
+        const randomNameMember = faker.lorem.words(2);
+        const randomEmailMember = faker.internet.email();
+        // GIVEN: Visitar members
+        Given.givenNavigateTomembers();
 
-    //     When.createMemberAndRecreateItFaker(randomNameMember, randomEmailMember);
+        When.createMemberAndRecreateItFaker(randomNameMember, randomEmailMember);
 
-    //     Then.validateNewMemberErrorDuplicate();
-    // });
+        Then.validateNewMemberErrorDuplicate();
+    });
 
-    // it('Escenario 118: Crear member note invalid - Faker', () => {
-    //     const randomNameMember = faker.lorem.words(2);
-    //     const randomEmailMember = faker.internet.email();
-    //     const randomInvalidNote = faker.string.alphanumeric(501);
-    //     // GIVEN: Visitar members
-    //     Given.givenNavigateToMembersNegative();
+    it('Escenario 118: Crear member note invalid - Faker', () => {
+        const randomNameMember = faker.lorem.words(2);
+        const randomEmailMember = faker.internet.email();
+        const randomInvalidNote = faker.string.alphanumeric(501);
+        // GIVEN: Visitar members
+        Given.givenNavigateToMembersNegative();
 
-    //     When.createNewMemberNegativeInvalidFaker(randomNameMember, randomEmailMember, randomInvalidNote);
+        When.createNewMemberNegativeInvalidFaker(randomNameMember, randomEmailMember, randomInvalidNote);
 
-    //     Then.validateNewMemberErrorInvalidNote();
+        Then.validateNewMemberErrorInvalidNote();
 
-    // });
+    });
 
-    // it('Escenario 119: Crear recomendación en los settings de la pagina - Faker', () => {
-    //     const randomURL = faker.internet.url();
+    it('Escenario 119: Crear recomendación en los settings de la pagina - Faker', () => {
+        const randomURL = faker.internet.url();
 
-    //     // GIVEN: Visitar los settings de la pagina
-    //     Given.givenNavigateToSettings();
-    //     //Crear la recomendación
-    //     When.createRecommendationValidFaker(randomURL);
+        // GIVEN: Visitar los settings de la pagina
+        Given.givenNavigateToSettings();
+        //Crear la recomendación
+        When.createRecommendationValidFaker(randomURL);
 
-    //     Then.validateNewRecommendationValid();
+        Then.validateNewRecommendationValid();
 
-    // });
+    });
 
-    // it('Escenario 120: Crear recomendación con link invalido en los settings de la pagina - Faker', () => {
-    //     const invalidURL= faker.lorem.words(5);
+    it('Escenario 120: Crear recomendación con link invalido en los settings de la pagina - Faker', () => {
+        const invalidURL= faker.lorem.words(5);
 
-    //     // GIVEN: Visitar los settings de la pagina
-    //     Given.givenNavigateToSettings();
+        // GIVEN: Visitar los settings de la pagina
+        Given.givenNavigateToSettings();
 
-    //     //Crear la recomendación
-    //     When.createRecommendationInvalidFaker(invalidURL);
+        //Crear la recomendación
+        When.createRecommendationInvalidFaker(invalidURL);
 
-    //     //Validar el mensaje de error
-    //     Then.validateNewRecommendationInvalid();
-    // });
+        //Validar el mensaje de error
+        Then.validateNewRecommendationInvalid();
+    });
     
 
  });
