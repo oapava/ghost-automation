@@ -173,6 +173,11 @@ class Then {
         cy.get('span').should('contain', 'Enter a valid URL');
         cy.get(this.spanElement).filter((index, element) => element.textContent.trim() === 'Cancel').should('be.visible').click({waitForAnimations: true})
     }
+
+    validateNewTagErrorInvalidSlug(){
+        cy.get('p').should('contain', 'URL cannot be longer than 191 characters.');
+    }
+
 }
 
 

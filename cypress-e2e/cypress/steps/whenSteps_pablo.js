@@ -584,7 +584,7 @@ class When {
         cy.screenshot('5/e14/p2-confirmacion-guardado');
     }
 
-    createNewTag(tagname){
+    createNewTag(tagname, tagslug=tagname){
         cy.screenshot('5/e15/p1-crear-nuevo-tag');
 
         // Hacer clic en el botón "New tag"
@@ -601,7 +601,7 @@ class When {
         cy.get(this.tagColorInput).type(tagColor);
 
         // Llenar el campo de slug del tag
-        cy.get(this.tagSlugInput).type(tagname);
+        cy.get(this.tagSlugInput).type(tagslug);
 
         // Llenar el campo de descripción del tag
         cy.get(this.tagDescriptionInput).type(tagDescription);
@@ -907,7 +907,7 @@ class When {
     createRecommendationValid(URL){
         //Crear la recomendacion
         this.createRecommendation(URL);
-        cy.wait(3000);
+        cy.wait(10000);
         //Confirmar añadir la recomendación
         cy.get(this.spanElement).filter((index, element) => element.textContent.trim() === 'Add').should('be.visible').click({waitForAnimations: true})
     }
