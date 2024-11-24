@@ -211,6 +211,14 @@ class Then {
         cy.screenshot('5/e15/p3-tag-creado-completo');
     }
 
+    validateEditedMockaroo(data){
+        cy.visit(Cypress.env('pageUrl'));
+        cy.url().should('include', '/ghost/#/pages');
+        cy.wait(500);
+        cy.contains(data).should('exist');
+    }
+
+
     validateTagWasCreatedName(tagName){
         cy.visit(Cypress.env('tagsUrl'));
         cy.get('.tags-list').should('contain', tagName);

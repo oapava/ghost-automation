@@ -21,7 +21,11 @@ module.exports = {
     newMemberEmail: "p.riverah",
     domainEmail: "@uniandes.edu.co",
     newMemberName: "Pablo Rivera",
-    updatedSiteTitle: 'Título actualizado: Automatizacion Uniandes ' + new Date()
+    updatedSiteTitle: 'Título actualizado: Automatizacion Uniandes ' + new Date(),
+    poolDRTag: 'https://my.api.mockaroo.com/tag.json?key=86ded800',
+    poolDRVideo: 'https://my.api.mockaroo.com/video.json?key=86ded800',
+    poolEdit: 'https://my.api.mockaroo.com/edit.json?key=86ded800',
+    poolDelete: 'https://my.api.mockaroo.com/delete.json?key=86ded800'
   },
   "screenshotsFolder": "cypress/screenshots"
 };

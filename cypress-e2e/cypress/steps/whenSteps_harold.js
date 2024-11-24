@@ -1183,6 +1183,43 @@ class When {
         this.validatePublishPageAndCloseModal(this.version + scenery, 'p7');
     }
 
+    createPublishAndDeletePagePoolMockaroo(data){
+            const pageData = data
+
+            cy.screenshot('5/e13/p1-pagina-creada-listada');
+            cy.contains('New page').click({ force: true, waitForAnimations: false });
+
+            cy.get(this.titleInput).type(pageData.title + '{enter}');
+
+            cy.get(this.buttonAddCard).first().click({ force: true, waitForAnimations: false });
+            cy.get(this.htmlEditorButton).first().click({ force: true, waitForAnimations: false });
+            cy.get(this.cmLineDiv).type(pageData.htmlContent + '{enter}');
+
+            cy.screenshot('5/e13/p2-pagina-creada-con-contenido');
+
+            this.publishPostAndPage('5/e13', 'p2');
+
+            cy.url().should('include', '/pages');
+            cy.contains(pageData.title).should('exist');
+            cy.wait(500);
+            cy.get(this.bodyElement).type('{esc}');
+            cy.screenshot('5/e13/p3-pagina-creada');
+
+            cy.visit(Cypress.env('pageUrl'));
+            cy.url().should('include', '/ghost/#/pages');
+
+            cy.contains(this.contentEntryTitle, pageData.title)
+                .closest(this.liElement)
+                .rightclick();
+
+            cy.get(this.deletePageButton)
+                .should('be.visible')
+                .then(() => {
+                    cy.screenshot('5/e13/p4-eliminar-pagina', { capture: 'fullPage' });
+                    cy.get(this.deletePageButton).click();
+                });
+    }
+
     createNewTagFaker() {
         const tagData = {
             name: faker.commerce.productName(),
@@ -1209,10 +1246,8 @@ class When {
             cy.wait(1000);
         }
 
-    createNewTagMockaroo(){
-        cy.fixture('mockarooData').then((data) => {
-            const randomIndex = Math.floor(Math.random() * 10);
-            const tagData = data[1];
+    createNewTagMockaroo(data){
+            const tagData = data;
 
             cy.screenshot('5/e15/p1-crear-nuevo-tag');
             cy.contains('a.gh-btn-primary', 'New tag').click();
@@ -1235,8 +1270,55 @@ class When {
 
             cy.get(this.tagSaveButton).click();
             cy.wait(1000);
-        });
     }
+
+    createPageAndPublishWithVideoMockaroo(data) {
+        cy.screenshot(`5/e11/p1-visit-page-list`);
+        cy.get(this.spanElement).contains('New page').click({force: true, waitForAnimations: false});
+
+        const videoData = data;
+        setSharedData("tituloSeleccionado", videoData.title);
+
+        cy.get(this.titleInput).type(`${videoData.title} ${this.time}`);
+        cy.get(this.titleInput).type('{enter}');
+
+        cy.get(this.buttonAddCard).first().click({force: true, waitForAnimations: false});
+
+        cy.get(this.buttonYoutube).scrollIntoView().should('be.visible').click();
+
+        cy.get(this.inputEmbedUrl).should('be.visible').type(videoData.url).type('{enter}');
+
+        cy.screenshot(`5/e11/p3-nueva-pagina-con-contenido-nuevo`);
+        cy.wait(1000);
+
+        this.publishPostAndPage('5/e11', 'p3');
+
+        cy.get(this.closeModalPublishFlow).click();
+    }
+
+    createAndPublishPageEditAndSaveMockaroo(data){
+        cy.screenshot('5/e12/p1-click-nueva-pagina')
+        cy.get(this.newPageButton).click();
+        cy.get(this.titleInput).type(data.title);
+
+        //Publicar post
+        cy.get(this.koenigEditorElement).first().click();
+        this.publishPostAndPage('5/e12','p1');
+        cy.url().should('contain', '/pages');
+
+        // Editar la página recién creada
+        cy.get(this.closeModalPublishFlow).click();
+        cy.screenshot('5/e12/p2-pagina-creada-listada');
+        cy.contains(data.title).click();
+        cy.get(this.titleInput).clear().type(data.updatedTitle).screenshot('5/e12/p3-actualizacion-titulo');
+
+        // Guardar la página actualizada
+        cy.get(this.publishSaveButton).contains('Update').click();
+        cy.screenshot('5/e12/p4-publicacion-pagina-actualizada');
+
+    }
+
+
     createNewTagFakerName() {
         const tagData = {
             name: faker.lorem.words(50).slice(0, 200),
