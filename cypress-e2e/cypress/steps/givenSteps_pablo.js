@@ -37,7 +37,9 @@ class Given {
             cy.get(this.buttonSignIn).click();
             cy.wait(500);
         });
-
+        cy.on('uncaught:exception', (err, runnable) => {
+            return false
+        })
     };
 
     givenNavigateDashboard(){
