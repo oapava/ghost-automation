@@ -1,7 +1,9 @@
 module.exports = {
   e2e: {
+    experimentalMemoryManagement: true, // Habilitar manejo experimental de memoria
+    numTestsKeptInMemory: 0, // Mantener solo el test actual en memoria
     setupNodeEvents(on, config) {
-      // implement node event listeners here
+      // Configuraciones adicionales de Node si es necesario
     },
   },
   env: {

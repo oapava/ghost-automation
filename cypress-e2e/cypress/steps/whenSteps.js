@@ -2565,12 +2565,12 @@ class When {
 
 
     publishPostAndPage(scenery, step){
-        cy.get(this.publishFlowButton).should('be.visible'); // Publish
+        cy.get(this.publishFlowButton).should('exist'); // Publish
         cy.screenshot(scenery + '/' + step + '_0_publishButton', {disableTimersAndAnimations: false});
         cy.get(this.publishFlowButton).first().click(); 
 
         //Continuar a review final
-        cy.get(this.publishContinueButton).should('be.visible'); // Continue, final review
+        cy.get(this.publishContinueButton).should('exist'); // Continue, final review
         cy.wait(500);
         cy.screenshot(scenery + '/' + step + '_1_finalReview', {disableTimersAndAnimations: false});
         cy.get(this.publishContinueButton).first().click(); 

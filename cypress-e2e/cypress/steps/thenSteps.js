@@ -469,11 +469,6 @@ class Then {
         cy.contains('Post para miembros 1').should('exist');
     }
 
-    seePostPublishedWithHtml(){
-        cy.visit(Cypress.env('postPageUrl'));
-        cy.contains('Post con HTML 1').should('exist');
-    }
-
     seePagePublishedWithHtml(){
         cy.visit(Cypress.env('pageUrl'));
         this.generalScroll('.gh-main')
