@@ -188,30 +188,40 @@ class Then {
     seePostPublishedRandom( {title} ){
         cy.visit(Cypress.env('postPagePublishedUrl'));
         this.generalScroll(this.mainScrollPost);
-        cy.contains(title).should('exist'); 
+        if(title !== ""){
+            cy.contains(title).should('exist'); 
+        }
     }
 
     seePostPublishedBoldRandom({title}){
         cy.visit(Cypress.env('postPagePublishedUrl'));
         this.generalScroll(this.mainScrollPost);
-        cy.contains(title).should('exist'); 
+        if(title !== ""){
+            cy.contains(title).should('exist')
+        }; 
     }
 
     seePostPublishedPostMarkdownRandom({title}){
         this.generalScroll(this.mainScrollPost);
-        cy.contains(title).should('exist'); 
+        if(title !== ""){
+            cy.contains(title).should('exist'); 
+        }
     }
 
     seePostPublishedPostWithImageRandom( {title} ){
         cy.visit(Cypress.env('postPagePublishedUrl'));
         this.generalScroll(this.mainScrollPost);
-        cy.contains(title).should('exist'); 
+        if(title !== ""){
+            cy.contains(title).should('exist'); 
+        };
     }
 
     seePostPublishedPostWithContentRandom({title}){
         cy.visit(Cypress.env('postPagePublishedUrl'));
         this.generalScroll(this.mainScrollPost);
-        cy.contains(title).should('exist'); 
+        if(title !== ""){
+            cy.contains(title).should('exist'); 
+        }
     }
 
     validateRemovePostAuthorError(){

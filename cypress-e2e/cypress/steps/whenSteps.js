@@ -845,11 +845,16 @@ class When {
 
         //Se ingresa titulo y contenido en negrita del post
         cy.get('@fixturePost').then((data) => {
-            cy.get(this.titleInput).type(title);
+            if(title !== ""){
+                cy.get(this.titleInput).type(title);
+            }
         });
 
         cy.screenshot(this.version + scenery + '/p2_addTitlePost');
         cy.get(this.titleInput).type('{enter}');
+
+        cy.get(this.textAreaContent).first().type('Content');
+        cy.get(this.textAreaContent).first().type('{enter}');
 
         this.publishPostAndPage(this.version + scenery,'p3');
         this.validatePublishPostAndCloseModal(this.version + scenery,'p4');
@@ -863,7 +868,9 @@ class When {
         cy.screenshot(this.version + scenery + '/p1_newPost');
 
         //Se ingresa titulo del post
-        cy.get(this.titleInput).type(title);
+        if(title !== ""){
+            cy.get(this.titleInput).type(title);
+        }
 
         cy.screenshot(this.version + scenery + '/p2_addTitlePost');
         cy.get(this.titleInput).type('{enter}');
@@ -890,10 +897,17 @@ class When {
         cy.get(this.titleInput).should('be.visible');
 
         //Se ingresa titulo del post
-        cy.get(this.textAreaContent).first().type(content);
+        if(content !== ""){
+            cy.get(this.textAreaContent).first().type(content);
+        }
+
+        cy.get(this.textAreaContent).first().type('Content');
+        cy.get(this.textAreaContent).first().type('{enter}');
 
         cy.get(this.titleInput).clear();
-        cy.get(this.titleInput).type(title);
+        if(title !== ""){
+            cy.get(this.titleInput).type(title);
+        }
         cy.get(this.titleInput).type('{enter}');
         cy.screenshot(this.version + scenery + '/p4_editedPost');
         
@@ -915,7 +929,9 @@ class When {
 
 
         //Se ingresa titulo del post
-        cy.get(this.titleInput).type(title);
+        if(title !== ""){
+            cy.get(this.titleInput).type(title);
+        }
         cy.screenshot(this.version + scenery + '/p2_addTitlePost');
         cy.get(this.titleInput).type('{enter}');
         //Agregar imagen
@@ -941,11 +957,18 @@ class When {
         cy.screenshot(this.version + scenery + '/p1_newPost');
 
         //Se ingresa titulo del post
-        cy.get(this.titleInput).type(title);
+        if(title !== ""){
+            cy.get(this.titleInput).type(title);
+        }
         
         cy.screenshot(this.version + scenery + '/p2_addTitlePost');
         cy.get(this.titleInput).type('{enter}');
-        cy.get(this.textAreaContent).first().type(content);
+        if(content !== ""){
+            cy.get(this.textAreaContent).first().type(content);
+        }
+
+        cy.get(this.textAreaContent).first().type('Content');
+        cy.get(this.textAreaContent).first().type('{enter}');
         
         cy.screenshot(this.version + scenery + '/p3_addContent');
 
@@ -1190,7 +1213,9 @@ class When {
         cy.get(this.navigationItemSecondary).click();
 
         //Cambiar la descripción del sitio
-        cy.get(this.newItemNavigationConfig).type( label);
+        if(label !== ""){
+            cy.get(this.newItemNavigationConfig).type( label);
+        };
         cy.get(this.nextInputNavigation).last().type( path );
 
         //Guardar cambios
@@ -2553,11 +2578,16 @@ class When {
         cy.screenshot(scenery + '/' + step + '_1_newPost');
 
         //Se ingresa titulo y contenido en negrita del post
-        cy.get(this.titleInput).type(title);
+        if(title !== ""){
+            cy.get(this.titleInput).type(title);
+        }
         cy.get(this.titleInput).type('{enter}');
         cy.get(this.titleInput).type('{enter}');
         cy.screenshot(scenery + '/' + step + '_2_addTitlePost');
         cy.wait(1000)
+
+        cy.get(this.textAreaContent).first().type('Content');
+        cy.get(this.textAreaContent).first().type('{enter}');
 
         this.publishPostAndPage(scenery, step + '_3');
         this.validatePublishPostAndCloseModal(scenery, step + '_4');

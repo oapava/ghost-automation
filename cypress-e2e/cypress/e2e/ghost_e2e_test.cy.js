@@ -271,15 +271,15 @@ describe('Pruebas E2E Ghost', () => {
         // THEN: Verificar post publicado
         Then.validateNavigationItemWasSaved();
     })
-    
+
     it('Escenario 21: Comprobar que se asigne un label al crear un nuevo item de navegación Secundario de una fuente de datos aleatorio dinámico', () => {
         getLinkDataDynamicrandom().then((navigate)=>{
             // THEN: Visitar pagina de posts
             Given.givenNavigateToSettings();
-    
+
             // WHEN: Crear y publicar post 
             When.changeNavigationItemSecondary( navigate );
-    
+
             // THEN: Verificar post publicado
             Then.validateNavigationItemSecondaryWasSaved( navigate );
         })
@@ -289,10 +289,10 @@ describe('Pruebas E2E Ghost', () => {
         getContributorDataDynamicrandom().then((contributor)=>{
             // THEN: Visitar pagina de posts
             Given.givenNavigateToSettings();
-    
+
             // WHEN: Crear y publicar post 
             When.inviteUserToBeContributor( contributor );
-    
+
             // THEN: Verificar post publicado
             Then.validateInvitationWasNotSend(contributor);
         })
@@ -302,10 +302,10 @@ describe('Pruebas E2E Ghost', () => {
         getContributorDataDynamicrandom().then((contributor)=>{
             // THEN: Visitar pagina de posts
             Given.givenNavigateToSettings();
-    
+
             // WHEN: Crear y publicar post 
             When.testBademailInField( contributor );
-    
+
             // THEN: Verificar post publicado
             Then.validateBadEmailError();
         })
@@ -315,23 +315,23 @@ describe('Pruebas E2E Ghost', () => {
         getOwnerDataDynamicrandom().then((owner)=>{
             // THEN: Visitar pagina de posts
             Given.givenNavigateToSettings();
-    
+
             // WHEN: Crear y publicar post 
             When.editOwnerInfo( owner );
-    
+
             // THEN: Verificar post publicado
             Then.validateFieldsComplete( owner );
         })
     })
-    
+
     it('Escenario 25: Comprobar que se asigne un usuario valido para Twitter en el formulario de owner', () => {
         getOwnerDataDynamicrandom().then((owner)=>{
             // THEN: Visitar pagina de posts
             Given.givenNavigateToSettings();
-    
+
             // WHEN: Crear y publicar post 
             When.editOwnerInfoTwitter( owner );
-    
+
             // THEN: Verificar post publicado
             Then.validateErrorTwitter( owner );
         })
@@ -349,20 +349,20 @@ describe('Pruebas E2E Ghost', () => {
         // THEN: Verificar post publicado
         Then.validateNavigationItemSecondaryWasSavedRandom( link )
     })
-    
+
     it('Escenario 27: Invitar un nuevo usuario al staff con rol "Contributor" con data aleatoria', () => {
         const contributor = contributorSchemaFaker();
 
         // THEN: Visitar pagina de posts
         Given.givenNavigateToSettings();
 
-        // WHEN: Crear y publicar post 
+        // WHEN: Crear y publicar post
         When.inviteUserToBeContributorRandom( contributor );
 
         // THEN: Verificar post publicado
         Then.validateInvitationWasNotSendRandom( contributor );
     })
-    
+
     it('Escenario 28: Comprobar que insgrese un correo válido con data aleatoria', () => {
         const contributor = contributorSchemaFaker();
 
@@ -381,8 +381,8 @@ describe('Pruebas E2E Ghost', () => {
 
         // THEN: Visitar pagina de posts
         Given.givenNavigateToSettings();
-    
-        // WHEN: Crear y publicar post 
+
+        // WHEN: Crear y publicar post
         When.editOwnerInfo( owner );
 
         // THEN: Verificar post publicado
@@ -395,7 +395,7 @@ describe('Pruebas E2E Ghost', () => {
         // THEN: Visitar pagina de posts
         Given.givenNavigateToSettings();
 
-        // WHEN: Crear y publicar post 
+        // WHEN: Crear y publicar post
         When.editOwnerInfoTwitter( owner );
 
         // THEN: Verificar post publicado
@@ -805,39 +805,37 @@ describe('Pruebas E2E Ghost', () => {
         Then.seePagePublishedWithHtml(post);
     });
 
-    // 
-
     it('Escenario 61: Crear y editar una página en Ghost', () => {
         // GIVEN: Visitar Pages
         Given.givenNavigateToPagePage();
-    
+
         // WHEN: Crear publicar, editar y guardar
         When.createAndPublishPageEditAndSave();
-    
+
         // THEN: Publicar la página
         Then.validatePageWasEditedAndCreated();
     });
     it('Escenario 62: Crear y publicar una página con un video de YouTube', () => {
         // GIVEN: Visitar Pages
         Given.givenNavigateToPagePage();
-    
+
         // WHEN: Click en "New page"
         When.createPageAndPublishWithVideoPool(0);
-    
+
         // THEN: Validar la publicación de la página
         Then.validatePageWithVideoCreated();
     });
     it('Escenario 63: Crear, publicar y eliminar una página en Ghost', () => {
-    
+
         // GIVEN: Visitar Pages
         Given.givenNavigateToPagePage();
-    
+
         // WHEN: Crear publicar, eliminar pagina
         When.createPublishAndDeletePagePool(0);
-    
+
         // THEN: Validar que se lemino la pagina creada
         Then.validatePageWasCreatedAndDeleted();
-    
+
     });
     it('Escenario 64: Crear una pagina y agregar un link de youtube invalido', () => {
         // GIVEN: Visitar Pages
@@ -1505,7 +1503,6 @@ describe('Pruebas E2E Ghost', () => {
         // THEN: Validar error del tag
         Then.validateErrorDescriptionTag();
     });
-    
 
- });
+});
 

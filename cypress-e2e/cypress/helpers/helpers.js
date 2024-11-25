@@ -73,8 +73,8 @@ export const ownerSchemaFaker = ()=>{
     const owner = {
         "name": faker.lorem.sentences({ min: 1, max: 3 }),
         "email": faker.internet.email(),
-        "location": faker.location.city(),
-        "website": faker.image.url(),
+        "location": faker.address.city(),
+        "website": faker.image.imageUrl(),
         "facebook": faker.lorem.sentences(2),
         "twitter": faker.lorem.sentences(1)
       }
