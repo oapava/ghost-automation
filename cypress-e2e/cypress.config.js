@@ -29,7 +29,11 @@ module.exports = {
     postPagePublishedUrl: "http://localhost:2369/ghost/#/posts?type=published",
     urlMockarooPost:"https://api.mockaroo.com/api/4d41dac0?count=1&key=d84032b0",
     mockaroo:'https://my.api.mockaroo.com/',
-    apiKeyMockarooPablo:'be0c2310'
+    apiKeyMockarooPablo:'be0c2310',
+    poolDRTag: 'https://my.api.mockaroo.com/tag.json?key=86ded800',
+    poolDRVideo: 'https://my.api.mockaroo.com/video.json?key=86ded800',
+    poolEdit: 'https://my.api.mockaroo.com/edit.json?key=86ded800',
+    poolDelete: 'https://my.api.mockaroo.com/delete.json?key=86ded800'
   },
   "screenshotsFolder": "cypress/screenshots"
 };

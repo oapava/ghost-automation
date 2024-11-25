@@ -98,3 +98,65 @@ export const contributorSchemaFaker = ()=>{
     }
     return contributor;
 }
+
+export const getTagDynamicrandom = ()=> {
+    const url = Cypress.env('poolDRTag');
+
+    return cy.request({
+        method: 'GET',
+        url: url,
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then((response) => {
+        console.log("this is response ", response.body)
+        expect(response.status).to.eq(200);
+        return response.body;
+    });
+}
+
+export const getVideoDynamicRandom = ()=> {
+    const url = Cypress.env('poolDRVideo');
+
+    return cy.request({
+        method: 'GET',
+        url: url,
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then((response) => {
+        console.log("this is response ", response.body)
+        expect(response.status).to.eq(200);
+        return response.body;
+    });
+}
+export const getEditDynamicRandom = ()=> {
+    const url = Cypress.env('poolEdit');
+
+    return cy.request({
+        method: 'GET',
+        url: url,
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then((response) => {
+        console.log("this is response ", response.body)
+        expect(response.status).to.eq(200);
+        return response.body;
+    });
+}
+export const getDeleteDynamicRandom = ()=> {
+    const url = Cypress.env('poolDelete');
+
+    return cy.request({
+        method: 'GET',
+        url: url,
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then((response) => {
+        console.log("this is response ", response.body)
+        expect(response.status).to.eq(200);
+        return response.body;
+    });
+}

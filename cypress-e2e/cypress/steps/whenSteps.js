@@ -1,5 +1,8 @@
 import { getPostDataDynamicrandom, schemaFaker } from '../helpers/helpers';
 import {fetchMockarooData} from "../support/mockaroo";
+import { setSharedData, getSharedData } from '../utils/sharedData';
+import { faker } from '@faker-js/faker';
+
 
 class When {
     //Getters Page Objects
@@ -475,6 +478,110 @@ class When {
 
     get inputAddRecommendation(){
         return 'input[placeholder="https://www.example.com"]'
+    }
+
+    get version(){
+        return '5/'
+    }
+
+    get titleInput(){
+        return 'textarea[data-test-editor-title-input]';
+    }
+
+    get buttonAddCard(){
+        return 'button[aria-label="Add a card"]';
+    }
+
+    get buttonYoutube(){
+        return 'button[data-kg-card-menu-item="YouTube"]';
+    }
+
+    get inputEmbedUrl(){
+        return 'input[data-testid="embed-url"]';
+    }
+
+    get publishFlowButton(){
+        return 'button[data-test-button="publish-flow"]';
+    }
+
+    get publishContinueButton(){
+        return 'button[data-test-button="continue"]';
+    }
+
+    get closeModalPublishFlow(){
+        return 'button[data-test-button="close-publish-flow"]';
+    }
+
+    get htmlEditorButton(){
+        return 'button[data-kg-card-menu-item="HTML"]';
+    }
+
+    get cmLineDiv(){
+        return 'div[class="cm-line"]';
+    }
+
+    get newPageButton(){
+        return 'a[href="#/editor/page/"]';
+    }
+
+    get koenigEditorElement(){
+        return '.koenig-react-editor';
+    }
+
+    get publishSaveButton(){
+        return 'button[data-test-button="publish-save"]';
+    }
+
+    get confirmPublishButton(){
+        return 'button[data-test-button="confirm-publish"]';
+    }
+
+    get contentEntryTitle(){
+        return 'h3.gh-content-entry-title';
+    }
+
+    get deletePageButton(){
+        return '[data-test-button="delete"]';
+    }
+
+
+    get time(){
+        const now = new Date();
+        const formattedDate = Math.floor(new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours(), now.getMinutes(), now.getSeconds()).getTime() / 1000);
+        return formattedDate;
+    }
+
+    get tagNameInput(){
+        return '[data-test-input="tag-name"]';
+    }
+
+    get tagColorInput(){
+        return '[data-test-input="accentColor"]';
+    }
+
+    get tagSlugInput(){
+        return '[data-test-input="tag-slug"]';
+    }
+
+    get tagDescriptionInput(){
+        return '[data-test-input="tag-description"]';
+    }
+
+    get tagSaveButton(){
+        return 'button[data-test-button="save"]';
+    }
+
+    get spanElement(){
+        return 'span';
+    }
+
+
+    get bodyElement(){
+        return 'body';
+    }
+
+    get liElement(){
+        return 'li';
     }
     
     //When Methods
@@ -1910,6 +2017,521 @@ class When {
         this.publishPostAndPage(this.version + stage,'p6');
         this.validatePublishPageAndCloseModal(this.version + stage,'p7');
     }
+
+    //HAROLD
+
+    validatePublishPageAndCloseModal(scenery, step){
+        cy.url().should('include', '/ghost/#/pages');
+        cy.wait(1000);
+        cy.screenshot(scenery + '/' + step + '_1_pagePublished');
+
+        cy.get(this.closeModalPublishFlow).click();
+        cy.screenshot(scenery + '/' + step + '_2_listPageFinal');
+    }
+
+
+    createAndPublishPageEditAndSave(){
+        // Crear nueva página
+        cy.screenshot('5/e12/p1-click-nueva-pagina')
+        cy.get(this.newPageButton).click();
+        cy.get(this.titleInput).type('My Page to edit{enter}');
+
+        //Publicar post
+        cy.get(this.koenigEditorElement).first().click();
+        this.publishPostAndPage('5/e12','p1');
+        cy.url().should('contain', '/pages');
+
+        // Editar la página recién creada
+        cy.get(this.closeModalPublishFlow).click();
+        cy.screenshot('5/e12/p2-pagina-creada-listada');
+        cy.contains('My Page to edit').click();
+        cy.get(this.titleInput).clear().type('Updated Page Title{enter}').screenshot('5/e12/p3-actualizacion-titulo');
+
+        // Guardar la página actualizada
+        cy.get(this.publishSaveButton).contains('Update').click();
+        cy.screenshot('5/e12/p4-publicacion-pagina-actualizada');
+
+    }
+
+    publishPostAndPage(scenery, step){
+        cy.get(this.publishFlowButton).should('be.visible'); // Publish
+        cy.screenshot(scenery + '/' + step + '_0_publishButton', {disableTimersAndAnimations: false});
+        cy.get(this.publishFlowButton).first().click();
+
+        //Continuar a review final
+        cy.get(this.publishContinueButton).should('be.visible'); // Continue, final review
+        cy.wait(500);
+        cy.screenshot(scenery + '/' + step + '_1_finalReview', {disableTimersAndAnimations: false});
+        cy.get(this.publishContinueButton).first().click();
+
+        //Publicar post
+        cy.get(this.confirmPublishButton).should('be.visible'); //Publish post, right now
+        cy.wait(500);
+        cy.screenshot(scenery + '/' + step + '_2_publishRightNow', {disableTimersAndAnimations: false});
+        cy.get(this.confirmPublishButton).first().click();
+    }
+
+    // POOL
+
+    createAndPublishPageWithHtmlPool(index){
+        var scenery = 'e10';
+
+        cy.fixture('testData').then((data) => {
+            // Usamos el índice recibido como parámetro para obtener los datos de la página
+            const pageData = data.pagesHtml[index];
+
+            cy.get(this.spanElement).contains('New page').click({force:true, waitForAnimations: false});
+            cy.screenshot(this.version + scenery + '/p1_sectionPage');
+
+            cy.get(this.titleInput).type(pageData.title);
+            cy.screenshot(this.version + scenery + '/p2_addTitlePage');
+            cy.get(this.titleInput).type('{enter}');
+
+            cy.get(this.buttonAddCard).first().click({force:true, waitForAnimations: false});
+            cy.screenshot(this.version + scenery + '/p3_cardOptions');
+
+            cy.get(this.htmlEditorButton).first().click({force:true, waitForAnimations: false});
+            cy.screenshot(this.version + scenery + '/p4_htmlOptionsSelected');
+
+            cy.get(this.cmLineDiv).type(pageData.htmlContent);
+            cy.screenshot(this.version + scenery + '/p5_addContentHtml');
+            cy.get(this.cmLineDiv).type('{enter}');
+
+            this.publishPostAndPage(this.version + scenery, 'p6');
+            this.validatePublishPageAndCloseModal(this.version + scenery, 'p7');
+        });
+    }
+
+    createPageAndPublishWithVideoPool(index) {
+        cy.screenshot(`5/e11/p1-visit-page-list`);
+
+        cy.get(this.spanElement).contains('New page').click({force: true, waitForAnimations: false});
+
+        cy.fixture('testData').then((data) => {
+            const videoData = data.videos[index];
+            setSharedData("tituloSeleccionado", videoData.title)
+
+            cy.get(this.titleInput).type(`${videoData.title} ${this.time}`);
+            cy.get(this.titleInput).type('{enter}');
+
+
+            cy.get(this.buttonAddCard).first().click({force: true, waitForAnimations: false});
+
+            cy.get(this.buttonYoutube).scrollIntoView().should('be.visible').click();
+
+            cy.get(this.inputEmbedUrl).should('be.visible').type(videoData.url).type('{enter}');
+
+            cy.screenshot(`5/e11/p3-nueva-pagina-con-contenido-nuevo`);
+            cy.wait(1000);
+
+            this.publishPostAndPage('5/e11', 'p3');
+
+            cy.get(this.closeModalPublishFlow).click();
+        });
+    }
+
+
+    createAndPublishPageEditAndSavePool(index) {
+        cy.fixture('testData').then((data) => {
+            const pageData = data.pagesEdit[index]; // Usar el índice recibido como parámetro
+
+            cy.screenshot('5/e12/p1-click-nueva-pagina');
+            cy.get(this.newPageButton).click();
+            cy.get(this.titleInput).type(pageData.title + '{enter}');
+
+            cy.get(this.koenigEditorElement).first().click();
+            this.publishPostAndPage('5/e12', 'p1');
+            cy.url().should('contain', '/pages');
+
+            cy.get(this.closeModalPublishFlow).click();
+            cy.screenshot('5/e12/p2-pagina-creada-listada');
+            cy.contains(pageData.title).click();
+            cy.get(this.titleInput).clear().type(pageData.updatedTitle + '{enter}').screenshot('5/e12/p3-actualizacion-titulo');
+
+            cy.get(this.publishSaveButton).contains('Update').click();
+            cy.screenshot('5/e12/p4-publicacion-pagina-actualizada');
+        });
+    }
+
+
+    createPublishAndDeletePagePool(index){
+        cy.fixture('testData').then((data) => {
+            const pageData = data.pagesDelete[index];
+
+            cy.screenshot('5/e13/p1-pagina-creada-listada');
+            cy.contains('New page').click({ force: true, waitForAnimations: false });
+
+            cy.get(this.titleInput).type(pageData.title + '{enter}');
+
+            cy.get(this.buttonAddCard).first().click({ force: true, waitForAnimations: false });
+            cy.get(this.htmlEditorButton).first().click({ force: true, waitForAnimations: false });
+            cy.get(this.cmLineDiv).type(pageData.htmlContent + '{enter}');
+
+            cy.screenshot('5/e13/p2-pagina-creada-con-contenido');
+
+            this.publishPostAndPage('5/e13', 'p2');
+
+            cy.url().should('include', '/pages');
+            cy.contains(pageData.title).should('exist');
+            cy.wait(500);
+            cy.get(this.bodyElement).type('{esc}');
+            cy.screenshot('5/e13/p3-pagina-creada');
+
+            cy.visit(Cypress.env('pageUrl'));
+            cy.url().should('include', '/ghost/#/pages');
+
+            cy.contains(this.contentEntryTitle, pageData.title)
+                .closest(this.liElement)
+                .rightclick();
+
+            cy.get(this.deletePageButton)
+                .should('be.visible')
+                .then(() => {
+                    cy.screenshot('5/e13/p4-eliminar-pagina', { capture: 'fullPage' });
+                    cy.get(this.deletePageButton).click();
+                });
+        });
+    }
+    createPageAndAddInvalidYoutubeLinkPool(){
+        cy.fixture('testData').then((data) => {
+            const pageData = data.pagesError[0];
+
+            // Click en "New page"
+            cy.get(this.spanElement).contains('New page').click({force:true, waitForAnimations: false});
+
+            cy.get(this.titleInput).type(pageData.title);
+            cy.get(this.titleInput).type('{enter}');
+
+            cy.get(this.buttonAddCard).first().click({force:true, waitForAnimations: false});
+
+            cy.get(this.buttonYoutube).scrollIntoView().should('be.visible').click();
+
+            cy.get(this.inputEmbedUrl).should('be.visible').type(pageData.invalidYoutubeLink).type('{enter}');
+
+            cy.screenshot('5/e14/p1-contenido-ingresado');
+
+            this.publishPostAndPage('5/e14', 'p1');
+            cy.get(this.closeModalPublishFlow).click();
+            cy.screenshot('5/e14/p2-confirmacion-guardado');
+        });
+    }
+
+    createNewTagPool(index){
+        cy.fixture('testData').then((data) => {
+            const tagData = data.tags[index];
+
+            cy.screenshot('5/e15/p1-crear-nuevo-tag');
+            cy.contains('a.gh-btn-primary', 'New tag').click();
+
+            const tagColor = tagData.color;
+            const tagDescription = tagData.description;
+
+            cy.get(this.tagNameInput).type(tagData.name);
+            cy.get(this.tagColorInput).type(tagColor);
+            cy.get(this.tagSlugInput).type(tagData.slug);
+            cy.get(this.tagDescriptionInput).type(tagDescription);
+            setSharedData("tagMockaroo", tagData.name)
+
+            cy.get(this.tagNameInput).scrollIntoView();
+
+            cy.screenshot('5/e15/p2-formulario-completo');
+            cy.wait(1000);
+
+            cy.get(this.tagSaveButton).click();
+            cy.wait(1000);
+        });
+    }
+
+
+    createAndPublishPageWithHtmlFaker() {
+        var scenery = 'e10';
+
+        const pageData = {
+            title: faker.lorem.words(5),
+            htmlContent: `<p>${faker.lorem.paragraph()}</p>`
+        };
+
+        setSharedData('pageTitle', pageData.title);
+
+        cy.get(this.spanElement).contains('New page').click({ force: true, waitForAnimations: false });
+        cy.screenshot(this.version + scenery + '/p1_sectionPage');
+
+        cy.get(this.titleInput).type(pageData.title);
+        cy.screenshot(this.version + scenery + '/p2_addTitlePage');
+        cy.get(this.titleInput).type('{enter}');
+
+        cy.get(this.buttonAddCard).first().click({ force: true, waitForAnimations: false });
+        cy.screenshot(this.version + scenery + '/p3_cardOptions');
+
+        cy.get(this.htmlEditorButton).first().click({ force: true, waitForAnimations: false });
+        cy.screenshot(this.version + scenery + '/p4_htmlOptionsSelected');
+
+        cy.get(this.cmLineDiv).type(pageData.htmlContent);
+        cy.screenshot(this.version + scenery + '/p5_addContentHtml');
+        cy.get(this.cmLineDiv).type('{enter}');
+
+        this.publishPostAndPage(this.version + scenery, 'p6');
+        this.validatePublishPageAndCloseModal(this.version + scenery, 'p7');
+    }
+
+    createPageAndPublishWithVideoFaker() {
+        cy.screenshot(`5/e11/p1-visit-page-list`);
+
+        cy.get(this.spanElement).contains('New page').click({force: true, waitForAnimations: false});
+
+        const randomTitle = faker.lorem.words(5);
+        const randomVideoUrl = faker.internet.url();
+
+        setSharedData('pageVideoTitle', randomTitle);
+
+        cy.get(this.titleInput).type(`${randomTitle} ${this.time}`);
+        cy.get(this.titleInput).type('{enter}');
+
+        cy.get(this.buttonAddCard).first().click({force: true, waitForAnimations: false});
+
+        cy.get(this.buttonYoutube).scrollIntoView().should('be.visible').click();
+
+        cy.get(this.inputEmbedUrl).should('be.visible').type(randomVideoUrl).type('{enter}');
+
+        cy.screenshot(`5/e11/p3-nueva-pagina-con-contenido-nuevo`);
+        cy.wait(1000);
+
+        this.publishPostAndPage('5/e11', 'p3');
+
+        cy.get(this.closeModalPublishFlow).click();
+    }
+
+    createAndPublishPageEditAndSaveFaker(index) {
+        const randomTitle = faker.lorem.words(15);
+        const randomUpdatedTitle = faker.lorem.words(15);
+
+        setSharedData('pageTitle', randomTitle);
+        setSharedData('updatedTitle', randomUpdatedTitle);
+
+        cy.screenshot('5/e12/p1-click-nueva-pagina');
+        cy.get(this.newPageButton).click();
+        cy.get(this.titleInput).type(randomTitle + '{enter}');
+
+        cy.get(this.koenigEditorElement).first().click();
+        this.publishPostAndPage('5/e12', 'p1');
+        cy.url().should('contain', '/pages');
+
+        cy.get(this.closeModalPublishFlow).click();
+        cy.screenshot('5/e12/p2-pagina-creada-listada');
+
+        cy.contains(randomTitle).click();
+
+        cy.get(this.titleInput).clear().type(randomUpdatedTitle + '{enter}').screenshot('5/e12/p3-actualizacion-titulo');
+
+        cy.get(this.publishSaveButton).contains('Update').click();
+        cy.screenshot('5/e12/p4-publicacion-pagina-actualizada');
+    }
+
+    createPublishAndDeletePageFaker() {
+        // Generar datos con Faker
+        const randomTitle = faker.lorem.words(10); // Título aleatorio con 10 letras
+        const randomContent = faker.lorem.words(22); // Contenido HTML aleatorio con un párrafo
+
+        // Iniciar la creación de la página
+        cy.screenshot('5/e13/p1-pagina-creada-listada');
+        cy.contains('New page').click({force: true, waitForAnimations: false});
+
+        // Usar los datos generados para llenar los campos
+        cy.get(this.titleInput).type(randomTitle + '{enter}');
+        cy.get(this.buttonAddCard).first().click({force: true, waitForAnimations: false});
+        cy.get(this.htmlEditorButton).first().click({force: true, waitForAnimations: false});
+        cy.get(this.cmLineDiv).type(randomContent + '{enter}');
+
+        cy.screenshot('5/e13/p2-pagina-creada-con-contenido');
+
+        // Publicar la página
+        this.publishPostAndPage('5/e13', 'p2');
+        cy.url().should('include', '/pages');
+        cy.contains(randomTitle).should('exist'); // Verificar que la página con el título generado existe
+        cy.wait(500);
+        cy.get(this.bodyElement).type('{esc}');
+        cy.screenshot('5/e13/p3-pagina-creada');
+
+        // Verificar la URL y entrar en la lista de páginas
+        cy.visit(Cypress.env('pageUrl'));
+        cy.url().should('include', '/ghost/#/pages');
+
+        // Eliminar la página creada
+        cy.contains(this.contentEntryTitle, randomTitle)
+            .closest(this.liElement)
+            .rightclick();
+
+        cy.get(this.deletePageButton)
+            .should('be.visible')
+            .then(() => {
+                cy.screenshot('5/e13/p4-eliminar-pagina', {capture: 'fullPage'});
+                cy.get(this.deletePageButton).click();
+            });
+    }
+
+
+    createPublishAndDeletePagePoolMockaroo(data){
+            const pageData = data
+
+            cy.screenshot('5/e13/p1-pagina-creada-listada');
+            cy.contains('New page').click({ force: true, waitForAnimations: false });
+
+            cy.get(this.titleInput).type(pageData.title + '{enter}');
+
+            cy.get(this.buttonAddCard).first().click({ force: true, waitForAnimations: false });
+            cy.get(this.htmlEditorButton).first().click({ force: true, waitForAnimations: false });
+            cy.get(this.cmLineDiv).type(pageData.htmlContent + '{enter}');
+
+            cy.screenshot('5/e13/p2-pagina-creada-con-contenido');
+
+            this.publishPostAndPage('5/e13', 'p2');
+
+            cy.url().should('include', '/pages');
+            cy.contains(pageData.title).should('exist');
+            cy.wait(500);
+            cy.get(this.bodyElement).type('{esc}');
+            cy.screenshot('5/e13/p3-pagina-creada');
+
+            cy.visit(Cypress.env('pageUrl'));
+            cy.url().should('include', '/ghost/#/pages');
+
+            cy.contains(this.contentEntryTitle, pageData.title)
+                .closest(this.liElement)
+                .rightclick();
+
+            cy.get(this.deletePageButton)
+                .should('be.visible')
+                .then(() => {
+                    cy.screenshot('5/e13/p4-eliminar-pagina', { capture: 'fullPage' });
+                    cy.get(this.deletePageButton).click();
+                });
+    }
+
+    createNewTagFaker() {
+        const tagData = {
+            name: faker.commerce.productName(),
+                color: faker.internet.color().replace('#', ''),
+                slug: faker.lorem.slug(),
+                description: faker.lorem.paragraph().slice(0, 500)
+            };
+        setSharedData('tagData', tagData);
+
+            cy.screenshot('5/e15/p1-crear-nuevo-tag');
+            cy.contains('a.gh-btn-primary', 'New tag').click();
+
+            cy.get(this.tagNameInput).type(tagData.name);
+            cy.get(this.tagColorInput).type(tagData.color);
+            cy.get(this.tagSlugInput).type(tagData.slug);
+            cy.get(this.tagDescriptionInput).type(tagData.description);
+
+            cy.get(this.tagNameInput).scrollIntoView();
+
+            cy.screenshot('5/e15/p2-formulario-completo');
+            cy.wait(1000);
+
+            cy.get(this.tagSaveButton).click();
+            cy.wait(1000);
+        }
+
+    createNewTagMockaroo(data){
+            const tagData = data;
+
+            cy.screenshot('5/e15/p1-crear-nuevo-tag');
+            cy.contains('a.gh-btn-primary', 'New tag').click();
+
+            const tagColor = tagData.color;
+            const tagDescription = tagData.description;
+            const tagName = tagData.name;
+            console.log(tagName, "este es el nombre")
+
+            cy.get(this.tagNameInput).type(tagData.name);
+            cy.get(this.tagColorInput).type(tagColor);
+            cy.get(this.tagSlugInput).type(tagData.slug);
+            cy.get(this.tagDescriptionInput).type(tagDescription);
+            setSharedData("tagDataTest", tagName)
+
+            cy.get(this.tagNameInput).scrollIntoView();
+
+            cy.screenshot('5/e15/p2-formulario-completo');
+            cy.wait(1000);
+
+            cy.get(this.tagSaveButton).click();
+            cy.wait(1000);
+    }
+
+    createPageAndPublishWithVideoMockaroo(data) {
+        cy.screenshot(`5/e11/p1-visit-page-list`);
+        cy.get(this.spanElement).contains('New page').click({force: true, waitForAnimations: false});
+
+        const videoData = data;
+        setSharedData("tituloSeleccionado", videoData.title);
+
+        cy.get(this.titleInput).type(`${videoData.title} ${this.time}`);
+        cy.get(this.titleInput).type('{enter}');
+
+        cy.get(this.buttonAddCard).first().click({force: true, waitForAnimations: false});
+
+        cy.get(this.buttonYoutube).scrollIntoView().should('be.visible').click();
+
+        cy.get(this.inputEmbedUrl).should('be.visible').type(videoData.url).type('{enter}');
+
+        cy.screenshot(`5/e11/p3-nueva-pagina-con-contenido-nuevo`);
+        cy.wait(1000);
+
+        this.publishPostAndPage('5/e11', 'p3');
+
+        cy.get(this.closeModalPublishFlow).click();
+    }
+
+    createAndPublishPageEditAndSaveMockaroo(data){
+        cy.screenshot('5/e12/p1-click-nueva-pagina')
+        cy.get(this.newPageButton).click();
+        cy.get(this.titleInput).type(data.title);
+
+        //Publicar post
+        cy.get(this.koenigEditorElement).first().click();
+        this.publishPostAndPage('5/e12','p1');
+        cy.url().should('contain', '/pages');
+
+        // Editar la página recién creada
+        cy.get(this.closeModalPublishFlow).click();
+        cy.screenshot('5/e12/p2-pagina-creada-listada');
+        cy.contains(data.title).click();
+        cy.get(this.titleInput).clear().type(data.updatedTitle).screenshot('5/e12/p3-actualizacion-titulo');
+
+        // Guardar la página actualizada
+        cy.get(this.publishSaveButton).contains('Update').click();
+        cy.screenshot('5/e12/p4-publicacion-pagina-actualizada');
+
+    }
+
+
+    createNewTagFakerName() {
+        const tagData = {
+            name: faker.lorem.words(50).slice(0, 200),
+            color: faker.internet.color().replace('#', ''),
+            slug: faker.lorem.slug(),
+            description: faker.lorem.paragraph().slice(0, 500)
+        };
+        setSharedData('tagData', tagData);
+
+        cy.screenshot('5/e15/p1-crear-nuevo-tag');
+        cy.contains('a.gh-btn-primary', 'New tag').click();
+
+        cy.get(this.tagNameInput).type(tagData.name);
+        cy.get(this.tagColorInput).type(tagData.color);
+        cy.get(this.tagSlugInput).type(tagData.slug);
+        cy.get(this.tagDescriptionInput).type(tagData.description);
+
+        cy.get(this.tagNameInput).scrollIntoView();
+
+        cy.screenshot('5/e15/p2-formulario-completo');
+        cy.wait(1000);
+
+        cy.get(this.tagSaveButton).click();
+        cy.wait(1000);
+    }
+
 
 
     //Utils
