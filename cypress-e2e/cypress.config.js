@@ -5,6 +5,7 @@ module.exports = {
     setupNodeEvents(on, config) {
       // Configuraciones adicionales de Node si es necesario
     },
+    experimentalSessionAndOrigin: true,
   },
   env: {
     baseUrl: "http://localhost:2369",
